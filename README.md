@@ -1,0 +1,2 @@
+# staty
+React + redux
