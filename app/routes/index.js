@@ -1,41 +1,41 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
-import App from './App';
-import SignupRoute from './SignupRoute';
-import LoginRoute from './LoginRoute';
-import ProfileRoute from './ProfileRoute';
+import App from './../containers/App';
+import SignupPage from './../containers/SignupPage';
+import LoginPage from './../containers/LoginPage';
+import ProfilePage from './../containers/ProfilePage';
 import NotFound from '../components/NotFound';
 import redirectBackAfter from '../utils/redirectBackAfter';
 import fillStore from '../utils/fillStore';
-import DashboardRoute from './DashboardRoute';
-import ContactRoute from './ContactRoute';
-import LeagueListRoute from './LeagueListRoute';
-import LeagueRoute from './LeagueRoute';
-import DivisionRoute from './DivisionRoute';
-import * as Posts from './Posts';
+import DashboardPage from './../containers/DashboardPage';
+import ContactPage from './../containers/ContactPage';
+import LeagueListPage from './../containers/LeagueListPage';
+import LeaguePage from './../containers/LeaguePage';
+import DivisionPage from './../containers/DivisionPage';
+import TeamPage from './../containers/TeamPage';
+import * as Posts from './../containers/Posts';
 
 const routes = (
   <Route component={App}>
-    <Route path="/signup" component={SignupRoute} />
-    <Route path="/login" component={LoginRoute} />
+    <Route path="/signup" component={SignupPage} />
+    <Route path="/login" component={LoginPage} />
     <Route path="/" component={Posts.List} />
     <Route path="/posts/:id" component={Posts.View} />
 
     <Route requireAuth>
-      <Route path="/dashboard" component={DashboardRoute} />
+      <Route path="/dashboard" component={DashboardPage} />
       <Route path="/dashboard/add" component={Posts.Edit} />
       <Route path="/dashboard/edit/:id" component={Posts.Edit} />
     </Route>
-      <Route path="/profile" component={ProfileRoute} />
+    <Route path="/profile" component={ProfilePage} />
 
-      <Route path="/contact" component={ContactRoute} />
-      <Route path="/league" component={LeagueListRoute} />
-
-
-      <Route path="/:leagueName" component={LeagueRoute} />
-      <Route path="/:leagueName/division/:divisionId" component={DivisionRoute} />
+    <Route path="/contact" component={ContactPage} />
+    <Route path="/leagues" component={LeagueListPage} />
 
 
+    <Route path="/:leagueName" component={LeaguePage} />
+    <Route path="/:leagueName/division/:divisionId" component={DivisionPage} />
+    <Route path="/:leagueName/team/:teamId" component={TeamPage} />
 
 
     <Route path="*" component={NotFound} />

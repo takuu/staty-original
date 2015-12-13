@@ -1,6 +1,9 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import Division from '../components/Division/Division';
+import CSSModules from 'react-css-modules';
+import globalStyle from '../styles/global.styl';
+import Standings from '../components/core/Standings/Standings'
+import Schedule from '../components/core/Schedule/Schedule';
 import _ from 'lodash';
 
 import { getLeagueByName } from '../actions/leagues';
@@ -8,7 +11,7 @@ import { getGamesByDivisionId } from '../actions/gameActions';
 import { getTeamsByDivisionId } from '../actions/teamActions';
 import { getDivisionById } from '../actions/divisionActions';
 
-
+@CSSModules(globalStyle)
 @connect((state,router) => {
   const divisionId = router.params.divisionId;
   const leagueName = router.params.leagueName;
@@ -32,7 +35,7 @@ import { getDivisionById } from '../actions/divisionActions';
   getTeamsByDivisionId,
   getDivisionById
 })
-class DivisionRoute extends React.Component {
+class DivisionPage extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -55,11 +58,45 @@ class DivisionRoute extends React.Component {
   render() {
     let {league, division, games, teams} = this.props;
     return (
-      <div>
-        <Division league={league} games={games} teams={teams} division={division}></Division>
-      </div>
+        <div className="DivisionPage">
+
+
+
+          <div styleName="portlet-title">
+            <div styleName="page-title">{division && division.name}</div>
+          </div>
+          <div className="row" style={{backgroundColor: '#eff3f8'}}>
+
+            <div className="col-md-5 col-xs-5" style={{margin: '20px 0px'}}>
+              <div styleName="sub-container">
+                <div className="sub-title-container">
+                  <div className="sub-title">Standing</div>
+                </div>
+                <div style={{padding: "10px"}}>
+                  <Standings league={league} games={games} />
+                </div>
+              </div>
+            </div>
+
+            <div className="col-md-7 col-xs-7" style={{margin: '20px 0px'}}>
+              <div className="sub-container">
+                <div className="sub-title-container">
+                  <div className="sub-title">Schedule</div>
+                </div>
+                <div style={{padding: "10px"}}>
+                  <Schedule league={league} games={games} />
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+        </div>
     );
   }
 }
 
-export default DivisionRoute;
+export default DivisionPage;

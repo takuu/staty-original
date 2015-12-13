@@ -18,7 +18,6 @@ export default class Standings extends React.Component {
 
   render() {
     const standings = statParser.createStandings(this.props.games);
-    debugger;
     return (
       <div className="wrapper">
         <table className="table">

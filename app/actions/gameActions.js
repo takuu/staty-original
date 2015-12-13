@@ -37,7 +37,6 @@ export function getGamesByDivisionId(id='') {
   return async (dispatch) => {
     try {
       const games = (await axios.get(`${baseUrl}/games/division/` + id)).data;
-      debugger;
       dispatch({ type: SET_GAMES_BY_DIVISION, games });
     } catch (error) {
       console.log('gameActions error: ', error);

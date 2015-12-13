@@ -17,7 +17,6 @@ export default (state = defaultState, action) => {
       _.map(action.games, (game) => {
         state = state.set(game._id, game);
       });
-      debugger;
       return state;
       break;
     case SET_GAMES_BY_TEAM:

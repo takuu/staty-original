@@ -40,7 +40,7 @@ export default class Header extends React.Component {
         <ul styleName="nav">
           <NavItem to="/">Blog</NavItem>
           <NavItem to="/contact">Contact</NavItem>
-          <NavItem to="/league">League</NavItem>
+          <NavItem to="/leagues">Leagues</NavItem>
           <NavItem to="/signup">Sign up</NavItem>
           <NavItem to="/login">Login</NavItem>
         </ul>
@@ -57,7 +57,7 @@ export default class Header extends React.Component {
             title="Reblog"
           >
           <span styleName="brand">
-            Reblog
+            Staty
           </span>
           </Link>
 
