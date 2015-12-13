@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { Route, IndexRoute } from 'react-router';
 import App from './App';
 import SignupRoute from './SignupRoute';
 import LoginRoute from './LoginRoute';
@@ -8,6 +8,10 @@ import NotFound from '../components/NotFound';
 import redirectBackAfter from '../utils/redirectBackAfter';
 import fillStore from '../utils/fillStore';
 import DashboardRoute from './DashboardRoute';
+import ContactRoute from './ContactRoute';
+import LeagueListRoute from './LeagueListRoute';
+import LeagueRoute from './LeagueRoute';
+import DivisionRoute from './DivisionRoute';
 import * as Posts from './Posts';
 
 const routes = (
@@ -18,17 +22,29 @@ const routes = (
     <Route path="/posts/:id" component={Posts.View} />
 
     <Route requireAuth>
-      <Route path="/profile" component={ProfileRoute} />
       <Route path="/dashboard" component={DashboardRoute} />
       <Route path="/dashboard/add" component={Posts.Edit} />
       <Route path="/dashboard/edit/:id" component={Posts.Edit} />
     </Route>
+      <Route path="/profile" component={ProfileRoute} />
+
+      <Route path="/contact" component={ContactRoute} />
+      <Route path="/league" component={LeagueListRoute} />
+
+
+      <Route path="/:leagueName" component={LeagueRoute} />
+      <Route path="/:leagueName/division/:divisionId" component={DivisionRoute} />
+
+
+
 
     <Route path="*" component={NotFound} />
   </Route>
 );
 
+
 function walk(routes, cb) {
+
   cb(routes);
 
   if (routes.childRoutes) {

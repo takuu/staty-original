@@ -8,6 +8,18 @@ import jwtToken from 'jsonwebtoken';
 import path from 'path';
 import fs from 'fs';
 import _ from 'lodash';
+import mongoose from 'mongoose';
+
+
+mongoose.connect('mongodb://localhost:27017/mofufus-dev', {db: {safe:true}});
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function (callback) {
+  console.log('DB CONNECTED!');
+  // yay!
+});
+
 
 const jsonPath = path.join(__dirname, 'data.json');
 const app = express();
@@ -19,13 +31,18 @@ app.use(jwt({
 }).unless(req => {
   const url = req.originalUrl;
   const postsRE = /^\/posts(\/.*)?$/;
+  const leaguesRE = /^\/leagues(\/.*)?$/;
+  const apiRE = /^\/api(\/.*)?$/;
 
   return (
       url === '/signup' ||
       url === '/login' ||
-      (postsRE).test(url) && req.method === 'GET'
+      (postsRE).test(url) && req.method === 'GET' ||
+      (leaguesRE).test(url) && req.method === 'GET' ||
+      (apiRE).test(url) && req.method === 'GET'
   );
 }));
+app.use('/api', require('./api.js'));
 
 function generateToken(email, password) {
   const payload = { email, password };
@@ -74,6 +91,7 @@ app.get('/profile', (req, res) => {
     res.sendStatus(401);
   }
 });
+
 
 app.put('/profile', (req, res) => {
   try {

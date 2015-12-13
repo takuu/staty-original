@@ -31,5 +31,11 @@ export default keyMirror({
 
   SAVE_POST: null,
   SAVE_POST_SUCCESS: null,
-  SAVE_POST_FAILURE: null
+  SAVE_POST_FAILURE: null,
+
+  SET_LEAGUE: null,
+  SET_ALL_LEAGUES: null,
+
+  SET_ALL_ACTIVE_DIVISIONS: null,
+  SET_DIVISIONS_BY_SEASON: null
 });

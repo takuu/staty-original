@@ -10,6 +10,7 @@ export default class NavItem extends React.Component {
   }
 
   render() {
+
     return (
       <li className={classNames({
         active: this.isActive(this.props.to)

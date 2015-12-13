@@ -1,4 +1,14 @@
 {
+  "leagues": [
+    {
+      "_id": 1,
+      "name": "Mofufus"
+    },
+    {
+      "_id": 2,
+      "name": "NAU"
+    }
+  ],
   "posts": [
     {
       "id": 1,

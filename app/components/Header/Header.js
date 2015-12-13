@@ -28,6 +28,8 @@ export default class Header extends React.Component {
       return (
         <ul styleName="nav">
           <NavItem to="/">Blog</NavItem>
+          <NavItem to="/contact">Contact</NavItem>
+          <NavItem to="/league">League</NavItem>
           <NavItem to="/dashboard">Dashboard</NavItem>
           <NavItem to="/profile">Profile</NavItem>
           <NavItem to="/logout" onClick={this.handleLogout}>Logout</NavItem>
@@ -37,6 +39,8 @@ export default class Header extends React.Component {
       return (
         <ul styleName="nav">
           <NavItem to="/">Blog</NavItem>
+          <NavItem to="/contact">Contact</NavItem>
+          <NavItem to="/league">League</NavItem>
           <NavItem to="/signup">Sign up</NavItem>
           <NavItem to="/login">Login</NavItem>
         </ul>
