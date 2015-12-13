@@ -1,6 +1,7 @@
 import {
   SET_ALL_ACTIVE_DIVISIONS,
-  SET_DIVISIONS_BY_SEASON
+  SET_DIVISIONS_BY_SEASON,
+  SET_DIVISION
 } from '../constants/actions';
 import Immutable from 'immutable';
 import _ from 'lodash';
@@ -19,6 +20,9 @@ export default (state = defaultState, action) => {
         state = state.set(division._id, division);
       });
       return state;
+      break;
+    case SET_DIVISION:
+      return state.set(action.division._id, action.division);
       break;
     default:
       return state;

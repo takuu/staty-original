@@ -36,6 +36,17 @@ export default keyMirror({
   SET_LEAGUE: null,
   SET_ALL_LEAGUES: null,
 
+  SET_DIVISION: null,
   SET_ALL_ACTIVE_DIVISIONS: null,
-  SET_DIVISIONS_BY_SEASON: null
+  SET_DIVISIONS_BY_SEASON: null,
+
+  SET_TEAM: null,
+  SET_TEAMS_BY_LEAGUE: null,
+  SET_TEAMS_BY_DIVISION: null,
+
+  SET_GAME: null,
+  SET_GAMES_WITH_FILTERS: null,
+  SET_GAMES_BY_TEAM: null,
+  SET_ALL_GAMES: null,
+  SET_GAMES_BY_DIVISION: null
 });

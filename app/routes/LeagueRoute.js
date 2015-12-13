@@ -29,8 +29,9 @@ class LeagueRoute extends React.Component {
     divisions: PropTypes.array.isRequired
   };
 
-  static fillStore(redux) {
-    return redux.dispatch(getLeagueByName('mofufus'));
+  static fillStore(redux, route) {
+    let leagueName = route.params.leagueName;
+    return redux.dispatch(getLeagueByName(leagueName));
   }
 
   componentWillReceiveProps(nextProps) {

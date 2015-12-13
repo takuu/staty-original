@@ -4,59 +4,62 @@ import Division from '../components/Division/Division';
 import _ from 'lodash';
 
 import { getLeagueByName } from '../actions/leagues';
-import { getActiveDivisionByLeagueId } from '../actions/divisionActions';
+import { getGamesByDivisionId } from '../actions/gameActions';
+import { getTeamsByDivisionId } from '../actions/teamActions';
+import { getDivisionById } from '../actions/divisionActions';
 
 
 @connect((state,router) => {
+  const divisionId = router.params.divisionId;
   const leagueName = router.params.leagueName;
+
   const leagues = state.leagues.toJS();
   const league = _.find(leagues, {name: leagueName});
 
-  const divisionsJS = state.divisions.toJS();
-  const divisions = _.map(divisionsJS, (division)=>{return division});
+  const gamesJS = state.games.toJS();
+  const games = _.map(gamesJS, (game)=>{return game});
 
-  return {league: league, divisions: divisions}
+  const teamsJS = state.teams.toJS();
+  const teams = _.map(teamsJS, (team)=>{return team});
+
+  const divisions = state.divisions.toJS();
+  const division = divisions && divisions[divisionId];
+
+  return {league: league, games: games, teams: teams, division: division}
 }, {
   getLeagueByName,
-  getActiveDivisionByLeagueId
+  getGamesByDivisionId,
+  getTeamsByDivisionId,
+  getDivisionById
 })
 class DivisionRoute extends React.Component {
   constructor(props) {
     super(props)
   }
   static propTypes = {
+    division: PropTypes.object.isRequired,
     league: PropTypes.object.isRequired,
-    divisions: PropTypes.array.isRequired
+    teams: PropTypes.array.isRequired,
+    games: PropTypes.array.isRequired
   };
 
-  static fillStore(redux) {
-    return redux.dispatch(getLeagueByName('mofufus'));
-  }
+  static fillStore(redux, route) {
 
-  componentWillReceiveProps(nextProps) {
-    const { league, getActiveDivisionByLeagueId } = nextProps;
-    const shouldFetch =
-      !_.isEqual(nextProps.divisions, this.props.divisions) ||
-      nextProps.divisions.length==0;
-
-    // TODO: currently called twice, fix so it's only called once
-    if(league && shouldFetch) {
-      getActiveDivisionByLeagueId(league._id);
-    }
+    let leagueName = route.params.leagueName;
+    redux.dispatch(getDivisionById(route.params.divisionId));
+    redux.dispatch(getGamesByDivisionId(route.params.divisionId));
+    redux.dispatch(getTeamsByDivisionId(route.params.divisionId));
+    return redux.dispatch(getLeagueByName(leagueName));
   }
 
   render() {
-    const league = this.props.league;
-    const divisions = this.props.divisions;
+    let {league, division, games, teams} = this.props;
     return (
       <div>
-        <Division league={league} divisions={divisions} />
+        <Division league={league} games={games} teams={teams} division={division}></Division>
       </div>
     );
   }
 }
-
-
-
 
 export default DivisionRoute;

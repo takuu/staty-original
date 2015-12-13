@@ -4,11 +4,14 @@ import router from './router';
 import posts from './posts';
 import leagues from './leagues';
 import divisions from './divisionReducers';
-
+import teams from './teamReducers';
+import games from './gameReducers';
 export default combineReducers({
   auth,
   router,
   posts,
   leagues,
-  divisions
+  divisions,
+  teams,
+  games
 });

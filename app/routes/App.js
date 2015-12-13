@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Header from '../components/Header/Header';
 import { fetchProfile, logout } from '../actions/auth';
+import CSSModules from 'react-css-modules';
 
 @connect(state => ({
   auth: state.auth,

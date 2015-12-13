@@ -1,12 +1,24 @@
 import {
   SET_ALL_ACTIVE_DIVISIONS,
-  SET_DIVISIONS_BY_SEASON
+  SET_DIVISIONS_BY_SEASON,
+  SET_DIVISION
 } from '../constants/actions';
 
 import axios from 'axios';
 import getHeaders from '../utils/getHeaders';
 
 const baseUrl = 'http://localhost:1337/api';
+
+export function getDivisionById(id='') {
+  return async (dispatch) => {
+    try {
+      const division = (await axios.get(baseUrl + '/divisions/' + id)).data;
+      dispatch({ type: SET_DIVISION, division });
+    } catch (error) {
+      console.log('divisionActions error: ', error)
+    }
+  };
+}
 
 export function getActiveDivisionByLeagueId(id='') {
   return async (dispatch) => {
