@@ -1,9 +1,9 @@
-import styles from './styles.styl';
+//import styles from './styles.styl';
 
 import React, { PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
 
-@CSSModules(styles)
+//@CSSModules(styles)
 export default class ProfileEdit extends React.Component {
   static propTypes = {
     profile: PropTypes.object,

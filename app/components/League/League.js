@@ -1,10 +1,8 @@
 import React, {PropTypes} from 'react';
 import { Link } from 'react-router';
-import styles from './styles.styl';
-import CSSModules from 'react-css-modules';
+import './styles.css';
 import _ from 'lodash';
 
-@CSSModules(styles)
 class League extends React.Component {
   static propTypes = {
     league: PropTypes.object,

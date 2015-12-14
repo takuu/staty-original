@@ -1,11 +1,10 @@
-import '../../styles/global.css';
-import styles from './styles.styl';
+//import styles from './styles.styl';
 
 import React, { PropTypes } from 'react';
 import marked from 'marked';
 import CSSModules from 'react-css-modules';
 
-@CSSModules(styles)
+//@CSSModules(styles)
 export default class PostEditor extends React.Component {
   static propTypes = {
     onPublish: PropTypes.func.isRequired,

@@ -46,18 +46,18 @@ module.exports = {
         exclude: /node_modules/,
         loaders: ['babel']
       },
-      //{
-      //  test: /\.css$/,
-      //  loader: 'style!css'
-      //},
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]?indentedSyntax')
+        loader: 'style!css'
       },
-      {
-        test: /\.styl$/,
-        loader: 'style!css?modules&localIdentName=[local]___[hash:base64:10]!stylus' // eslint-disable-line
-      }
+      //{
+      //  test: /\.css$/,
+      //  loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]')
+      //},
+      //{
+      //  test: /\.styl$/,
+      //  loader: 'style!css?modules&localIdentName=[local]___[hash:base64:10]!stylus' // eslint-disable-line
+      //}
     ]
   },
 

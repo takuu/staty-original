@@ -1,11 +1,12 @@
-import styles from './styles.styl';
+//import styles from './styles.styl';
 
+import './styles.css';
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import NavItem from './NavItem';
 import CSSModules from 'react-css-modules';
 
-@CSSModules(styles)
+//@CSSModules(styles)
 export default class Header extends React.Component {
   static propTypes = {
     loggedIn: PropTypes.bool,
@@ -26,7 +27,7 @@ export default class Header extends React.Component {
 
     if (loggedIn) {
       return (
-        <ul styleName="nav">
+        <ul className="nav">
           <NavItem to="/">Blog</NavItem>
           <NavItem to="/contact">Contact</NavItem>
           <NavItem to="/league">League</NavItem>
@@ -37,7 +38,7 @@ export default class Header extends React.Component {
       );
     } else {
       return (
-        <ul styleName="nav">
+        <ul className="nav">
           <NavItem to="/">Blog</NavItem>
           <NavItem to="/contact">Contact</NavItem>
           <NavItem to="/leagues">Leagues</NavItem>
@@ -50,13 +51,13 @@ export default class Header extends React.Component {
 
   render() {
     return (
-      <nav styleName="navbar">
+      <nav className="navbar">
           <Link
             to="/"
             activeClassName=""
             title="Reblog"
           >
-          <span styleName="brand">
+          <span className="brand">
             Staty
           </span>
           </Link>

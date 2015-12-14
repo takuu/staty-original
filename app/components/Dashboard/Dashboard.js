@@ -1,11 +1,11 @@
-import '../../styles/global.css';
-import styles from './styles.styl';
+//import '../../styles/global.css';
+//import styles from './styles.styl';
 
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import CSSModules from 'react-css-modules';
 
-@CSSModules(styles)
+//@CSSModules(styles)
 export default class Dashboard extends React.Component {
   static propTypes = {
     publishedPosts: PropTypes.array.isRequired,

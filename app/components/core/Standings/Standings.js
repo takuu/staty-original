@@ -1,11 +1,11 @@
-import styles from './styles.styl';
+//import styles from './styles.styl';
 
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import CSSModules from 'react-css-modules';
 import statParser from '../../../utils/statParser';
 
-@CSSModules(styles)
+//@CSSModules(styles)
 export default class Standings extends React.Component {
   static propTypes = {
     games: PropTypes.array,

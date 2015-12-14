@@ -1,4 +1,3 @@
-import global from '../../styles/global.styl';
 import React, {PropTypes} from 'react';
 import { Link } from 'react-router';
 import styles from './styles.styl';
@@ -7,7 +6,6 @@ import Schedule from '../core/Schedule/Schedule';
 import CSSModules from 'react-css-modules';
 import _ from 'lodash';
 
-@CSSModules(global)
 @CSSModules(styles)
 class Division extends React.Component {
   static propTypes = {

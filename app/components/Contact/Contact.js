@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './styles.styl';
+import './styles.css';
 import _ from 'lodash';
 
 class Contact extends React.Component {

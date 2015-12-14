@@ -1,11 +1,7 @@
-import styles from './styles.styl';
-
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import CSSModules from 'react-css-modules';
 import statParser from '../../../utils/statParser';
 
-@CSSModules(styles)
 export default class Schedule extends React.Component {
   static propTypes = {
     games: PropTypes.array,
