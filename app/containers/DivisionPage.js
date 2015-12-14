@@ -1,7 +1,5 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import CSSModules from 'react-css-modules';
-import globalStyle from '../styles/global.styl';
 import Standings from '../components/core/Standings/Standings'
 import Schedule from '../components/core/Schedule/Schedule';
 import _ from 'lodash';
@@ -11,7 +9,6 @@ import { getGamesByDivisionId } from '../actions/gameActions';
 import { getTeamsByDivisionId } from '../actions/teamActions';
 import { getDivisionById } from '../actions/divisionActions';
 
-@CSSModules(globalStyle)
 @connect((state,router) => {
   const divisionId = router.params.divisionId;
   const leagueName = router.params.leagueName;
@@ -45,6 +42,12 @@ class DivisionPage extends React.Component {
     teams: PropTypes.array.isRequired,
     games: PropTypes.array.isRequired
   };
+  static defaultProps = {
+    division: {},
+    league: {},
+    teams: [],
+    games: []
+  };
 
   static fillStore(redux, route) {
 
@@ -57,13 +60,14 @@ class DivisionPage extends React.Component {
 
   render() {
     let {league, division, games, teams} = this.props;
+    debugger;
     return (
         <div className="DivisionPage">
 
 
 
-          <div styleName="portlet-title">
-            <div styleName="page-title">{division && division.name}</div>
+          <div className="portlet-title">
+            <div className="page-title">{division && division.name}</div>
           </div>
           <div className="row" style={{backgroundColor: '#eff3f8'}}>
 

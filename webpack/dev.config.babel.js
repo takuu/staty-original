@@ -2,7 +2,7 @@
 import webpack from 'webpack';
 import path from 'path';
 import cssnext from 'cssnext';
-
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 const bundle = process.env.BUNDLE || 'client';
 const env = process.env.NODE_ENV || 'development';
 
@@ -24,6 +24,9 @@ module.exports = {
   },
 
   plugins: [
+    new ExtractTextPlugin('app.css', {
+      allChunks: true
+    }),
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify(env) }
     }),
@@ -43,9 +46,13 @@ module.exports = {
         exclude: /node_modules/,
         loaders: ['babel']
       },
+      //{
+      //  test: /\.css$/,
+      //  loader: 'style!css'
+      //},
       {
         test: /\.css$/,
-        loader: 'style!css'
+        loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]?indentedSyntax')
       },
       {
         test: /\.styl$/,
