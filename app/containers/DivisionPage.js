@@ -72,7 +72,7 @@ class DivisionPage extends React.Component {
           <div className="row" style={{backgroundColor: '#eff3f8'}}>
 
             <div className="col-md-5 col-xs-5" style={{margin: '20px 0px'}}>
-              <div styleName="sub-container">
+              <div className="sub-container">
                 <div className="sub-title-container">
                   <div className="sub-title">Standing</div>
                 </div>

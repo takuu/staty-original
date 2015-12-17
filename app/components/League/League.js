@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import './styles.css';
 import _ from 'lodash';
 
+
 class League extends React.Component {
   static propTypes = {
     league: PropTypes.object,
@@ -14,6 +15,7 @@ class League extends React.Component {
   };
   render() {
     let {league, divisions} = this.props;
+    let season = divisions.length && divisions[0].season.name;
     let divisionList = (
       <dl>
         {
@@ -31,12 +33,36 @@ class League extends React.Component {
       </dl>
     );
     return (
-      <div className="LeaguePage">
-        <div className="LeaguePage-container">
-          <h1>{league.name}</h1>
-          {divisionList}
+      <div>
+        <div className="portlet-title">
+          <div className="page-title">{season}</div>
+        </div>
+        <div className="row" style={{backgroundColor: '#eff3f8'}}>
+          <div className="col-md-5 col-xs-5" style={{margin: '20px 0px'}}>
+            <div className="sub-container">
+              <div className="sub-title-container">
+                <div className="sub-title">Divisions</div>
+              </div>
+              <div style={{padding: "10px"}}>
+                {divisionList}
+              </div>
+            </div>
+          </div>
+
+          <div className="col-md-7 col-xs-7" style={{margin: '20px 0px'}}>
+            <div className="sub-container">
+              <div className="sub-title-container">
+                <div className="sub-title">LEAGUE INFO</div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
+
+
+
+
     );
   }
 

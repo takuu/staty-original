@@ -1,20 +1,93 @@
+/* React Starter Kit | MIT License | http://www.reactstarterkit.com/ */
+
+@import '../variables.css';
+
+:root {
+    --brand-color: #61dafb;
+}
 .navbar {
-    height: 100px;
-    width: 900px;
-    margin: 20px auto 40px;
-    position: relative;
+    background-color:#000;
 }
-.brand {
-    font-size: 2em;
+.Header {
+    background: #000;
+    color: #fff;
+    height:40px;
 }
-.nav {
-    list-style: none;
-    position: absolute;
+
+/*.Header-container {*/
+/*margin: 0 auto;*/
+/*padding: 10px 0;*/
+/*max-width: var(--max-content-width);*/
+/*}*/
+
+
+.Header-brand {
+    color: color(var(--brand-color) lightness(+10%));
+    text-decoration: none;
+    font-size: 1.4em;
+    line-height:2.0em;
+}
+
+.Header-brandTxt {
+    margin-left: 10px;
+}
+
+.Header-nav {
+    float: right;
+    margin-top: 6px;
+}
+
+.Header-banner {
+    text-align: center;
+}
+
+.Header-bannerTitle {
+    margin: 0;
+    padding: 10px;
+    font-weight: normal;
+    font-size: 4em;
+    line-height: 1em;
+}
+
+.Header-bannerDesc {
+    padding: 0;
+    color: rgba(255, 255, 255, .5);
+    font-size: 1.25em;
+    margin: 0;
+}
+
+
+
+.Navigation-link {
     display: inline-block;
-    right: 0;
-    -webkit-padding-start: 0px;
+    padding: 3px 8px;
+    text-decoration: none;
+    font-size: 1.0em; /* ~18px */
 }
-li {
-    display: inline-block;
-    margin-left: 20px;
+
+.Navigation-link,
+.Navigation-link:active,
+.Navigation-link:visited {
+    color: rgba(255, 255, 255, .6);
 }
+
+.Navigation-link:hover {
+    color: rgba(255, 255, 255, 1);
+}
+
+.Navigation-link--highlight {
+    margin-right: 8px;
+    margin-left: 8px;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, .15);
+    color: #fff;
+}
+
+.Navigation-link--highlight:hover {
+    background: rgba(0, 0, 0, .3);
+}
+
+.Navigation-spacer {
+    color: rgba(255, 255, 255, .3);
+}
+

@@ -1,10 +1,8 @@
 import React, { PropTypes} from 'react';
-import styles from './styles.styl';
+import './styles.css';
 import { Link } from 'react-router';
 
-import CSSModules from 'react-css-modules';
 
-@CSSModules(styles)
 class SubHeader extends React.Component {
 
   static propTypes = {
@@ -24,23 +22,25 @@ class SubHeader extends React.Component {
 
   render() {
     let title;
-    if(this.props.league) {
-      title = this.props.league.name.toUpperCase();
+    const {league} = this.props;
+    let leagueName = league && league.name;
+    if(league) {
+      title = league.name.toUpperCase();
     }
 
     return (
       <div>
         <div className="col-md-12 col-xs-12 nopadding">
           <ul className="nav nav-pills">
-            <li><a href={"/" + this.props.league.name}>Home</a></li>
-            <li><a href={"/" + this.props.league.name + "/register"}>Registration</a></li>
-            <li><a href={"/" + this.props.league.name + "/about"}>About</a></li>
-            <li><a href={"/" + this.props.league.name + "/pricing"}>Pricing</a></li>
-            <li><a href={"/" + this.props.league.name + "/pastResults"}>Past Results</a></li>
-            <li><a href={"/" + this.props.league.name + "/contact"}>Contact</a></li>
-            <li><a href={"/" + this.props.league.name + "/rules"}>Rules</a></li>
-            <li><a href={"/" + this.props.league.name + "/gyms"}>Gyms</a></li>
-            <li><a href={"/" + this.props.league.name + "/news"}>News</a></li>
+            <li><a href={"/" + leagueName}>Home</a></li>
+            <li><a href={"/" + leagueName + "/register"}>Registration</a></li>
+            <li><a href={"/" + leagueName + "/about"}>About</a></li>
+            <li><a href={"/" + leagueName + "/pricing"}>Pricing</a></li>
+            <li><a href={"/" + leagueName + "/pastResults"}>Past Results</a></li>
+            <li><a href={"/" + leagueName + "/contact"}>Contact</a></li>
+            <li><a href={"/" + leagueName + "/rules"}>Rules</a></li>
+            <li><a href={"/" + leagueName + "/gyms"}>Gyms</a></li>
+            <li><a href={"/" + leagueName + "/news"}>News</a></li>
           </ul>
 
           <div className="col-md-6 col-xs-6">
@@ -50,7 +50,7 @@ class SubHeader extends React.Component {
             <div className="form-inline pull-right">
               <div className="form-group">
                 <input type="text" className="form-control" name="searchText" onChange={this.handleSearchChange.bind(this)} placeholder="Search for player..." />
-                <Link to={'/' + this.props.league.name + '/results/' + this.state.searchText}>
+                <Link to={'/' + leagueName + '/results/' + this.state.searchText}>
                   <button className="btn btn-default" type="button">Search</button>
                 </Link>
               </div>

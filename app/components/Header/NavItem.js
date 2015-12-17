@@ -15,7 +15,7 @@ export default class NavItem extends React.Component {
       <li className={classNames({
         active: this.isActive(this.props.to)
       })}>
-        <Link {...this.props} activeClassName="" />
+        <Link className="Navigation-link" {...this.props} activeClassName="" />
       </li>
     );
   }

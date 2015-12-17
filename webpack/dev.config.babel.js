@@ -50,6 +50,10 @@ module.exports = {
         test: /\.css$/,
         loader: 'style!css'
       },
+      {
+        test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
+        loader: 'url-loader?limit=10000',
+      }
       //{
       //  test: /\.css$/,
       //  loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]')

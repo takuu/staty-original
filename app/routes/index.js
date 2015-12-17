@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import { Route } from 'react-router';
 import App from './../containers/App';
 import SignupPage from './../containers/SignupPage';
 import LoginPage from './../containers/LoginPage';
@@ -14,6 +14,7 @@ import LeaguePage from './../containers/LeaguePage';
 import DivisionPage from './../containers/DivisionPage';
 import TeamPage from './../containers/TeamPage';
 import * as Posts from './../containers/Posts';
+import PanelContainer from '../components/PanelContainer/PanelContainer';
 
 const routes = (
   <Route component={App}>
@@ -33,9 +34,13 @@ const routes = (
     <Route path="/leagues" component={LeagueListPage} />
 
 
-    <Route path="/:leagueName" component={LeaguePage} />
-    <Route path="/:leagueName/division/:divisionId" component={DivisionPage} />
-    <Route path="/:leagueName/team/:teamId" component={TeamPage} />
+    <Route path="/:leagueName" component={PanelContainer}>
+      <Route path="main" component={LeaguePage} />
+      <Route path="division/:divisionId" component={DivisionPage} />
+      <Route path="team/:teamId" component={TeamPage} />
+    </Route>
+
+
 
 
     <Route path="*" component={NotFound} />

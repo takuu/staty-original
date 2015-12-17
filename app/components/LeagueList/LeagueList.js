@@ -10,7 +10,7 @@ class League extends React.Component {
         return (
           <div className="col-md-10 col-xs-10" key={league._id}>
             <div className="col-md-7">
-              <Link to={`/${league.name}`} >
+              <Link to={`/${league.name}/main`} >
                 {league.displayName || league.name}
               </Link>
 
