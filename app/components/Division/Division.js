@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import { Link } from 'react-router';
 import styles from './styles.styl';
 import Standings from '../core/Standings/Standings';
-import Schedule from '../core/Schedule/Schedule';
+import Schedule from '../core/LeagueSchedule/Schedule';
 import CSSModules from 'react-css-modules';
 import _ from 'lodash';
 

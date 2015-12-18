@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Standings from '../components/core/Standings/Standings'
-import Schedule from '../components/core/Schedule/Schedule';
+import Schedule from '../components/core/LeagueSchedule/LeagueSchedule';
 import _ from 'lodash';
 
 import { getLeagueByName } from '../actions/leagues';

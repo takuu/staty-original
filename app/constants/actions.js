@@ -48,5 +48,10 @@ export default keyMirror({
   SET_GAMES_WITH_FILTERS: null,
   SET_GAMES_BY_TEAM: null,
   SET_ALL_GAMES: null,
-  SET_GAMES_BY_DIVISION: null
+  SET_GAMES_BY_DIVISION: null,
+
+  SET_PLAYERS_WITH_FILTERS: null,
+  SEARCH_PLAYER: null,
+  SET_PLAYER: null,
+  SET_PLAYERS_BY_TEAM: null
 });

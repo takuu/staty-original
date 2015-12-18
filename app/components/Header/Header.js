@@ -43,7 +43,7 @@ export default class Header extends React.Component {
     } else {
       return (
         <div className="Header-nav Navigation">
-          <Link className="Navigation-link" to="/">Blog</Link>
+          <Link className="Navigation-link" to="/">Home</Link>
           <Link className="Navigation-link" to="/contact">Contact</Link>
           <Link className="Navigation-link" to="/leagues">Leagues</Link>
           <Link className="Navigation-link" to="/signup">Sign up</Link>

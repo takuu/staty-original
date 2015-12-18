@@ -1,17 +1,18 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import Team from '../components/Team/Team';
+import PlayerList from '../components/core/PlayerList/PlayerList';
+import TeamSchedule from '../components/core/TeamSchedule/TeamSchedule';
 import _ from 'lodash';
 
 import { getLeagueByName } from '../actions/leagues';
-import { getGamesByDivisionId } from '../actions/gameActions';
-import { getTeamsByDivisionId } from '../actions/teamActions';
-import { getDivisionById } from '../actions/divisionActions';
+import { getGamesByTeamId } from '../actions/gameActions';
+import { getTeamById } from '../actions/teamActions';
+import { getPlayersWithFilters } from '../actions/playerActions';
 
 
 @connect((state,router) => {
-  const divisionId = router.params.divisionId;
   const leagueName = router.params.leagueName;
+  const teamId = router.params.teamId;
 
   const leagues = state.leagues.toJS();
   const league = _.find(leagues, {name: leagueName});
@@ -20,46 +21,60 @@ import { getDivisionById } from '../actions/divisionActions';
   const games = _.map(gamesJS, (game)=>{return game});
 
   const teamsJS = state.teams.toJS();
-  const teams = _.map(teamsJS, (team)=>{return team});
+  const team = _.find(teamsJS, {_id: teamId});
 
-  const divisions = state.divisions.toJS();
-  const division = divisions && divisions[divisionId];
+  const playersJS = state.players.toJS();
+  const players = _.map(playersJS, (player)=>{return player});
 
-  return {league: league, games: games, teams: teams, division: division}
+  return {league: league, games: games, team: team, players: players}
 }, {
   getLeagueByName,
-  getGamesByDivisionId,
-  getTeamsByDivisionId,
-  getDivisionById
+  getGamesByTeamId,
+  getTeamById,
+  getPlayersWithFilters
 })
-class TeamRoute extends React.Component {
+class TeamPage extends React.Component {
   constructor(props) {
     super(props)
   }
   static propTypes = {
-    division: PropTypes.object.isRequired,
     league: PropTypes.object.isRequired,
-    teams: PropTypes.array.isRequired,
-    games: PropTypes.array.isRequired
+    team: PropTypes.object.isRequired,
+    games: PropTypes.array.isRequired,
+    players: PropTypes.array.isRequired
   };
 
   static fillStore(redux, route) {
 
     let leagueName = route.params.leagueName;
-    redux.dispatch(getDivisionById(route.params.divisionId));
-    redux.dispatch(getGamesByDivisionId(route.params.divisionId));
-    redux.dispatch(getTeamsByDivisionId(route.params.divisionId));
+    redux.dispatch(getGamesByTeamId(route.params.teamId));
+    redux.dispatch(getTeamById(route.params.teamId));
+    redux.dispatch(getPlayersWithFilters({team: route.params.teamId}));
     return redux.dispatch(getLeagueByName(leagueName));
   }
 
   render() {
-    let {league, division, games, teams} = this.props;
+    let {league, players, games, team} = this.props;
     return (
       <div>
-        <Team league={league} games={games} teams={teams} division={division} />
+        <div className="portlet-title">
+          <div className="page-title">{team && team.name}</div>
+        </div>
+        <div className="row" style={{backgroundColor: '#eff3f8'}}>
+
+          <div className="col-md-5 col-xs-5" style={{margin: '20px 0px'}}>
+            <PlayerList players={players} team={team} league={league} />
+          </div>
+
+          <div className="col-md-7 col-xs-7" style={{margin: '20px 0px'}}>
+            <TeamSchedule league={league} games={games} />
+          </div>
+        </div>
+
+
       </div>
     );
   }
 }
 
-export default TeamRoute;
+export default TeamPage;
