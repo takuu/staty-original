@@ -18,6 +18,7 @@ export default class TeamSchedule extends React.Component {
         <div className="sub-title-container">
           <div className="sub-title">Schedule</div>
         </div>
+        <table className="table">
         {
           _.map(this.props.games, (game) => {
 
@@ -42,7 +43,7 @@ export default class TeamSchedule extends React.Component {
             );
           })
         }
-        }
+        </table>
       </div>
     );
   }

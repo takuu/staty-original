@@ -17,7 +17,6 @@ export default class PlayerList extends React.Component {
 
   render() {
     const {players, team, league} = this.props;
-    debugger;
     let hasNumber = helper.doesKeyExistInList(players, 'number');
     let hasName = helper.doesKeyExistInList(players, 'name');
     let hasPos = helper.doesKeyExistInList(players, 'position');
@@ -36,7 +35,7 @@ export default class PlayerList extends React.Component {
               return (
                 <tr>
                   {(hasNumber) ? (<td>{player.number || '-'}</td>): ''}
-                  {(hasName) ? (<td><a href={playerUrl}>{player.name || '-'}</a></td>): ''}
+                  {(hasName) ? (<td><Link to={playerUrl}>{player.name || '-'}</Link></td>): ''}
                   {(hasPos) ? (<td>{player.position || '-'}</td>): ''}
                   {(hasHeight) ? (<td>{player.height || '-'}</td>): ''}
                 </tr>

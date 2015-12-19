@@ -7,6 +7,7 @@ import divisions from './divisionReducers';
 import teams from './teamReducers';
 import games from './gameReducers';
 import players from './playerReducers';
+import stats from './statReducers';
 export default combineReducers({
   auth,
   router,
@@ -15,5 +16,6 @@ export default combineReducers({
   divisions,
   teams,
   games,
-  players
+  players,
+  stats
 });

@@ -60,7 +60,6 @@ class DivisionPage extends React.Component {
 
   render() {
     let {league, division, games, teams} = this.props;
-    debugger;
     return (
         <div className="DivisionPage">
 

@@ -53,5 +53,8 @@ export default keyMirror({
   SET_PLAYERS_WITH_FILTERS: null,
   SEARCH_PLAYER: null,
   SET_PLAYER: null,
-  SET_PLAYERS_BY_TEAM: null
+  SET_PLAYERS_BY_TEAM: null,
+
+  SET_STATS_OF_PLAYER: null,
+  SET_STATS_OF_GAME: null
 });
