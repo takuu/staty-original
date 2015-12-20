@@ -15,6 +15,7 @@
 .page-content {
     background-color:#eff3f8;
     padding:15px 0;
+    min-height:800px;
 }
 .portlet {
     margin-top:0px;

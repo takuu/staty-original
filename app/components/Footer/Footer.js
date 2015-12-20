@@ -8,29 +8,27 @@ import { Link } from 'react-router';
 class Footer extends React.Component{
 
   static propTypes = {
-    viewport: PropTypes.shape({
-      width: PropTypes.number.isRequired,
-      height: PropTypes.number.isRequired
-    }).isRequired
+
   };
 
   render() {
     // This is just an example how one can render CSS
-    let { width, height } = this.props.viewport;
-    this.renderCss(`.Footer-viewport:after {content:' ${width}x${height}';}`);
 
     return (
       <div className="Footer">
         <div className="Footer-container">
           <span className="Footer-text">© Staty.io</span>
           <span className="Footer-spacer">·</span>
-          <a className="Footer-link" href="/" onClick={Link.handleClick}>Home</a>
+          <Link className="Footer-link" to="/">Home</Link>
           <span className="Footer-spacer">·</span>
-          <a className="Footer-link" href="/privacy" onClick={Link.handleClick}>Privacy</a>
+          <Link className="Footer-link" to="/privacy" >Privacy</Link>
           <span className="Footer-spacer">·</span>
-          <a className="Footer-link" href="/not-found" onClick={Link.handleClick}>Not Found</a>
+          <Link className="Footer-link" to="/contact">Contact</Link>
+          <span className="Footer-spacer">·</span>
+          <Link className="Footer-link" to="/signup">Sign up</Link>
+          <span className="Footer-spacer">·</span>
           <span className="Footer-spacer"> | </span>
-          <span ref="viewport" className="Footer-viewport Footer-text Footer-text--muted">Viewport:</span>
+          <Link className="Footer-link" to="/login">Admin</Link>
         </div>
       </div>
     );

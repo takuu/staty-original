@@ -4,9 +4,8 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Header from '../components/Header/Header';
+import Footer from '../components/Footer/Footer';
 import { fetchProfile, logout } from '../actions/auth';
-import CSSModules from 'react-css-modules';
-
 @connect(state => ({
   auth: state.auth,
   router: state.router
@@ -40,8 +39,11 @@ export default class App extends React.Component {
           router={this.context.router}
           {...bindActionCreators({ logout }, dispatch)}
         />
+        <div style={{minHeight: '800px'}}>
+          {this.props.children}
+        </div>
 
-        {this.props.children}
+        <Footer />
       </div>
     );
   }
