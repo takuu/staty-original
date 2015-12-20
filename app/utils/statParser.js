@@ -10,6 +10,7 @@ function combineList(list=[]) {
     });
     return total;
   });
+  console.log('ccc', cummulativeStats);
   return cummulativeStats;
 }
 

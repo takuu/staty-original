@@ -14,6 +14,7 @@ import LeaguePage from './../containers/LeaguePage';
 import DivisionPage from './../containers/DivisionPage';
 import TeamPage from './../containers/TeamPage';
 import PlayerPage from '../containers/PlayerPage';
+import GamePage from '../containers/GamePage';
 import * as Posts from './../containers/Posts';
 import PanelContainer from '../components/PanelContainer/PanelContainer';
 
@@ -37,7 +38,10 @@ const routes = (
 
     <Route path="/:leagueName" component={PanelContainer}>
       <Route path="main" component={LeaguePage} />
+
+      <Route path="division/:divisionId/game/:gameId" component={GamePage} />
       <Route path="division/:divisionId" component={DivisionPage} />
+
       <Route path="team/:teamId/player/:playerId" component={PlayerPage} />
       <Route path="team/:teamId" component={TeamPage} />
 

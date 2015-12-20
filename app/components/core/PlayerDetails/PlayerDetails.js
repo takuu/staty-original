@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import './styles.css';
 import _ from 'lodash';
+import {Link} from 'react-router';
 import statParser from '../../../utils/statParser';
 
 class PlayerDetails extends React.Component {
@@ -36,23 +37,23 @@ class PlayerDetails extends React.Component {
         <p>Position</p>
         <p>
           High Score:
-          <a href={maxPointsGame && "/" + league.name + "/division/" + maxPointsGame.division + "/game/" + maxPointsGame.game._id}>{maxPointsGame && maxPointsGame.stat.points}</a>
+          <Link to={maxPointsGame && "/" + league.name + "/division/" + maxPointsGame.division + "/game/" + maxPointsGame.game._id}>{maxPointsGame && maxPointsGame.stat.points}</Link>
         </p>
         <p>
           High Rebound:
-          <a href={maxReboundsGame && "/" + league.name + "/division/" + maxReboundsGame.division + "/game/" + maxReboundsGame.game._id}>{maxReboundsGame && maxReboundsGame.stat.totalRebounds}</a>
+          <Link to={maxReboundsGame && "/" + league.name + "/division/" + maxReboundsGame.division + "/game/" + maxReboundsGame.game._id}>{maxReboundsGame && maxReboundsGame.stat.totalRebounds}</Link>
         </p>
         <p>
           High Assists:
-          <a href={maxAssistsGame && "/" + league.name + "/division/" + maxAssistsGame.division + "/game/" + maxAssistsGame.game._id}>{maxAssistsGame && maxAssistsGame.stat.assists}</a>
+          <Link to={maxAssistsGame && "/" + league.name + "/division/" + maxAssistsGame.division + "/game/" + maxAssistsGame.game._id}>{maxAssistsGame && maxAssistsGame.stat.assists}</Link>
         </p>
         <p>
           High Steals:
-          <a href={maxStealsGame && "/" + league.name + "/division/" + maxStealsGame.division + "/game/" + maxStealsGame.game._id}>{maxStealsGame && maxStealsGame.stat.steals}</a>
+          <Link to={maxStealsGame && "/" + league.name + "/division/" + maxStealsGame.division + "/game/" + maxStealsGame.game._id}>{maxStealsGame && maxStealsGame.stat.steals}</Link>
         </p>
         <p>
           High Blocks:
-          <a href={maxBlocksGame && "/" + league.name + "/division/" + maxBlocksGame.division + "/game/" + maxBlocksGame.game._id}>{maxBlocksGame && maxBlocksGame.stat.blocks}</a>
+          <Link to={maxBlocksGame && "/" + league.name + "/division/" + maxBlocksGame.division + "/game/" + maxBlocksGame.game._id}>{maxBlocksGame && maxBlocksGame.stat.blocks}</Link>
         </p>
 
       </div>

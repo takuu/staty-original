@@ -63,7 +63,7 @@ exports.getPlayerStats = function(req, res) {
 exports.getGameStats = function(req, res) {
   var id = req.params.id;
   Stat.find({game: id})
-    .populate('player')
+    .populate('player game')
     .exec(function(err, stats) {
     res.status(200).send(stats);
   })
