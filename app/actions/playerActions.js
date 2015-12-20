@@ -37,7 +37,10 @@ export function searchPlayer(name='') {
   return async (dispatch) => {
     try {
       const players = (await axios.get(baseUrl + '/players/search/?q=' + name)).data;
-      dispatch({ type: SEARCH_PLAYER, players });
+      const result = _.map(players, function (item) {
+        return _.extend({}, item, {searchName: name});
+      });
+      dispatch({ type: SEARCH_PLAYER, players: result });
     } catch (error) {
       console.log('playerActions error: ', error)
     }

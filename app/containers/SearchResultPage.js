@@ -14,7 +14,7 @@ import PlayerList from '../components/core/PlayerList/PlayerList';
   const league = _.find(leagues, {name: leagueName});
 
   const playersJS = state.players.toJS();
-  const players = _.map(playersJS, (player)=>{return player});
+  const players = _.filter(playersJS, {searchName: searchName});
 
   return {league: league, players: players}
 }, {
