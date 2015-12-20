@@ -15,6 +15,7 @@ import DivisionPage from './../containers/DivisionPage';
 import TeamPage from './../containers/TeamPage';
 import PlayerPage from '../containers/PlayerPage';
 import GamePage from '../containers/GamePage';
+import SearchResultPage from '../containers/SearchResultPage';
 import * as Posts from './../containers/Posts';
 import PanelContainer from '../components/PanelContainer/PanelContainer';
 
@@ -37,7 +38,8 @@ const routes = (
 
 
     <Route path="/:leagueName" component={PanelContainer}>
-      <Route path="main" component={LeaguePage} />
+      <Route path="home" component={LeaguePage} />
+      <Route path="results/:searchName" component={SearchResultPage}></Route>
 
       <Route path="division/:divisionId/game/:gameId" component={GamePage} />
       <Route path="division/:divisionId" component={DivisionPage} />
@@ -46,9 +48,6 @@ const routes = (
       <Route path="team/:teamId" component={TeamPage} />
 
     </Route>
-
-
-
 
     <Route path="*" component={NotFound} />
   </Route>

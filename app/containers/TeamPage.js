@@ -63,7 +63,12 @@ class TeamPage extends React.Component {
         <div className="row" style={{backgroundColor: '#eff3f8'}}>
 
           <div className="col-md-5 col-xs-5" style={{margin: '20px 0px'}}>
-            <PlayerList players={players} team={team} league={league} />
+            <div className="sub-container">
+              <div className="sub-title-container">
+                <div className="sub-title">Roster</div>
+              </div>
+              <PlayerList players={players} team={team} league={league} />
+            </div>
           </div>
 
           <div className="col-md-7 col-xs-7" style={{margin: '20px 0px'}}>
