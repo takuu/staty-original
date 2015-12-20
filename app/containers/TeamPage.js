@@ -72,7 +72,12 @@ class TeamPage extends React.Component {
           </div>
 
           <div className="col-md-7 col-xs-7" style={{margin: '20px 0px'}}>
-            <TeamSchedule league={league} games={games} />
+            <div className="sub-container">
+              <div className="sub-title-container">
+                <div className="sub-title">Schedule</div>
+              </div>
+              <TeamSchedule league={league} games={games} />
+            </div>
           </div>
         </div>
 

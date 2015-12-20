@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import statParser from '../../../utils/statParser';
 
-export default class LeagueSchedule extends React.Component {
+export default class Schedule extends React.Component {
   static propTypes = {
     games: PropTypes.array,
     league: PropTypes.object
@@ -15,7 +15,7 @@ export default class LeagueSchedule extends React.Component {
   render() {
     const schedule = statParser.createSchedule(this.props.games);
     return (
-      <div className="wrapper">
+      <div>
         {
           _.map(Object.keys(schedule), (key) => {
             let list = schedule[key];

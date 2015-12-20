@@ -19,24 +19,22 @@ export default class Standings extends React.Component {
   render() {
     const standings = statParser.createStandings(this.props.games);
     return (
-      <div className="wrapper">
-        <table className="table">
-          <tbody>
-          {
-            _.map(standings, (team) => {
-              return (
-                <tr>
-                  <td>
-                    <Link key={team._id} to={"/" + this.props.league.name + "/team/" + team.id} >{team.name}</Link>
-                  </td>
-                  <td>{team.win}-{team.loss}</td>
-                </tr>
-              )
-            })
-          }
-          </tbody>
-        </table>
-      </div>
+      <table className="table">
+        <tbody>
+        {
+          _.map(standings, (team) => {
+            return (
+              <tr>
+                <td>
+                  <Link key={team._id} to={"/" + this.props.league.name + "/team/" + team.id} >{team.name}</Link>
+                </td>
+                <td>{team.win}-{team.loss}</td>
+              </tr>
+            )
+          })
+        }
+        </tbody>
+      </table>
     );
   }
 }
