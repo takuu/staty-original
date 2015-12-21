@@ -438,7 +438,8 @@
       "email": "email@adress",
       "password": "pass",
       "firstname": "Taku",
-      "lastname": "Uechi"
+      "lastname": "Uechi",
+      "leagueName": "mofufus"
     },
     {
       "id": 5,

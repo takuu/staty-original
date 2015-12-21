@@ -61,6 +61,7 @@ const HARDCODED_PASSWORD = 'pass';
 const HARDCODED_USER = {
   id: 4,
   email: 'email@adress',
+  leagueName: 'mofufus',
   password: 'pass'
 };
 

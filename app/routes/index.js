@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router';
 import App from './../containers/App';
+import Auth from '../containers/Auth';
 import SignupPage from './../containers/SignupPage';
 import LoginPage from './../containers/LoginPage';
 import ProfilePage from './../containers/ProfilePage';
@@ -16,6 +17,7 @@ import TeamPage from './../containers/TeamPage';
 import PlayerPage from '../containers/PlayerPage';
 import GamePage from '../containers/GamePage';
 import SearchResultPage from '../containers/SearchResultPage';
+import LeagueAboutPage from '../containers/LeagueAboutPage';
 import * as Posts from './../containers/Posts';
 import PanelContainer from '../components/PanelContainer/PanelContainer';
 
@@ -39,7 +41,15 @@ const routes = (
 
     <Route path="/:leagueName" component={PanelContainer}>
       <Route path="home" component={LeaguePage} />
+      <Route path="dashboard" component={Auth} >
+        <Route path="about" component={LeagueAboutPage} />
+      </Route>
+
+      <Route path="about" component={LeagueAboutPage} />
+
+
       <Route path="results/:searchName" component={SearchResultPage}></Route>
+
 
       <Route path="division/:divisionId/game/:gameId" component={GamePage} />
       <Route path="division/:divisionId" component={DivisionPage} />
@@ -69,6 +79,8 @@ export default (store, client) => {
   return walk(Route.createRouteFromReactElement(routes), route => {
     route.onEnter = (nextState, transition) => {
       const loggedIn = !!store.getState().auth.token;
+      const auth = store.getState().auth;
+      debugger;
 
       if (route.requireAuth && !loggedIn) {
         transition.to(...redirectBackAfter('/login', nextState));
