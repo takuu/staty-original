@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import PlayerList from '../components/core/PlayerList/PlayerList';
-import TeamSchedule from '../components/core/TeamSchedule/TeamSchedule';
+import PlayerList from '../../components/core/PlayerList/PlayerList';
+import TeamSchedule from '../../components/core/TeamSchedule/TeamSchedule';
 import _ from 'lodash';
 
-import { getLeagueByName } from '../actions/leagues';
-import { getGamesByTeamId } from '../actions/gameActions';
-import { getTeamById } from '../actions/teamActions';
-import { getPlayersWithFilters } from '../actions/playerActions';
+import { getLeagueByName } from '../../actions/leagues';
+import { getGamesByTeamId } from '../../actions/gameActions';
+import { getTeamById } from '../../actions/teamActions';
+import { getPlayersWithFilters } from '../../actions/playerActions';
 
 
 @connect((state,router) => {

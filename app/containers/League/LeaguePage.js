@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import League from '../components/League/League';
+import League from '../../components/League/League';
 import _ from 'lodash';
-import {PanelContainer} from '../components/PanelContainer/PanelContainer';
-import { getLeagueByName } from '../actions/leagues';
-import { getActiveDivisionByLeagueId } from '../actions/divisionActions';
+import {PanelContainer} from '../../components/PanelContainer/PanelContainer';
+import { getLeagueByName } from '../../actions/leagues';
+import { getActiveDivisionByLeagueId } from '../../actions/divisionActions';
 
 
 @connect((state,router) => {

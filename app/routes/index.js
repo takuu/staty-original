@@ -11,12 +11,12 @@ import fillStore from '../utils/fillStore';
 import DashboardPage from './../containers/DashboardPage';
 import ContactPage from './../containers/ContactPage';
 import LeagueListPage from './../containers/LeagueListPage';
-import LeaguePage from './../containers/LeaguePage';
-import DivisionPage from './../containers/DivisionPage';
-import TeamPage from './../containers/TeamPage';
-import PlayerPage from '../containers/PlayerPage';
-import GamePage from '../containers/GamePage';
-import SearchResultPage from '../containers/SearchResultPage';
+import LeaguePage from './../containers/League/LeaguePage';
+import DivisionPage from './../containers/League/DivisionPage';
+import TeamPage from './../containers/League/TeamPage';
+import PlayerPage from '../containers/League/PlayerPage';
+import GamePage from '../containers/League/GamePage';
+import SearchResultPage from '../containers/League/SearchResultPage';
 import LeagueAboutPage from '../containers/LeagueAboutPage';
 import * as Posts from './../containers/Posts';
 import PanelContainer from '../components/PanelContainer/PanelContainer';
@@ -80,7 +80,6 @@ export default (store, client) => {
     route.onEnter = (nextState, transition) => {
       const loggedIn = !!store.getState().auth.token;
       const auth = store.getState().auth;
-      debugger;
 
       if (route.requireAuth && !loggedIn) {
         transition.to(...redirectBackAfter('/login', nextState));

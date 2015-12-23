@@ -5,7 +5,6 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import NavItem from './NavItem';
 
-//@CSSModules(styles)
 export default class Header extends React.Component {
   static propTypes = {
     loggedIn: PropTypes.bool,
@@ -28,7 +27,7 @@ export default class Header extends React.Component {
       return (
 
           <div className="Header-nav Navigation" role="navigation">
-            <Link className="Navigation-link" to="/league" >League</Link>
+            <Link className="Navigation-link" to="/leagues" >Leagues</Link>
             <Link to="/dashboard">Dashboard</Link>
             <Link to="/profile">Profile</Link>
             <Link to="/logout" onClick={this.handleLogout}>Logout</Link>

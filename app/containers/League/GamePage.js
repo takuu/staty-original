@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import StatList from '../components/core/StatList/StatList';
+import StatList from '../../components/core/StatList/StatList';
 import _ from 'lodash';
 
-import { getLeagueByName } from '../actions/leagues';
-import { getGameById } from '../actions/gameActions';
-import { getStatsByGameId } from '../actions/statActions';
+import { getLeagueByName } from '../../actions/leagues';
+import { getGameById } from '../../actions/gameActions';
+import { getStatsByGameId } from '../../actions/statActions';
 
 
 @connect((state,router) => {

@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { searchPlayer } from '../actions/playerActions';
-import { getLeagueByName } from '../actions/leagues'
-import PlayerList from '../components/core/PlayerList/PlayerList';
+import { searchPlayer } from '../../actions/playerActions';
+import { getLeagueByName } from '../../actions/leagues'
+import PlayerList from '../../components/core/PlayerList/PlayerList';
 
 
 @connect((state,router) => {

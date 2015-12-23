@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import GameLog from '../components/core/GameLog/GameLog'
-import SplitStats from '../components/core/SplitStats/SplitStats'
-import PlayerDetails from '../components/core/PlayerDetails/PlayerDetails';
+import GameLog from '../../components/core/GameLog/GameLog'
+import SplitStats from '../../components/core/SplitStats/SplitStats'
+import PlayerDetails from '../../components/core/PlayerDetails/PlayerDetails';
 import _ from 'lodash';
 
-import { getLeagueByName } from '../actions/leagues';
-import { getGamesByTeamId } from '../actions/gameActions';
-import { getStatsByPlayerId } from '../actions/statActions';
-import { getPlayerById } from '../actions/playerActions';
+import { getLeagueByName } from '../../actions/leagues';
+import { getGamesByTeamId } from '../../actions/gameActions';
+import { getStatsByPlayerId } from '../../actions/statActions';
+import { getPlayerById } from '../../actions/playerActions';
 
 
 @connect((state,router) => {
