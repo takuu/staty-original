@@ -18,6 +18,7 @@ import PlayerPage from '../containers/League/PlayerPage';
 import GamePage from '../containers/League/GamePage';
 import SearchResultPage from '../containers/League/SearchResultPage';
 import LeagueAboutPage from '../containers/LeagueAboutPage';
+import AboutPage from '../containers/AboutPage';
 import * as Posts from './../containers/Posts';
 import PanelContainer from '../components/PanelContainer/PanelContainer';
 
@@ -34,6 +35,7 @@ const routes = (
       <Route path="/dashboard/edit/:id" component={Posts.Edit} />
     </Route>
     <Route path="/profile" component={ProfilePage} />
+    <Route path="/about" component={AboutPage} />
 
     <Route path="/contact" component={ContactPage} />
     <Route path="/leagues" component={LeagueListPage} />
