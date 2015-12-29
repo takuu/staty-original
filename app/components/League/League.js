@@ -17,39 +17,40 @@ class League extends React.Component {
     let {league, divisions} = this.props;
     let season = divisions.length && divisions[0].season.name;
     let divisionList = (
-      <dl>
+      <ul className="list-group">
         {
           _.map(divisions, (division) => {
             return (
-              <dt key={division._id}>
+              <li key={division._id} className="list-group-item">
                 <Link to={"/" + this.props.league.name + "/division/" + division._id}>
-                  {division.name}
+                  <span className="inline-list-item" style={{width: '25%'}}>Dec 1</span>
+                  <span className="inline-list-item" style={{width: '50%'}}>{division.name}</span>
+                  <span className="inline-list-item" style={{width: '25%'}}>Completed</span>
                 </Link>
-              </dt>
+
+              </li>
 
             )
           })
         }
-      </dl>
+      </ul>
     );
     return (
       <div>
-        <div className="portlet-title">
-          <div className="page-title">{season}</div>
-        </div>
         <div className="row" style={{backgroundColor: '#eff3f8'}}>
-          <div className="col-md-5 col-xs-5" style={{margin: '20px 0px'}}>
+          <div className="col-md-4 col-xs-4" style={{margin: '20px 0px'}}>
             <div className="sub-container">
               <div className="sub-title-container">
-                <div className="sub-title">Divisions</div>
+                <div className="sub-title">Leagues</div>
               </div>
-              <div style={{padding: "10px"}}>
+              <div>
+                <div className="page-title text-center">{season}</div>
                 {divisionList}
               </div>
             </div>
           </div>
 
-          <div className="col-md-7 col-xs-7" style={{margin: '20px 0px'}}>
+          <div className="col-md-8 col-xs-8" style={{margin: '20px 0px'}}>
             <div className="sub-container">
               <div className="sub-title-container">
                 <div className="sub-title">LEAGUE INFO</div>

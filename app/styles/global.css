@@ -18,7 +18,7 @@ html {
 }
 
 body {
-    background-color:#fff;
+    background-color:#eff3f8;
     color:#34495e;
     padding:0 !important;
     margin:0 !important;
@@ -257,7 +257,7 @@ End Custom Boostrap
     text-transform: uppercase !important;
     font-size:16px;
     font-weight:bold;
-    padding:5px 0px;
+    padding:10px 0px;
 }
 
 .sub-title-container {
@@ -272,10 +272,10 @@ End Custom Boostrap
 }
 
 .sub-container {
-    padding: 10px 15px;
+    padding: 10px 0px 0px 0px;
     background-color:#fff;
     border: 1px solid #ebf0f5;
-    min-height:300px;
+    min-height:200px;
 }
 
 .lighter {
@@ -289,7 +289,10 @@ End Custom Boostrap
     color:#333;
 }
 
-
+.centered {
+    margin: 0 auto;
+    display: table;
+}
 
 
 /*

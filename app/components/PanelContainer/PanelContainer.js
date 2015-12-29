@@ -27,13 +27,9 @@ export default class PanelContainer extends React.Component {
     const {league} = this.props;
     return (
       <div>
-        <div className="page-head">
-          <div className="container">
-            <SubHeader league={league}></SubHeader>
-          </div>
-        </div>
+        <SubHeader league={league}></SubHeader>
         <div className="page-content">
-          <div className="container">
+          <div className="container-fluid">
             <div className="row">
               <div className="col-md-12 col xs-12">
                 <div className="portlet light portlet-fit portlet datatable">

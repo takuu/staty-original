@@ -9,9 +9,15 @@
     background-color:#000;
 }
 .Header {
-    background: #000;
-    color: #fff;
-    height:40px;
+    background: #333;
+    position:fixed;
+    top:0;
+    left:0;
+    color: #444;
+    height:48px;
+    width:100%;
+    z-index:100;
+
 }
 
 /*.Header-container {*/
@@ -30,11 +36,13 @@
 
 .Header-brandTxt {
     margin-left: 10px;
+    line-height:50px;
 }
 
 .Header-nav {
     float: right;
     margin-top: 6px;
+    line-height:32px;
 }
 
 .Header-banner {
@@ -68,11 +76,11 @@
 .Navigation-link,
 .Navigation-link:active,
 .Navigation-link:visited {
-    color: rgba(255, 255, 255, .6);
+    color: #eee;
 }
 
 .Navigation-link:hover {
-    color: rgba(255, 255, 255, 1);
+    color: #aaa;
 }
 
 .Navigation-link--highlight {
@@ -80,7 +88,7 @@
     margin-left: 8px;
     border-radius: 3px;
     background: rgba(0, 0, 0, .15);
-    color: #fff;
+    color: #eee;
 }
 
 .Navigation-link--highlight:hover {
