@@ -87,3 +87,9 @@ exports.getActiveDivisionsByLeagueId = function(req, res) {
 
 };
 
+function handleError(res, err) {
+  console.log('handleError');
+  console.log(err);
+  return res.send(500, err);
+}
+

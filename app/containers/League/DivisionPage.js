@@ -65,43 +65,15 @@ class DivisionPage extends React.Component {
   render() {
     let {league, division, games, teams} = this.props;
     return (
-        <div className="DivisionPage">
-
-
-
-          <div className="portlet-title">
-            <div className="page-title">{division && division.name}</div>
-          </div>
-          <div className="row" style={{backgroundColor: '#eff3f8'}}>
-
-            <div className="col-md-5 col-xs-5" style={{margin: '20px 0px'}}>
-              <div className="sub-container">
-                <div className="sub-title-container">
-                  <div className="sub-title">Standing</div>
-                </div>
-                <div style={{padding: "10px"}}>
-                  <Standings league={league} games={games} />
-                </div>
-              </div>
-            </div>
-
-            <div className="col-md-7 col-xs-7" style={{margin: '20px 0px'}}>
-              <div className="sub-container">
-                <div className="sub-title-container">
-                  <div className="sub-title">Schedule</div>
-                </div>
-                <div style={{padding: "10px"}}>
-                  <Schedule league={league} games={games} />
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-
-
-
+      <div className="sub-container">
+        <div className="sub-title-container">
+          <div className="sub-title">Schedule</div>
         </div>
+        <div style={{padding: "10px"}}>
+          <Schedule league={league} games={games} />
+          <Standings league={league} games={games} />
+        </div>
+      </div>
     );
   }
 }
