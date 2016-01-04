@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import League from '../../components/League/League';
 import _ from 'lodash';
 import {PanelContainer} from '../../components/PanelContainer/PanelContainer';
+import DivisionList from '../../components/core/DivisionList/DivisionList.js';
 import { getLeagueByName } from '../../actions/leagues';
 import { getActiveDivisionByLeagueId } from '../../actions/divisionActions';
 
@@ -48,11 +49,32 @@ class LeagueRoute extends React.Component {
   }
 
   render() {
-    const league = this.props.league;
-    const divisions = this.props.divisions;
+    let {league, divisions} = this.props;
+    let season = (divisions.length) ? divisions[0].season.name: '';
     return (
       <div>
-        <League league={league} divisions={divisions} />
+        <div className="row" style={{backgroundColor: '#eff3f8'}}>
+          <div className="col-md-4 col-xs-4" style={{margin: '20px 0px'}}>
+            <div className="sub-container">
+              <div className="sub-title-container">
+                <div className="sub-title">Leagues</div>
+              </div>
+              <div>
+                <div className="page-title text-center">{season}</div>
+                <DivisionList league={league} divisions={divisions}></DivisionList>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-md-8 col-xs-8" style={{margin: '20px 0px'}}>
+            <div className="sub-container">
+              <div className="sub-title-container">
+                <div className="sub-title">LEAGUE INFO</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     );
   }
