@@ -15,7 +15,6 @@ class LeagueRoute extends React.Component {
                 <div className="sub-title">LEAGUE INFO</div>
               </div>
             </div>
-
     );
   }
 }
