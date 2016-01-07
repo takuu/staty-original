@@ -38,10 +38,17 @@ export default class AboutPage extends React.Component {
               <button type="button" className="btn btn-default">Left</button>
              </div>
             <div className="col-md-12">
-              <a href="https://www.google.com">gOOgle</a>
+              <img src="http://www.small-hydro.com/images/home_btn_small.jpg" alt="google"></img>
+
             </div>
+            <div className="col-md-2">
+              <a href="https://www.google.com">gooooooogle</a>
+            </div>
+            <div className="col-md-10">.col-md-10</div>
             <div className="col-md-2"></div>
-            <div className="col-md-8">awefj;lajwelkfj a;lkjaw;lekfj aw;kefj ;lawjeflkj a;lwkejf a;lwkjef lkajwef alk;jef la;kje fal;kjf alkjf alkjf a;lwkejf al;kwje flkajwe lfkja wl;ekjf ;alkjfa;l</div>
+            <div className="col-md-8">ASDF This is my first text that I am putting in the about page for the website. asdklf;lkas df;alksdjf asdf;lkjasd falskdfj askdfjlkasd;flkj a alksdjf;lkajsd falksjdf ;laksj dfadsflkj  </div>
+            <div className="col-md-2">.col-md-2</div>
+            <div className="col-md-8">ASDF This is my first text that I am putting in the about page for the website</div>
             <div className="col-md-2"></div>
         </div>
       </div>
