@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import Standings from '../../components/core/Standings/Standings'
-import Schedule from '../../components/core/LeagueSchedule/LeagueSchedule';
+import Standings from '../../../components/core/Standings/Standings'
+import Schedule from '../../../components/core/LeagueSchedule/LeagueSchedule';
 import _ from 'lodash';
-import { Link } from 'react-router';
+import {Link} from 'react-router';
 
-import { getLeagueByName } from '../../actions/leagues';
-import { getGamesByDivisionId } from '../../actions/gameActions';
-import { getTeamsByDivisionId } from '../../actions/teamActions';
-import { getDivisionById } from '../../actions/divisionActions';
+import { getLeagueByName } from '../../../actions/leagues';
+import { getGamesByDivisionId } from '../../../actions/gameActions';
+import { getTeamsByDivisionId } from '../../../actions/teamActions';
+import { getDivisionById } from '../../../actions/divisionActions';
 
 @connect((state,router) => {
   const divisionId = router.params.divisionId;
@@ -37,12 +37,11 @@ import { getDivisionById } from '../../actions/divisionActions';
   getTeamsByDivisionId,
   getDivisionById
 })
-class DivisionPage extends React.Component {
+class SchedulePage extends React.Component {
   constructor(props) {
     super(props)
   }
   static propTypes = {
-    children: PropTypes.element.isRequired,
     division: PropTypes.object.isRequired,
     league: PropTypes.object.isRequired,
     teams: PropTypes.array.isRequired,
@@ -69,34 +68,14 @@ class DivisionPage extends React.Component {
     let scheduleUrl = "/" + league.name + "/division/" + division._id + "/schedule";
     let standingUrl = "/" + league.name + "/division/" + division._id + "/standing";
     let teamsUrl = "/" + league.name + "/division/" + division._id + "/teams";
-
     return (
-      <div className="sub-container">
-        <div className="sub-title-container">
-          <div className="container">
-            <div className="col-md-6 col-xs-12">
-              <ul className="nav nav-tabs nav-justified">
-                <li role="presentation" className="active">
-                  <Link to={scheduleUrl}><div className="sub-title">Schedule</div></Link>
-                </li>
-                <li role="presentation">
-                  <Link to={standingUrl}><div className="sub-title">Standing</div></Link>
-                </li>
-                <li role="presentation">
-                  <Link to={teamsUrl}><div className="sub-title">Teams</div></Link>
-                </li>
-              </ul>
-            </div>
-          </div>
 
-
-        </div>
         <div style={{padding: "10px"}}>
-          {this.props.children}
+          <Schedule league={league} games={games} />
         </div>
-      </div>
+
     );
   }
 }
 
-export default DivisionPage;
+export default SchedulePage;

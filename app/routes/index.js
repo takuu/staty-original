@@ -13,6 +13,8 @@ import ContactPage from './../containers/ContactPage';
 import LeagueListPage from './../containers/LeagueListPage';
 import LeaguePage from './../containers/League/LeaguePage';
 import DivisionPage from './../containers/League/DivisionPage';
+import SchedulePage from './../containers/League/Division/SchedulePage';
+import StandingPage from './../containers/League/Division/StandingPage';
 import TeamPage from './../containers/League/TeamPage';
 import PlayerPage from '../containers/League/PlayerPage';
 import GamePage from '../containers/League/GamePage';
@@ -21,6 +23,7 @@ import LeagueAboutPage from '../containers/LeagueAboutPage';
 import AboutPage from '../containers/AboutPage';
 import * as Posts from './../containers/Posts';
 import PanelContainer from '../components/PanelContainer/PanelContainer';
+
 
 const routes = (
   <Route component={App}>
@@ -54,7 +57,11 @@ const routes = (
 
 
       <Route path="division/:divisionId/game/:gameId" component={GamePage} />
-      <Route path="division/:divisionId" component={DivisionPage} />
+      <Route path="division/:divisionId" component={DivisionPage} >
+        <Route path="schedule" component={SchedulePage} />
+        <Route path="standing" component={StandingPage} />
+      </Route>
+
 
       <Route path="team/:teamId/player/:playerId" component={PlayerPage} />
       <Route path="team/:teamId" component={TeamPage} />
@@ -64,7 +71,6 @@ const routes = (
     <Route path="*" component={NotFound} />
   </Route>
 );
-
 
 function walk(routes, cb) {
 
