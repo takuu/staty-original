@@ -66,7 +66,7 @@ export default class PanelContainer extends React.Component {
                         </div>
                       </div>
                     </div>
-                    <div className="col-md-8 col-xs-8" style={{margin: '20px 0px'}}>
+                    <div className="col-md-8 col-xs-8" style={{margin: '21px 0px'}}>
                       {this.props.children}
                     </div>
                   </div>
