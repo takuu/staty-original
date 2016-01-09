@@ -27,18 +27,51 @@ browserSync({
       webpackHotMiddleware(bundler),
 
       (req, res, next) => {
-        if (req.url !== '/') { return next(); }
 
-        fs.readFile(path.join(__dirname, 'app', 'template.html'), {
-          encoding: 'utf-8'
-        }, (err, source) => {
-          if (err) return next(err);
+        console.log('foo?: ', req.originalUrl);
+        if(req.url == '/') {
 
-          const template = _.template(source);
+          fs.readFile(path.join(__dirname, 'app/landing', 'index.html'), {
+            encoding: 'utf-8'
+          }, (err, source) => {
+            if (err) return next(err);
 
-          res.write(template({ html: '', initialState: 'undefined', env }));
-          res.end();
-        });
+            const template = _.template(source);
+
+            res.write(template({ html: '', initialState: 'undefined', env }));
+            res.end();
+          });
+        } else {
+
+          // This is here because of the hashtags
+          //if (req.url !== '/') { return next(); }
+          var isAllowedAsset = _checkIfAllowedAsset(req.originalUrl);
+          console.log('isAsset?: ', isAllowedAsset);
+          if(isAllowedAsset) return next();
+
+
+          fs.readFile(path.join(__dirname, 'app', 'template.html'), {
+            encoding: 'utf-8'
+          }, (err, source) => {
+            if (err) return next(err);
+
+            const template = _.template(source);
+
+            res.write(template({ html: '', initialState: 'undefined', env }));
+            res.end();
+          });
+        }
+
+        function _checkIfAllowedAsset(url) {
+          var ALLOWED_TYPES = ['png', 'jpeg', 'css', 'js', 'jpg'];
+          var path = url.split('.');
+          var fileType = path[1] && path[1].split('?')[0];
+
+          var index = ALLOWED_TYPES.indexOf(fileType);
+          return index >=0;
+
+        }
+
       }
 
     ]

@@ -67,8 +67,8 @@ class StandingPage extends React.Component {
     let {league, division, games, teams} = this.props;
     return (
       <div>
-          <Standings league={league} games={games} />
-        </div>
+        <Standings league={league} games={games} />
+      </div>
 
     );
   }

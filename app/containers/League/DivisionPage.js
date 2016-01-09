@@ -18,7 +18,7 @@ import { getDivisionById } from '../../actions/divisionActions';
   const league = _.find(leagues, {name: leagueName});
 
   const gamesJS = state.games.toJS();
-  const games = _.filter(gamesJS, (game)=>{
+  const games = _.filter(gamesJS, (game)=> {
     return game.division == divisionId;
   });
 
@@ -26,6 +26,7 @@ import { getDivisionById } from '../../actions/divisionActions';
   const teams = _.filter(teamsJS, (team)=>{
     return team.division._id == divisionId;
   });
+  debugger;
 
   const divisions = state.divisions.toJS();
   const division = divisions && divisions[divisionId];
@@ -88,7 +89,6 @@ class DivisionPage extends React.Component {
               </ul>
             </div>
           </div>
-
 
         </div>
         <div style={{padding: "10px"}}>

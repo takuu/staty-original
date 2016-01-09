@@ -54,10 +54,10 @@ export default class Header extends React.Component {
       <div>
         <div className="Header">
           <div className="container">
-            <Link className="Header-brand" to="/" title="Staty">
+            <a className="Header-brand" href="/" title="Staty">
               <img className="Header-brandImg" src={require('./logo-small.png')} width="32" height="32" alt="React" />
               <span className="Header-brandTxt">Staty</span>
-            </Link>
+            </a>
             {this.renderNavBar()}
           </div>
         </div>

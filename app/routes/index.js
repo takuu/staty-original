@@ -29,7 +29,6 @@ const routes = (
   <Route component={App}>
     <Route path="/signup" component={SignupPage} />
     <Route path="/login" component={LoginPage} />
-    <Route path="/" component={Posts.List} />
     <Route path="/posts/:id" component={Posts.View} />
 
     <Route requireAuth>

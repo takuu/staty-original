@@ -52,7 +52,7 @@ export default class PanelContainer extends React.Component {
         <div className="page-content">
           <div className="container-fluid">
             <div className="row">
-              <div className="col-md-12 col xs-12">
+              <div className="col-md-12 col-xs-12">
                 <div className="portlet light portlet-fit portlet datatable">
                   <div className="row" style={{backgroundColor: '#eff3f8'}}>
                     <div className="col-md-4 col-xs-4" style={{margin: '20px 0px'}}>
