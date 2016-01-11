@@ -4,6 +4,7 @@ import Standings from '../../components/core/Standings/Standings'
 import Schedule from '../../components/core/LeagueSchedule/LeagueSchedule';
 import _ from 'lodash';
 import { Link } from 'react-router';
+import classNames from 'classnames';
 
 import { getLeagueByName } from '../../actions/leagues';
 import { getGamesByDivisionId } from '../../actions/gameActions';
@@ -26,12 +27,13 @@ import { getDivisionById } from '../../actions/divisionActions';
   const teams = _.filter(teamsJS, (team)=>{
     return team.division._id == divisionId;
   });
-  debugger;
 
   const divisions = state.divisions.toJS();
   const division = divisions && divisions[divisionId];
 
-  return {league: league, games: games, teams: teams, division: division}
+  const path = router.location && router.location.pathname;
+
+  return {league: league, games: games, teams: teams, division: division, path: path}
 }, {
   getLeagueByName,
   getGamesByDivisionId,
@@ -47,13 +49,15 @@ class DivisionPage extends React.Component {
     division: PropTypes.object.isRequired,
     league: PropTypes.object.isRequired,
     teams: PropTypes.array.isRequired,
-    games: PropTypes.array.isRequired
+    games: PropTypes.array.isRequired,
+    path: PropTypes.string.isRequired
   };
   static defaultProps = {
     division: {},
     league: {},
     teams: [],
-    games: []
+    games: [],
+    path: ''
   };
 
   static fillStore(redux, route) {
@@ -66,10 +70,20 @@ class DivisionPage extends React.Component {
   }
 
   render() {
-    let {league, division, games, teams} = this.props;
+    let {league, division, games, teams, path} = this.props;
     let scheduleUrl = "/" + league.name + "/division/" + division._id + "/schedule";
     let standingUrl = "/" + league.name + "/division/" + division._id + "/standing";
     let teamsUrl = "/" + league.name + "/division/" + division._id + "/teams";
+
+    let urlParts = path.split('/');
+    let routeName = urlParts[urlParts.length-1];
+    let standingClass = classNames({
+      'active': routeName == 'standing'
+    });
+    let scheduleClass = classNames({
+      'active': routeName == 'schedule'
+    });
+    debugger;
 
     return (
       <div className="sub-container">
@@ -77,10 +91,10 @@ class DivisionPage extends React.Component {
           <div className="container">
             <div className="col-md-6 col-xs-12">
               <ul className="nav nav-tabs nav-justified">
-                <li role="presentation" className="active">
+                <li role="presentation" className={scheduleClass}>
                   <Link to={scheduleUrl}><div className="sub-title">Schedule</div></Link>
                 </li>
-                <li role="presentation">
+                <li role="presentation" className={standingClass}>
                   <Link to={standingUrl}><div className="sub-title">Standing</div></Link>
                 </li>
                 <li role="presentation">
@@ -89,7 +103,6 @@ class DivisionPage extends React.Component {
               </ul>
             </div>
           </div>
-
         </div>
         <div style={{padding: "10px"}}>
           {this.props.children}
