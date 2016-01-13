@@ -63,7 +63,7 @@ browserSync({
         }
 
         function _checkIfAllowedAsset(url) {
-          var ALLOWED_TYPES = ['png', 'jpeg', 'css', 'js', 'jpg'];
+          var ALLOWED_TYPES = ['png', 'jpeg', 'css', 'js', 'jpg', 'gif'];
           var path = url.split('.');
           var fileType = path[1] && path[1].split('?')[0];
 

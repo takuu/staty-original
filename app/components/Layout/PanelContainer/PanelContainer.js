@@ -2,10 +2,10 @@ import React, { PropTypes } from 'react';
 
 import './styles.css';
 import _ from 'lodash';
-import SubHeader from '../../components/SubHeader/SubHeader.js';
-import DivisionList from '../../components/core/DivisionList/DivisionList';
-import { getLeagueByName } from '../../actions/leagues';
-import { getActiveDivisionByLeagueId } from '../../actions/divisionActions';
+import SubHeader from '../../../components/SubHeader/SubHeader.js';
+import DivisionList from '../../../components/core/DivisionList/DivisionList';
+import { getLeagueByName } from '../../../actions/leagues';
+import { getActiveDivisionByLeagueId } from '../../../actions/divisionActions';
 import { connect } from 'react-redux';
 
 @connect((state,router) => {
@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
   const divisionsJS = state.divisions.toJS();
   const divisions = _.map(divisionsJS, (division)=>{return division});
 
-  return {league: league, divisions: divisions}
+  return {league: league, divisions: divisions, params: router.params}
 }, {
   getLeagueByName,
   getActiveDivisionByLeagueId
@@ -44,8 +44,8 @@ export default class PanelContainer extends React.Component {
   }
 
   render() {
-    const {league, divisions} = this.props;
-    let season = (divisions.length) ? divisions[0].season.name: '';
+    const {league, divisions, params} = this.props;
+    const currentDivision = _.find(divisions, {_id: params.divisionId});
     return (
       <div>
         <SubHeader league={league}></SubHeader>
@@ -55,20 +55,7 @@ export default class PanelContainer extends React.Component {
               <div className="col-md-12 col-xs-12">
                 <div className="portlet light portlet-fit portlet datatable">
                   <div className="row" style={{backgroundColor: '#eff3f8'}}>
-                    <div className="col-md-4 col-xs-4" style={{margin: '20px 0px'}}>
-                      <div className="sub-container">
-                        <div className="sub-title-container">
-                          <div className="sub-title">Leagues</div>
-                        </div>
-                        <div>
-                          <div className="page-title text-center">{season}</div>
-                          <DivisionList league={league} divisions={divisions}></DivisionList>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-md-8 col-xs-8" style={{margin: '21px 0px'}}>
-                      {this.props.children}
-                    </div>
+                    {this.props.children}
                   </div>
                 </div>
               </div>

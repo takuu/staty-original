@@ -11,7 +11,7 @@
     float:left;
     width:100%;
     padding: 0 10px;
-    height:50px;
+    height:58px;
 }
 .sub-header-link a {
     color:#fff;
@@ -20,7 +20,7 @@
 .sub-header-title {
     color:#fff;
     font-size:24px;
-    line-height:50px;
+    line-height:58px;
     text-transform:capitalize;
 }
 .league-logo {
@@ -34,9 +34,8 @@
 
 }
 .icon-image {
-    background: url('background/repeat_basketball_texture_sm_1.png') #ffffff no-repeat;
-
-    width:40px;
-    height:40px;
+    background: url('background/mofufus_logo.png') #ffffff no-repeat;
+    width:48px;
+    height:48px;
     border-radius: 50%;
 }

@@ -22,7 +22,10 @@ import SearchResultPage from '../containers/League/SearchResultPage';
 import LeagueAboutPage from '../containers/LeagueAboutPage';
 import AboutPage from '../containers/AboutPage';
 import * as Posts from './../containers/Posts';
-import PanelContainer from '../components/PanelContainer/PanelContainer';
+import PanelContainer from '../components/Layout/PanelContainer/PanelContainer';
+import LeagueLayout from '../components/Layout/LeagueLayout/LeagueLayout';
+
+import LeagueAdmin from '../containers/LeagueAdmin/LeagueAdmin';
 
 
 const routes = (
@@ -43,27 +46,29 @@ const routes = (
     <Route path="/leagues" component={LeagueListPage} />
 
 
+    <Route path="/:leagueName/admin" component={LeagueAdmin} />
     <Route path="/:leagueName" component={PanelContainer}>
-      <Route path="home" component={LeaguePage} />
-      <Route path="dashboard" component={Auth} >
+      <Route component={LeagueLayout}>
+        <Route path="home" component={LeaguePage} />
+        <Route path="dashboard" component={Auth} >
+          <Route path="about" component={LeagueAboutPage} />
+        </Route>
+
         <Route path="about" component={LeagueAboutPage} />
+
+        <Route path="results/:searchName" component={SearchResultPage}></Route>
+
+        <Route path="division/:divisionId/game/:gameId" component={GamePage} />
+        <Route path="division/:divisionId" component={DivisionPage} >
+          <Route path="schedule" component={SchedulePage} />
+          <Route path="standing" component={StandingPage} />
+        </Route>
+
+
+        <Route path="team/:teamId/player/:playerId" component={PlayerPage} />
+        <Route path="team/:teamId" component={TeamPage} />
       </Route>
 
-      <Route path="about" component={LeagueAboutPage} />
-
-
-      <Route path="results/:searchName" component={SearchResultPage}></Route>
-
-
-      <Route path="division/:divisionId/game/:gameId" component={GamePage} />
-      <Route path="division/:divisionId" component={DivisionPage} >
-        <Route path="schedule" component={SchedulePage} />
-        <Route path="standing" component={StandingPage} />
-      </Route>
-
-
-      <Route path="team/:teamId/player/:playerId" component={PlayerPage} />
-      <Route path="team/:teamId" component={TeamPage} />
 
     </Route>
 

@@ -83,7 +83,6 @@ class DivisionPage extends React.Component {
     let scheduleClass = classNames({
       'active': routeName == 'schedule'
     });
-    debugger;
 
     return (
       <div className="sub-container">
