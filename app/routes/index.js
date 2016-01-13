@@ -22,8 +22,8 @@ import SearchResultPage from '../containers/League/SearchResultPage';
 import LeagueAboutPage from '../containers/LeagueAboutPage';
 import AboutPage from '../containers/AboutPage';
 import * as Posts from './../containers/Posts';
-import PanelContainer from '../components/Layout/PanelContainer/PanelContainer';
-import LeagueLayout from '../components/Layout/LeagueLayout/LeagueLayout';
+import PanelContainer from '../containers/Layout/SiteLayout/PanelContainer';
+import LeagueLayout from '../containers/Layout/LeagueLayout/LeagueLayout';
 
 import LeagueAdmin from '../containers/LeagueAdmin/LeagueAdmin';
 
@@ -46,8 +46,14 @@ const routes = (
     <Route path="/leagues" component={LeagueListPage} />
 
 
-    <Route path="/:leagueName/admin" component={LeagueAdmin} />
+
     <Route path="/:leagueName" component={PanelContainer}>
+      <Route path="admin" component={Auth}>
+        <Route path="home" component={LeagueAdmin}>
+
+        </Route>
+      </Route>
+
       <Route component={LeagueLayout}>
         <Route path="home" component={LeaguePage} />
         <Route path="dashboard" component={Auth} >

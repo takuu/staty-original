@@ -47,7 +47,6 @@ export default (state = initialState, action) => {
     case SAVE_PROFILE:
     case SAVE_PROFILE_SUCCESS:
     case FETCH_PROFILE_SUCCESS:
-      debugger;
       return {
         ...state,
         profile: { ...state.profile, ...action.user },

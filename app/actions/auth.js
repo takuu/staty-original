@@ -66,7 +66,6 @@ export function login(email, password, router) {
         password
       });
 
-      debugger;
 
       saveAuthToken(token);
 

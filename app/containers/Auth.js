@@ -24,7 +24,6 @@ export default class Auth extends React.Component {
 
   render() {
     const { auth: {profile, token}, dispatch, params } = this.props;
-    debugger;
     let body = (token && profile && profile.leagueName == params.leagueName) ?
       (
       <div>{this.props.children}</div>
