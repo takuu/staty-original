@@ -22,7 +22,7 @@ import SearchResultPage from '../containers/League/SearchResultPage';
 import LeagueAboutPage from '../containers/LeagueAboutPage';
 import AboutPage from '../containers/AboutPage';
 import * as Posts from './../containers/Posts';
-import PanelContainer from '../containers/Layout/SiteLayout/PanelContainer';
+import SiteLayout from '../containers/Layout/SiteLayout/SiteLayout';
 import LeagueLayout from '../containers/Layout/LeagueLayout/LeagueLayout';
 
 import LeagueAdmin from '../containers/LeagueAdmin/LeagueAdmin';
@@ -47,7 +47,7 @@ const routes = (
 
 
 
-    <Route path="/:leagueName" component={PanelContainer}>
+    <Route path="/:leagueName" component={SiteLayout}>
       <Route path="admin" component={Auth}>
         <Route path="home" component={LeagueAdmin}>
 

@@ -21,7 +21,7 @@ import { connect } from 'react-redux';
   getLeagueByName,
   getActiveDivisionByLeagueId
 })
-export default class PanelContainer extends React.Component {
+export default class SiteLayout extends React.Component {
   static propTypes = {
     children: PropTypes.element.isRequired,
     league: PropTypes.object.isRequired,

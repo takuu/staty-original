@@ -1,4 +1,4 @@
-@import '../../variables.css';
+@import '../../../components/variables.css';
 
 .title {
     font-size: 1.2em;
