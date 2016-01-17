@@ -24,8 +24,8 @@ import AboutPage from '../containers/AboutPage';
 import * as Posts from './../containers/Posts';
 import SiteLayout from '../containers/Layout/SiteLayout/SiteLayout';
 import LeagueLayout from '../containers/Layout/LeagueLayout/LeagueLayout';
-
 import LeagueAdmin from '../containers/LeagueAdmin/LeagueAdmin';
+import DivisionAdmin from '../containers/LeagueAdmin/DivisionAdmin';
 
 
 const routes = (
@@ -45,15 +45,12 @@ const routes = (
     <Route path="/contact" component={ContactPage} />
     <Route path="/leagues" component={LeagueListPage} />
 
-
-
     <Route path="/:leagueName" component={SiteLayout}>
       <Route path="admin" component={Auth}>
-        <Route path="home" component={LeagueAdmin}>
+        <Route path="home" component={LeagueAdmin} />
+        <Route path="divisions" component={DivisionAdmin} />
 
-        </Route>
       </Route>
-
       <Route component={LeagueLayout}>
         <Route path="home" component={LeaguePage} />
         <Route path="dashboard" component={Auth} >

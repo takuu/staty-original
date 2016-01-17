@@ -8,6 +8,7 @@ import teams from './teamReducers';
 import games from './gameReducers';
 import players from './playerReducers';
 import stats from './statReducers';
+import seasons from './seasonReducers';
 export default combineReducers({
   auth,
   router,
@@ -17,5 +18,6 @@ export default combineReducers({
   teams,
   games,
   players,
-  stats
+  stats,
+  seasons
 });

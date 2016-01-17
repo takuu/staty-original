@@ -1,7 +1,8 @@
 import {
   SET_ALL_ACTIVE_DIVISIONS,
   SET_DIVISIONS_BY_SEASON,
-  SET_DIVISION
+  SET_DIVISION,
+  SET_ALL_DIVISIONS
 } from '../constants/actions';
 
 import axios from 'axios';
@@ -40,4 +41,13 @@ export function getDivisionsBySeasonId(id='') {
     }
   };
 }
-
+export function getAllDivisions() {
+  return async (dispatch) => {
+    try {
+      const divisions = (await axios.get(`${baseUrl}/divisions/`)).data;
+      dispatch({ type: SET_ALL_DIVISIONS, divisions });
+    } catch (error) {
+      console.log('divisionActions error: ', error);
+    }
+  };
+}
