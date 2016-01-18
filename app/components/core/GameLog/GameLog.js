@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
 import './styles.css';
 import _ from 'lodash';
 import statParser from '../../../utils/statParser';

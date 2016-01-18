@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { Route, IndexRoute } from 'react-router';
 import App from './../containers/App';
 import Auth from '../containers/Auth';
 import SignupPage from './../containers/SignupPage';
@@ -54,7 +54,20 @@ const routes = (
 
       </Route>
       <Route component={LeagueLayout}>
-        <Route path="home" component={LeaguePage} />
+        <IndexRoute component={LeaguePage} />
+
+        <Route path="league/:leagueId">
+          <Route path="about" component={LeagueAboutPage} />
+          <Route path="division/:divisionId/game/:gameId" component={GamePage} />
+          <Route path="division/:divisionId" component={DivisionPage} >
+            <Route path="schedule" component={SchedulePage} />
+            <Route path="standing" component={StandingPage} />
+          </Route>
+
+
+          <Route path="team/:teamId/player/:playerId" component={PlayerPage} />
+          <Route path="team/:teamId" component={TeamPage} />
+        </Route>
         <Route path="dashboard" component={Auth} >
           <Route path="about" component={LeagueAboutPage} />
         </Route>

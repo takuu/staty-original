@@ -13,7 +13,8 @@ export default class Schedule extends React.Component {
   };
 
   render() {
-    const schedule = statParser.createSchedule(this.props.games);
+    const {league, games} = this.props;
+    const schedule = statParser.createSchedule(games);
     return (
       <div>
         {
@@ -33,11 +34,11 @@ export default class Schedule extends React.Component {
                       {game.time}
                     </td>
                     <td>
-                      <Link to={"/" + this.props.league.name + "/team/" + game.homeTeam._id} >{game.homeTeam.name}</Link>
+                      <Link to={"/" + league.name + "/league/" + league._id + "/team/" + game.homeTeam._id} >{game.homeTeam.name}</Link>
                     </td>
                     <td>vs</td>
                     <td>
-                      <Link to={"/" + this.props.league.name + "/team/" + game.awayTeam._id} >{game.awayTeam.name}</Link>
+                      <Link to={"/" + league.name + "/league/" + league._id + "/team/" + game.awayTeam._id} >{game.awayTeam.name}</Link>
                     </td>
                     <td>
                       Mark Keppel High School

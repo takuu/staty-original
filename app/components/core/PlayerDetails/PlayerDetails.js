@@ -37,23 +37,23 @@ class PlayerDetails extends React.Component {
         <p>Position</p>
         <p>
           High Score:
-          <Link to={maxPointsGame && "/" + league.name + "/division/" + maxPointsGame.division + "/game/" + maxPointsGame.game._id}>{maxPointsGame && maxPointsGame.stat.points}</Link>
+          <Link to={maxPointsGame && "/" + league.name + "/league/" + league._id + "/division/" + maxPointsGame.division + "/game/" + maxPointsGame.game._id}>{maxPointsGame && maxPointsGame.stat.points}</Link>
         </p>
         <p>
           High Rebound:
-          <Link to={maxReboundsGame && "/" + league.name + "/division/" + maxReboundsGame.division + "/game/" + maxReboundsGame.game._id}>{maxReboundsGame && maxReboundsGame.stat.totalRebounds}</Link>
+          <Link to={maxReboundsGame && "/" + league.name + "/league/" + league._id + "/division/" + maxReboundsGame.division + "/game/" + maxReboundsGame.game._id}>{maxReboundsGame && maxReboundsGame.stat.totalRebounds}</Link>
         </p>
         <p>
           High Assists:
-          <Link to={maxAssistsGame && "/" + league.name + "/division/" + maxAssistsGame.division + "/game/" + maxAssistsGame.game._id}>{maxAssistsGame && maxAssistsGame.stat.assists}</Link>
+          <Link to={maxAssistsGame && "/" + league.name + "/league/" + league._id + "/division/" + maxAssistsGame.division + "/game/" + maxAssistsGame.game._id}>{maxAssistsGame && maxAssistsGame.stat.assists}</Link>
         </p>
         <p>
           High Steals:
-          <Link to={maxStealsGame && "/" + league.name + "/division/" + maxStealsGame.division + "/game/" + maxStealsGame.game._id}>{maxStealsGame && maxStealsGame.stat.steals}</Link>
+          <Link to={maxStealsGame && "/" + league.name + "/league/" + league._id + "/division/" + maxStealsGame.division + "/game/" + maxStealsGame.game._id}>{maxStealsGame && maxStealsGame.stat.steals}</Link>
         </p>
         <p>
           High Blocks:
-          <Link to={maxBlocksGame && "/" + league.name + "/division/" + maxBlocksGame.division + "/game/" + maxBlocksGame.game._id}>{maxBlocksGame && maxBlocksGame.stat.blocks}</Link>
+          <Link to={maxBlocksGame && "/" + league.name + "/league/" + league._id + "/division/" + maxBlocksGame.division + "/game/" + maxBlocksGame.game._id}>{maxBlocksGame && maxBlocksGame.stat.blocks}</Link>
         </p>
 
       </div>
