@@ -47,27 +47,29 @@ const routes = (
     <Route path="/leagues" component={LeagueListPage} />
 
     <Route path="/:leagueName" component={SiteLayout}>
-      <Route path="admin" component={Auth}>
-        <Route path="home" component={LeagueAdmin} />
-        <Route path="divisions" component={DivisionAdmin} />
-        <Route path="seasons" component={SeasonAdmin} />
 
-      </Route>
       <Route component={LeagueLayout}>
         <IndexRoute component={LeaguePage} />
+      </Route>
 
-        <Route path="league/:leagueId">
-          <Route path="about" component={LeagueAboutPage} />
+      <Route path="league/:leagueId">
+        <Route component={LeagueLayout}>
           <Route path="division/:divisionId/game/:gameId" component={GamePage} />
           <Route path="division/:divisionId" component={DivisionPage} >
             <Route path="schedule" component={SchedulePage} />
             <Route path="standing" component={StandingPage} />
           </Route>
-
-
           <Route path="team/:teamId/player/:playerId" component={PlayerPage} />
           <Route path="team/:teamId" component={TeamPage} />
         </Route>
+
+        <Route path="admin" component={Auth}>
+          <Route path="home" component={LeagueAdmin} />
+          <Route path="divisions" component={DivisionAdmin} />
+          <Route path="seasons" component={SeasonAdmin} />
+        </Route>
+
+
         <Route path="dashboard" component={Auth} >
           <Route path="about" component={LeagueAboutPage} />
         </Route>
@@ -76,15 +78,6 @@ const routes = (
 
         <Route path="results/:searchName" component={SearchResultPage}></Route>
 
-        <Route path="division/:divisionId/game/:gameId" component={GamePage} />
-        <Route path="division/:divisionId" component={DivisionPage} >
-          <Route path="schedule" component={SchedulePage} />
-          <Route path="standing" component={StandingPage} />
-        </Route>
-
-
-        <Route path="team/:teamId/player/:playerId" component={PlayerPage} />
-        <Route path="team/:teamId" component={TeamPage} />
       </Route>
 
 

@@ -14,7 +14,9 @@ var Player = require('./player.model.js');
 
 // Get list of players
 exports.index = function(req, res) {
-  Player.find(req.query, function (err, players) {
+  Player.find(req.query)
+    .populate('team')
+    .exec(function (err, players) {
     if(err) { return handleError(res, err); }
     res.status(200).send(players);
   });
