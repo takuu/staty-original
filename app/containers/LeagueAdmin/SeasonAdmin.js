@@ -7,15 +7,17 @@ var ReactDataGrid = require('react-data-grid/addons');
 
 @connect((state,router) => {
   const leagueName = router.params.leagueName;
+  const leagueId = router.params.leagueId;
   const leagues = state.leagues.toJS();
   const league = _.find(leagues, {name: leagueName});
 
-  const divisionsJS = state.divisions.toJS();
-  const divisions = _.map(divisionsJS, (division)=>{return division});
+  const seasonsJS = state.seasons.toJS();
+  const seasons = _.filter(seasonsJS, {league: leagueId});
 
-  return {league: league, params: router.params, divisions: divisions}
+  return {league: league, params: router.params, seasons: seasons}
 }, {
-  getLeagueByName
+  getLeagueByName,
+  getSeasonsByLeagueId
 })
 class SeasonAdmin extends React.Component {
 
@@ -26,11 +28,13 @@ class SeasonAdmin extends React.Component {
   };
   static fillStore(redux, route) {
     let leagueName = route.params.leagueName;
+    const leagueId = route.params.leagueId;
+    redux.dispatch(getSeasonsByLeagueId(leagueId));
     return redux.dispatch(getLeagueByName(leagueName));
   }
 
   render() {
-    const {league, params, divisions} = this.props;
+    const {league, params, seasons} = this.props;
     debugger;
     var _rows = [];
     for (var i = 1; i < 1000; i++) {

@@ -2,7 +2,7 @@ import {
   SET_ALL_ACTIVE_DIVISIONS,
   SET_DIVISIONS_BY_SEASON,
   SET_DIVISION,
-  SET_ALL_DIVISIONS
+  SET_DIVISIONS_BY_LEAGUE
 } from '../constants/actions';
 import Immutable from 'immutable';
 import _ from 'lodash';
@@ -16,7 +16,7 @@ export default (state = defaultState, action) => {
       });
       return state;
       break;
-    case SET_ALL_DIVISIONS:
+    case SET_DIVISIONS_BY_LEAGUE:
       _.map(action.divisions, (division) => {
         state = state.set(division._id, division);
       });

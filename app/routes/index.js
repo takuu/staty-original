@@ -47,7 +47,7 @@ const routes = (
     <Route path="/leagues" component={LeagueListPage} />
 
     <Route path="/:leagueName" component={SiteLayout}>
-
+      /*League Home*/
       <Route component={LeagueLayout}>
         <IndexRoute component={LeaguePage} />
       </Route>
@@ -63,6 +63,7 @@ const routes = (
           <Route path="team/:teamId" component={TeamPage} />
         </Route>
 
+        /*League Admin*/
         <Route path="admin" component={Auth}>
           <Route path="home" component={LeagueAdmin} />
           <Route path="divisions" component={DivisionAdmin} />

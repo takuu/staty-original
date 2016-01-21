@@ -2,7 +2,7 @@ import {
   SET_ALL_ACTIVE_DIVISIONS,
   SET_DIVISIONS_BY_SEASON,
   SET_DIVISION,
-  SET_ALL_DIVISIONS
+  SET_DIVISIONS_BY_LEAGUE
 } from '../constants/actions';
 
 import axios from 'axios';
@@ -41,11 +41,11 @@ export function getDivisionsBySeasonId(id='') {
     }
   };
 }
-export function getAllDivisions() {
+export function getDivisionsByLeagueId(id='') {
   return async (dispatch) => {
     try {
-      const divisions = (await axios.get(`${baseUrl}/divisions/`)).data;
-      dispatch({ type: SET_ALL_DIVISIONS, divisions });
+      const divisions = (await axios.get(`${baseUrl}/divisions/league/` + id)).data;
+      dispatch({ type: SET_DIVISIONS_BY_LEAGUE, divisions });
     } catch (error) {
       console.log('divisionActions error: ', error);
     }

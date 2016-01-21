@@ -62,7 +62,7 @@ function createSchedule(games=[]) {
 
 export default {
   combineListofStats: combineList,
-  pluckThenCombineStats: _.compose(combineList, _.pluck),
+  pluckThenCombineStats: _.flowRight(combineList, _.map),
   shootingPercentage: shootingPercentage,
   createStandings: createStandings,
   createSchedule: createSchedule

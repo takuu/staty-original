@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import {Link} from 'react-router';
 import { getLeagueByName } from '../../actions/leagues';
-import { getAllDivisions } from '../../actions/divisionActions';
+import { getDivisionsByLeagueId } from '../../actions/divisionActions';
 import { connect } from 'react-redux';
 var ReactDataGrid = require('react-data-grid/addons');
 
@@ -15,7 +15,8 @@ var ReactDataGrid = require('react-data-grid/addons');
 
   return {league: league, params: router.params, divisions: divisions}
 }, {
-  getLeagueByName
+  getLeagueByName,
+  getDivisionsByLeagueId
 })
 class DivisionAdmin extends React.Component {
 
@@ -26,20 +27,20 @@ class DivisionAdmin extends React.Component {
   };
   static fillStore(redux, route) {
     let leagueName = route.params.leagueName;
-    redux.dispatch(getAllDivisions());
+    let leagueId = route.params.leagueId;
+    redux.dispatch(getDivisionsByLeagueId(leagueId));
     return redux.dispatch(getLeagueByName(leagueName));
   }
 
   render() {
     const {league, params, divisions} = this.props;
     debugger;
-    var _rows = [];
-    for (var i = 1; i < 1000; i++) {
-      _rows.push({ id: i, name: 'Title ' + i, strengthLevel: i * 1000});
-    }
+    let _rows = [];
+
+    _rows = divisions;
 
     //A rowGetter function is required by the grid to retrieve a row for a given index
-    var rowGetter = function(i){
+    var rowGetter = function(i) {
       return _rows[i];
     };
 
@@ -48,8 +49,11 @@ class DivisionAdmin extends React.Component {
       _rows[e.rowIdx] = e.updated;
     };
 
+    var save = function(e) {
+      debugger;
+    };
+
     var columns = [
-      { key: 'id', name: 'ID', editable: true },
       { key: 'name', name: 'Division Name', editable: true },
       { key: 'season', name: 'Season Name', editable: true },
       { key: 'strengthLevel', name: 'Strength Level', editable: true }
@@ -96,14 +100,16 @@ class DivisionAdmin extends React.Component {
             <div className="sub-container">
               <div className="sub-title-container">
                 <div className="sub-title">GET STARTED</div>
-                <ReactDataGrid
-                  enableCellSelect={true}
-                  columns={columns}
-                  rowGetter={rowGetter}
-                  rowsCount={_rows.length}
-                  minHeight={500}
-                  onRowUpdated={handleRowUpdated}/>
               </div>
+
+              <button onClick={save} style={{float:'right'}}>Save</button>
+              <ReactDataGrid
+                enableCellSelect={true}
+                columns={columns}
+                rowGetter={rowGetter}
+                rowsCount={_rows.length}
+                minHeight={500}
+                onRowUpdated={handleRowUpdated}/>
             </div>
           </div>
         </div>

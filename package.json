@@ -36,7 +36,7 @@
     "json-server": "^0.7.25",
     "jsonwebtoken": "^5.0.1",
     "key-mirror": "^1.0.0",
-    "lodash": "^3.10.1",
+    "lodash": "^4.0.0",
     "marked": "^0.3.5",
     "mongoose": "^4.2.9",
     "react": "^0.13.3",
