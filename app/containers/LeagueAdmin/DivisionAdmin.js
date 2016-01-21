@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
+import _ from 'lodash';
 import {Link} from 'react-router';
 import { getLeagueByName } from '../../actions/leagues';
-import { getDivisionsByLeagueId } from '../../actions/divisionActions';
+import { getDivisionsByLeagueId, updateDivision } from '../../actions/divisionActions';
 import { connect } from 'react-redux';
 var ReactDataGrid = require('react-data-grid/addons');
 
@@ -16,7 +17,8 @@ var ReactDataGrid = require('react-data-grid/addons');
   return {league: league, params: router.params, divisions: divisions}
 }, {
   getLeagueByName,
-  getDivisionsByLeagueId
+  getDivisionsByLeagueId,
+  updateDivision
 })
 class DivisionAdmin extends React.Component {
 
@@ -33,24 +35,23 @@ class DivisionAdmin extends React.Component {
   }
 
   render() {
-    const {league, params, divisions} = this.props;
-    debugger;
-    let _rows = [];
-
-    _rows = divisions;
+    const {league, params, divisions, updateDivision} = this.props;
+    let _rows = _.cloneDeep(divisions);
 
     //A rowGetter function is required by the grid to retrieve a row for a given index
     var rowGetter = function(i) {
       return _rows[i];
     };
 
-    var handleRowUpdated = function(e) {
-      debugger;
-      _rows[e.rowIdx] = e.updated;
+    var handleRowUpdated = function(item) {
+      _rows[item.rowIdx][item.cellKey] = item.updated[item.cellKey];
     };
 
     var save = function(e) {
-      debugger;
+      const difference = _.differenceWith(_rows, divisions, _.isEqual);
+      _.map(difference, (item) => {
+        updateDivision(item);
+      });
     };
 
     var columns = [
