@@ -53,10 +53,12 @@ export function getDivisionsByLeagueId(id='') {
   };
 }
 export function updateDivision(item) {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     try {
+      const { auth: { token } } = getState();
+      let headers = getHeaders(token);
       debugger;
-      const division = (await axios.put(`${baseUrl}/divisions/` + item._id, item)).data;
+      const division = (await axios.put(`${baseUrl}/divisions/` + item._id, item, { headers })).data;
       dispatch({ type: UPDATE_DIVISION, division });
     } catch (error) {
       console.log('divisionActions error: ', error);

@@ -28,10 +28,12 @@ class DivisionAdmin extends React.Component {
     divisions: PropTypes.array.isRequired
   };
   static fillStore(redux, route) {
+
     let leagueName = route.params.leagueName;
     let leagueId = route.params.leagueId;
     redux.dispatch(getDivisionsByLeagueId(leagueId));
     return redux.dispatch(getLeagueByName(leagueName));
+
   }
 
   render() {

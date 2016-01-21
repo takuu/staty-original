@@ -39,7 +39,7 @@ app.use(jwt({
       url === '/login' ||
       (postsRE).test(url) && req.method === 'GET' ||
       (leaguesRE).test(url) && req.method === 'GET' ||
-      (apiRE).test(url) && (req.method === 'GET' || req.method === 'PUT')
+      (apiRE).test(url) && (req.method === 'GET')
   );
 }));
 app.use('/api', require('./api.js'));
