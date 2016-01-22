@@ -4,6 +4,7 @@ import {Link} from 'react-router';
 import { getLeagueByName } from '../../actions/leagues';
 import { getDivisionsByLeagueId, updateDivision } from '../../actions/divisionActions';
 import { connect } from 'react-redux';
+import GridEditor from '../../components/LeagueAdmin/GridEditor/GridEditor';
 var ReactDataGrid = require('react-data-grid/addons');
 
 @connect((state,router) => {
@@ -40,26 +41,15 @@ class DivisionAdmin extends React.Component {
     const {league, params, divisions, updateDivision} = this.props;
     let _rows = _.cloneDeep(divisions);
 
-    //A rowGetter function is required by the grid to retrieve a row for a given index
-    var rowGetter = function(i) {
-      return _rows[i];
-    };
-
-    var handleRowUpdated = function(item) {
-      _rows[item.rowIdx][item.cellKey] = item.updated[item.cellKey];
-    };
-
-    var save = function(e) {
-      const difference = _.differenceWith(_rows, divisions, _.isEqual);
-      _.map(difference, (item) => {
-        updateDivision(item);
-      });
-    };
+    var priorities = [{id:0, title : 'Critical'}, {id:1, title : 'High'}, {id:2, title : 'Medium'}, {id:3, title : 'Low'}]
+    var AutoCompleteEditor = ReactDataGrid.Editors.AutoComplete;
+    var PrioritiesEditor = <AutoCompleteEditor options={priorities}/>;
 
     var columns = [
-      { key: 'name', name: 'Division Name', editable: true },
-      { key: 'season', name: 'Season Name', editable: true },
-      { key: 'strengthLevel', name: 'Strength Level', editable: true }
+      { key: 'name', name: 'Division Name', editable: true, sortable: true },
+      { key: 'season', name: 'Season Name', editable: true, sortable: true },
+      { key: 'strengthLevel', name: 'Strength Level', editable: true, sortable: true },
+      { key: 'priority', name: 'Priority', editor: PrioritiesEditor, sortable: true }
     ];
 
     return (
@@ -104,15 +94,7 @@ class DivisionAdmin extends React.Component {
               <div className="sub-title-container">
                 <div className="sub-title">GET STARTED</div>
               </div>
-
-              <button onClick={save} style={{float:'right'}}>Save</button>
-              <ReactDataGrid
-                enableCellSelect={true}
-                columns={columns}
-                rowGetter={rowGetter}
-                rowsCount={_rows.length}
-                minHeight={500}
-                onRowUpdated={handleRowUpdated}/>
+              <GridEditor list={divisions} saveCallback={updateDivision} columns={columns} />
             </div>
           </div>
         </div>
