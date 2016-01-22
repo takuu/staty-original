@@ -5,7 +5,6 @@ import _ from 'lodash';
 import SubHeader from '../../../components/SubHeader/SubHeader.js';
 import DivisionList from '../../../components/core/DivisionList/DivisionList';
 import { getLeagueByName } from '../../../actions/leagues';
-import { getActiveDivisionByLeagueId } from '../../../actions/divisionActions';
 import { connect } from 'react-redux';
 
 @connect((state,router) => {
@@ -13,13 +12,10 @@ import { connect } from 'react-redux';
   const leagues = state.leagues.toJS();
   const league = _.find(leagues, {name: leagueName});
 
-  const divisionsJS = state.divisions.toJS();
-  const divisions = _.map(divisionsJS, (division)=>{return division});
 
-  return {league: league, divisions: divisions, params: router.params}
+  return {league: league}
 }, {
-  getLeagueByName,
-  getActiveDivisionByLeagueId
+  getLeagueByName
 })
 export default class SiteLayout extends React.Component {
   static propTypes = {
@@ -31,21 +27,10 @@ export default class SiteLayout extends React.Component {
     let leagueName = route.params.leagueName;
     return redux.dispatch(getLeagueByName(leagueName));
   }
-  componentWillReceiveProps(nextProps) {
-    const { league, getActiveDivisionByLeagueId } = nextProps;
-    const shouldFetch =
-      !_.isEqual(nextProps.divisions, this.props.divisions) ||
-      nextProps.divisions.length==0;
-
-    // TODO: currently called twice, fix so it's only called once
-    if(league && shouldFetch) {
-      getActiveDivisionByLeagueId(league._id);
-    }
-  }
 
   render() {
-    const {league, divisions, params} = this.props;
-    const currentDivision = _.find(divisions, {_id: params.divisionId});
+    const {league} = this.props;
+
     return (
       <div>
         <SubHeader league={league}></SubHeader>

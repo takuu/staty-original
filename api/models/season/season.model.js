@@ -13,9 +13,8 @@ var SeasonSchema = new Schema({
     required: 'Please enter a season name',
     trim: true
   },
-  active: {type: Boolean, default: false},
-  disabled: {type: Boolean, default: false},
-  league: { type: Schema.ObjectId, ref: 'League' },
+  startDate: { type: Date, default: Date.now },
+  endDate: { type: Date, default: Date.now },
   created: { type: Date, default: Date.now },
   updated: { type: Date, default: Date.now }
 });
