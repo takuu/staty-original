@@ -27,7 +27,6 @@ export default class DivisionList extends React.Component {
 
     //A rowGetter function is required by the grid to retrieve a row for a given index
     var rowGetter = function(i) {
-      debugger;
       return _rows[i];
     };
 
