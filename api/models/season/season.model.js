@@ -13,8 +13,8 @@ var SeasonSchema = new Schema({
     required: 'Please enter a season name',
     trim: true
   },
-  startDate: { type: Date, default: Date.now },
-  endDate: { type: Date, default: Date.now },
+  startDate: { type: Date },
+  endDate: { type: Date },
   created: { type: Date, default: Date.now },
   updated: { type: Date, default: Date.now }
 });

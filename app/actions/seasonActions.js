@@ -1,6 +1,7 @@
 import {
   SET_SEASON,
-  SET_SEASONS_BY_LEAGUE
+  SET_SEASONS_BY_LEAGUE,
+  SET_ALL_SEASONS
 } from '../constants/actions';
 
 import axios from 'axios';
@@ -23,6 +24,16 @@ export function getSeasonsByLeagueId(id='') {
     try {
       const seasons = (await axios.get(`${baseUrl}/seasons/league/` + id)).data;
       dispatch({ type: SET_SEASONS_BY_LEAGUE, seasons });
+    } catch (error) {
+      console.log('seasonActions error: ', error);
+    }
+  };
+}
+export function getAllSeasons() {
+  return async (dispatch) => {
+    try {
+      const seasons = (await axios.get(`${baseUrl}/seasons`)).data;
+      dispatch({ type: SET_ALL_SEASONS, seasons });
     } catch (error) {
       console.log('seasonActions error: ', error);
     }

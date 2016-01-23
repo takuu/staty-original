@@ -38,6 +38,7 @@ export default keyMirror({
 
   SET_SEASON: null,
   SET_SEASONS_BY_LEAGUE: null,
+  SET_ALL_SEASONS: null,
 
   SET_DIVISION: null,
   SET_ALL_ACTIVE_DIVISIONS: null,

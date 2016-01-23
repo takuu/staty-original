@@ -3,6 +3,7 @@ import _ from 'lodash';
 import {Link} from 'react-router';
 import { getLeagueByName } from '../../actions/leagues';
 import { getDivisionsByLeagueId, updateDivision } from '../../actions/divisionActions';
+import { getAllSeasons } from '../../actions/seasonActions';
 import { connect } from 'react-redux';
 import GridEditor from '../../components/LeagueAdmin/GridEditor/GridEditor';
 var ReactDataGrid = require('react-data-grid/addons');
@@ -15,39 +16,53 @@ var ReactDataGrid = require('react-data-grid/addons');
   const divisionsJS = state.divisions.toJS();
   const divisions = _.map(divisionsJS, (division)=>{return division});
 
-  return {league: league, params: router.params, divisions: divisions}
+  const seasonsJS = state.seasons.toJS();
+  const seasons = _.map(seasonsJS, (season)=>{return season});
+
+  return {league: league, params: router.params, divisions: divisions, seasons: seasons}
 }, {
   getLeagueByName,
   getDivisionsByLeagueId,
-  updateDivision
+  updateDivision,
+  getAllSeasons
 })
 class DivisionAdmin extends React.Component {
 
   static propTypes = {
     children: PropTypes.element.isRequired,
     league: PropTypes.object.isRequired,
-    divisions: PropTypes.array.isRequired
+    divisions: PropTypes.array.isRequired,
+    seasons: PropTypes.array.isRequired
   };
   static fillStore(redux, route) {
 
     let leagueName = route.params.leagueName;
     let leagueId = route.params.leagueId;
     redux.dispatch(getDivisionsByLeagueId(leagueId));
+    redux.dispatch(getAllSeasons());
     return redux.dispatch(getLeagueByName(leagueName));
 
   }
 
   render() {
-    const {league, params, divisions, updateDivision} = this.props;
+    const {league, params, divisions, updateDivision, seasons} = this.props;
     let _rows = _.cloneDeep(divisions);
+    debugger;
 
     var priorities = [{id:0, title : 'Critical'}, {id:1, title : 'High'}, {id:2, title : 'Medium'}, {id:3, title : 'Low'}]
+    var seasonList = _.map(seasons, (season) => {
+      return {
+        id: season._id,
+        title: season.name
+      }
+    });
     var AutoCompleteEditor = ReactDataGrid.Editors.AutoComplete;
+    var SeasonsEditor = <AutoCompleteEditor options={seasonList}/>;
     var PrioritiesEditor = <AutoCompleteEditor options={priorities}/>;
 
     var columns = [
       { key: 'name', name: 'Division Name', editable: true, sortable: true },
-      { key: 'season', name: 'Season Name', editable: true, sortable: true },
+      { key: 'season', name: 'Season Name', editable: true, sortable: true, editor: SeasonsEditor },
       { key: 'strengthLevel', name: 'Strength Level', editable: true, sortable: true },
       { key: 'priority', name: 'Priority', editor: PrioritiesEditor, sortable: true }
     ];
