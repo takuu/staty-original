@@ -85,7 +85,6 @@ class GamePage extends React.Component {
               </div>
             </div>
           </div>
-
           <div className="col-md-8 col-xs-8" style={{margin: '20px 0px'}}>
             <div className="sub-container">
               <div className="sub-title-container">
@@ -98,7 +97,6 @@ class GamePage extends React.Component {
               <StatList stats={awayTeamStats}></StatList>
             </div>
           </div>
-
         </div>
       </div>
     );

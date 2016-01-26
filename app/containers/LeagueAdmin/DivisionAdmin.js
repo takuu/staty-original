@@ -47,9 +47,8 @@ class DivisionAdmin extends React.Component {
   render() {
     const {league, params, divisions, updateDivision, seasons} = this.props;
     let _rows = _.cloneDeep(divisions);
-    debugger;
 
-    var priorities = [{id:0, title : 'Critical'}, {id:1, title : 'High'}, {id:2, title : 'Medium'}, {id:3, title : 'Low'}]
+    var priorities = [{id:0, title : 'Critical'}, {id:1, title : 'High'}, {id:2, title : 'Medium'}, {id:3, title : 'Low'}];
     var seasonList = _.map(seasons, (season) => {
       return {
         id: season._id,

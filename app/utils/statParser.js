@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 function combineList(list=[]) {
 
-  let clone = _.clone(list, true);
+  let clone = _.cloneDeep(list);
 
   let cummulativeStats = _.reduce(clone, (total, stat) => {
     _.map(Object.keys(stat), (key) => {
@@ -20,7 +20,7 @@ function shootingPercentage(made, attempted) {
 }
 
 function createStandings(games=[]) {
-  let cloned = _.clone(games, true);
+  let cloned = _.cloneDeep(games);
   let finishedGames = _.filter(cloned, {isUpdated: true});
   /*
    {
@@ -28,6 +28,7 @@ function createStandings(games=[]) {
    }
    */
 
+  // TODO: Refactor to use _.reduce
   let board = {};
   _.map(finishedGames, (game)=> {
     board[game.homeTeam.name] = board[game.homeTeam.name] ||
@@ -49,7 +50,7 @@ function createStandings(games=[]) {
 }
 
 function createSchedule(games=[]) {
-  let cloned = _.clone(games, true);
+  let cloned = _.cloneDeep(games);
   let unplayedGames = _.filter(cloned, {isUpdated: false});
 
   _.map(unplayedGames, (game) => {

@@ -29,17 +29,23 @@ export default class LeagueLayout extends React.Component {
   };
   static fillStore(redux, route) {
     let leagueName = route.params.leagueName;
-    return redux.dispatch(getLeagueByName(leagueName));
+    console.log(this.props);
+    debugger;
+    //return redux.dispatch(getLeagueByName(leagueName));
   }
   componentWillReceiveProps(nextProps) {
     const { league, getActiveDivisionByLeagueId } = nextProps;
+
+    // Fetch if the _id don't match and if length == 0
     const shouldFetch =
-      !_.isEqual(nextProps.divisions, this.props.divisions) ||
-      nextProps.divisions.length==0;
+      !_.isEqualWith(nextProps.divisions, this.props.divisions, (a, b) => {
+        return a._id == b._id;
+      }) || nextProps.divisions.length==0;
 
     // TODO: currently called twice, fix so it's only called once
     if(league && shouldFetch) {
       getActiveDivisionByLeagueId(league._id);
+      debugger;
     }
   }
 

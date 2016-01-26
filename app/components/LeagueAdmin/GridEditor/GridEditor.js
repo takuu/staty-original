@@ -19,11 +19,53 @@ export default class DivisionList extends React.Component {
 
   render() {
     const {list, saveCallback, columns} = this.props;
+    let valueToObjectIDMapper = {};
+    let allOptions = _.map(columns, 'editor._store.props.options');
+
+    // TODO: This should be refactored to use _.reduce
+    _.map(allOptions, (item, index) => {
+      if(item) {
+        let temp = {};
+        temp[item.title] = item.id;
+        valueToObjectIDMapper[columns[index].key] = temp;
+      }
+    });
+
+    var baz = _.reduce(allOptions, (result, list, index) => {
+      if(list) {
+
+        let temp = _.reduce(list, (res, item) => {
+
+          res[item.title] = item.id;
+          return res;
+        }, {});
+        result[columns[index].key] = temp;
+      }
+
+      return result;
+    }, {});
+    debugger;
     let _rows = _.cloneDeep(list);
 
-    var priorities = [{id:0, title : 'Critical'}, {id:1, title : 'High'}, {id:2, title : 'Medium'}, {id:3, title : 'Low'}]
-    var AutoCompleteEditor = ReactDataGrid.Editors.AutoComplete;
-    var PrioritiesEditor = <AutoCompleteEditor options={priorities}/>
+    let foo = _.map(list, (item) => {
+      let bar = {};
+       _.map(Object.keys(item), (key) => {
+         let val;
+         if (typeof item[key] == 'object') {
+           let id = item[key]._id;
+           val = item[key].name;
+           valueToObjectIDMapper[key] = valueToObjectIDMapper[key] || {};
+           valueToObjectIDMapper[key][val] = id;
+         } else {
+           val = item[key];
+         }
+         bar[key] = val;
+      });
+      return bar;
+    });
+
+    _rows = foo;
+    debugger;
 
     //A rowGetter function is required by the grid to retrieve a row for a given index
     var rowGetter = function(i) {
@@ -31,6 +73,7 @@ export default class DivisionList extends React.Component {
     };
 
     var handleRowUpdated = function(item) {
+      debugger;
       _rows[item.rowIdx][item.cellKey] = item.updated[item.cellKey];
     };
 
