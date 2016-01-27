@@ -7,6 +7,7 @@ import cookie from './utils/cookie';
 import routes from './routes';
 import { routerStateChange } from './actions/router';
 import { createRedux } from './utils/redux';
+
 //import BrowserHistory from 'react-router/lib/BrowserHistory';
 
 //const newHistory = new BrowserHistory();
@@ -22,7 +23,7 @@ export default class Root extends React.Component {
 
   render() {
     return (
-      <Provider store={store}>{() => (
+      <Provider store={store}>
         <Router
           history={browserHistory}
           routes={routes(store, true)}
@@ -31,7 +32,7 @@ export default class Root extends React.Component {
             store.dispatch(routerStateChange(this.state));
           }}
         />
-      )}</Provider>
+      </Provider>
     );
   }
 }

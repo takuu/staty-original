@@ -2,6 +2,7 @@
 /* global process */
 import 'babel/polyfill';
 import React from 'react';
+import ReactDOM from 'react-dom';
 //import BrowserHistory from 'react-router/lib/BrowserHistory';
 //import HashHistory from 'react-router/lib/HashHistory';
 import Root from './Root';
@@ -15,7 +16,7 @@ const history = (process.env.NODE_ENV === 'production')
 
 //const history = new BrowserHistory();
 const history = {};
-React.render(
+ReactDOM.render(
   <Root {...{ history }} />,
   document.getElementById('app')
 );
