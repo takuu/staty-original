@@ -23,14 +23,13 @@ import { connect } from 'react-redux';
 })
 export default class LeagueLayout extends React.Component {
   static propTypes = {
-    children: PropTypes.element.isRequired,
-    league: PropTypes.object.isRequired,
-    divisions: PropTypes.array.isRequired
+    children: PropTypes.element,
+    league: PropTypes.object,
+    divisions: PropTypes.array
   };
   static fillStore(redux, route) {
     let leagueName = route.params.leagueName;
     console.log(this.props);
-    debugger;
     //return redux.dispatch(getLeagueByName(leagueName));
   }
   componentWillReceiveProps(nextProps) {
@@ -45,7 +44,6 @@ export default class LeagueLayout extends React.Component {
     // TODO: currently called twice, fix so it's only called once
     if(league && shouldFetch) {
       getActiveDivisionByLeagueId(league._id);
-      debugger;
     }
   }
 

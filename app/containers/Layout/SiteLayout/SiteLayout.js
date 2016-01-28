@@ -7,11 +7,10 @@ import SubHeader from '../../../components/SubHeader/SubHeader.js';
 import { getLeagueByName } from '../../../actions/leagues';
 import { connect } from 'react-redux';
 
-@connect((state,router) => {
+@connect((state, router) => {
   const leagueName = router.params.leagueName;
   const leagues = state.leagues.toJS();
   const league = _.find(leagues, {name: leagueName});
-
 
   return {league: league}
 }, {
@@ -19,8 +18,8 @@ import { connect } from 'react-redux';
 })
 export default class SiteLayout extends React.Component {
   static propTypes = {
-    children: PropTypes.element.isRequired,
-    league: PropTypes.object.isRequired
+    children: PropTypes.element,
+    league: PropTypes.object
   };
   static fillStore(redux, route) {
     let leagueName = route.params.leagueName;
@@ -43,7 +42,6 @@ export default class SiteLayout extends React.Component {
                 <div className="portlet light portlet-fit portlet datatable">
                   <div className="row" style={{backgroundColor: '#eff3f8'}}>
                     {childrenWithProps}
-
                   </div>
                 </div>
               </div>
