@@ -6,6 +6,7 @@ import { getDivisionsByLeagueId, updateDivision } from '../../actions/divisionAc
 import { getAllSeasons } from '../../actions/seasonActions';
 import { connect } from 'react-redux';
 import GridEditor from '../../components/LeagueAdmin/GridEditor/GridEditor';
+import GridLink from '../../components/LeagueAdmin/GridLink/GridLink';
 var ReactDataGrid = require('react-data-grid/addons');
 
 @connect((state,router) => {
@@ -29,10 +30,10 @@ var ReactDataGrid = require('react-data-grid/addons');
 class DivisionAdmin extends React.Component {
 
   static propTypes = {
-    children: PropTypes.element.isRequired,
-    league: PropTypes.object.isRequired,
-    divisions: PropTypes.array.isRequired,
-    seasons: PropTypes.array.isRequired
+    children: PropTypes.element,
+    league: PropTypes.object,
+    divisions: PropTypes.array,
+    seasons: PropTypes.array
   };
   static fillStore(redux, route) {
 
@@ -55,15 +56,19 @@ class DivisionAdmin extends React.Component {
         title: season.name
       }
     });
+    var commitMe = function() {
+      console.log('commitMe');
+    }
     var AutoCompleteEditor = ReactDataGrid.Editors.AutoComplete;
-    var SeasonsEditor = <AutoCompleteEditor options={seasonList}/>;
     var PrioritiesEditor = <AutoCompleteEditor options={priorities}/>;
+
 
     var columns = [
       { key: 'name', name: 'Division Name', editable: true, sortable: true },
-      { key: 'season', name: 'Season Name', editable: true, sortable: true, editor: SeasonsEditor },
+      { key: 'season', name: 'Season Name', resizable: true, sortable: true, editor: <AutoCompleteEditor options={seasonList} onCommit={commitMe}/> },
       { key: 'strengthLevel', name: 'Strength Level', editable: true, sortable: true },
-      { key: 'priority', name: 'Priority', editor: PrioritiesEditor, sortable: true }
+      { key: 'priority', name: 'Priority', editor: PrioritiesEditor, sortable: true },
+      { key: 'editTeams', name: 'Edit Teams', formatter: <GridLink url={"/"} text={"Edit Teams"} />}
     ];
 
     return (

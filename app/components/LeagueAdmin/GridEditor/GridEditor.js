@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import _ from 'lodash';
 import './styles.css';
 var ReactDataGrid = require('react-data-grid/addons');
-export default class DivisionList extends React.Component {
+export default class GridEditor extends React.Component {
   static propTypes = {
     list: PropTypes.array,
     saveCallback: PropTypes.func,
@@ -44,7 +44,6 @@ export default class DivisionList extends React.Component {
 
       return result;
     }, {});
-    debugger;
     let _rows = _.cloneDeep(list);
 
     let foo = _.map(list, (item) => {
@@ -65,7 +64,6 @@ export default class DivisionList extends React.Component {
     });
 
     _rows = foo;
-    debugger;
 
     //A rowGetter function is required by the grid to retrieve a row for a given index
     var rowGetter = function(i) {
@@ -73,7 +71,6 @@ export default class DivisionList extends React.Component {
     };
 
     var handleRowUpdated = function(item) {
-      debugger;
       _rows[item.rowIdx][item.cellKey] = item.updated[item.cellKey];
     };
 
