@@ -4,15 +4,15 @@ import classNames from 'classnames';
 import _ from 'lodash';
 import './styles.css';
 
-const GridLink = ({url, text}) => (
+const GridLink = ({value, text}) => (
   <div>
-    <Link to={url}>{text}</Link>
+    <Link to={value}>{text}</Link>
   </div>
 );
 
 GridLink.propTypes = {
   text: PropTypes.string,
-  url: PropTypes.string
+  value: PropTypes.string
 };
 
 export default GridLink;

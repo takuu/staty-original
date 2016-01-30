@@ -3,7 +3,6 @@ import './styles.css';
 import _ from 'lodash';
 import statParser from '../../../utils/statParser';
 
-debugger;
 const GameLog = ({stats, title}) => {
 
   const combined = statParser.pluckThenCombineStats(stats, 'stat') || {};

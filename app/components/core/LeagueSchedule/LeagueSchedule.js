@@ -5,7 +5,6 @@ import statParser from '../../../utils/statParser';
 const Schedule = ({league, games}) => {
 
   const schedule = statParser.createSchedule(games);
-
   return (
     <div>
       {

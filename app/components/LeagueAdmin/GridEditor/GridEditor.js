@@ -10,6 +10,7 @@ export default class GridEditor extends React.Component {
   static propTypes = {
     list: PropTypes.array,
     saveCallback: PropTypes.func,
+    rowRenderer: PropTypes.object,
     columns: PropTypes.array
   };
   static defaultProps = {
@@ -18,7 +19,8 @@ export default class GridEditor extends React.Component {
   };
 
   render() {
-    const {list, saveCallback, columns} = this.props;
+    const {list, saveCallback, columns, rowRenderer} = this.props;
+    debugger;
     let valueToObjectIDMapper = {};
     let allOptions = _.map(columns, 'editor._store.props.options');
 
@@ -104,7 +106,10 @@ export default class GridEditor extends React.Component {
           rowGetter={rowGetter}
           rowsCount={_rows.length}
           minHeight={500}
-          onRowUpdated={handleRowUpdated}/>
+          onRowUpdated={handleRowUpdated}
+          rowRenderer={rowRenderer}
+        />
+
       </div>
     );
   }
