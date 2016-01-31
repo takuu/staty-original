@@ -20,7 +20,6 @@ export default class GridEditor extends React.Component {
 
   render() {
     const {list, saveCallback, columns, rowRenderer} = this.props;
-    debugger;
     let valueToObjectIDMapper = {};
     let allOptions = _.map(columns, 'editor._store.props.options');
 

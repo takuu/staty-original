@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import _ from 'lodash';
 import {Link} from 'react-router';
 import { getLeagueByName } from '../../actions/leagues';
-import { getDivisionsByLeagueId, updateDivision } from '../../actions/divisionActions';
+import { getTeamsByDivisionId, updateTeam } from '../../actions/teamActions';
 import { getAllSeasons } from '../../actions/seasonActions';
 import { connect } from 'react-redux';
 import GridEditor from '../../components/LeagueAdmin/GridEditor/GridEditor';
@@ -14,64 +14,53 @@ var ReactDataGrid = require('react-data-grid/addons');
   const leagues = state.leagues.toJS();
   const league = _.find(leagues, {name: leagueName});
 
-  const divisionsJS = state.divisions.toJS();
-  const divisions = _.map(divisionsJS, (division)=>{return division});
+  const teamsJS = state.teams.toJS();
+  const teams = _.map(teamsJS, (team)=>{return team});
 
-  const seasonsJS = state.seasons.toJS();
-  const seasons = _.map(seasonsJS, (season)=>{return season});
-
-  return {league: league, params: router.params, divisions: divisions, seasons: seasons}
+  return {league: league, params: router.params, teams: teams}
 }, {
   getLeagueByName,
-  getDivisionsByLeagueId,
-  updateDivision,
-  getAllSeasons
+  getTeamsByDivisionId,
+  updateTeam
 })
-class DivisionAdmin extends React.Component {
+class TeamAdmin extends React.Component {
 
   static propTypes = {
     children: PropTypes.element,
     league: PropTypes.object,
-    divisions: PropTypes.array,
-    seasons: PropTypes.array
+    teams: PropTypes.array
   };
   static fillStore(redux, route) {
 
     let leagueName = route.params.leagueName;
-    let leagueId = route.params.leagueId;
-    redux.dispatch(getDivisionsByLeagueId(leagueId));
-    redux.dispatch(getAllSeasons());
+    let {divisionId} = route.location.query;
+    redux.dispatch(getTeamsByDivisionId(divisionId));
     return redux.dispatch(getLeagueByName(leagueName));
 
   }
 
   render() {
-    const {league, params, divisions, updateDivision, seasons} = this.props;
-    let divisionList = _.cloneDeep(divisions);
+    const {league, teams, updateTeam} = this.props;
+    let teamList = _.cloneDeep(teams);
+    
 
-    divisionList = _.map(divisionList, (division) => {
-      division.teamUrl = '/' + league.name + '/league/' + league._id + '/admin/teams?divisionId=' + division._id;
-      return division;
+    teamList = _.map(teamList, (team) => {
+      team.playerUrl = league.name + '/league/' + league._id + '/admin/players?teamId=' + team._id;
+      return team;
     });
+
 
 
     var priorities = [{id:0, title : 'Critical'}, {id:1, title : 'High'}, {id:2, title : 'Medium'}, {id:3, title : 'Low'}];
-    var seasonList = _.map(seasons, (season) => {
-      return {
-        id: season._id,
-        title: season.name
-      }
-    });
 
     var AutoCompleteEditor = ReactDataGrid.Editors.AutoComplete;
     var PrioritiesEditor = <AutoCompleteEditor options={priorities}/>;
 
     var columns = [
-      { key: 'name', name: 'Division Name', editable: true, sortable: true },
-      { key: 'season', name: 'Season Name', resizable: true, sortable: true, editor: <AutoCompleteEditor options={seasonList} /> },
+      { key: 'name', name: 'Team Name', editable: true, sortable: true },
       { key: 'strengthLevel', name: 'Strength Level', editable: true, sortable: true },
       { key: 'priority', name: 'Priority', editor: PrioritiesEditor, sortable: true },
-      { key: 'teamUrl', name: 'Edit Teams', formatter: <GridLink text={'Edit Teams'} {...this.props} /> }
+      { key: 'playerUrl', name: 'Edit Players', formatter: <GridLink text={'Edit Players'} {...this.props} /> }
     ];
 
     return (
@@ -117,7 +106,7 @@ class DivisionAdmin extends React.Component {
               <div className="sub-title-container">
                 <div className="sub-title">GET STARTED</div>
               </div>
-              <GridEditor list={divisionList} saveCallback={updateDivision} columns={columns} />
+              <GridEditor list={teamList} saveCallback={updateTeam} columns={columns} />
             </div>
           </div>
         </div>
@@ -126,4 +115,4 @@ class DivisionAdmin extends React.Component {
   }
 }
 
-export default DivisionAdmin;
+export default TeamAdmin;

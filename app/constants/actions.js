@@ -49,6 +49,7 @@ export default keyMirror({
   SET_TEAM: null,
   SET_TEAMS_BY_LEAGUE: null,
   SET_TEAMS_BY_DIVISION: null,
+  UPDATE_TEAM: null,
 
   SET_GAME: null,
   SET_GAMES_WITH_FILTERS: null,

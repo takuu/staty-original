@@ -26,6 +26,7 @@ import SiteLayout from '../containers/Layout/SiteLayout/SiteLayout';
 import LeagueLayout from '../containers/Layout/LeagueLayout/LeagueLayout';
 import LeagueAdmin from '../containers/LeagueAdmin/LeagueAdmin';
 import DivisionAdmin from '../containers/LeagueAdmin/DivisionAdmin';
+import TeamAdmin from '../containers/LeagueAdmin/TeamAdmin';
 import SeasonAdmin from '../containers/LeagueAdmin/SeasonAdmin';
 
 
@@ -67,6 +68,7 @@ const routes = (
         <Route path="admin" component={Auth}>
           <Route path="home" component={LeagueAdmin} />
           <Route path="divisions" component={DivisionAdmin} />
+          <Route path="teams" component={TeamAdmin} />
           <Route path="seasons" component={SeasonAdmin} />
         </Route>
 
