@@ -11,6 +11,7 @@
 
 var _ = require('lodash');
 var Player = require('./player.model.js');
+var ObjectId = require('mongoose').Types.ObjectId;
 
 // Get list of players
 exports.index = function(req, res) {
@@ -71,6 +72,15 @@ exports.search = function(req, res) {
     if(err) { return handleError(res, err); }
     res.status(200).send(players);
   });
+};
+
+exports.findByTeamId = function(req, res) {
+  Player.find({team:new ObjectId(req.params.id)})
+    .populate('team')
+    .exec(function(err, players) {
+      if (err) { return handleError(res, err); }
+      res.status(200).send(players);
+    });
 };
 
 function handleError(res, err) {

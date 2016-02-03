@@ -54,7 +54,6 @@ class DivisionAdmin extends React.Component {
       return division;
     });
 
-
     var priorities = [{id:0, title : 'Critical'}, {id:1, title : 'High'}, {id:2, title : 'Medium'}, {id:3, title : 'Low'}];
     var seasonList = _.map(seasons, (season) => {
       return {
@@ -63,12 +62,16 @@ class DivisionAdmin extends React.Component {
       }
     });
 
+    var foo = function(){};
+    var bar = {a: 1};
+
     var AutoCompleteEditor = ReactDataGrid.Editors.AutoComplete;
-    var PrioritiesEditor = <AutoCompleteEditor options={priorities}/>;
+    var SeasonsEditor = <AutoCompleteEditor options={seasonList} onCommit={foo} value={bar} />
+    var PrioritiesEditor = <AutoCompleteEditor options={priorities} onCommit={foo} value={bar} />;
 
     var columns = [
       { key: 'name', name: 'Division Name', editable: true, sortable: true },
-      { key: 'season', name: 'Season Name', resizable: true, sortable: true, editor: <AutoCompleteEditor options={seasonList} /> },
+      { key: 'season', name: 'Season Name', resizable: true, sortable: true, editor: SeasonsEditor },
       { key: 'strengthLevel', name: 'Strength Level', editable: true, sortable: true },
       { key: 'priority', name: 'Priority', editor: PrioritiesEditor, sortable: true },
       { key: 'teamUrl', name: 'Edit Teams', formatter: <GridLink text={'Edit Teams'} {...this.props} /> }

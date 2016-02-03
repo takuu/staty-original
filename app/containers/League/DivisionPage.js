@@ -45,12 +45,12 @@ class DivisionPage extends React.Component {
     super(props)
   }
   static propTypes = {
-    children: PropTypes.element.isRequired,
-    division: PropTypes.object.isRequired,
-    league: PropTypes.object.isRequired,
-    teams: PropTypes.array.isRequired,
-    games: PropTypes.array.isRequired,
-    path: PropTypes.string.isRequired
+    children: PropTypes.element,
+    division: PropTypes.object,
+    league: PropTypes.object,
+    teams: PropTypes.array,
+    games: PropTypes.array,
+    path: PropTypes.string
   };
   static defaultProps = {
     division: {},
