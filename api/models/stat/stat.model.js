@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 /**
- * Game Schema
+ * Stat Schema
  */
 var StatSchema = new Schema({
   player: { type: Schema.ObjectId, ref: 'Player' },
@@ -29,7 +29,6 @@ var StatSchema = new Schema({
     freeThrowsMade: {type: Number, default: -1},
     fouls: {type: Number, default: -1},
     turnovers: {type: Number, default: -1}
-
   },
   created: { type: Date, default: Date.now },
   updated: { type: Date, default: Date.now }

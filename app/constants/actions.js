@@ -64,5 +64,6 @@ export default keyMirror({
   UPDATE_PLAYER: null,
 
   SET_STATS_OF_PLAYER: null,
-  SET_STATS_OF_GAME: null
+  SET_STATS_OF_GAME: null,
+  UPDATE_STAT: null
 });

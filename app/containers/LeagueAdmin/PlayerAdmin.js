@@ -3,7 +3,6 @@ import _ from 'lodash';
 import {Link} from 'react-router';
 import { getLeagueByName } from '../../actions/leagues';
 import { getPlayersByTeamId, updatePlayer } from '../../actions/playerActions';
-import { getAllSeasons } from '../../actions/seasonActions';
 import { connect } from 'react-redux';
 import GridEditor from '../../components/LeagueAdmin/GridEditor/GridEditor';
 import GridLink from '../../components/LeagueAdmin/GridLink/GridLink';
@@ -43,7 +42,7 @@ class PlayerAdmin extends React.Component {
     let playerList = _.cloneDeep(players);
 
     playerList = _.map(playerList, (player) => {
-      player.statsUrl = league.name + '/league/' + league._id + '/admin/stats?playerId=' + player._id;
+      player.statsUrl ='/' +  league.name + '/league/' + league._id + '/admin/stats?playerId=' + player._id;
       return player;
     });
 

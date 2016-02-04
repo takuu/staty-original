@@ -72,6 +72,7 @@ const routes = (
           <Route path="divisions" component={DivisionAdmin} />
           <Route path="teams" component={TeamAdmin} />
           <Route path="players" component={PlayerAdmin} />
+          <Route path="stats" component={StatAdmin} />
           <Route path="seasons" component={SeasonAdmin} />
         </Route>
 
