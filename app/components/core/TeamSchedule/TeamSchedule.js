@@ -13,18 +13,19 @@ export default class TeamSchedule extends React.Component {
   };
 
   render() {
+    const {games, league} = this.props;
     return (
 
         <table className="table">
         {
-          _.map(this.props.games, (game) => {
+          _.map(games, (game) => {
 
             let boxScore = (game.isUpdated) && game.homeScore + '-' + game.awayScore;
             let gameTime = game.time || '-';
-            let gameLink = "/" + game.league.name + '/division/' + game.division + "/game/" + game._id;
+            let gameLink = "/" + game.league.name + "/league/" + league._id + '/division/' + game.division + "/game/" + game._id;
             let gameDate = new Date(game.date);
-            let awayTeamLink = "/" + game.league.name + '/team/' + game.awayTeam._id;
-            let homeTeamLink = "/" + game.league.name + '/team/' + game.homeTeam._id;
+            let awayTeamLink = "/" + game.league.name + "/league/" + league._id + '/team/' + game.awayTeam._id;
+            let homeTeamLink = "/" + game.league.name + "/league/" + league._id + '/team/' + game.homeTeam._id;
 
             let oldGame = (gameDate < new Date())? 'lighter': 'dark';
             let homeWin = (boxScore && game.homeScore > game.awayScore) ? 'bold': '';

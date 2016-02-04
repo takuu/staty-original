@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { Route, IndexRoute } from 'react-router';
 import App from './../containers/App';
 import Auth from '../containers/Auth';
 import SignupPage from './../containers/SignupPage';
@@ -24,8 +24,12 @@ import AboutPage from '../containers/AboutPage';
 import * as Posts from './../containers/Posts';
 import SiteLayout from '../containers/Layout/SiteLayout/SiteLayout';
 import LeagueLayout from '../containers/Layout/LeagueLayout/LeagueLayout';
-
 import LeagueAdmin from '../containers/LeagueAdmin/LeagueAdmin';
+import DivisionAdmin from '../containers/LeagueAdmin/DivisionAdmin';
+import TeamAdmin from '../containers/LeagueAdmin/TeamAdmin';
+import PlayerAdmin from '../containers/LeagueAdmin/PlayerAdmin';
+import StatAdmin from '../containers/LeagueAdmin/StatAdmin';
+import SeasonAdmin from '../containers/LeagueAdmin/SeasonAdmin';
 
 
 const routes = (
@@ -45,17 +49,34 @@ const routes = (
     <Route path="/contact" component={ContactPage} />
     <Route path="/leagues" component={LeagueListPage} />
 
-
-
     <Route path="/:leagueName" component={SiteLayout}>
-      <Route path="admin" component={Auth}>
-        <Route path="home" component={LeagueAdmin}>
-
-        </Route>
+      /*League Home*/
+      <Route component={LeagueLayout}>
+        <IndexRoute component={LeaguePage} />
       </Route>
 
-      <Route component={LeagueLayout}>
-        <Route path="home" component={LeaguePage} />
+      <Route path="league/:leagueId">
+        <Route component={LeagueLayout}>
+          <Route path="division/:divisionId/game/:gameId" component={GamePage} />
+          <Route path="division/:divisionId" component={DivisionPage} >
+            <Route path="schedule" component={SchedulePage} />
+            <Route path="standing" component={StandingPage} />
+          </Route>
+          <Route path="team/:teamId/player/:playerId" component={PlayerPage} />
+          <Route path="team/:teamId" component={TeamPage} />
+        </Route>
+
+        /*League Admin*/
+        <Route path="admin" component={Auth}>
+          <Route path="home" component={LeagueAdmin} />
+          <Route path="divisions" component={DivisionAdmin} />
+          <Route path="teams" component={TeamAdmin} />
+          <Route path="players" component={PlayerAdmin} />
+          <Route path="stats" component={StatAdmin} />
+          <Route path="seasons" component={SeasonAdmin} />
+        </Route>
+
+
         <Route path="dashboard" component={Auth} >
           <Route path="about" component={LeagueAboutPage} />
         </Route>
@@ -64,15 +85,6 @@ const routes = (
 
         <Route path="results/:searchName" component={SearchResultPage}></Route>
 
-        <Route path="division/:divisionId/game/:gameId" component={GamePage} />
-        <Route path="division/:divisionId" component={DivisionPage} >
-          <Route path="schedule" component={SchedulePage} />
-          <Route path="standing" component={StandingPage} />
-        </Route>
-
-
-        <Route path="team/:teamId/player/:playerId" component={PlayerPage} />
-        <Route path="team/:teamId" component={TeamPage} />
       </Route>
 
 

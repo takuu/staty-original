@@ -25,7 +25,7 @@ export default class PlayerList extends React.Component {
       <table className="table">
         {
           _.map(players, (player) => {
-            let playerUrl = "/" + league.name +
+            let playerUrl = "/" + league.name + "/league/" + league._id +
               "/team/" + player.team._id + "/player/" + player._id;
             return (
               <tr>

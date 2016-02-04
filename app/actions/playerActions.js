@@ -2,7 +2,8 @@ import {
   SET_PLAYERS_WITH_FILTERS,
   SEARCH_PLAYER,
   SET_PLAYER,
-  SET_PLAYERS_BY_TEAM
+  SET_PLAYERS_BY_TEAM,
+  UPDATE_PLAYER
 } from '../constants/actions';
 
 import axios from 'axios';
@@ -25,8 +26,8 @@ export function getPlayerById(id='') {
 export function getPlayersByTeamId(id='') {
   return async (dispatch) => {
     try {
-      const player = (await axios.get(baseUrl + '/players/' + id)).data;
-      dispatch({ type: SET_PLAYERS_BY_TEAM, player });
+      const players = (await axios.get(baseUrl + '/players/team/' + id)).data;
+      dispatch({ type: SET_PLAYERS_BY_TEAM, players: players });
     } catch (error) {
       console.log('playerActions error: ', error)
     }
@@ -57,4 +58,16 @@ export function getPlayersWithFilters(params={}) {
     }
   };
 }
-
+export function updatePlayer(item) {
+  return async (dispatch, getState) => {
+    try {
+      const { auth: { token } } = getState();
+      let headers = getHeaders(token);
+      debugger;
+      const player = (await axios.put(`${baseUrl}/players/` + item._id, item, { headers })).data;
+      dispatch({ type: UPDATE_PLAYER, player });
+    } catch (error) {
+      console.log('playerActions error: ', error);
+    }
+  };
+}

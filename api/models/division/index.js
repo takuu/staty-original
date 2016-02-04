@@ -7,10 +7,12 @@ var router = express.Router();
 
 router.get('/active/:id', controller.getActiveDivisionsByLeagueId);
 router.get('/season/:id', controller.findBySeasonId);
+router.get('/league/:id', controller.findByLeagueId);
 router.get('/', controller.index);
+
 router.get('/:id', controller.show);
 router.post('/', controller.create);
-//router.put('/:id', controller.update);
+router.put('/:id', controller.update);
 //router.patch('/:id', controller.update);
 //router.delete('/:id', controller.destroy);
 

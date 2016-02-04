@@ -1,6 +1,7 @@
 import {
   SET_STATS_OF_PLAYER,
-  SET_STATS_OF_GAME
+  SET_STATS_OF_GAME,
+  UPDATE_STAT
 } from '../constants/actions';
 
 import Immutable from 'immutable';
@@ -21,6 +22,9 @@ export default (state = defaultState, action) => {
         state = state.set(stat._id, stat);
       });
       return state;
+      break;
+    case UPDATE_STAT:
+      return state.set(action.stat._id, action.stat);
       break;
     default:
       return state;

@@ -2,7 +2,8 @@ import {
   SET_PLAYERS_WITH_FILTERS,
   SEARCH_PLAYER,
   SET_PLAYER,
-  SET_PLAYERS_BY_TEAM
+  SET_PLAYERS_BY_TEAM,
+  UPDATE_PLAYER
 } from '../constants/actions';
 
 import Immutable from 'immutable';
@@ -31,6 +32,9 @@ export default (state = defaultState, action) => {
       return state;
       break;
     case SET_PLAYER:
+      return state.set(action.player._id, action.player);
+      break;
+    case UPDATE_PLAYER:
       return state.set(action.player._id, action.player);
       break;
     default:

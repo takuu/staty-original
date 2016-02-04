@@ -31,7 +31,7 @@ export default class DivisionList extends React.Component {
               });
               return (
                 <li key={division._id} className="list-group-item">
-                  <Link to={"/" + league.name + "/division/" + division._id + "/schedule"} className={divisionClass}>
+                  <Link to={"/" + league.name +"/league/" + league._id +  "/division/" + division._id + "/schedule"} className={divisionClass}>
                     <span className="inline-list-item date-item">
                       Dec 1
                     </span>
