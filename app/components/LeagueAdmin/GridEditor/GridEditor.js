@@ -32,22 +32,7 @@ export default class GridEditor extends React.Component {
       }
     });
 
-    var baz = _.reduce(allOptions, (result, list, index) => {
-      if(list) {
-
-        let temp = _.reduce(list, (res, item) => {
-
-          res[item.title] = item.id;
-          return res;
-        }, {});
-        result[columns[index].key] = temp;
-      }
-
-      return result;
-    }, {});
-    let _rows = _.cloneDeep(list);
-
-    let foo = _.map(list, (item) => {
+    let _rows = _.map(list, (item) => {
       let bar = {};
        _.map(Object.keys(item), (key) => {
          let val;
@@ -64,7 +49,6 @@ export default class GridEditor extends React.Component {
       return bar;
     });
 
-    _rows = foo;
 
     //A rowGetter function is required by the grid to retrieve a row for a given index
     var rowGetter = function(i) {

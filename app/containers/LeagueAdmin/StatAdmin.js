@@ -6,6 +6,7 @@ import { getStatsByPlayerId, updateStat } from '../../actions/statActions';
 import { connect } from 'react-redux';
 import GridEditor from '../../components/LeagueAdmin/GridEditor/GridEditor';
 import GridLink from '../../components/LeagueAdmin/GridLink/GridLink';
+import SideNav from '../../components/LeagueAdmin/SideNav/SideNav';
 var ReactDataGrid = require('react-data-grid/addons');
 
 @connect((state, router) => {
@@ -40,13 +41,10 @@ class StatAdmin extends React.Component {
     let statList = _.cloneDeep(stats);
 
     statList = _.map(statList, (stat) => {
-      let gamesUrl ='/' +  league.name + '/league/' + league._id + '/admin/games?statId=' + stat._id;
-      let myTeamUrl ='/' +  league.name + '/league/' + league._id + '/admin/players?teamId=' + stat.team;
-      let againstTeamUrl ='/' +  league.name + '/league/' + league._id + '/admin/players?teamId=' + stat.vsTeam._id;
-
-
-      let foo = { ...stat.stat, gamesUrl, myTeamUrl, againstTeamUrl, created: stat.created,  };
-      return foo;
+      stat.gamesUrl ='/' +  league.name + '/league/' + league._id + '/admin/games?statId=' + stat._id;
+      stat.myTeamUrl ='/' +  league.name + '/league/' + league._id + '/admin/players?teamId=' + stat.team;
+      stat.againstTeamUrl ='/' +  league.name + '/league/' + league._id + '/admin/players?teamId=' + stat.vsTeam._id;
+      return stat;
     });
 
     var priorities = [{id:0, title : 'Critical'}, {id:1, title : 'High'}, {id:2, title : 'Medium'}, {id:3, title : 'Low'}];
@@ -88,30 +86,7 @@ class StatAdmin extends React.Component {
                 <div className="sub-title">Main</div>
               </div>
 
-              <div style={{padding: "10px"}}>
-                <ul className="list-group">
-                  <li className="list-group-item">
-                    <Link to={"/" + league.name + "/admin/league/config"}>
-                      Configuration
-                    </Link>
-                  </li>
-                  <li className="list-group-item">
-                    <Link to={"/" + league.name + "/admin/league"}>
-                      Update League
-                    </Link>
-                  </li>
-                  <li className="list-group-item">
-                    <Link to={"/" + league.name + "/admin/league/info"}>
-                      Update Information
-                    </Link>
-                  </li>
-                  <li className="list-group-item">
-                    <Link to={"/" + league.name + "/admin/league/info"}>
-                      Update Rules
-                    </Link>
-                  </li>
-                </ul>
-              </div>
+              <SideNav league={league} />
             </div>
           </div>
           <div className="col-md-9 col-xs-9" style={{margin: '20px 0px'}}>

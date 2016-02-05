@@ -3,6 +3,7 @@ import {Link} from 'react-router';
 import { getLeagueByName } from '../../actions/leagues';
 import { connect } from 'react-redux';
 var ReactDataGrid = require('react-data-grid/addons');
+import SideNav from '../../components/LeagueAdmin/SideNav/SideNav';
 
 @connect((state,router) => {
   const leagueName = router.params.leagueName;
@@ -58,30 +59,7 @@ class LeagueAdmin extends React.Component {
             <div className="sub-title-container">
               <div className="sub-title">Main</div>
             </div>
-            <div style={{padding: "10px"}}>
-              <ul className="list-group">
-                <li className="list-group-item">
-                  <Link to={"/" + league.name + "/admin/league/config"}>
-                    Configuration
-                  </Link>
-                </li>
-                <li className="list-group-item">
-                  <Link to={"/" + league.name + "/admin/league"}>
-                    Update League
-                  </Link>
-                </li>
-                <li className="list-group-item">
-                  <Link to={"/" + league.name + "/admin/league/info"}>
-                    Update Information
-                  </Link>
-                </li>
-                <li className="list-group-item">
-                  <Link to={"/" + league.name + "/admin/league/info"}>
-                    Update Rules
-                  </Link>
-                </li>
-              </ul>
-            </div>
+            <SideNav league={league} />
           </div>
         </div>
         <div className="col-md-9 col-xs-9" style={{margin: '20px 0px'}}>

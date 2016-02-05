@@ -7,6 +7,7 @@ import { getAllSeasons } from '../../actions/seasonActions';
 import { connect } from 'react-redux';
 import GridEditor from '../../components/LeagueAdmin/GridEditor/GridEditor';
 import GridLink from '../../components/LeagueAdmin/GridLink/GridLink';
+import SideNav from '../../components/LeagueAdmin/SideNav/SideNav';
 var ReactDataGrid = require('react-data-grid/addons');
 
 @connect((state,router) => {
@@ -65,17 +66,19 @@ class DivisionAdmin extends React.Component {
     var foo = function(){};
     var bar = {a: 1};
 
-    var AutoCompleteEditor = ReactDataGrid.Editors.AutoComplete;
-    var SeasonsEditor = <AutoCompleteEditor options={seasonList} onCommit={foo} value={bar} />
-    var PrioritiesEditor = <AutoCompleteEditor options={priorities} onCommit={foo} value={bar} />;
-
     var columns = [
       { key: 'name', name: 'Division Name', editable: true, sortable: true },
-      { key: 'season', name: 'Season Name', resizable: true, sortable: true, editor: SeasonsEditor },
+      { key: 'season', name: 'Season Name', resizable: true, sortable: true, width: 150, editor: SeasonsEditor },
       { key: 'strengthLevel', name: 'Strength Level', editable: true, sortable: true },
-      { key: 'priority', name: 'Priority', editor: PrioritiesEditor, sortable: true },
+      { key: 'priority', name: 'Priority', width: 150, editor: PrioritiesEditor, sortable: true },
       { key: 'teamUrl', name: 'Edit Teams', formatter: <GridLink text={'Edit Teams'} {...this.props} /> }
     ];
+
+    var AutoCompleteEditor = ReactDataGrid.Editors.AutoComplete;
+    var SeasonsEditor = <AutoCompleteEditor options={seasonList} onCommit={foo} value={bar} column={columns[1]} />
+    var PrioritiesEditor = <AutoCompleteEditor options={priorities} onCommit={foo} value={bar} column={columns[3]} />;
+
+
 
     return (
       <div className="sub-container">
@@ -89,30 +92,7 @@ class DivisionAdmin extends React.Component {
                 <div className="sub-title">Main</div>
               </div>
 
-              <div style={{padding: "10px"}}>
-                <ul className="list-group">
-                  <li className="list-group-item">
-                    <Link to={"/" + league.name + "/admin/league/config"}>
-                      Configuration
-                    </Link>
-                  </li>
-                  <li className="list-group-item">
-                    <Link to={"/" + league.name + "/admin/league"}>
-                      Update League
-                    </Link>
-                  </li>
-                  <li className="list-group-item">
-                    <Link to={"/" + league.name + "/admin/league/info"}>
-                      Update Information
-                    </Link>
-                  </li>
-                  <li className="list-group-item">
-                    <Link to={"/" + league.name + "/admin/league/info"}>
-                      Update Rules
-                    </Link>
-                  </li>
-                </ul>
-              </div>
+              <SideNav league={league} />
             </div>
           </div>
           <div className="col-md-9 col-xs-9" style={{margin: '20px 0px'}}>
