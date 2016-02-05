@@ -17,7 +17,7 @@ class StatList extends React.Component {
     let statsLength = stats.length;
 
     if(statsLength) {
-      combined = statParser.pluckThenCombineStats(stats, 'stat');
+      combined = statParser.combineStats(stats);
     }
 
     return  (
@@ -47,42 +47,30 @@ class StatList extends React.Component {
 
       <tbody>
       {
-        _.map(stats, (game) => {
-          let gameDate = new Date(game.game.date);
-          let gameTime = (game.game && game.game.time) ? game.game.time : '-';
-          let score = (game.game.homeScore) + '-' + game.game.awayScore;
-          let homeTeamWin = (game.game.homeScore > game.game.awayScore);
-          let outcome;
-          if (homeTeamWin) {
-            outcome = (game.team == game.game.homeTeam) ? 'W' : 'L';
-          } else {
-            outcome = (game.team == game.game.awayTeam) ? 'W' : 'L';
-          }
-          combined = statParser.pluckThenCombineStats(stats, 'stat');
-
+        _.map(stats, (player) => {
           return (
             <tr>
 
-              <td>{game.player.number}</td>
-              <td>{game.player.name}</td>
+              <td>{player.player.number}</td>
+              <td>{player.player.name}</td>
 
-              <td>{game.stat.fieldGoalsMade}</td>
-              <td>{game.stat.fieldGoalsAttempted}</td>
+              <td>{player.fieldGoalsMade}</td>
+              <td>{player.fieldGoalsAttempted}</td>
 
-              <td>{statParser.shootingPercentage(game.stat.fieldGoalsMade, game.stat.fieldGoalsMade)}</td>
+              <td>{statParser.shootingPercentage(player.fieldGoalsMade, player.fieldGoalsMade)}</td>
 
-              <td>{game.stat.threePointsMade}</td>
-              <td>{game.stat.threePointsAttempted}</td>
-              <td>{statParser.shootingPercentage(game.stat.threePointsMade, game.stat.threePointsAttempted)}</td>
-              <td>{game.stat.freeThrowsMade}</td>
-              <td>{game.stat.freeThrowsAttempted}</td>
-              <td>{statParser.shootingPercentage(game.stat.freeThrowsMade, game.stat.freeThrowsAttempted)}</td>
-              <td>{game.stat.totalRebounds}</td>
-              <td>{game.stat.assists}</td>
-              <td>{game.stat.steals}</td>
-              <td>{game.stat.blocks}</td>
-              <td>{game.stat.fouls}</td>
-              <td>{game.stat.points}</td>
+              <td>{player.threePointsMade}</td>
+              <td>{player.threePointsAttempted}</td>
+              <td>{statParser.shootingPercentage(player.threePointsMade, player.threePointsAttempted)}</td>
+              <td>{player.freeThrowsMade}</td>
+              <td>{player.freeThrowsAttempted}</td>
+              <td>{statParser.shootingPercentage(player.freeThrowsMade, player.freeThrowsAttempted)}</td>
+              <td>{player.totalRebounds}</td>
+              <td>{player.assists}</td>
+              <td>{player.steals}</td>
+              <td>{player.blocks}</td>
+              <td>{player.fouls}</td>
+              <td>{player.points}</td>
             </tr>
           )
         })

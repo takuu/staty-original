@@ -22,11 +22,11 @@ class PlayerDetails extends React.Component {
     let maxPointsGame, maxAssistsGame, maxReboundsGame, maxStealsGame, maxBlocksGame;
 
     if(stats.length) {
-      maxPointsGame = _.max(stats, 'stat.points');
-      maxAssistsGame = _.max(stats, 'stat.assists');
-      maxReboundsGame = _.max(stats, 'stat.totalRebounds');
-      maxStealsGame = _.max(stats, 'stat.steals');
-      maxBlocksGame = _.max(stats, 'stat.blocks');
+      maxPointsGame = _.max(stats, 'points');
+      maxAssistsGame = _.max(stats, 'assists');
+      maxReboundsGame = _.max(stats, 'totalRebounds');
+      maxStealsGame = _.max(stats, 'steals');
+      maxBlocksGame = _.max(stats, 'blocks');
     }
 
     return (
@@ -37,23 +37,23 @@ class PlayerDetails extends React.Component {
         <p>Position</p>
         <p>
           High Score:
-          <Link to={maxPointsGame && "/" + league.name + "/league/" + league._id + "/division/" + maxPointsGame.division + "/game/" + maxPointsGame.game._id}>{maxPointsGame && maxPointsGame.stat.points}</Link>
+          <Link to={maxPointsGame && "/" + league.name + "/league/" + league._id + "/division/" + maxPointsGame.division + "/game/" + maxPointsGame.game._id}>{maxPointsGame && maxPointsGame.points}</Link>
         </p>
         <p>
           High Rebound:
-          <Link to={maxReboundsGame && "/" + league.name + "/league/" + league._id + "/division/" + maxReboundsGame.division + "/game/" + maxReboundsGame.game._id}>{maxReboundsGame && maxReboundsGame.stat.totalRebounds}</Link>
+          <Link to={maxReboundsGame && "/" + league.name + "/league/" + league._id + "/division/" + maxReboundsGame.division + "/game/" + maxReboundsGame.game._id}>{maxReboundsGame && maxReboundsGame.totalRebounds}</Link>
         </p>
         <p>
           High Assists:
-          <Link to={maxAssistsGame && "/" + league.name + "/league/" + league._id + "/division/" + maxAssistsGame.division + "/game/" + maxAssistsGame.game._id}>{maxAssistsGame && maxAssistsGame.stat.assists}</Link>
+          <Link to={maxAssistsGame && "/" + league.name + "/league/" + league._id + "/division/" + maxAssistsGame.division + "/game/" + maxAssistsGame.game._id}>{maxAssistsGame && maxAssistsGame.assists}</Link>
         </p>
         <p>
           High Steals:
-          <Link to={maxStealsGame && "/" + league.name + "/league/" + league._id + "/division/" + maxStealsGame.division + "/game/" + maxStealsGame.game._id}>{maxStealsGame && maxStealsGame.stat.steals}</Link>
+          <Link to={maxStealsGame && "/" + league.name + "/league/" + league._id + "/division/" + maxStealsGame.division + "/game/" + maxStealsGame.game._id}>{maxStealsGame && maxStealsGame.steals}</Link>
         </p>
         <p>
           High Blocks:
-          <Link to={maxBlocksGame && "/" + league.name + "/league/" + league._id + "/division/" + maxBlocksGame.division + "/game/" + maxBlocksGame.game._id}>{maxBlocksGame && maxBlocksGame.stat.blocks}</Link>
+          <Link to={maxBlocksGame && "/" + league.name + "/league/" + league._id + "/division/" + maxBlocksGame.division + "/game/" + maxBlocksGame.game._id}>{maxBlocksGame && maxBlocksGame.blocks}</Link>
         </p>
 
       </div>

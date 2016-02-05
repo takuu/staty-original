@@ -5,7 +5,7 @@ import statParser from '../../../utils/statParser';
 
 const GameLog = ({stats, title}) => {
 
-  const combined = statParser.pluckThenCombineStats(stats, 'stat') || {};
+  const combined = statParser.combineStats(stats) || [];
   return (
       <table className="table" style={{fontSize: '.7em'}}>
         <thead>
@@ -53,22 +53,22 @@ const GameLog = ({stats, title}) => {
                 <td>{gameTime}</td>
                 <td>{game.vsTeam.name}</td>
                 <td>{outcome} {score}</td>
-                <td>{game.stat.fieldGoalsMade}</td>
-                <td>{game.stat.fieldGoalsAttempted}</td>
-                <td>{((game.stat.fieldGoalsMade/game.stat.fieldGoalsAttempted)*100).toFixed(1)}</td>
+                <td>{game.fieldGoalsMade}</td>
+                <td>{game.fieldGoalsAttempted}</td>
+                <td>{((game.fieldGoalsMade/game.fieldGoalsAttempted)*100).toFixed(1)}</td>
 
-                <td>{game.stat.threePointsMade}</td>
-                <td>{game.stat.threePointsAttempted}</td>
-                <td>{((game.stat.threePointsMade/game.stat.threePointsAttempted)*100).toFixed(1)}</td>
-                <td>{game.stat.freeThrowsMade}</td>
-                <td>{game.stat.freeThrowsAttempted}</td>
-                <td>{((game.stat.freeThrowsMade/game.stat.freeThrowsAttempted)*100).toFixed(1)}</td>
-                <td>{game.stat.totalRebounds}</td>
-                <td>{game.stat.assists}</td>
-                <td>{game.stat.steals}</td>
-                <td>{game.stat.blocks}</td>
-                <td>{game.stat.fouls}</td>
-                <td>{game.stat.points}</td>
+                <td>{game.threePointsMade}</td>
+                <td>{game.threePointsAttempted}</td>
+                <td>{((game.threePointsMade/game.threePointsAttempted)*100).toFixed(1)}</td>
+                <td>{game.freeThrowsMade}</td>
+                <td>{game.freeThrowsAttempted}</td>
+                <td>{((game.freeThrowsMade/game.freeThrowsAttempted)*100).toFixed(1)}</td>
+                <td>{game.totalRebounds}</td>
+                <td>{game.assists}</td>
+                <td>{game.steals}</td>
+                <td>{game.blocks}</td>
+                <td>{game.fouls}</td>
+                <td>{game.points}</td>
               </tr>
             )
           })

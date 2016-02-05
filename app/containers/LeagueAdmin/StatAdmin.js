@@ -75,7 +75,7 @@ class StatAdmin extends React.Component {
     ];
 
 
-    
+
     return (
       <div className="sub-container">
         <div className="sub-title-container">

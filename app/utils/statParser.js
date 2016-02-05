@@ -13,6 +13,21 @@ function combineList(list=[]) {
   return cummulativeStats;
 }
 
+function combineStats(list=[]) {
+
+  let clone = _.cloneDeep(list);
+
+  let cummulativeStats = _.reduce(clone, (total, stat) => {
+    _.map(Object.keys(stat), (key) => {
+      if(key != '__v' && typeof total[key] == 'number' && total[key] >= 0) {
+        total[key] = total[key] + stat[key];
+      }
+    });
+    return total;
+  });
+  return cummulativeStats;
+}
+
 function shootingPercentage(made, attempted) {
   if(attempted == 0 || made == 0) return 0;
   let percentage = (made/attempted) * 100;
@@ -62,6 +77,7 @@ function createSchedule(games=[]) {
 }
 
 export default {
+  combineStats: combineStats,
   combineListofStats: combineList,
   pluckThenCombineStats: _.flowRight(combineList, _.map),
   shootingPercentage: shootingPercentage,

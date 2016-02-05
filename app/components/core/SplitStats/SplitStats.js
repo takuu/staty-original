@@ -24,7 +24,7 @@ class SplitStats extends React.Component {
 
   render() {
     const {stats} = this.props;
-    let combined = statParser.pluckThenCombineStats(stats, 'stat') || {};
+    let combined = statParser.combineStats(stats) || {};
 
     return (
       <table className="table" style={{fontSize: '.7em'}}>

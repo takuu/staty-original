@@ -84,7 +84,7 @@ class PlayerPage extends React.Component {
               <div className="sub-title-container">
                 <div className="sub-title">Game Log</div>
               </div>
-              <GameLog stats={stats} />
+              <GameLog stats={stats} title={'hi'} />
             </div>
           </div>
           <div className="col-md-8 col-xs-8">
