@@ -5,8 +5,7 @@ import _ from 'lodash';
 import './styles.css';
 
 
- const SideNav = ({league}) => {
-   
+const SideNav = ({league}) => {
    return (
      <div style={{padding: "10px"}}>
        <ul className="list-group">
@@ -33,7 +32,7 @@ import './styles.css';
        </ul>
      </div>
    );
- }
+}
 
 export default SideNav;
 

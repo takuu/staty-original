@@ -39,10 +39,10 @@ class PlayerPage extends React.Component {
     super(props)
   }
   static propTypes = {
-    league: PropTypes.object.isRequired,
-    stats: PropTypes.object.isRequired,
-    games: PropTypes.array.isRequired,
-    player: PropTypes.object.isRequired
+    league: PropTypes.object,
+    stats: PropTypes.array,
+    games: PropTypes.array,
+    player: PropTypes.object
   };
 
   static fillStore(redux, route) {
@@ -99,7 +99,7 @@ class PlayerPage extends React.Component {
                 {
                   _.map(gameTimes,(time, key) => {
                     return (
-                      <SplitStats stats={time} title={key}></SplitStats>
+                      <SplitStats key={key} stats={time} title={key}></SplitStats>
                     )
                   })
                 }

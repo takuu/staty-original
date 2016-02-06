@@ -4,26 +4,8 @@ import _ from 'lodash';
 import statParser from '../../../utils/statParser';
 
 
-const Foo = ({stats}) => (
-  <div>Foo</div>
-);
-Foo.propTypes = {
-  stats:  PropTypes.array.isRequired
-};
-Foo.defaultProps = {
-  stats: []
-};
-class SplitStats extends React.Component {
-  static propTypes = {
-    stats: PropTypes.array.isRequired
+const SplitStats = ({stats, title}) => {
 
-  };
-  static defaultProps = {
-    stats: []
-  };
-
-  render() {
-    const {stats} = this.props;
     let combined = statParser.combineStats(stats) || {};
 
     return (
@@ -52,7 +34,7 @@ class SplitStats extends React.Component {
         <tbody>
 
         <tr>
-          <td><b>{this.props.title}</b></td>
+          <td><b>{title}</b></td>
           <td>{stats.length}</td>
           <td>{(combined.fieldGoalsMade / stats.length).toFixed(1)}</td>
           <td>{(combined.fieldGoalsAttempted / stats.length).toFixed(1)}</td>
@@ -79,8 +61,15 @@ class SplitStats extends React.Component {
       </table>
 
     );
-  }
 
-}
+};
+
+SplitStats.propTypes = {
+  stats: PropTypes.array.isRequired
+
+};
+SplitStats.defaultProps = {
+  stats: []
+};
 
 export default SplitStats;

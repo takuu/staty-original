@@ -38,10 +38,10 @@ class TeamPage extends React.Component {
     super(props)
   }
   static propTypes = {
-    league: PropTypes.object.isRequired,
-    team: PropTypes.object.isRequired,
-    games: PropTypes.array.isRequired,
-    players: PropTypes.array.isRequired
+    league: PropTypes.object,
+    team: PropTypes.object,
+    games: PropTypes.array,
+    players: PropTypes.array
   };
 
   static fillStore(redux, route) {

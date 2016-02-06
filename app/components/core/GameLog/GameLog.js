@@ -47,7 +47,7 @@ const GameLog = ({stats, title}) => {
             }
 
             return (
-              <tr>
+              <tr key={game._id}>
 
                 <td>{(gameDate.getMonth()+1) + '/' + gameDate.getDate() + '/' + gameDate.getFullYear()}</td>
                 <td>{gameTime}</td>

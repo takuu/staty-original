@@ -4,15 +4,9 @@ import _ from 'lodash';
 import statParser from '../../../utils/statParser';
 import Loader from '../../Loader/Loader';
 
-class StatList extends React.Component {
-  static propTypes = {
-    stats: PropTypes.array
-  };
-  static defaultProps = {
-    stats: []
-  };
-  render() {
-    const {stats} = this.props;
+
+
+const StatList = ({stats}) =>  {
     let combined = {};
     let statsLength = stats.length;
 
@@ -49,7 +43,7 @@ class StatList extends React.Component {
       {
         _.map(stats, (player) => {
           return (
-            <tr>
+            <tr key={player._id}>
 
               <td>{player.player.number}</td>
               <td>{player.player.name}</td>
@@ -104,8 +98,14 @@ class StatList extends React.Component {
     </table>
 
     )
-  }
 
 }
+
+StatList.propTypes = {
+  stats: PropTypes.array
+};
+StatList.defaultProps = {
+  stats: []
+};
 
 export default StatList;
