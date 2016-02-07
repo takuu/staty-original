@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-function combineList(list=[]) {
+function combineList (list = []) {
 
   let clone = _.cloneDeep(list);
 
@@ -13,13 +13,13 @@ function combineList(list=[]) {
   return cummulativeStats;
 }
 
-function combineStats(list=[]) {
+function combineStats (list = []) {
 
   let clone = _.cloneDeep(list);
 
   let cummulativeStats = _.reduce(clone, (total, stat) => {
     _.map(Object.keys(stat), (key) => {
-      if(key != '__v' && typeof total[key] == 'number' && total[key] >= 0) {
+      if (key !== '__v' && typeof total[key] === 'number' && total[key] >= 0) {
         total[key] = total[key] + stat[key];
       }
     });
@@ -28,13 +28,13 @@ function combineStats(list=[]) {
   return cummulativeStats;
 }
 
-function shootingPercentage(made, attempted) {
-  if(attempted == 0 || made == 0) return 0;
-  let percentage = (made/attempted) * 100;
-  return percentage.toFixed(1)
+function shootingPercentage (made, attempted) {
+  if (attempted === 0 || made === 0) return 0;
+  let percentage = (made / attempted) * 100;
+  return percentage.toFixed(1);
 }
 
-function createStandings(games=[]) {
+function createStandings (games = []) {
   let cloned = _.cloneDeep(games);
   let finishedGames = _.filter(cloned, {isUpdated: true});
   /*
@@ -45,13 +45,13 @@ function createStandings(games=[]) {
 
   // TODO: Refactor to use _.reduce
   let board = {};
-  _.map(finishedGames, (game)=> {
+  _.map(finishedGames, (game) => {
     board[game.homeTeam.name] = board[game.homeTeam.name] ||
       {win: 0, loss: 0, name: game.homeTeam.name, _id: game.homeTeam._id};
     board[game.awayTeam.name] = board[game.awayTeam.name] ||
       {win: 0, loss: 0, name: game.awayTeam.name, _id: game.awayTeam._id};
 
-    if(game.homeScore > game.awayScore) {
+    if (game.homeScore > game.awayScore) {
       board[game.homeTeam.name].win++;
       board[game.awayTeam.name].loss++;
     } else {
@@ -64,7 +64,7 @@ function createStandings(games=[]) {
 
 }
 
-function createSchedule(games=[]) {
+function createSchedule (games = []) {
   let cloned = _.cloneDeep(games);
   let unplayedGames = _.filter(cloned, {isUpdated: false});
 
@@ -83,4 +83,4 @@ export default {
   shootingPercentage: shootingPercentage,
   createStandings: createStandings,
   createSchedule: createSchedule
-}
+};

@@ -61,6 +61,10 @@ module.exports = {
         loader: "url?limit=10000&mimetype=application/octet-stream"
       },
       //{
+      //  test: /\.js$/,
+      //  loader: "eslint-loader", exclude: /node_modules/
+      //}
+      //{
       //  test: /\.css$/,
       //  loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]')
       //},

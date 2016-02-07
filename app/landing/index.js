@@ -7,7 +7,7 @@ import './styles.css';
 export default class LandingPage extends React.Component {
 
 
-  render() {
+  render () {
     return (
       <div></div>
     );

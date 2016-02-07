@@ -24,7 +24,7 @@ export default class SignupRoute extends React.Component {
     this.props.signup(email, password, router);
   }
 
-  render() {
+  render () {
     return (
         <Signup
           auth={this.props}

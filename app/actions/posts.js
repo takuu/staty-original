@@ -14,7 +14,7 @@ import getHeaders from '../utils/getHeaders';
 
 const baseUrl = 'http://localhost:1337';
 
-export function fetchPosts() {
+export function fetchPosts () {
   return async (dispatch) => {
     try {
       const posts = (await axios.get(`${baseUrl}/posts`)).data;
@@ -28,7 +28,7 @@ export function fetchPosts() {
   };
 }
 
-export function fetchPost(id) {
+export function fetchPost (id) {
   return async (dispatch, getState) => {
     try {
       const { auth: { token } } = getState();
@@ -47,7 +47,7 @@ export function fetchPost(id) {
   };
 }
 
-export function savePost(post) {
+export function savePost (post) {
   return async (dispatch, getState) => {
     try {
       const { auth: { token } } = getState();

@@ -23,7 +23,7 @@ export default class LoginRoute extends React.Component {
     this.props.login(email, password, router);
   }
 
-  render() {
+  render () {
     return (
       <Login
         auth={this.props}

@@ -14,11 +14,11 @@ export default (state = defaultState, action) => {
         state = state.set(league._id, league);
       });
       return state;
-    break;
+      break;
 
     case SET_LEAGUE:
       return state.set(action.league._id, action.league);
-    break;
+      break;
     default:
       return state;
   }

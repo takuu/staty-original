@@ -22,7 +22,7 @@ import getHeaders from '../utils/getHeaders.js';
 
 const baseUrl = 'http://localhost:1337';
 
-function saveAuthToken(token) {
+function saveAuthToken (token) {
   const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
   cookie.set({
@@ -32,7 +32,7 @@ function saveAuthToken(token) {
   });
 }
 
-export function signup(email, password, router) {
+export function signup (email, password, router) {
   return async (dispatch) => {
     try {
       const { data: { token, user } } = await axios.post(`${baseUrl}/signup`, {
@@ -58,7 +58,7 @@ export function signup(email, password, router) {
   };
 }
 
-export function login(email, password, router) {
+export function login (email, password, router) {
   return async (dispatch) => {
     try {
       const { data: { token, user } } = await axios.post(`${baseUrl}/login`, {
@@ -86,7 +86,7 @@ export function login(email, password, router) {
   };
 }
 
-export function logout(router) {
+export function logout (router) {
   return dispatch => {
     cookie.unset('token');
 
@@ -96,7 +96,7 @@ export function logout(router) {
   };
 }
 
-export function fetchProfile() {
+export function fetchProfile () {
   return async (dispatch, getState) => {
     try {
       const { auth: { token } } = getState();
@@ -112,7 +112,7 @@ export function fetchProfile() {
   };
 }
 
-export function saveProfile(user) {
+export function saveProfile (user) {
   return async (dispatch, getState) => {
     const { auth: { token } } = getState();
 

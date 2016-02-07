@@ -6,7 +6,7 @@ import createLogger from 'redux-logger';
 import { ROUTER_STATE_CHANGE } from '../constants/actions';
 import reducer from '../reducers';
 
-export function createRedux(initialState) {
+export function createRedux (initialState) {
   const middleware = [thunk];
 
   if (process.env.NODE_ENV !== 'production') {

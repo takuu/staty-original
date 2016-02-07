@@ -18,13 +18,13 @@ export default class Auth extends React.Component {
     router: PropTypes.object
   };
 
-  static fillStore(redux) {
+  static fillStore (redux) {
     return redux.dispatch(fetchProfile());
   }
 
-  render() {
+  render () {
     const { auth: {profile, token}, dispatch, params } = this.props;
-    let body = (token && profile && profile.leagueName == params.leagueName) ?
+    let body = (token && profile && profile.leagueName === params.leagueName) ?
       (
       <div>{this.props.children}</div>
       ) :

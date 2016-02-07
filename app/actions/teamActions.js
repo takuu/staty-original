@@ -10,17 +10,17 @@ import getHeaders from '../utils/getHeaders';
 
 const baseUrl = 'http://localhost:1337/api';
 
-export function getTeamById(id='') {
+export function getTeamById (id = '') {
   return async (dispatch) => {
     try {
       const team = (await axios.get(baseUrl + '/teams/' + id)).data;
       dispatch({ type: SET_TEAM, team });
     } catch (error) {
-      console.log('teamActions error: ', error)
+      console.log('teamActions error: ', error);
     }
   };
 }
-export function getTeamsByLeagueId(id='') {
+export function getTeamsByLeagueId (id = '') {
   return async (dispatch) => {
     try {
       const teams = (await axios.get(`${baseUrl}/teams/league/` + id)).data;
@@ -31,7 +31,7 @@ export function getTeamsByLeagueId(id='') {
   };
 }
 
-export function getTeamsByDivisionId(id='') {
+export function getTeamsByDivisionId (id = '') {
   return async (dispatch) => {
     try {
       const teams = (await axios.get(`${baseUrl}/teams/division/` + id)).data;
@@ -42,7 +42,7 @@ export function getTeamsByDivisionId(id='') {
   };
 }
 
-export function updateTeam(item) {
+export function updateTeam (item) {
   return async (dispatch, getState) => {
     try {
       const { auth: { token } } = getState();

@@ -2,7 +2,7 @@
 import { canUseDOM } from 'exenv';
 
 let cookie = {
-  set({ name, value = '', path = '/', domain = '', expires = '' }) {
+  set ({ name, value = '', path = '/', domain = '', expires = '' }) {
     if (!canUseDOM) { return; }
 
     if (expires instanceof Date) {
@@ -17,11 +17,11 @@ let cookie = {
     ].join(';');
   },
 
-  unset(name) {
+  unset (name) {
     cookie.set({ name, expires: new Date(0) });
   },
 
-  get(name) {
+  get (name) {
     var re = new RegExp(['(?:^|; )',
       name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1'),
       '=([^;]*)'

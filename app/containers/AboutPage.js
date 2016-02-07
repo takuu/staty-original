@@ -7,7 +7,7 @@ import './styles.css';
 export default class AboutPage extends React.Component {
 
 
-  render() {
+  render () {
     return (
       <div className="container">
         <div style={{marginTop: '50px'}} className="row">
@@ -82,7 +82,7 @@ export default class AboutPage extends React.Component {
                         <div className="row">
                             <div className="col-md-12">
                                 <div className="k-badge k-badge--clickable k-spacing-bottom--small w-media w-media-logo"
-                                     style={{backgroundImage: "url(https://dy53q6sor7j4i.cloudfront.net/assets/press-kit/placeholder-karma-logo-1c945b5d4d61c1dc16d3e5d842f82ae8981aac135eb9df2d52a13828a1a902b0.jpg)"}}>
+                                     style={{backgroundImage: 'url(https://dy53q6sor7j4i.cloudfront.net/assets/press-kit/placeholder-karma-logo-1c945b5d4d61c1dc16d3e5d842f82ae8981aac135eb9df2d52a13828a1a902b0.jpg)'}}>
                                     <a className="k-badge-link" href="https://dy53q6sor7j4i.cloudfront.net/media/Karma-Identity-Assets-20150831.zip">
                                     <span className="k-badge-link-text">ZIP</span></a>
                                 </div>
@@ -95,7 +95,7 @@ export default class AboutPage extends React.Component {
                         <div className="row">
                             <div className="col-md-6">
                                  <div className="k-badge k-badge--clickable k-spacing-bottom--small w-media"
-                                      style={{backgroundImage: "url(https://dy53q6sor7j4i.cloudfront.net/assets/sborsje-fd449768cc8b8a57aec212cd3e307c402e46deb8ddec08ccab13c1d416f110e6.jpg)"}}>
+                                      style={{backgroundImage: 'url(https://dy53q6sor7j4i.cloudfront.net/assets/sborsje-fd449768cc8b8a57aec212cd3e307c402e46deb8ddec08ccab13c1d416f110e6.jpg)'}}>
                                      <a className="k-badge-link" href="https://dy53q6sor7j4i.cloudfront.net/assets/press-kit/stefanborsje-cto-8a2edf1c602ae6fc32dc98f4115ac2dab169c2d852145a7d9d39d337c0549cb2.jpg">
                                          <span className="k-badge-link-text">JPG</span></a>
                                  </div>
@@ -104,9 +104,9 @@ export default class AboutPage extends React.Component {
                             </div>
                             <div className="col-md-6">
                                 <div className="k-badge k-badge--clickable k-spacing-bottom--small w-media"
-                                     style={{backgroundImage: "url(https://dy53q6sor7j4i.cloudfront.net/assets/press-kit/stevenvanwel-ceo-431552ce7185f68742d95e714d27813060c049c25ac8edb90d4415b7af501ce2.png)"}}>
-                                    <a class="k-badge-link" href="https://dy53q6sor7j4i.cloudfront.net/assets/press-kit/stevenvanwel-ceo-431552ce7185f68742d95e714d27813060c049c25ac8edb90d4415b7af501ce2.png">
-                                        <span class="k-badge-link-text">PNG</span></a>
+                                     style={{backgroundImage: 'url(https://dy53q6sor7j4i.cloudfront.net/assets/press-kit/stevenvanwel-ceo-431552ce7185f68742d95e714d27813060c049c25ac8edb90d4415b7af501ce2.png)'}}>
+                                    <a className="k-badge-link" href="https://dy53q6sor7j4i.cloudfront.net/assets/press-kit/stevenvanwel-ceo-431552ce7185f68742d95e714d27813060c049c25ac8edb90d4415b7af501ce2.png">
+                                        <span className="k-badge-link-text">PNG</span></a>
                                 </div>
                                 <h4 className="k-header--x-small">Some Dude</h4>
                                 <p className="k-paragraph--small">CTO, Co-Founder</p>
@@ -120,7 +120,7 @@ export default class AboutPage extends React.Component {
                         <div className="row">
                             <div className="col-md-12">
                                 <div className="k-badge k-badge--clickable k-spacing-bottom--small w-media w-media-logo"
-                                     style={{backgroundImage: "url(https://dy53q6sor7j4i.cloudfront.net/assets/graphic-ecosystem-1e5b16362bc48c49e66aa2091e74864a0e15127aca8d02bd4e449481c678b96a.jpg)"}}>
+                                     style={{backgroundImage: 'url(https://dy53q6sor7j4i.cloudfront.net/assets/graphic-ecosystem-1e5b16362bc48c49e66aa2091e74864a0e15127aca8d02bd4e449481c678b96a.jpg)'}}>
                                     <a className="k-badge-link" href="https://dy53q6sor7j4i.cloudfront.net/media/Karma-Go-Photos-20151116.zip">
                                         <span className="k-badge-link-text">ZIP</span></a>
                                 </div>
@@ -133,7 +133,7 @@ export default class AboutPage extends React.Component {
                         <div className="row">
                             <div className="col-md-12">
                                 <div className="k-badge k-badge--clickable k-spacing-bottom--small w-media w-media-logo"
-                                     style={{backgroundImage: "url(https://dy53q6sor7j4i.cloudfront.net/assets/press-kit/app-ios-2e29bde7166d00c9bec0e1cd32315012737b14e6eb6953f73e5ea2318aaec861.png)"}}>
+                                     style={{backgroundImage: 'url(https://dy53q6sor7j4i.cloudfront.net/assets/press-kit/app-ios-2e29bde7166d00c9bec0e1cd32315012737b14e6eb6953f73e5ea2318aaec861.png)'}}>
                                     <a className="k-badge-link" href="https://dy53q6sor7j4i.cloudfront.net/media/Karma-Go-Photos-20151116.zip">
                                         <span className="k-badge-link-text">ZIP</span></a>
                                 </div>

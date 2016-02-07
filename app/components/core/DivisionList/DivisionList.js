@@ -6,11 +6,11 @@ import classNames from 'classnames';
 import './styles.css';
 const DivisionList = ({divisions, league, currentDivision}) => {
 
-  let season = (divisions.length) ? divisions[0].season.name: '';
+  let season = (divisions.length) ? divisions[0].season.name : '';
   return (
     <div>
-      <div className="page-title text-center">{season}</div>
-      <ul className="list-group">
+      <div className='page-title text-center'>{season}</div>
+      <ul className='list-group'>
         {
           _.map(divisions, (division) => {
             let divisionClass = classNames({

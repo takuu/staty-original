@@ -1,4 +1,4 @@
-export default function(redux, nextState, components) {
+export default function (redux, nextState, components) {
   return Promise.all(components.map(async Component => {
     Component = Component && Component.WrappedComponent || Component;
 

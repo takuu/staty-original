@@ -1,3 +1,3 @@
-export default function getHeaders(token) {
+export default function getHeaders (token) {
   return { Authorization: 'Bearer ' + token };
 }

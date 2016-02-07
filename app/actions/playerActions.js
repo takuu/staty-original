@@ -12,29 +12,29 @@ import helpers from '../utils/helpers';
 
 const baseUrl = 'http://localhost:1337/api';
 
-export function getPlayerById(id='') {
+export function getPlayerById (id = '') {
   return async (dispatch) => {
     try {
       const player = (await axios.get(baseUrl + '/players/' + id)).data;
       dispatch({ type: SET_PLAYER, player });
     } catch (error) {
-      console.log('playerActions error: ', error)
+      console.log('playerActions error: ', error);
     }
   };
 }
 
-export function getPlayersByTeamId(id='') {
+export function getPlayersByTeamId (id = '') {
   return async (dispatch) => {
     try {
       const players = (await axios.get(baseUrl + '/players/team/' + id)).data;
       dispatch({ type: SET_PLAYERS_BY_TEAM, players: players });
     } catch (error) {
-      console.log('playerActions error: ', error)
+      console.log('playerActions error: ', error);
     }
   };
 }
 
-export function searchPlayer(name='') {
+export function searchPlayer (name = '') {
   return async (dispatch) => {
     try {
       const players = (await axios.get(baseUrl + '/players/search/?q=' + name)).data;
@@ -43,11 +43,11 @@ export function searchPlayer(name='') {
       });
       dispatch({ type: SEARCH_PLAYER, players: result });
     } catch (error) {
-      console.log('playerActions error: ', error)
+      console.log('playerActions error: ', error);
     }
   };
 }
-export function getPlayersWithFilters(params={}) {
+export function getPlayersWithFilters (params = {}) {
   return async (dispatch) => {
     try {
       let query = helpers.jsonToQueryString(params);
@@ -58,7 +58,7 @@ export function getPlayersWithFilters(params={}) {
     }
   };
 }
-export function updatePlayer(item) {
+export function updatePlayer (item) {
   return async (dispatch, getState) => {
     try {
       const { auth: { token } } = getState();

@@ -94,7 +94,7 @@ const routes = (
   </Route>
 );
 
-function walk(routes, cb) {
+function walk (routes, cb) {
 
   cb(routes);
 

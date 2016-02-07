@@ -22,11 +22,11 @@ export default class App extends React.Component {
     router: PropTypes.object
   }
 
-  static fillStore(redux) {
+  static fillStore (redux) {
     return redux.dispatch(fetchProfile());
   }
 
-  render() {
+  render () {
     const {
       auth,
       dispatch

@@ -14,11 +14,11 @@ export default class LeagueListRoute extends React.Component {
     leagues: PropTypes.array.isRequired
   };
 
-  static fillStore(redux) {
+  static fillStore (redux) {
     return redux.dispatch(getAllLeagues());
   }
 
-  render() {
+  render () {
     const leagues = this.props.leagues;
 
     return (

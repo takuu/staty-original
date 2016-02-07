@@ -4,7 +4,7 @@ import Contact from '../components/Contact/Contact';
 
 export default class ContactRoute extends React.Component {
 
-  render() {
+  render () {
     return <Contact />;
   }
 }

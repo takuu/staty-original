@@ -12,17 +12,17 @@ import getHeaders from '../utils/getHeaders';
 
 const baseUrl = 'http://localhost:1337/api';
 
-export function getGameById(id='') {
+export function getGameById (id = '') {
   return async (dispatch) => {
     try {
       const game = (await axios.get(baseUrl + '/games/' + id)).data;
       dispatch({ type: SET_GAME, game });
     } catch (error) {
-      console.log('gameActions error: ', error)
+      console.log('gameActions error: ', error);
     }
   };
 }
-export function getGamesByTeamId(id='') {
+export function getGamesByTeamId (id = '') {
   return async (dispatch) => {
     try {
       const games = (await axios.get(`${baseUrl}/games/team/` + id)).data;
@@ -33,7 +33,7 @@ export function getGamesByTeamId(id='') {
   };
 }
 
-export function getGamesByDivisionId(id='') {
+export function getGamesByDivisionId (id = '') {
   return async (dispatch) => {
     try {
       const games = (await axios.get(`${baseUrl}/games/division/` + id)).data;
@@ -44,7 +44,7 @@ export function getGamesByDivisionId(id='') {
   };
 }
 
-export function getGamesWithFilters(params={}) {
+export function getGamesWithFilters (params = {}) {
   return async (dispatch) => {
     try {
       const games = (await axios.get(`${baseUrl}/games/?` + helpers.jsonToQueryString(params))).data;

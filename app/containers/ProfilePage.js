@@ -16,7 +16,7 @@ export default class ProfileRoute extends React.Component {
 
   saveProfile = profile => this.props.saveProfile(profile)
 
-  render() {
+  render () {
     const { auth: { profile } } = this.props;
 
     if (!profile) return null;
