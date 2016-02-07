@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchProfile, logout } from '../actions/auth';
+import Loader from '../components/Loader/Loader';
 @connect(state => ({
   auth: state.auth,
   router: state.router
@@ -24,13 +25,18 @@ export default class Auth extends React.Component {
 
   render () {
     const { auth: {profile, token}, dispatch, params } = this.props;
-    let body = (token && profile && profile.leagueName === params.leagueName) ?
-      (
-      <div>{this.props.children}</div>
-      ) :
-      (
-        <div>INVALID ACCESS</div>
-      );
+    let body = (<div></div>);
+
+    if (profile) {
+      if (token && profile.leagueName === params.leagueName) {
+        body = (<div>{this.props.children}</div>);
+      } else {
+        body = (<div>INVALID ACCESS</div>);
+      }
+    } else {
+      body = (<div><Loader /></div>);
+    }
+
     return (
       <div>
         <div style={{minHeight: '800px'}}>

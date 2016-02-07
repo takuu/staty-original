@@ -1,8 +1,6 @@
-//import styles from './styles.styl';
 import React, { PropTypes } from 'react';
-import CSSModules from 'react-css-modules';
+import './styles.css';
 
-//@CSSModules(styles)
 export default class Login extends React.Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
@@ -35,20 +33,20 @@ export default class Login extends React.Component {
     const { email, password } = this.state;
 
     return (
-      <div styleName="wrapper">
-        <div styleName="title">Login</div>
+      <div className='wrapper' style={{marginTop: '100px'}}>
+        <div className="title">Login</div>
 
         {error
           ? <div>{error.message}</div>
           : null}
 
-        <div styleName="code">
+        <div className="code">
           <code>
-            <span styleName="hilight">email@adress</span>
+            <span className="hilight">email@adress</span>
           </code>
           <br />
           <code>
-            <span styleName="hilight">pass</span>
+            <span className="hilight">pass</span>
           </code>
         </div>
 
@@ -56,7 +54,7 @@ export default class Login extends React.Component {
             <label htmlFor="email">E-mail</label>
 
             <input
-              styleName="input"
+              className="input"
               value={email}
               onChange={this.handleChange('email')}
               id="email"
@@ -67,7 +65,7 @@ export default class Login extends React.Component {
 
             <label htmlFor="password">Password</label>
             <input
-              styleName="input"
+              className="input"
               value={password}
               onChange={this.handleChange('password')}
               id="password"
@@ -77,7 +75,7 @@ export default class Login extends React.Component {
             />
 
             <button
-              styleName="btn"
+              className="btn"
               type="submit"
             >
             Login

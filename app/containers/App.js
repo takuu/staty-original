@@ -29,7 +29,8 @@ export default class App extends React.Component {
   render () {
     const {
       auth,
-      dispatch
+      dispatch,
+      params
     } = this.props;
 
     return (
@@ -37,6 +38,7 @@ export default class App extends React.Component {
         <Header
           loggedIn={!!auth.token}
           router={this.context.router}
+          params={params}
           {...bindActionCreators({ logout }, dispatch)}
         />
         <div style={{minHeight: '800px'}}>

@@ -8,23 +8,22 @@ class League extends React.Component {
     let leagueList = (
       _.map(this.props.leagues, (league) => {
         return (
-          <div className="col-md-10 col-xs-10" key={league._id}>
-            <div className="col-md-7">
-              <Link to={`/${league.name}`} >
+          <div className='col-md-10 col-xs-10' key={league._id}>
+            <div className='col-md-7'>
+              <Link to={`/${league.name}`}>
                 {league.displayName || league.name}
               </Link>
-
             </div>
-            <div className="col-md-5">
+            <div className='col-md-5'>
               {league.location}
             </div>
           </div>
         );
       })
-    )
+    );
     return (
-      <div className="LeaguePage">
-        <div className="LeaguePage-container">
+      <div className='LeaguePage' style={{marginTop: '80px'}}>
+        <div className='LeaguePage-container'>
           <h1>League</h1>
           {leagueList}
         </div>
