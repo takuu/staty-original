@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import statParser from '../../../utils/statParser';
 import helper from '../../../utils/helpers';
+import './styles.css';
 
 const PlayerList = ({players, league}) => {
   let hasNumber = helper.doesKeyExistInList(players, 'number');
@@ -10,23 +11,30 @@ const PlayerList = ({players, league}) => {
   let hasHeight = helper.doesKeyExistInList(players, 'height');
 
   return (
-    <table className="table">
-      <tbody>
+    <ul className='list-group'>
       {
         _.map(players, (player) => {
-
           return (
-            <tr key={player._id}>
-              {(hasNumber) ? (<td>{player.number || '-'}</td>): ''}
-              {(hasName) ? (<td><Link to={_createPlayerUrl(league, player)}>{player.name || '-'}</Link></td>): ''}
-              {(hasPos) ? (<td>{player.position || '-'}</td>): ''}
-              {(hasHeight) ? (<td>{player.height || '-'}</td>): ''}
-            </tr>
-          )
+            <li className='list-group-item nopadding' key={player._id}>
+              <Link to={_createPlayerUrl(league, player)} className='list-group-item'>
+                <span className='inline-list-item number-item'>
+                  {(hasNumber) ? (player.number || '-') : ''}
+                </span>
+                <span className='inline-list-item name-item'>
+                  {(hasName) ? (player.name || '-') : ''}
+                </span>
+                <span className='inline-list-item position-item'>
+                  {(hasPos) ? (player.position || '-') : ''}
+                </span>
+                <span className='inline-list-item height-item'>
+                  {(hasHeight) ? (player.height || '-') : ''}
+                </span>
+              </Link>
+            </li>
+          );
         })
       }
-      </tbody>
-    </table>
+    </ul>
   );
 
   function _createPlayerUrl(league, player) {

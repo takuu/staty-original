@@ -1,0 +1,16 @@
+.inline-list-item.date-item {
+    margin:10px 0px;
+    width:30%;
+}
+.inline-list-item.time-item {
+    width:15%;
+}
+.inline-list-item.home-item {
+    width:20%;
+}
+.inline-list-item.score-item {
+    width:10%;
+}
+.inline-list-item.away-item {
+    width:20%;
+}

@@ -236,6 +236,38 @@ Custom Bootstrap
     background: 0 0 !important;
 }
 
+.list-group {
+    margin-bottom: 0;
+}
+
+a.list-group-item {
+    cursor:pointer;
+}
+.list-group-item {
+    display:inline-block;
+    width:100%;
+
+    border-radius: 0 !important;
+
+    border-bottom-style: none;
+    border-left-style:none;
+    border-right-style:none;
+    border-top: 1px solid #ddd !important;
+    padding:0px 15px;
+}
+
+.list-group-item.active {
+    background-color:#eee;
+}
+.inline-list-item {
+    display:inline-block;
+    vertical-align:middle;
+    line-height:normal;
+    padding: 0 5px;
+    color:#444;
+    height:1.45em;
+}
+
 /*
 End Custom Boostrap
 */
@@ -247,6 +279,7 @@ End Custom Boostrap
 .portlet-title {
     padding:17px 20px 10px;
     border-bottom:1px solid #eee;
+    background-color:#fff;
 }
 
 .portlet-body {

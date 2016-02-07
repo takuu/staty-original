@@ -1,11 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import statParser from '../../../utils/statParser';
-import helper from '../../../utils/helpers';
 import classNames from 'classnames';
 import './styles.css';
 const DivisionList = ({divisions, league, currentDivision}) => {
-
   let season = (divisions.length) ? divisions[0].season.name : '';
   return (
     <div>
@@ -14,40 +11,39 @@ const DivisionList = ({divisions, league, currentDivision}) => {
         {
           _.map(divisions, (division) => {
             let divisionClass = classNames({
-              'active': division._id == currentDivision._id,
+              'active': division._id === currentDivision._id,
               'list-group-item': true
             });
             return (
-              <li key={division._id} className="list-group-item">
+              <li key={division._id} className='list-group-item nopadding'>
                 <Link to={_createScheduleLink(league, division)} className={divisionClass}>
-                  <span className="inline-list-item date-item">
+                  <span className='inline-list-item date-item'>
                     Dec 1
                   </span>
-                  <span className="inline-list-item division-item">
+                  <span className='inline-list-item division-item'>
                     {division.name}
                   </span>
-                  <span className="inline-list-item status-item">
+                  <span className='inline-list-item status-item'>
                     Completed
                   </span>
                 </Link>
               </li>
-            )
+            );
           })
         }
       </ul>
     </div>
   );
 
-  function _createScheduleLink(league, division) {
-    return (division) ? `/${league.name}/league/${league._id}/division/${division._id}/schedule`: '#';
+  function _createScheduleLink (league, division) {
+    return (division) ? `/${league.name}/league/${league._id}/division/${division._id}/schedule` : '#';
   }
-
 }
 
 DivisionList.propTypes = {
   divisions: PropTypes.array,
   league: PropTypes.object,
-  currentDivision: PropTypes.object,
+  currentDivision: PropTypes.object
 };
 DivisionList.defaultProps = {
   divisions: [],
