@@ -14,6 +14,7 @@ class Footer extends React.Component{
   render() {
     // This is just an example how one can render CSS
 
+
     return (
       <div className="Footer">
         <div className="Footer-container">

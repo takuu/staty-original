@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { login } from '../actions/auth';
 import Login from '../components/Auth/Login';
 
-@connect(state => ({
-  auth: state.auth
-}), {
+@connect((state) => {
+  return {auth: state.auth};
+}, {
   login
 })
 export default class LoginRoute extends React.Component {
@@ -26,7 +26,7 @@ export default class LoginRoute extends React.Component {
   render () {
     return (
       <Login
-        auth={this.props}
+        auth={this.props.auth}
         handleLogin={this.handleLogin}
        />
     );

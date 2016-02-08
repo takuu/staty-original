@@ -36,7 +36,6 @@ export default class Auth extends React.Component {
     } else {
       body = (<div><Loader /></div>);
     }
-
     return (
       <div>
         <div style={{minHeight: '800px'}}>

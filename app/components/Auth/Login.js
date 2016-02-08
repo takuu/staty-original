@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
+import { browserHistory } from 'react-router';
 import './styles.css';
 
 export default class Login extends React.Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
-    handleLogin: PropTypes.func.isRequired
+    handleLogin: PropTypes.func.isRequired,
   }
 
   static contextTypes = {
@@ -29,12 +30,17 @@ export default class Login extends React.Component {
   }
 
   render() {
-    const { auth: { error } } = this.props;
+    const { auth: { error, token, profile } } = this.props;
     const { email, password } = this.state;
+
+    // redirect here
+    if (token && profile && profile.leagueName) {
+      browserHistory.push(`/${profile.leagueName}`);
+    }
 
     return (
       <div className='wrapper' style={{marginTop: '100px'}}>
-        <div className="title">Login</div>
+        <div className='title'>Login</div>
 
         {error
           ? <div>{error.message}</div>
