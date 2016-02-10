@@ -1,10 +1,9 @@
 import React from 'react';
-import CSSModules from 'react-css-modules';
 
 export default class NotFound extends React.Component {
   render () {
     return (
-      <div styleName="wrapper">
+      <div className='wrapper' style={{marginTop: '50px'}}>
         <h1>Not Found</h1>
       </div>
     );

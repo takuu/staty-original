@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import Standings from '../../../components/core/Standings/Standings'
-import Schedule from '../../../components/core/LeagueSchedule/LeagueSchedule';
+
+import TeamList from '../../../components/core/TeamList/TeamList';
 import _ from 'lodash';
 import {Link} from 'react-router';
 
@@ -37,7 +37,7 @@ import { getDivisionById } from '../../../actions/divisionActions';
   getTeamsByDivisionId,
   getDivisionById
 })
-class StandingPage extends React.Component {
+class TeamsPage extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -67,11 +67,11 @@ class StandingPage extends React.Component {
     let {league, division, games, teams} = this.props;
     return (
       <div>
-        <Standings league={league} games={games} />
+        <TeamList league={league} teams={teams} />
       </div>
 
     );
   }
 }
 
-export default StandingPage;
+export default TeamsPage;
