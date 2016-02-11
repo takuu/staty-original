@@ -35,7 +35,8 @@ export default class Login extends React.Component {
 
     // redirect here
     if (token && profile && profile.leagueName) {
-      browserHistory.push(`/${profile.leagueName}`);
+      debugger;
+      browserHistory.push(`/${profile.leagueName}/admin`);
     }
 
     return (

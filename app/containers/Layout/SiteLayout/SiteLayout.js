@@ -50,8 +50,6 @@ export default class SiteLayout extends React.Component {
         </div>
       </div>
     );
-
   }
 }
-
 

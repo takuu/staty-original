@@ -54,40 +54,35 @@ const routes = (
       /*League Home*/
       <Route component={LeagueLayout}>
         <IndexRoute component={LeaguePage} />
+        <Route path="division/:divisionId/game/:gameId" component={GamePage} />
+        <Route path="division/:divisionId" component={DivisionPage} >
+          <Route path="schedule" component={SchedulePage} />
+          <Route path="standing" component={StandingPage} />
+          <Route path="teams" component={TeamsPage} />
+        </Route>
+        <Route path="team/:teamId/player/:playerId" component={PlayerPage} />
+        <Route path="team/:teamId" component={TeamPage} />
       </Route>
 
-      <Route path="league/:leagueId">
-        <Route component={LeagueLayout}>
-          <Route path="division/:divisionId/game/:gameId" component={GamePage} />
-          <Route path="division/:divisionId" component={DivisionPage} >
-            <Route path="schedule" component={SchedulePage} />
-            <Route path="standing" component={StandingPage} />
-            <Route path="teams" component={TeamsPage} />
-          </Route>
-          <Route path="team/:teamId/player/:playerId" component={PlayerPage} />
-          <Route path="team/:teamId" component={TeamPage} />
-        </Route>
+      /*League Admin*/
+      <Route path="admin" component={Auth}>
+        <IndexRoute component={LeagueAdmin} />
+        <Route path="divisions" component={DivisionAdmin} />
+        <Route path="teams" component={TeamAdmin} />
+        <Route path="players" component={PlayerAdmin} />
+        <Route path="stats" component={StatAdmin} />
+        <Route path="seasons" component={SeasonAdmin} />
+      </Route>
 
-        /*League Admin*/
-        <Route path="admin" component={Auth}>
-          <Route path="home" component={LeagueAdmin} />
-          <Route path="divisions" component={DivisionAdmin} />
-          <Route path="teams" component={TeamAdmin} />
-          <Route path="players" component={PlayerAdmin} />
-          <Route path="stats" component={StatAdmin} />
-          <Route path="seasons" component={SeasonAdmin} />
-        </Route>
-
-
-        <Route path="dashboard" component={Auth} >
-          <Route path="about" component={LeagueAboutPage} />
-        </Route>
-
+      <Route path="dashboard" component={Auth} >
         <Route path="about" component={LeagueAboutPage} />
-
-        <Route path="results/:searchName" component={SearchResultPage}></Route>
-
       </Route>
+
+      <Route path="about" component={LeagueAboutPage} />
+
+      <Route path="results/:searchName" component={SearchResultPage}></Route>
+
+
 
 
     </Route>

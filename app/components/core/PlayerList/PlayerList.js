@@ -38,7 +38,7 @@ const PlayerList = ({players, league}) => {
   );
 
   function _createPlayerUrl(league, player) {
-    return (player) ? `/${league.name}/league/${league._id}/team/${player.team._id}/player/${player._id}`: '#';
+    return (player) ? `/${league.name}/team/${player.team._id}/player/${player._id}`: '#';
   }
 };
 

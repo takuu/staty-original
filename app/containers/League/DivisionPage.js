@@ -71,9 +71,9 @@ class DivisionPage extends React.Component {
 
   render() {
     let {league, division, games, teams, path} = this.props;
-    let scheduleUrl = "/" + league.name + "/league/" + league._id + "/division/" + division._id + "/schedule";
-    let standingUrl = "/" + league.name + "/league/" + league._id + "/division/" + division._id + "/standing";
-    let teamsUrl = "/" + league.name + "/league/" + league._id + "/division/" + division._id + "/teams";
+    let scheduleUrl = "/" + league.name + "/division/" + division._id + "/schedule";
+    let standingUrl = "/" + league.name + "/division/" + division._id + "/standing";
+    let teamsUrl = "/" + league.name + "/division/" + division._id + "/teams";
 
     let urlParts = path.split('/');
     let routeName = urlParts[urlParts.length-1];

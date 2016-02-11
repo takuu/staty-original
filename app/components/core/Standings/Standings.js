@@ -28,7 +28,7 @@ const Standings = ({games, league}) => {
   );
 
   function _createTeamLink(league, team) {
-    return (team) ? `/${league.name}/league/${league._id}/team/${team._id}`: '#';
+    return (team) ? `/${league.name}/team/${team._id}`: '#';
   }
 }
 

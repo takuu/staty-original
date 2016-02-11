@@ -36,11 +36,11 @@ const TeamSchedule = ({games, league}) => {
     </ul>
   );
   function _createGameLink(league, game) {
-    return (game) ? `/${league.name}/league/${league._id}/division/${game.division}/game/${game._id}`: '#';
+    return (game) ? `/${league.name}/division/${game.division}/game/${game._id}`: '#';
   }
 
   function _createTeamLink(league, team) {
-    return (team) ? `/${league.name}/league/${league._id}/team/${team._id}`: '#';
+    return (team) ? `/${league.name}/team/${team._id}`: '#';
   }
 };
 

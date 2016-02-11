@@ -24,11 +24,11 @@ const Schedule = ({league, games}) => {
                     {game.time}
                   </td>
                   <td>
-                    <Link to={"/" + league.name + "/league/" + league._id + "/team/" + game.homeTeam._id} >{game.homeTeam.name}</Link>
+                    <Link to={"/" + league.name + "/team/" + game.homeTeam._id} >{game.homeTeam.name}</Link>
                   </td>
                   <td>vs</td>
                   <td>
-                    <Link to={"/" + league.name + "/league/" + league._id + "/team/" + game.awayTeam._id} >{game.awayTeam.name}</Link>
+                    <Link to={"/" + league.name + "/team/" + game.awayTeam._id} >{game.awayTeam.name}</Link>
                   </td>
                   <td>
                     Mark Keppel High School

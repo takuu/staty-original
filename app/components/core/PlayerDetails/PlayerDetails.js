@@ -47,7 +47,7 @@ const PlayerDetails = ({stats, player, league}) => {
   );
 
   function _createGameLink(league, game) {
-    return (game) ? `/${league.name}/league/${league._id}/division/${game.division}/game/${game.game._id}`: '#';
+    return (game) ? `/${league.name}/division/${game.division}/game/${game.game._id}`: '#';
   }
 
 }

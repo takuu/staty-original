@@ -46,6 +46,9 @@ export default class LeagueLayout extends React.Component {
 
   render() {
     const {league, divisions, params} = this.props;
+    var childrenWithProps = React.Children.map(this.props.children, (child) => {
+      return React.cloneElement(child, {league: league});
+    });
     const currentDivision = _.find(divisions, {_id: params.divisionId});
     return (
       <div>
@@ -60,7 +63,7 @@ export default class LeagueLayout extends React.Component {
           </div>
         </div>
         <div className="col-md-8 col-xs-8" style={{margin: '21px 0px'}}>
-          {this.props.children}
+          {childrenWithProps}
         </div>
       </div>
     );
