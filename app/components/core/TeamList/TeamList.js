@@ -9,7 +9,6 @@ const TeamList = ({teams, league}) => {
       <li className='list-group-item nopadding'></li>
     </ul>
   );
-
 };
 
 TeamList.propTypes = {

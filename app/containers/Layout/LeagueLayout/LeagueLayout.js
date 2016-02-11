@@ -27,10 +27,7 @@ export default class LeagueLayout extends React.Component {
     league: PropTypes.object,
     divisions: PropTypes.array
   };
-  static fillStore(redux, route) {
-    let leagueName = route.params.leagueName;
-    console.log(this.props);
-    //return redux.dispatch(getLeagueByName(leagueName));
+  static fillStore (redux, route) {
   }
   componentWillReceiveProps(nextProps) {
     const { league, getActiveDivisionByLeagueId } = nextProps;
