@@ -40,6 +40,9 @@ class DivisionAdmin extends React.Component {
 
     let leagueName = route.params.leagueName;
     let leagueId = route.params.leagueId;
+
+    let foo = redux.getState();
+    debugger;
     redux.dispatch(getDivisionsByLeagueId(leagueId));
     redux.dispatch(getAllSeasons());
     return redux.dispatch(getLeagueByName(leagueName));
@@ -49,6 +52,7 @@ class DivisionAdmin extends React.Component {
   render() {
     const {league, params, divisions, updateDivision, seasons} = this.props;
     let divisionList = _.cloneDeep(divisions);
+    debugger;
 
     divisionList = _.map(divisionList, (division) => {
       division.teamUrl = '/' + league.name + '/league/' + league._id + '/admin/teams?divisionId=' + division._id;

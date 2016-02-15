@@ -8,6 +8,7 @@ var router = express.Router();
 router.get('/active/:id', controller.getActiveDivisionsByLeagueId);
 router.get('/season/:id', controller.findBySeasonId);
 router.get('/league/:id', controller.findByLeagueId);
+router.get('/leagueName/:name', controller.findByLeagueName);
 router.get('/', controller.index);
 
 router.get('/:id', controller.show);

@@ -32,6 +32,19 @@ export function getActiveDivisionByLeagueId (id = '') {
     }
   };
 }
+
+export function getActiveDivisionByLeagueName (name = '') {
+  return async (dispatch) => {
+    try {
+      const divisions = (await axios.get(baseUrl + '/divisions/activeName/' + name)).data;
+      dispatch({ type: SET_ALL_ACTIVE_DIVISIONS, divisions });
+    } catch (error) {
+      console.log('divisionActions error: ', error);
+    }
+  };
+}
+
+
 export function getDivisionsBySeasonId (id = '') {
   return async (dispatch) => {
     try {
@@ -52,6 +65,18 @@ export function getDivisionsByLeagueId (id = '') {
     }
   };
 }
+
+export function getDivisionsByLeagueName (name = '') {
+  return async (dispatch) => {
+    try {
+      const divisions = (await axios.get(`${baseUrl}/divisions/leagueName/` + name)).data;
+      dispatch({ type: SET_DIVISIONS_BY_LEAGUE, divisions });
+    } catch (error) {
+      console.log('divisionActions error: ', error);
+    }
+  };
+}
+
 export function updateDivision (item) {
   return async (dispatch, getState) => {
     try {

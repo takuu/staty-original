@@ -52,10 +52,10 @@ export default class LeagueLayout extends React.Component {
     const currentDivision = _.find(divisions, {_id: params.divisionId});
     return (
       <div>
-        <div className="col-md-4 col-xs-4" style={{margin: '20px 0px'}}>
-          <div className="sub-container">
-            <div className="sub-title-container">
-              <div className="sub-title">Leagues</div>
+        <div className='col-md-4 col-xs-4' style={{margin: '20px 0px'}}>
+          <div className='sub-container'>
+            <div className='sub-title-container'>
+              <div className='sub-title'>Leagues</div>
             </div>
             <div>
               <DivisionList league={league} divisions={divisions} currentDivision={currentDivision}></DivisionList>
@@ -67,8 +67,5 @@ export default class LeagueLayout extends React.Component {
         </div>
       </div>
     );
-
   }
 }
-
-

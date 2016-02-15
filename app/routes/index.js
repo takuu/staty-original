@@ -108,6 +108,7 @@ export default (store, client) => {
       const loggedIn = !!store.getState().auth.token;
       const auth = store.getState().auth;
 
+      // Note: There's further Auth validation in containers/Auth
       if (route.requireAuth && !loggedIn) {
         transition.to(...redirectBackAfter('/login', nextState));
       } else if (client) {

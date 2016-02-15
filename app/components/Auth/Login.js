@@ -5,7 +5,7 @@ import './styles.css';
 export default class Login extends React.Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
-    handleLogin: PropTypes.func.isRequired,
+    handleLogin: PropTypes.func.isRequired
   }
 
   static contextTypes = {

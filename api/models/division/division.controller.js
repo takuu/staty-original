@@ -82,6 +82,20 @@ exports.findByLeagueId = function(req, res) {
     });
 };
 
+exports.findByLeagueName = function(req, res) {
+  console.log(req.params.name);
+  Division.find({})
+    .populate('league', null, {name: {$in: [req.params.name]}})
+    .exec(function(err, divisions) {
+      if (err) { return handleError(res, err); }
+      divisions = divisions.filter(function(division) {
+        return division.league != null;
+      });
+      console.log('Division.findByLeagueName', divisions);
+      res.status(200).send(divisions);
+    });
+};
+
 exports.getActiveDivisionsByLeagueId = function(req, res) {
   Division.find({league: new ObjectId(req.params.id)})
     .populate({

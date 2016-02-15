@@ -10,7 +10,7 @@ export default class Header extends React.Component {
     loggedIn: PropTypes.bool,
     logout: PropTypes.func.isRequired,
     router: PropTypes.object.isRequired
-  }
+  };
 
   handleLogout = e => {
     const { logout, router } = this.props;
@@ -18,12 +18,12 @@ export default class Header extends React.Component {
     e.preventDefault();
 
     logout(router);
-  }
+  };
 
   renderNavBar () {
     const { loggedIn, params } = this.props;
     if (loggedIn) {
-      let adminLink = `/${params.leagueName}/league/${params.leagueId}/admin/home`;
+      let adminLink = `/${params.leagueName}/admin`;
       return (
           <div className='Header-nav Navigation' role='navigation'>
             <Link className='Navigation-link' to='/leagues' >Leagues</Link>
@@ -51,7 +51,7 @@ export default class Header extends React.Component {
       <div>
         <div className="Header">
           <div className="container">
-            <a className="Header-brand" href="/" title="Staty">
+            <a className="Header-brand" href="/" title='Staty'>
               <img className="Header-brandImg" src={require('./logo-full.png')} width="110" height="32" alt="React" />
 
             </a>

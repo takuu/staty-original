@@ -24,12 +24,16 @@ export default class Auth extends React.Component {
   }
 
   render () {
-    const { auth: {profile, token}, dispatch, params } = this.props;
+    const { auth: {profile, token}, dispatch, params, league } = this.props;
     let body = (<div></div>);
 
+    let childrenWithProps = React.Children.map(this.props.children, (child) => {
+      return React.cloneElement(child, { league: league });
+    });
+
     if (profile) {
-      if (token && profile.leagueName === params.leagueName) {
-        body = (<div>{this.props.children}</div>);
+      if (token && profile.leagueName === params.leagueName && league) {
+        body = (<div>{childrenWithProps}</div>);
       } else {
         body = (<div>INVALID ACCESS</div>);
       }

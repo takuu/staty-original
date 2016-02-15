@@ -43,7 +43,7 @@ class PlayerAdmin extends React.Component {
     let playerList = _.cloneDeep(players);
 
     playerList = _.map(playerList, (player) => {
-      player.statsUrl ='/' +  league.name + '/league/' + league._id + '/admin/stats?playerId=' + player._id;
+      player.statsUrl = '/' +  league.name + '/league/' + league._id + '/admin/stats?playerId=' + player._id;
       return player;
     });
 
