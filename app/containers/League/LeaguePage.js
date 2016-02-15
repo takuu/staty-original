@@ -8,6 +8,8 @@ class LeagueRoute extends React.Component {
 
 
   render() {
+    console.log('this: ', this.props);
+    debugger;
 
     return (
       <div className="sub-container">

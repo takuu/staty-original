@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
+import classNames from 'classnames';
 import './styles.css';
 const DivisionList = ({divisions, league, currentDivision}) => {
   let season = (divisions.length) ? divisions[0].season.name : '';
