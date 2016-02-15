@@ -36,7 +36,6 @@ class SeasonAdmin extends React.Component {
 
   render() {
     const {league, params, seasons} = this.props;
-    debugger;
     var _rows = [];
     for (var i = 1; i < 1000; i++) {
       _rows.push({ id: i, name: 'Title ' + i, strengthLevel: i * 1000});
@@ -48,7 +47,6 @@ class SeasonAdmin extends React.Component {
     };
 
     var handleRowUpdated = function(e) {
-      debugger;
       _rows[e.rowIdx] = e.updated;
     };
 
@@ -62,34 +60,16 @@ class SeasonAdmin extends React.Component {
     return (
       <div className="sub-container">
         <div className="sub-title-container">
-          <div className="sub-title">Dashboard</div>
-        </div>
-        <div className="row" style={{backgroundColor: '#eff3f8'}}>
-          <div className="col-md-3 col-xs-3" style={{margin: '20px 0px'}}>
-            <div className="sub-container">
-              <div className="sub-title-container">
-                <div className="sub-title">Main</div>
-              </div>
-              <SideNav league={league} />
-            </div>
-          </div>
-          <div className="col-md-9 col-xs-9" style={{margin: '20px 0px'}}>
-            <div className="sub-container">
-              <div className="sub-title-container">
-                <div className="sub-title">GET STARTED</div>
-                <ReactDataGrid
-                  enableCellSelect={true}
-                  columns={columns}
-                  rowGetter={rowGetter}
-                  rowsCount={_rows.length}
-                  minHeight={500}
-                  onRowUpdated={handleRowUpdated}/>
-              </div>
-            </div>
-          </div>
+          <div className="sub-title">GET STARTED</div>
+          <ReactDataGrid
+            enableCellSelect={true}
+            columns={columns}
+            rowGetter={rowGetter}
+            rowsCount={_rows.length}
+            minHeight={500}
+            onRowUpdated={handleRowUpdated}/>
         </div>
       </div>
-
     );
   }
 }

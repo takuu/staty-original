@@ -42,17 +42,12 @@ class TeamAdmin extends React.Component {
 
   render() {
     const {league, teams, updateTeam} = this.props;
-    let teamList = _.cloneDeep(teams);
-
-
-    teamList = _.map(teamList, (team) => {
-      team.playerUrl = '/' + league.name + '/league/' + league._id + '/admin/players?teamId=' + team._id;
+    let teamList = _.map(_.cloneDeep(teams), (team) => {
+      team.playerUrl = '/' + league.name + '/admin/players?teamId=' + team._id;
       return team;
     });
 
-
-
-    var priorities = [{id:0, title : 'Critical'}, {id:1, title : 'High'}, {id:2, title : 'Medium'}, {id:3, title : 'Low'}];
+    var priorities = [{id: 0, title: 'Critical'}, {id: 1, title: 'High'}, {id: 2, title: 'Medium'}, {id: 3, title: 'Low'}];
 
     var AutoCompleteEditor = ReactDataGrid.Editors.AutoComplete;
     var PrioritiesEditor = <AutoCompleteEditor options={priorities}/>;
@@ -67,27 +62,9 @@ class TeamAdmin extends React.Component {
     return (
       <div className="sub-container">
         <div className="sub-title-container">
-          <div className="sub-title">Dashboard</div>
+          <div className="sub-title">GET STARTED</div>
         </div>
-        <div className="row" style={{backgroundColor: '#eff3f8'}}>
-          <div className="col-md-3 col-xs-3" style={{margin: '20px 0px'}}>
-            <div className="sub-container">
-              <div className="sub-title-container">
-                <div className="sub-title">Main</div>
-              </div>
-
-              <SideNav league={league} />
-            </div>
-          </div>
-          <div className="col-md-9 col-xs-9" style={{margin: '20px 0px'}}>
-            <div className="sub-container">
-              <div className="sub-title-container">
-                <div className="sub-title">GET STARTED</div>
-              </div>
-              <GridEditor list={teamList} saveCallback={updateTeam} columns={columns} />
-            </div>
-          </div>
-        </div>
+        <GridEditor list={teamList} saveCallback={updateTeam} columns={columns} />
       </div>
     );
   }

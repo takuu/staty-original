@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 import './styles.css';
 import _ from 'lodash';
 import { getLeagueByName } from '../../../actions/leagues';
-import SideNav from '../../components/LeagueAdmin/SideNav/SideNav';
+import SideNav from '../../../components/LeagueAdmin/SideNav/SideNav';
 import { connect } from 'react-redux';
 
 @connect((state,router) => {
@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 }, {
   getLeagueByName
 })
-export default class LeagueLayout extends React.Component {
+export default class AdminLayout extends React.Component {
   static propTypes = {
     children: PropTypes.element,
     league: PropTypes.object
@@ -32,7 +32,7 @@ export default class LeagueLayout extends React.Component {
     });
     return (
       <div>
-        <div className='col-md-4 col-xs-4' style={{margin: '20px 0px'}}>
+        <div className='col-md-3 col-xs-3' style={{margin: '20px 0px'}}>
           <div className='sub-container'>
             <div className='sub-title-container'>
               <div className='sub-title'>Main</div>
@@ -42,7 +42,7 @@ export default class LeagueLayout extends React.Component {
             </div>
           </div>
         </div>
-        <div className="col-md-8 col-xs-8" style={{margin: '21px 0px'}}>
+        <div className="col-md-9 col-xs-9" style={{margin: '21px 0px'}}>
           {childrenWithProps}
         </div>
       </div>

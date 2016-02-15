@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import _ from 'lodash';
 import {Link} from 'react-router';
 import { getLeagueByName } from '../../actions/leagues';
-import { getDivisionsByLeagueId, updateDivision } from '../../actions/divisionActions';
+import { getDivisionsByLeagueName, updateDivision } from '../../actions/divisionActions';
 import { getAllSeasons } from '../../actions/seasonActions';
 import { connect } from 'react-redux';
 import GridEditor from '../../components/LeagueAdmin/GridEditor/GridEditor';
@@ -24,7 +24,7 @@ var ReactDataGrid = require('react-data-grid/addons');
   return {league: league, params: router.params, divisions: divisions, seasons: seasons}
 }, {
   getLeagueByName,
-  getDivisionsByLeagueId,
+  getDivisionsByLeagueName,
   updateDivision,
   getAllSeasons
 })
@@ -39,11 +39,8 @@ class DivisionAdmin extends React.Component {
   static fillStore(redux, route) {
 
     let leagueName = route.params.leagueName;
-    let leagueId = route.params.leagueId;
 
-    let foo = redux.getState();
-    debugger;
-    redux.dispatch(getDivisionsByLeagueId(leagueId));
+    redux.dispatch(getDivisionsByLeagueName(leagueName));
     redux.dispatch(getAllSeasons());
     return redux.dispatch(getLeagueByName(leagueName));
 
@@ -52,10 +49,9 @@ class DivisionAdmin extends React.Component {
   render() {
     const {league, params, divisions, updateDivision, seasons} = this.props;
     let divisionList = _.cloneDeep(divisions);
-    debugger;
 
     divisionList = _.map(divisionList, (division) => {
-      division.teamUrl = '/' + league.name + '/league/' + league._id + '/admin/teams?divisionId=' + division._id;
+      division.teamUrl = '/' + league.name + '/admin/teams?divisionId=' + division._id;
       return division;
     });
 
@@ -87,27 +83,9 @@ class DivisionAdmin extends React.Component {
     return (
       <div className="sub-container">
         <div className="sub-title-container">
-          <div className="sub-title">Dashboard</div>
+          <div className="sub-title">GET STARTED</div>
         </div>
-        <div className="row" style={{backgroundColor: '#eff3f8'}}>
-          <div className="col-md-3 col-xs-3" style={{margin: '20px 0px'}}>
-            <div className="sub-container">
-              <div className="sub-title-container">
-                <div className="sub-title">Main</div>
-              </div>
-
-              <SideNav league={league} />
-            </div>
-          </div>
-          <div className="col-md-9 col-xs-9" style={{margin: '20px 0px'}}>
-            <div className="sub-container">
-              <div className="sub-title-container">
-                <div className="sub-title">GET STARTED</div>
-              </div>
-              <GridEditor list={divisionList} saveCallback={updateDivision} columns={columns} />
-            </div>
-          </div>
-        </div>
+        <GridEditor list={divisionList} saveCallback={updateDivision} columns={columns} />
       </div>
     );
   }

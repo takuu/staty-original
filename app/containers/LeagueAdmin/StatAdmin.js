@@ -72,32 +72,12 @@ class StatAdmin extends React.Component {
       { key: 'priority', name: 'Priority', editor: PrioritiesEditor, sortable: true }
     ];
 
-
-
     return (
       <div className="sub-container">
         <div className="sub-title-container">
-          <div className="sub-title">Dashboard</div>
+          <div className="sub-title">GET STARTED</div>
         </div>
-        <div className="row" style={{backgroundColor: '#eff3f8'}}>
-          <div className="col-md-3 col-xs-3" style={{margin: '20px 0px'}}>
-            <div className="sub-container">
-              <div className="sub-title-container">
-                <div className="sub-title">Main</div>
-              </div>
-
-              <SideNav league={league} />
-            </div>
-          </div>
-          <div className="col-md-9 col-xs-9" style={{margin: '20px 0px'}}>
-            <div className="sub-container">
-              <div className="sub-title-container">
-                <div className="sub-title">GET STARTED</div>
-              </div>
-              <GridEditor list={statList} saveCallback={updateStat} columns={columns} />
-            </div>
-          </div>
-        </div>
+        <GridEditor list={statList} saveCallback={updateStat} columns={columns} />
       </div>
     )
   }

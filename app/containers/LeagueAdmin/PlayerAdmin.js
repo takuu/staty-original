@@ -40,10 +40,8 @@ class PlayerAdmin extends React.Component {
 
   render() {
     const {league, players, updatePlayer} = this.props;
-    let playerList = _.cloneDeep(players);
-
-    playerList = _.map(playerList, (player) => {
-      player.statsUrl = '/' +  league.name + '/league/' + league._id + '/admin/stats?playerId=' + player._id;
+    let playerList = _.map(_.cloneDeep(players), (player) => {
+      player.statsUrl = '/' +  league.name + '/admin/stats?playerId=' + player._id;
       return player;
     });
 
@@ -62,27 +60,9 @@ class PlayerAdmin extends React.Component {
     return (
       <div className="sub-container">
         <div className="sub-title-container">
-          <div className="sub-title">Dashboard</div>
+          <div className="sub-title">GET STARTED</div>
         </div>
-        <div className="row" style={{backgroundColor: '#eff3f8'}}>
-          <div className="col-md-3 col-xs-3" style={{margin: '20px 0px'}}>
-            <div className="sub-container">
-              <div className="sub-title-container">
-                <div className="sub-title">Main</div>
-              </div>
-
-              <SideNav league={league} />
-            </div>
-          </div>
-          <div className="col-md-9 col-xs-9" style={{margin: '20px 0px'}}>
-            <div className="sub-container">
-              <div className="sub-title-container">
-                <div className="sub-title">GET STARTED</div>
-              </div>
-              <GridEditor list={playerList} saveCallback={updatePlayer} columns={columns} />
-            </div>
-          </div>
-        </div>
+        <GridEditor list={playerList} saveCallback={updatePlayer} columns={columns} />
       </div>
     );
   }

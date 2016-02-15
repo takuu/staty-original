@@ -86,6 +86,7 @@ exports.findByLeagueName = function(req, res) {
   console.log(req.params.name);
   Division.find({})
     .populate('league', null, {name: {$in: [req.params.name]}})
+    .populate('season')
     .exec(function(err, divisions) {
       if (err) { return handleError(res, err); }
       divisions = divisions.filter(function(division) {
