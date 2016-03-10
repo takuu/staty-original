@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import classNames from 'classnames';
 import './styles.css';
 const DivisionList = ({divisions, league, currentDivision}) => {
+  debugger;
   let season = (divisions.length) ? divisions[0].season.name : '';
   return (
     <div>
@@ -36,6 +37,7 @@ const DivisionList = ({divisions, league, currentDivision}) => {
   );
 
   function _createScheduleLink (league, division) {
+    debugger;
     return (division) ? `/${league.name}/division/${division._id}/schedule` : '#';
   }
 }

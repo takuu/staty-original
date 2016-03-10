@@ -20,7 +20,10 @@ export function createRedux (initialState) {
   const store = finalCreateStore(reducer, initialState);
 
   if (module.hot) {
-    const nextReducer = require('../reducers');
+
+    //const nextReducer = require('../reducers');
+    const nextReducer = reducer;
+
     module.hot.accept('../reducers',
       () => { store.replaceReducer(nextReducer); });
   }

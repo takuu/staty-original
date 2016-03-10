@@ -1,7 +1,4 @@
-import {
-  SET_LEAGUE,
-  SET_ALL_LEAGUES
-} from '../constants/actions';
+import ActionTypes from '../constants/actions';
 
 import axios from 'axios';
 import getHeaders from '../utils/getHeaders';
@@ -12,8 +9,9 @@ export function getAllLeagues () {
   return async (dispatch) => {
     try {
       const leagues = (await axios.get(`${baseUrl}/leagues`)).data;
-      dispatch({ type: SET_ALL_LEAGUES, leagues });
+      dispatch({ type: ActionTypes.SET_ALL_LEAGUES, leagues });
     } catch (error) {
+      console.log(error);
     }
   };
 }
@@ -21,8 +19,11 @@ export function getLeagueByName (name = '') {
   return async (dispatch) => {
     try {
       const league = (await axios.get(`${baseUrl}/leagues/search/?name=` + name)).data;
-      dispatch({ type: SET_LEAGUE, league });
+      console.log('foo', ActionTypes.SET_LEAGUE);
+      debugger;
+      dispatch({ type: ActionTypes.SET_LEAGUE, league: league });
     } catch (error) {
+      console.log(error);
     }
   };
 }

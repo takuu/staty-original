@@ -1,4 +1,4 @@
-import {
+/*import {
   FETCH_POSTS_SUCCESS,
   FETCH_POSTS_FAILURE,
 
@@ -7,7 +7,8 @@ import {
 
   SAVE_POST_SUCCESS,
   SAVE_POST_FAILURE
-} from '../constants/actions';
+} from '../constants/actions';*/
+import ActionTypes from '../constants/actions';
 
 import axios from 'axios';
 import getHeaders from '../utils/getHeaders';
@@ -18,10 +19,10 @@ export function fetchPosts () {
   return async (dispatch) => {
     try {
       const posts = (await axios.get(`${baseUrl}/posts`)).data;
-      dispatch({ type: FETCH_POSTS_SUCCESS, posts });
+      dispatch({ type: ActionTypes.FETCH_POSTS_SUCCESS, posts });
     } catch (error) {
       dispatch({
-        type: FETCH_POSTS_FAILURE,
+        type: ActionTypes.FETCH_POSTS_FAILURE,
         error: Error('Unknown error occured :-(. Please, try again later.')
       });
     }
@@ -37,10 +38,10 @@ export function fetchPost (id) {
       const post = (await axios.get(`${baseUrl}/posts/${id}`, {
         headers
       })).data;
-      dispatch({ type: FETCH_POST_SUCCESS, post });
+      dispatch({ type: ActionTypes.FETCH_POST_SUCCESS, post });
     } catch (error) {
       dispatch({
-        type: FETCH_POST_FAILURE,
+        type: ActionTypes.FETCH_POST_FAILURE,
         error: Error('Unknown error occured :-(. Please, try again later.')
       });
     }
@@ -62,10 +63,10 @@ export function savePost (post) {
         post = (await axios.post(`${baseUrl}/posts`, post, { headers })).data;
       }
 
-      dispatch({ type: SAVE_POST_SUCCESS, post });
+      dispatch({ type: ActionTypes.SAVE_POST_SUCCESS, post });
     } catch (error) {
       dispatch({
-        type: SAVE_POST_FAILURE,
+        type: ActionTypes.SAVE_POST_FAILURE,
         error: Error('Unknown error occured :-(. Please, try again later.')
       });
     }

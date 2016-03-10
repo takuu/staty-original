@@ -1,5 +1,7 @@
 /* eslint-env browser */
 /* global process */
+import 'babel-core/register';
+import 'babel-polyfill';
 import React from 'react';
 import { Router, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';

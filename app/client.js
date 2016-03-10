@@ -1,6 +1,7 @@
 /* eslint-env browser */
 /* global process */
-import 'babel/polyfill';
+import 'babel-core/register';
+import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 //import BrowserHistory from 'react-router/lib/BrowserHistory';

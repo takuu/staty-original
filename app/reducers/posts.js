@@ -1,12 +1,14 @@
-import {
-  FETCH_POSTS_SUCCESS,
-  FETCH_POST_SUCCESS,
-  SAVE_POST_SUCCESS
-} from '../constants/actions';
+//import {
+//  FETCH_POSTS_SUCCESS,
+//  FETCH_POST_SUCCESS,
+//  SAVE_POST_SUCCESS
+//} from '../constants/actions';
+import ActionTypes from '../constants/actions';
 
 export default (state = { list: [], items: {} }, action) => {
   switch (action.type) {
-    case FETCH_POSTS_SUCCESS:
+    case ActionTypes.FETCH_POSTS_SUCCESS:
+      debugger;
       const list = action.posts.map(item => item.id);
       const items = {};
 
@@ -14,8 +16,8 @@ export default (state = { list: [], items: {} }, action) => {
 
       return { list, items };
 
-    case SAVE_POST_SUCCESS:
-    case FETCH_POST_SUCCESS:
+    case ActionTypes.SAVE_POST_SUCCESS:
+    case ActionTypes.FETCH_POST_SUCCESS:
       return {
         items: {
           ...state.items,

@@ -1,11 +1,11 @@
-import {
+/*import {
   SET_PLAYERS_WITH_FILTERS,
   SEARCH_PLAYER,
   SET_PLAYER,
   SET_PLAYERS_BY_TEAM,
   UPDATE_PLAYER
-} from '../constants/actions';
-
+} from '../constants/actions';*/
+import ActionTypes from '../constants/actions';
 import axios from 'axios';
 import getHeaders from '../utils/getHeaders';
 import helpers from '../utils/helpers';
@@ -16,7 +16,7 @@ export function getPlayerById (id = '') {
   return async (dispatch) => {
     try {
       const player = (await axios.get(baseUrl + '/players/' + id)).data;
-      dispatch({ type: SET_PLAYER, player });
+      dispatch({ type: ActionTypes.SET_PLAYER, player });
     } catch (error) {
       console.log('playerActions error: ', error);
     }
@@ -27,7 +27,7 @@ export function getPlayersByTeamId (id = '') {
   return async (dispatch) => {
     try {
       const players = (await axios.get(baseUrl + '/players/team/' + id)).data;
-      dispatch({ type: SET_PLAYERS_BY_TEAM, players: players });
+      dispatch({ type: ActionTypes.SET_PLAYERS_BY_TEAM, players: players });
     } catch (error) {
       console.log('playerActions error: ', error);
     }
@@ -41,7 +41,7 @@ export function searchPlayer (name = '') {
       const result = _.map(players, function (item) {
         return _.extend({}, item, {searchName: name});
       });
-      dispatch({ type: SEARCH_PLAYER, players: result });
+      dispatch({ type: ActionTypes.SEARCH_PLAYER, players: result });
     } catch (error) {
       console.log('playerActions error: ', error);
     }
@@ -52,7 +52,7 @@ export function getPlayersWithFilters (params = {}) {
     try {
       let query = helpers.jsonToQueryString(params);
       const players = (await axios.get(`${baseUrl}/players/?` + query)).data;
-      dispatch({ type: SET_PLAYERS_WITH_FILTERS, players });
+      dispatch({ type: ActionTypes.SET_PLAYERS_WITH_FILTERS, players });
     } catch (error) {
       console.log('playerActions error: ', error);
     }
@@ -65,7 +65,7 @@ export function updatePlayer (item) {
       let headers = getHeaders(token);
       debugger;
       const player = (await axios.put(`${baseUrl}/players/` + item._id, item, { headers })).data;
-      dispatch({ type: UPDATE_PLAYER, player });
+      dispatch({ type: ActionTypes.UPDATE_PLAYER, player });
     } catch (error) {
       console.log('playerActions error: ', error);
     }

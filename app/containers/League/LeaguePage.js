@@ -1,27 +1,15 @@
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import _ from 'lodash';
-
+import React from 'react';
 
 class LeagueRoute extends React.Component {
-
-
-
-  render() {
-    console.log('this: ', this.props);
-    debugger;
-
+  render () {
     return (
-      <div className="sub-container">
-        <div className="sub-title-container">
-          <div className="sub-title">LEAGUE INFO</div>
+      <div className='sub-container'>
+        <div className='sub-title-container'>
+          <div className='sub-title'>LEAGUE INFO</div>
         </div>
       </div>
     );
   }
 }
-
-
-
 
 export default LeagueRoute;

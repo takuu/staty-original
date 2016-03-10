@@ -1,4 +1,4 @@
-import {
+/*import {
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
 
@@ -13,7 +13,8 @@ import {
   SAVE_PROFILE,
   SAVE_PROFILE_SUCCESS,
   SAVE_PROFILE_FAILURE
-} from '../constants/actions';
+} from '../constants/actions';*/
+import ActionTypes from '../constants/actions';
 
 import cookie from '../utils/cookie';
 import redirectBackAfter from '../utils/redirectBackAfter';
@@ -42,14 +43,14 @@ export function signup (email, password, router) {
 
       saveAuthToken(token);
 
-      dispatch({ type: LOGIN_SUCCESS, token });
-      dispatch({ type: FETCH_PROFILE_SUCCESS, user });
-      dispatch({ type: SIGNUP_SUCCESS });
+      dispatch({ type: ActionTypes.LOGIN_SUCCESS, token });
+      dispatch({ type: ActionTypes.FETCH_PROFILE_SUCCESS, user });
+      dispatch({ type: ActionTypes.SIGNUP_SUCCESS });
       // TODO: don't do it here.
       router.transitionTo('/profile');
     } catch (error) {
       dispatch({
-        type: SIGNUP_FAILURE,
+        type: ActionTypes.SIGNUP_FAILURE,
         error: (error.status === 409)
           ? Error('User with such an email already exists')
           : Error('Unknown error occured :-(. Please, try again later.')
@@ -69,8 +70,8 @@ export function login (email, password, router) {
 
       saveAuthToken(token);
 
-      dispatch({ type: LOGIN_SUCCESS, token });
-      dispatch({ type: FETCH_PROFILE_SUCCESS, user });
+      dispatch({ type: ActionTypes.LOGIN_SUCCESS, token });
+      dispatch({ type: ActionTypes.FETCH_PROFILE_SUCCESS, user });
 
       const { query } = router.state.location;
       const redirectTo = (query && query.redirectTo) ? query.redirectTo : '/';
@@ -81,7 +82,7 @@ export function login (email, password, router) {
         ? Error('Incorrect email or password')
         : Error('Unknown error occured :-(. Please, try again later.');
 
-      dispatch({ type: LOGIN_FAILURE, error });
+      dispatch({ type: ActionTypes.LOGIN_FAILURE, error });
     }
   };
 }
@@ -90,7 +91,7 @@ export function logout (router) {
   return dispatch => {
     cookie.unset('token');
 
-    dispatch({ type: LOGOUT });
+    dispatch({ type: ActionTypes.LOGOUT });
 
     router.transitionTo(...redirectBackAfter('/login', router.state));
   };
@@ -105,9 +106,9 @@ export function fetchProfile () {
 
       const headers = getHeaders(token);
       const user = (await axios.get(`${baseUrl}/profile`, { headers })).data;
-      dispatch({ type: FETCH_PROFILE_SUCCESS, user });
+      dispatch({ type: ActionTypes.FETCH_PROFILE_SUCCESS, user });
     } catch (error) {
-      dispatch({ type: FETCH_PROFILE_FAILURE, error });
+      dispatch({ type: ActionTypes.FETCH_PROFILE_FAILURE, error });
     }
   };
 }
@@ -116,7 +117,7 @@ export function saveProfile (user) {
   return async (dispatch, getState) => {
     const { auth: { token } } = getState();
 
-    dispatch({ type: SAVE_PROFILE, user });
+    dispatch({ type: ActionTypes.SAVE_PROFILE, user });
 
     try {
       const headers = getHeaders(token);
@@ -127,10 +128,10 @@ export function saveProfile (user) {
         { headers })
       ).data;
 
-      dispatch({ type: SAVE_PROFILE_SUCCESS, user });
+      dispatch({ type: ActionTypes.SAVE_PROFILE_SUCCESS, user });
     } catch (error) {
       dispatch({
-        type: SAVE_PROFILE_FAILURE,
+        type: ActionTypes.SAVE_PROFILE_FAILURE,
         error: Error('Unknown error occured :-(. Please, try again later.')
       });
     }
