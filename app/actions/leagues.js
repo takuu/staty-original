@@ -19,8 +19,6 @@ export function getLeagueByName (name = '') {
   return async (dispatch) => {
     try {
       const league = (await axios.get(`${baseUrl}/leagues/search/?name=` + name)).data;
-      console.log('foo', ActionTypes.SET_LEAGUE);
-      debugger;
       dispatch({ type: ActionTypes.SET_LEAGUE, league: league });
     } catch (error) {
       console.log(error);

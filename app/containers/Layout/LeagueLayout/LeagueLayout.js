@@ -46,7 +46,6 @@ export default class LeagueLayout extends React.Component {
 
   render() {
     const {league, divisions, params} = this.props;
-    debugger;
     var childrenWithProps = React.Children.map(this.props.children, (child) => {
       return React.cloneElement(child, {league: league});
     });
