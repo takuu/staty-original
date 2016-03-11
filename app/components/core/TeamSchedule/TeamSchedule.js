@@ -16,7 +16,7 @@ const TeamSchedule = ({games, league}) => {
           let homeWin = (boxScore && game.homeScore > game.awayScore) ? 'bold' : '';
           let awayWin = (boxScore && game.homeScore < game.awayScore) ? 'bold' : '';
           return (
-            <li key={game._id} className='list-group-item nopadding'>
+            <li key={game._id} className='list-group-item nopadding list-group-item-md'>
               <span className='inline-list-item date-item'>{gameDate.toDateString()}</span>
               <span className='inline-list-item time-item'>{gameTime}</span>
               <span className='inline-list-item home-item'>

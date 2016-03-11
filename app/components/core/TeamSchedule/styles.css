@@ -5,6 +5,10 @@
     align-items:center;
 }
 
+.list-group-item-md {
+    height:50px;
+}
+
 .inline-list-item.date-item {
     display: -webkit-flex;
     display:flex;

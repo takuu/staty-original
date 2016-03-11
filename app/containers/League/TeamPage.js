@@ -24,7 +24,9 @@ import { getPlayersWithFilters } from '../../actions/playerActions';
   const team = _.find(teamsJS, {_id: teamId});
 
   const playersJS = state.players.toJS();
-  const players = _.map(playersJS, (player)=>{return player});
+  const players = _.filter(playersJS, (player) => {
+    return player.team._id === teamId;
+  });
 
   return {league: league, games: games, team: team, players: players}
 }, {
