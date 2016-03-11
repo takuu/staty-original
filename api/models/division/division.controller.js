@@ -32,10 +32,18 @@ exports.show = function(req, res) {
 
 // Creates a new division in the DB.
 exports.create = function(req, res) {
-  Division.create(req.body, function(err, division) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, division);
+  let {league, season, name} = req.body;
+  Division.count({league: ObjectId(league), season: ObjectId(season), name: name}, function (err, count) {
+    if (err) { return handleError(res, err); }
+    if (!count) {
+      Division.create(req.body, function(err, division) {
+        if(err) { return handleError(res, err); }
+        return res.json(201, division);
+      });
+    }
+
   });
+
 };
 
 // Updates an existing division in the DB.

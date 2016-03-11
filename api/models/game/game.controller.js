@@ -35,10 +35,24 @@ exports.show = function(req, res) {
 
 // Creates a new game in the DB.
 exports.create = function(req, res) {
-  Game.create(req.body, function(err, game) {
+  let {homeTeam, homeScore, awayTeam, awayScore, division, season, league, time} = req.body;
+
+  Game.count({homeTeam: ObjectId(homeTeam), homeScore: homeScore,
+    awayTeam: ObjectId(awayTeam), awayScore: awayScore,
+    division: ObjectId(division), season: ObjectId(season),
+    league: ObjectId(league), time: time
+  }, function(err, count) {
     if(err) { return handleError(res, err); }
-    return res.json(201, game);
+    if (!count) {
+      Game.create(req.body, function(err, game) {
+        if(err) { return handleError(res, err); }
+        return res.json(201, game);
+      });
+    }
+
   });
+
+
 };
 
 // Updates an existing game in the DB.

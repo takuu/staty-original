@@ -34,10 +34,17 @@ exports.show = function(req, res) {
 
 // Creates a new player in the DB.
 exports.create = function(req, res) {
-  Player.create(req.body, function(err, player) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, player);
+  let {team, name} = req.body;
+  Player.count({team: ObjectId(team), name: name}, function (err, count) {
+    if (err) { return handleError(res, err); }
+    if (!count) {
+      Player.create(req.body, function(err, player) {
+        if(err) { return handleError(res, err); }
+        return res.json(201, player);
+      });
+    }
   });
+
 };
 
 // Updates an existing player in the DB.

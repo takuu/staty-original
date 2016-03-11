@@ -32,10 +32,17 @@ exports.show = function(req, res) {
 
 // Creates a new team in the DB.
 exports.create = function(req, res) {
-  Team.create(req.body, function(err, team) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, team);
+  let {name, division, league} = req.body;
+  Team.count({name: name, division: ObjectId(division), league: ObjectId(league)}, function (err, count) {
+    if (err) { return handleError(res, err); }
+    if (!count) {
+      Team.create(req.body, function(err, team) {
+        if(err) { return handleError(res, err); }
+        return res.json(201, team);
+      });
+    }
   });
+
 };
 
 // Updates an existing team in the DB.
