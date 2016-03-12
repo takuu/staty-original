@@ -61,19 +61,18 @@ function createStandings (games = []) {
   });
 
   return board;
-
 }
 
 function createSchedule (games = []) {
   let cloned = _.cloneDeep(games);
-  let unplayedGames = _.filter(cloned, {isUpdated: false});
+  let gameList = _.orderBy(cloned, ['date', ['asc']]);
 
-  _.map(unplayedGames, (game) => {
+  _.map(gameList, (game) => {
     let date = new Date(game.date);
     game.prettyDate = date.toDateString();
   });
 
-  return _.groupBy(unplayedGames, 'prettyDate');
+  return _.groupBy(gameList, 'prettyDate');
 }
 
 export default {

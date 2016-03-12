@@ -1,11 +1,26 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import statParser from '../../../utils/statParser';
+import GameDayList from '../../core/GameDayList/GameDayList';
 
 const Schedule = ({league, games}) => {
 
   const schedule = statParser.createSchedule(games);
+  //debugger;
+
   return (
+    <div>
+      {
+        _.map(Object.keys(schedule), (date) => {
+          let games = schedule[date];
+          return (
+            <GameDayList games={games} date={date} league={league} />
+          );
+        })
+      }
+      </div>
+  )
+  let old = (
     <div>
       {
         _.map(Object.keys(schedule), (key) => {
