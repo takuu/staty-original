@@ -8,7 +8,34 @@ import statParser from '../../../utils/statParser';
 
 const Standings = ({games, league}) => {
   const standings = statParser.createStandings(games);
+
   return (
+    <div>
+      <ul className='list-group'>
+        {
+          _.map(standings, (team) => {
+            let {name, _id, win, loss} = team;
+
+            return (
+              <li key={_id} className='list-group-item nopadding list-group-item-md'>
+                <Link to={_createTeamLink(league, team)} className='list-group-item list-group-item-md noborder'>
+                <span className='inline-list-item teams-item'>
+                  <span>{name}</span>
+                </span>
+                <span className='inline-list-item record-item'>
+                  <span>{win} - {loss}</span>
+                </span>
+                </Link>
+              </li>
+            )
+          })
+        }
+      </ul>
+
+    </div>
+  );
+
+  let old = (
     <table className="table">
       <tbody>
       {

@@ -58,9 +58,13 @@ function createStandings (games = []) {
       board[game.homeTeam.name].loss++;
       board[game.awayTeam.name].win++;
     }
+    board[game.homeTeam.name].winRate = board[game.homeTeam.name].win / (board[game.homeTeam.name].win + board[game.homeTeam.name].loss);
+
   });
 
-  return board;
+  let ordered = _.orderBy(board, ['win'], ['desc']);
+
+  return ordered;
 }
 
 function createSchedule (games = []) {

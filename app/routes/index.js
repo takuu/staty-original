@@ -24,6 +24,7 @@ import LeagueAboutPage from '../containers/LeagueAboutPage';
 import AboutPage from '../containers/AboutPage';
 import * as Posts from './../containers/Posts';
 import SiteLayout from '../containers/Layout/SiteLayout/SiteLayout';
+import GameLayout from '../containers/Layout/GameLayout/GameLayout';
 import LeagueLayout from '../containers/Layout/LeagueLayout/LeagueLayout';
 import AdminLayout from '../containers/Layout/AdminLayout/AdminLayout';
 import LeagueAdmin from '../containers/LeagueAdmin/LeagueAdmin';
@@ -54,7 +55,7 @@ const routes = (
       /*League Home*/
       <Route component={LeagueLayout}>
         <IndexRoute component={LeaguePage} />
-        <Route path="division/:divisionId/game/:gameId" component={GamePage} />
+
         <Route path="division/:divisionId" component={DivisionPage} >
           <Route path="schedule" component={SchedulePage} />
           <Route path="standing" component={StandingPage} />
@@ -62,6 +63,9 @@ const routes = (
         </Route>
         <Route path="team/:teamId/player/:playerId" component={PlayerPage} />
         <Route path="team/:teamId" component={TeamPage} />
+      </Route>
+      <Route component={GameLayout}>
+        <Route path="division/:divisionId/game/:gameId" component={GamePage} />
       </Route>
 
       /*League Admin*/
