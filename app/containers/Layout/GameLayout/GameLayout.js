@@ -19,7 +19,6 @@ import { connect } from 'react-redux';
   const games = _.filter(gamesJS, (game) => {
     return game.division === divisionId;
   });
-  debugger;
 
   return {league: league, games: games, params: router.params}
 }, {
@@ -43,7 +42,6 @@ export default class GameLayout extends React.Component {
       return React.cloneElement(child, {league: league});
     });
 
-    //debugger;
     return (
       <div>
         <div className='col-md-4 col-xs-4' style={{margin: '20px 0px'}}>

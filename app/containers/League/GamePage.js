@@ -6,7 +6,7 @@ import _ from 'lodash';
 import { getLeagueByName } from '../../actions/leagues';
 import { getGameById } from '../../actions/gameActions';
 import { getStatsByGameId } from '../../actions/statActions';
-
+import './styles.css';
 
 @connect((state,router) => {
   const leagueName = router.params.leagueName;
@@ -29,7 +29,7 @@ import { getStatsByGameId } from '../../actions/statActions';
 
 class GamePage extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
   static propTypes = {
     league: PropTypes.object.isRequired,
@@ -78,22 +78,15 @@ class GamePage extends React.Component {
           <div className="page-title">Game Page</div>
         </div>
         <div className="row" style={{backgroundColor: '#eff3f8'}}>
-          <div className="col-md-4 col-xs-4" style={{margin: '20px 0px'}}>
-            <div className="sub-container">
-              <div className="sub-title-container">
-                <div className="sub-title">Standings</div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-8 col-xs-8" style={{margin: '20px 0px'}}>
+          <div className="col-md-12 col-xs-12" style={{margin: '20px 0px'}}>
             <div className="sub-container">
               <div className="sub-title-container">
                 <div className="sub-title">Game Stats</div>
               </div>
-              <h5 className="text-center">{dateTime}</h5>
-              <h3 className="text-center">{homeTeamName} - {homeTeamScore}</h3>
+              <h5 className='text-center'>{dateTime}</h5>
+              <div className='team-header'>{homeTeamName} - {homeTeamScore}</div>
               <StatList stats={homeTeamStats}></StatList>
-              <h3 className="text-center">{awayTeamName} - {awayTeamScore}</h3>
+              <div className='team-header'>{awayTeamName} - {awayTeamScore}</div>
               <StatList stats={awayTeamStats}></StatList>
             </div>
           </div>
