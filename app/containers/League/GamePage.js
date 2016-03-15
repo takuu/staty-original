@@ -85,9 +85,9 @@ class GamePage extends React.Component {
               </div>
               <h5 className='text-center'>{dateTime}</h5>
               <div className='team-header'>{homeTeamName} - {homeTeamScore}</div>
-              <StatList stats={homeTeamStats}></StatList>
+              <StatList stats={homeTeamStats} league={league}></StatList>
               <div className='team-header'>{awayTeamName} - {awayTeamScore}</div>
-              <StatList stats={awayTeamStats}></StatList>
+              <StatList stats={awayTeamStats} league={league}></StatList>
             </div>
           </div>
         </div>
@@ -95,8 +95,5 @@ class GamePage extends React.Component {
     );
   }
 }
-
-
-
 
 export default GamePage;

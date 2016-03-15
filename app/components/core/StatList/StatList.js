@@ -1,12 +1,14 @@
 import React, { PropTypes } from 'react';
 import styles from './styles.css';
 import _ from 'lodash';
+import { Link } from 'react-router';
 import statParser from '../../../utils/statParser';
+import { createPlayerUrl } from '../../../utils/createLinks';
 import Loader from '../../Loader/Loader';
 
 
 
-const StatList = ({stats}) =>  {
+const StatList = ({stats, league}) =>  {
     let combined = {};
     let statsLength = stats.length;
 
@@ -97,10 +99,11 @@ const StatList = ({stats}) =>  {
       <tbody>
       {
         _.map(stats, (player) => {
+
           return (
             <tr key={player._id}>
 
-              <th className='name'>{player.player.name}</th>
+              <th className='name'><Link to={_createPlayerUrl(league, player)}>{player.player.name}</Link></th>
 
               <td>{player.fieldGoalsMade}</td>
               <td>{player.fieldGoalsAttempted}</td>
@@ -119,6 +122,7 @@ const StatList = ({stats}) =>  {
               <td>{player.blocks}</td>
               <td>{player.fouls}</td>
               <td>{player.points}</td>
+
             </tr>
           )
         })
@@ -151,14 +155,19 @@ const StatList = ({stats}) =>  {
     </table>
 
     )
+  function _createPlayerUrl(league, player) {
+    return (player) ? `/${league.name}/team/${player.team._id}/player/${player._id}` : '#';
+  }
 
 }
 
 StatList.propTypes = {
-  stats: PropTypes.array
+  stats: PropTypes.array,
+  league: PropTypes.object
 };
 StatList.defaultProps = {
-  stats: []
+  stats: [],
+  league: {}
 };
 
 export default StatList;
