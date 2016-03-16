@@ -20,12 +20,12 @@ import { getDivisionById } from '../../actions/divisionActions';
 
   const gamesJS = state.games.toJS();
   const games = _.filter(gamesJS, (game)=> {
-    return game.division == divisionId;
+    return game.division === divisionId;
   });
 
   const teamsJS = state.teams.toJS();
   const teams = _.filter(teamsJS, (team)=>{
-    return team.division._id == divisionId;
+    return team.division._id === divisionId;
   });
 
   const divisions = state.divisions.toJS();
@@ -61,12 +61,11 @@ class DivisionPage extends React.Component {
   };
 
   static fillStore(redux, route) {
-
-    let leagueName = route.params.leagueName;
+    //let leagueName = route.params.leagueName;
     redux.dispatch(getDivisionById(route.params.divisionId));
     redux.dispatch(getGamesByDivisionId(route.params.divisionId));
-    redux.dispatch(getTeamsByDivisionId(route.params.divisionId));
-    return redux.dispatch(getLeagueByName(leagueName));
+    return redux.dispatch(getTeamsByDivisionId(route.params.divisionId));
+    //return redux.dispatch(getLeagueByName(leagueName));
   }
 
   render() {
@@ -84,13 +83,17 @@ class DivisionPage extends React.Component {
       'active': routeName == 'schedule'
     });
 
+    var childrenWithProps = React.Children.map(this.props.children, (child) => {
+      return React.cloneElement(child, {league: league, division: division});
+    });
+
     return (
-      <div className="sub-container">
-        <div className="sub-title-container">
-          <div className="container">
-            <div className="col-md-6 col-xs-12">
-              <ul className="nav nav-tabs nav-justified">
-                <li role="presentation" className={scheduleClass}>
+      <div className='sub-container'>
+        <div className='sub-title-container'>
+          <div className='container'>
+            <div className='col-md-6 col-xs-12'>
+              <ul className='nav nav-tabs nav-justified'>
+                <li role='presentation' className={scheduleClass}>
                   <Link to={scheduleUrl}><div className="sub-title">Schedule</div></Link>
                 </li>
                 <li role="presentation" className={standingClass}>
@@ -103,8 +106,8 @@ class DivisionPage extends React.Component {
             </div>
           </div>
         </div>
-        <div style={{padding: "10px"}}>
-          {this.props.children}
+        <div style={{padding: '10px'}}>
+          {childrenWithProps}
         </div>
       </div>
     );

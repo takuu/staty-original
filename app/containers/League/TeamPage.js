@@ -3,14 +3,15 @@ import { connect } from 'react-redux';
 import PlayerList from '../../components/core/PlayerList/PlayerList';
 import TeamSchedule from '../../components/core/TeamSchedule/TeamSchedule';
 import _ from 'lodash';
+import classNames from 'classnames';
+import { Link } from 'react-router';
 
 import { getLeagueByName } from '../../actions/leagues';
 import { getGamesByTeamId } from '../../actions/gameActions';
 import { getTeamById } from '../../actions/teamActions';
 import { getPlayersWithFilters } from '../../actions/playerActions';
 
-
-@connect((state,router) => {
+@connect((state, router) => {
   const leagueName = router.params.leagueName;
   const teamId = router.params.teamId;
 
@@ -28,7 +29,9 @@ import { getPlayersWithFilters } from '../../actions/playerActions';
     return player.team._id === teamId;
   });
 
-  return {league: league, games: games, team: team, players: players}
+  const path = router.location && router.location.pathname;
+
+  return {league: league, games: games, team: team, players: players, path: path}
 }, {
   getLeagueByName,
   getGamesByTeamId,
@@ -43,11 +46,11 @@ class TeamPage extends React.Component {
     league: PropTypes.object,
     team: PropTypes.object,
     games: PropTypes.array,
-    players: PropTypes.array
+    players: PropTypes.array,
+    path: PropTypes.string
   };
 
-  static fillStore(redux, route) {
-
+  static fillStore (redux, route) {
     let leagueName = route.params.leagueName;
     redux.dispatch(getGamesByTeamId(route.params.teamId));
     redux.dispatch(getTeamById(route.params.teamId));
@@ -55,9 +58,44 @@ class TeamPage extends React.Component {
     return redux.dispatch(getLeagueByName(leagueName));
   }
 
-  render() {
-    let {league, players, games, team} = this.props;
+  render () {
+    let {league, players, games, team, path} = this.props;
+
+    let rosterUrl = '';
+    let standingUrl = '';
+
+    let urlParts = path.split('/');
+    let routeName = urlParts[urlParts.length - 1];
+    let rosterClass = classNames({
+      'active': routeName === 'roster'
+    });
+    let teamStatsClass = classNames({
+      'active': routeName === 'team-stats'
+    });
+
     return (
+      <div className='sub-container'>
+        <div className='sub-title-container'>
+          <div className='container'>
+            <div className='col-md-6 col-xs-12'>
+              <ul className='nav nav-tabs nav-justified'>
+                <li role='presentation' className={rosterClass}>
+                  <Link to={rosterUrl}><div className='sub-title'>Roster</div></Link>
+                </li>
+                <li role='presentation' className={teamStatsClass}>
+                  <Link to={standingUrl}><div className="sub-title">Team Stats</div></Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style={{padding: '10px'}}>
+          {this.props.children}
+        </div>
+      </div>
+    );
+
+    let foo = (
       <div>
         <div className="portlet-title">
           <div className="page-title">{team && team.name}</div>
@@ -82,8 +120,6 @@ class TeamPage extends React.Component {
             </div>
           </div>
         </div>
-
-
       </div>
     );
   }

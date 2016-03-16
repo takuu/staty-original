@@ -39,7 +39,7 @@ export default class TeamLayout extends React.Component {
   render() {
     const {league, games, params} = this.props;
     var childrenWithProps = React.Children.map(this.props.children, (child) => {
-      return React.cloneElement(child, {league: league});
+      return React.cloneElement(child, {league: league, games: games});
     });
 
     return (
