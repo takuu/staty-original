@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import classNames from 'classnames';
-import { getPlayersWithFilters } from '../../actions/playerActions';
+import { getPlayersWithFilters } from '../../../actions/playerActions';
 
 @connect((state, router) => {
   const teamId = router.params.teamId;
@@ -32,14 +32,11 @@ class RosterPage extends React.Component {
 
   render () {
     let {league, players, games} = this.props;
-    debugger;
     return (
       <div>
         Roster Page
       </div>
     );
-
-
   }
 }
 

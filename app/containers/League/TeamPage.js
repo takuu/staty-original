@@ -42,12 +42,21 @@ class TeamPage extends React.Component {
   constructor(props) {
     super(props)
   }
+
   static propTypes = {
     league: PropTypes.object,
     team: PropTypes.object,
     games: PropTypes.array,
     players: PropTypes.array,
     path: PropTypes.string
+  };
+
+  static defaultProps = {
+    league: {},
+    team: {},
+    games: [],
+    players: [],
+    path: ''
   };
 
   static fillStore (redux, route) {
@@ -61,8 +70,8 @@ class TeamPage extends React.Component {
   render () {
     let {league, players, games, team, path} = this.props;
 
-    let rosterUrl = '';
-    let standingUrl = '';
+    let rosterUrl = `/${league.name}/team/${team._id}/roster`;
+    let standingUrl = `/${league.name}/team/${team._id}/team-stats`;
 
     let urlParts = path.split('/');
     let routeName = urlParts[urlParts.length - 1];

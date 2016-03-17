@@ -12,8 +12,6 @@ import { getTeamsByDivisionId } from '../../../actions/teamActions';
 @connect((state,router) => {
   const divisionId = router.params.divisionId;
   const leagueName = router.params.leagueName;
-
-
   const gamesJS = state.games.toJS();
   const games = _.filter(gamesJS, (game)=>{
     return game.division == divisionId;
