@@ -6,6 +6,7 @@ var controller = require('./stat.controller');
 var router = express.Router();
 
 router.get('/player/:id', controller.getPlayerStats);
+router.get('/team/:id', controller.getTeamStats);
 router.get('/game/:id', controller.getGameStats);
 router.get('/', controller.index);
 router.get('/:id', controller.show);

@@ -1,8 +1,3 @@
-/*import {
-  SET_STATS_OF_PLAYER,
-  SET_STATS_OF_GAME,
-  UPDATE_STAT
-} from '../constants/actions';*/
 import ActionTypes from '../constants/actions';
 
 import axios from 'axios';
@@ -15,6 +10,17 @@ export function getStatsByPlayerId (id = '') {
     try {
       const stats = (await axios.get(baseUrl + '/stats/player/' + id)).data;
       dispatch({ type: ActionTypes.SET_STATS_OF_PLAYER, stats });
+    } catch (error) {
+      console.log('statActions error: ', error);
+    }
+  };
+}
+
+export function getStatsByTeamId (id = '') {
+  return async (dispatch) => {
+    try {
+      const stats = (await axios.get(baseUrl + '/stats/team/' + id)).data;
+      dispatch({ type: ActionTypes.SET_STATS_OF_TEAM, stats });
     } catch (error) {
       console.log('statActions error: ', error);
     }

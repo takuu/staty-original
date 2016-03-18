@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import classNames from 'classnames';
 import { getPlayersWithFilters } from '../../../actions/playerActions';
+import PlayerList from '../../../components/core/PlayerList/PlayerList';
 
 @connect((state, router) => {
   const teamId = router.params.teamId;
@@ -34,7 +35,7 @@ class RosterPage extends React.Component {
     let {league, players, games} = this.props;
     return (
       <div>
-        Roster Page
+        <PlayerList league={league} players={players}></PlayerList>
       </div>
     );
   }

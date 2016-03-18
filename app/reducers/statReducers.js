@@ -1,8 +1,3 @@
-/*import {
-  SET_STATS_OF_PLAYER,
-  SET_STATS_OF_GAME,
-  UPDATE_STAT
-} from '../constants/actions';*/
 import ActionTypes from '../constants/actions';
 import Immutable from 'immutable';
 import _ from 'lodash';
@@ -23,6 +18,11 @@ export default (state = defaultState, action) => {
       });
       return state;
       break;
+    case ActionTypes.SET_STATS_OF_TEAM:
+      _.map(action.stats, (stat) => {
+        state = state.set(stat._id, stat);
+      });
+      return state;
     case ActionTypes.UPDATE_STAT:
       return state.set(action.stat._id, action.stat);
       break;

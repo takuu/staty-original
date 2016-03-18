@@ -65,8 +65,18 @@ exports.getPlayerStats = function(req, res) {
     .populate('vsTeam game')
     .exec(function(err, stats) {
     res.status(200).send(stats);
-  })
+  });
 };
+
+exports.getTeamStats = function(req, res) {
+  var id = req.params.id;
+  Stat.find({team: id})
+    .populate('team vsTeam game player')
+    .exec(function(err, stats) {
+      res.status(200).send(stats);
+    });
+};
+
 
 exports.getGameStats = function(req, res) {
   var id = req.params.id;

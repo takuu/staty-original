@@ -22,7 +22,9 @@ import { getPlayerById } from '../../actions/playerActions';
   const games = _.map(gamesJS, (game)=>{return game});
 
   const statsJS = state.stats.toJS();
-  const stats = _.map(statsJS,(stat)=>{return stat});
+  const stats = _.filter(statsJS,(stat)=>{
+    return stat.player === playerId;
+  });
 
   const playersJS = state.players.toJS();
   const player = _.find(playersJS, {_id: playerId});

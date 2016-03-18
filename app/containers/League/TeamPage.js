@@ -31,7 +31,7 @@ import { getPlayersWithFilters } from '../../actions/playerActions';
 
   const path = router.location && router.location.pathname;
 
-  return {league: league, games: games, team: team, players: players, path: path}
+  return {league: league, games: games, team: team, players: players, path: path};
 }, {
   getLeagueByName,
   getGamesByTeamId,

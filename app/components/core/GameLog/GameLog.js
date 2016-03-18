@@ -7,7 +7,7 @@ const GameLog = ({stats, title}) => {
 
   const combined = statParser.combineStats(stats) || [];
   return (
-      <table className="table" style={{fontSize: '.7em'}}>
+      <table className='table' style={{fontSize: '.7em'}}>
         <thead>
         <tr>
           <td>Date</td>
