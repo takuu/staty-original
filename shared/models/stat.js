@@ -1,21 +1,11 @@
-'use strict';
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-import stat from '../../../shared/models/stat';
-import utils from '../../utils';
-
-/**
- * Stat Schema
- */
-var StatSchema = new Schema(utils.objectIdify(stat));
-/*var StatSchema = new Schema({
-  player: { type: Schema.ObjectId, ref: 'Player' },
-  league: { type: Schema.ObjectId, ref: 'League' },
-  season: {type: Schema.ObjectId, ref: 'Season'},
-  division: { type: Schema.ObjectId, ref: 'Division' },
-  team: { type: Schema.ObjectId, ref: 'Team' },
-  vsTeam: { type: Schema.ObjectId, ref: 'Team' },
-  game: { type: Schema.ObjectId, ref: 'Game' },
+export default {
+  player: { type: 'id', ref: 'Player' },
+  league: { type: 'id', ref: 'League' },
+  season: {type: 'id', ref: 'Season'},
+  division: { type: 'id', ref: 'Division' },
+  team: { type: 'id', ref: 'Team' },
+  vsTeam: { type: 'id', ref: 'Team' },
+  game: { type: 'id', ref: 'Game' },
   points: {type: Number, default: -1},
   assists: {type: Number, default: -1},
   offensiveRebounds: {type: Number, default: -1},
@@ -33,6 +23,4 @@ var StatSchema = new Schema(utils.objectIdify(stat));
   turnovers: {type: Number, default: -1},
   created: { type: Date, default: Date.now },
   updated: { type: Date, default: Date.now }
-});*/
-
-module.exports = mongoose.model('Stat', StatSchema);
+};

@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import stat from '../../shared/models/stat';
 
 function combineList (list = []) {
 
@@ -26,6 +27,30 @@ function combineStats (list = []) {
     return total;
   });
   return cummulativeStats;
+}
+
+function playerListCummulativeStats (stats = [], players = []) {
+  let statList = _.cloneDeep(stats);
+  let playerList = _.cloneDeep(players);
+  let playerListSummary = [];
+
+  if(playerList.length && statList.length);
+  playerListSummary = _.map(playerList, (player) => {
+    let playerStats = _.filter(statList, (stat) => {
+      return stat.player._id === player._id;
+    });
+    let result = combineStats(playerStats) || {};
+    result.player = player;
+    result.gameCount = playerStats.length;
+    return result;
+  });
+  playerListSummary = _.orderBy(playerListSummary, (player) => {
+    return (player.points) ? player.points / player.gameCount : 0;
+
+  }, ['desc']);
+
+  return playerListSummary;
+
 }
 
 function shootingPercentage (made, attempted) {
@@ -85,5 +110,6 @@ export default {
   pluckThenCombineStats: _.flowRight(combineList, _.map),
   shootingPercentage: shootingPercentage,
   createStandings: createStandings,
-  createSchedule: createSchedule
+  createSchedule: createSchedule,
+  playerListCummulativeStats: playerListCummulativeStats
 };

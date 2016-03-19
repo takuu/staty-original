@@ -11,24 +11,7 @@ const TeamStatList = ({stats, league, players}) =>  {
   let statsLength = stats.length;
   let playerSummaryList = [];
 
-
-  if(statsLength) {
-    combined = statParser.combineStats(stats);
-    playerSummaryList = _.map(players, (player) => {
-      let playerStats = _.filter(stats, (stat) => {
-        return stat.player._id === player._id;
-      });
-      let result = statParser.combineStats(playerStats) || {};
-      result.player = player;
-      result.gameCount = playerStats.length;
-      return result;
-    });
-    playerSummaryList = _.orderBy(playerSummaryList, (player) => {
-      return player.points / player.gameCount;
-    }, ['desc']);
-    debugger;
-  }
-
+  playerSummaryList = statParser.playerListCummulativeStats(stats, players);
 
 
   return (
