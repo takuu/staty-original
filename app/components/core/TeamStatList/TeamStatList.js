@@ -8,10 +8,7 @@ import Loader from '../../Loader/Loader';
 
 const TeamStatList = ({stats, league, players}) =>  {
   let combined = {};
-  let statsLength = stats.length;
-  let playerSummaryList = [];
-
-  playerSummaryList = statParser.playerListCummulativeStats(stats, players);
+  let playerSummaryList = statParser.playerListCummulativeStats(stats, players);
 
 
   return (

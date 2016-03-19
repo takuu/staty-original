@@ -3,21 +3,43 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var _ = require('lodash');
 
-var objectIdify = function(json) {
-
-  var result = {};
+let mongooseify = function (json) {
+  let result = {};
   _.map(Object.keys(json), (key) => {
-    var property = _.cloneDeep(json[key]);
-    var isObjectId = property.type && property.ref && property.type === 'id' && typeof property.ref === 'string';
-    if (isObjectId) {
-      property = _.assign({}, property, {type: Schema.ObjectId});
+    let type;
+    let property = _.cloneDeep(json[key]);
+    switch (property.type) {
+      case 'id':
+        type = Schema.ObjectId;
+        break;
+      case 'number':
+        type = Number;
+        break;
+      case 'string':
+        type = String;
+        break;
+      case 'date':
+        type = Date;
+        break;
+      case 'buffer':
+        type = Buffer;
+        break;
+      case 'boolean':
+        type = Boolean;
+        break;
+      case 'array':
+        type = [];
+        break;
+      default:
+        break;
+
     }
-    result[key] = property;
+    result[key] = _.assign({}, property, {type: type});
   });
 
   return result;
 };
 
 export default {
-  objectIdify
+  mongooseify
 };

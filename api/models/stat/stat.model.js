@@ -7,7 +7,7 @@ import utils from '../../utils';
 /**
  * Stat Schema
  */
-var StatSchema = new Schema(utils.objectIdify(stat));
+var StatSchema = new Schema(utils.mongooseify(stat));
 /*var StatSchema = new Schema({
   player: { type: Schema.ObjectId, ref: 'Player' },
   league: { type: Schema.ObjectId, ref: 'League' },
