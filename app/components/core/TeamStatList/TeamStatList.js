@@ -10,7 +10,6 @@ const TeamStatList = ({stats, league, players}) =>  {
   let combined = {};
   let playerSummaryList = statParser.playerListCummulativeStats(stats, players);
 
-
   return (
     <table className='table' style={{fontSize: '.7em'}}>
       <thead>
@@ -38,6 +37,24 @@ const TeamStatList = ({stats, league, players}) =>  {
       <tbody>
       {
         _.map(playerSummaryList, (player) => {
+          /*let result = {
+            gameCount: player.gameCount,
+            avgFieldGoalsMade: (player.fieldGoalsMade / player.gameCount).toFixed(1),
+            avgFieldGoalsAttempted: (player.fieldGoalsAttempted / player.gameCount).toFixed(1),
+            fieldGoalPercentage: statParser.shootingPercentage(player.fieldGoalsMade, player.fieldGoalsAttempted),
+            avgThreePointsMade: (player.threePointsMade / player.gameCount).toFixed(1),
+            avgThreePointsAttempted: (player.threePointsAttempted / player.gameCount).toFixed(1),
+            threePointPercentage: statParser.shootingPercentage(player.threePointsMade, player.threePointsAttempted),
+            freeThrowsMade: (player.freeThrowsMade / player.gameCount).toFixed(1),
+            freeThrowsAttempted: (player.freeThrowsAttempted / player.gameCount).toFixed(1),
+            freeThrowsPercentage: statParser.shootingPercentage(player.freeThrowsMade, player.freeThrowsAttempted),
+            avgRebounds: (player.totalRebounds / player.gameCount).toFixed(1),
+            avgAssists: (player.assists / player.gameCount).toFixed(1),
+            avgSteals: (player.steals / player.gameCount).toFixed(1),
+            avgBlocks: (player.blocks / player.gameCount).toFixed(1),
+            avgFouls: (player.fouls / player.gameCount).toFixed(1),
+            avgPoints: (player.points / player.gameCount).toFixed(1)
+          }*/
 
           return (
             <tr key={player._id}>
@@ -45,23 +62,23 @@ const TeamStatList = ({stats, league, players}) =>  {
               <th className='name'><Link to={_createPlayerUrl(league, player)}>{player.player && player.player.name}</Link></th>
 
               <td>{player.gameCount}</td>
-              <td>{(player.fieldGoalsMade / player.gameCount).toFixed(1)}</td>
-              <td>{(player.fieldGoalsAttempted / player.gameCount).toFixed(1)}</td>
+              <td>{player.avgFieldGoalsMade}</td>
+              <td>{player.avgFieldGoalsAttempted}</td>
 
-              <td>{statParser.shootingPercentage(player.fieldGoalsMade, player.fieldGoalsAttempted)}</td>
+              <td>{player.fieldGoalPercentage || '-'}</td>
 
-              <td>{(player.threePointsMade / player.gameCount).toFixed(1)}</td>
-              <td>{(player.threePointsAttempted / player.gameCount).toFixed(1)}</td>
-              <td>{statParser.shootingPercentage(player.threePointsMade, player.threePointsAttempted)}</td>
-              <td>{(player.freeThrowsMade / player.gameCount).toFixed(1)}</td>
-              <td>{(player.freeThrowsAttempted / player.gameCount).toFixed(1)}</td>
-              <td>{statParser.shootingPercentage(player.freeThrowsMade, player.freeThrowsAttempted)}</td>
-              <td>{(player.totalRebounds / player.gameCount).toFixed(1)}</td>
-              <td>{(player.assists / player.gameCount).toFixed(1)}</td>
-              <td>{(player.steals / player.gameCount).toFixed(1)}</td>
-              <td>{(player.blocks / player.gameCount).toFixed(1)}</td>
-              <td>{(player.fouls / player.gameCount).toFixed(1)}</td>
-              <td>{(player.points / player.gameCount).toFixed(1)}</td>
+              <td>{player.avgThreePointsMade}</td>
+              <td>{player.avgThreePointsAttempted}</td>
+              <td>{player.threePointPercentage|| '-'}</td>
+              <td>{player.avgFreeThrowsMade}</td>
+              <td>{player.avgFreeThrowsAttempted}</td>
+              <td>{player.freeThrowsPercentage|| '-'}</td>
+              <td>{player.avgRebounds}</td>
+              <td>{player.avgAssists}</td>
+              <td>{player.avgSteals}</td>
+              <td>{player.avgBlocks}</td>
+              <td>{player.avgFouls}</td>
+              <td>{player.avgPoints}</td>
             </tr>
           );
         })
