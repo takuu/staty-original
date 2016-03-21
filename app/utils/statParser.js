@@ -107,7 +107,8 @@ function createStandings (games = []) {
       board[game.awayTeam.name].win++;
     }
     board[game.homeTeam.name].winRate = board[game.homeTeam.name].win / (board[game.homeTeam.name].win + board[game.homeTeam.name].loss);
-
+    board[game.homeTeam.name].division = game.division;
+    board[game.awayTeam.name].division = game.division;
   });
 
   let ordered = _.orderBy(board, ['win'], ['desc']);

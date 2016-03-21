@@ -18,6 +18,7 @@ import StandingPage from './../containers/League/Division/StandingPage';
 import TeamsPage from './../containers/League/Division/TeamsPage';
 import TeamPage from './../containers/League/TeamPage';
 import PlayerPage from '../containers/League/PlayerPage';
+import TeamGamesPage from '../containers/League/Team/TeamGamesPage';
 import RosterPage from '../containers/League/Team/RosterPage';
 import TeamStatsPage from '../containers/League/Team/TeamStatsPage';
 import GamePage from '../containers/League/GamePage';
@@ -72,7 +73,8 @@ const routes = (
       </Route>
 
       <Route component={TeamLayout}>
-        <Route path='team/:teamId' component={TeamPage} >
+        <Route path='division/:divisionId/team/:teamId' component={TeamPage} >
+          <IndexRoute component={TeamGamesPage} />
           <Route path='roster' component={RosterPage} />
           <Route path='team-stats' component={TeamStatsPage} />
         </Route>

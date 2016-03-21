@@ -4,8 +4,8 @@ import './styles.css';
 import _ from 'lodash';
 import SubHeader from '../../../components/SubHeader/SubHeader.js';
 import { getLeagueByName } from '../../../actions/leagues';
-import { getGamesByTeamId } from '../../../actions/gameActions';
-import LeagueSchedule from '../../../components/core/LeagueSchedule/LeagueSchedule.js';
+import { getGamesByDivisionId } from '../../../actions/gameActions';
+import Standings from '../../../components/core/Standings/Standings.js';
 import { connect } from 'react-redux';
 
 //":leagueName/division/:divisionId/game/:gameId"
@@ -23,7 +23,7 @@ import { connect } from 'react-redux';
   return {league: league, games: games, params: router.params};
 }, {
   getLeagueByName,
-  getGamesByTeamId
+  getGamesByDivisionId
 })
 export default class TeamLayout extends React.Component {
   static propTypes = {
@@ -32,16 +32,16 @@ export default class TeamLayout extends React.Component {
     games: PropTypes.array
   };
   static fillStore (redux, router) {
-    const {teamId} = router.params;
-    redux.dispatch(getGamesByTeamId(teamId));
+    const {divisionId} = router.params;
+    //redux.dispatch(getGamesByTeamId(teamId));
+    redux.dispatch(getGamesByDivisionId(divisionId));
   }
 
-  render() {
+  render () {
     const {league, games, params} = this.props;
     var childrenWithProps = React.Children.map(this.props.children, (child) => {
       return React.cloneElement(child, {league: league, games: games});
     });
-
     return (
       <div>
         <div className='col-md-4 col-xs-4' style={{margin: '20px 0px'}}>
@@ -50,11 +50,11 @@ export default class TeamLayout extends React.Component {
               <div className='sub-title'>Schedule</div>
             </div>
             <div>
-              <LeagueSchedule league={league} games={games} />
+              <Standings league={league} games={games} />
             </div>
           </div>
         </div>
-        <div className="col-md-8 col-xs-8" style={{margin: '21px 0px'}}>
+        <div className='col-md-8 col-xs-8' style={{margin: '21px 0px'}}>
           {childrenWithProps}
         </div>
       </div>

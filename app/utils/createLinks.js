@@ -5,6 +5,13 @@ function _createPlayerUrl (league, player) {
   return (player) ? `/${league.name}/team/${teamId}/player/${player._id}` : '#';
 }
 
+function _createTeamLink (league, team) {
+  let {division} = team;
+  let divisionId = (typeof division === 'object' && division._id) ? division._id: division;
+  return (team) ? `/${league.name}/division/${divisionId}/team/${team._id}`: '#';
+}
+
 export default {
-  createPlayerUrl: _createPlayerUrl
+  createPlayerUrl: _createPlayerUrl,
+  createTeamLink: _createTeamLink
 };

@@ -5,6 +5,7 @@ import TeamSchedule from '../../components/core/TeamSchedule/TeamSchedule';
 import _ from 'lodash';
 import classNames from 'classnames';
 import { Link } from 'react-router';
+import createLinks from '../../utils/createLinks';
 
 import { getLeagueByName } from '../../actions/leagues';
 import { getGamesByTeamId } from '../../actions/gameActions';
@@ -70,11 +71,15 @@ class TeamPage extends React.Component {
   render () {
     let {league, players, games, team, path} = this.props;
 
-    let rosterUrl = `/${league.name}/team/${team._id}/roster`;
-    let standingUrl = `/${league.name}/team/${team._id}/team-stats`;
+    let rosterUrl = createLinks.createTeamLink(league, team) + '/roster';
+    let gameUrl = createLinks.createTeamLink(league, team);
+    let standingUrl = createLinks.createTeamLink(league, team) + '/team-stats';
 
     let urlParts = path.split('/');
     let routeName = urlParts[urlParts.length - 1];
+    let gamesClass = classNames({
+      'active': routeName === team._id || routeName === ''
+    });
     let rosterClass = classNames({
       'active': routeName === 'roster'
     });
@@ -83,25 +88,38 @@ class TeamPage extends React.Component {
     });
 
     return (
-      <div className='sub-container'>
-        <div className='sub-title-container'>
-          <div className='container'>
-            <div className='col-md-6 col-xs-12'>
-              <ul className='nav nav-tabs nav-justified'>
-                <li role='presentation' className={rosterClass}>
-                  <Link to={rosterUrl}><div className='sub-title'>Roster</div></Link>
-                </li>
-                <li role='presentation' className={teamStatsClass}>
-                  <Link to={standingUrl}><div className="sub-title">Team Stats</div></Link>
-                </li>
-              </ul>
+      <div>
+        <div className='portlet-title'>
+          <div className='page-title'>{team && team.name}</div>
+        </div>
+        <div className='row' style={{backgroundColor: '#eff3f8'}}>
+          <div className='col-md-12 col-xs-12' style={{margin: '20px 0px'}}>
+            <div className='sub-container'>
+              <div className='sub-title-container'>
+                <div className='container'>
+                  <div className='col-md-6 col-xs-12'>
+                    <ul className='nav nav-tabs nav-justified'>
+                      <li role='presentation' className={gamesClass}>
+                        <Link to={gameUrl}><div className='sub-title'>Games</div></Link>
+                      </li>
+                      <li role='presentation' className={rosterClass}>
+                        <Link to={rosterUrl}><div className='sub-title'>Roster</div></Link>
+                      </li>
+                      <li role='presentation' className={teamStatsClass}>
+                        <Link to={standingUrl}><div className='sub-title'>Team Stats</div></Link>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div style={{padding: '10px'}}>
+                {this.props.children}
+              </div>
             </div>
           </div>
         </div>
-        <div style={{padding: '10px'}}>
-          {this.props.children}
-        </div>
       </div>
+
     );
 
     let foo = (

@@ -54,7 +54,7 @@ export default class GameLayout extends React.Component {
             </div>
           </div>
         </div>
-        <div className="col-md-8 col-xs-8" style={{margin: '21px 0px'}}>
+        <div className='col-md-8 col-xs-8' style={{margin: '21px 0px'}}>
           {childrenWithProps}
         </div>
       </div>

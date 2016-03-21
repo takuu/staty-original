@@ -45,7 +45,6 @@ class TeamStatsPage extends React.Component {
     //debugger;
     return (
       <div>
-        Team Stats Page
         <TeamStatList stats={stats} league={league} players={players}></TeamStatList>
       </div>
     );

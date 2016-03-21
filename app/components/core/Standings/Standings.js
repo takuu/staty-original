@@ -4,6 +4,7 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import CSSModules from 'react-css-modules';
 import statParser from '../../../utils/statParser';
+import createLinks from '../../../utils/createLinks';
 
 
 const Standings = ({games, league}) => {
@@ -16,9 +17,10 @@ const Standings = ({games, league}) => {
           _.map(standings, (team) => {
             let {name, _id, win, loss} = team;
 
+
             return (
               <li key={_id} className='list-group-item nopadding list-group-item-md'>
-                <Link to={_createTeamLink(league, team)} className='list-group-item list-group-item-md noborder'>
+                <Link to={createLinks.createTeamLink(league, team)} className='list-group-item list-group-item-md noborder'>
                 <span className='inline-list-item teams-item'>
                   <span>{name}</span>
                 </span>
@@ -54,9 +56,11 @@ const Standings = ({games, league}) => {
     </table>
   );
 
-  function _createTeamLink(league, team) {
-    return (team) ? `/${league.name}/team/${team._id}`: '#';
-  }
+  /*function _createTeamLink(league, team) {
+    let {division} = team;
+    let divisionId = (typeof division === 'object' && division._id) ? division._id: division;
+    return (team) ? `/${league.name}/division/${divisionId}/team/${team._id}`: '#';
+  }*/
 }
 
 Standings.propTypes = {
