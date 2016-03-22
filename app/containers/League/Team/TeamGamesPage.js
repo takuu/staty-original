@@ -21,7 +21,7 @@ import LeagueSchedule from '../../../components/core/LeagueSchedule/LeagueSchedu
 })
 class RosterPage extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
   static propTypes = {
     league: PropTypes.object,

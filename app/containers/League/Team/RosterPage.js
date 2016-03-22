@@ -19,11 +19,10 @@ import PlayerList from '../../../components/core/PlayerList/PlayerList';
 })
 class RosterPage extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
   static propTypes = {
     league: PropTypes.object,
-    games: PropTypes.array,
     players: PropTypes.array
   };
 
@@ -32,7 +31,7 @@ class RosterPage extends React.Component {
   }
 
   render () {
-    let {league, players, games} = this.props;
+    let {league, players} = this.props;
     return (
       <div>
         <PlayerList league={league} players={players}></PlayerList>

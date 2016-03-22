@@ -30,7 +30,6 @@ class TeamStatsPage extends React.Component {
   }
   static propTypes = {
     league: PropTypes.object,
-    games: PropTypes.array,
     players: PropTypes.array,
     stats: PropTypes.array
   };
@@ -41,8 +40,7 @@ class TeamStatsPage extends React.Component {
   }
 
   render () {
-    let {league, players, games, stats} = this.props;
-    //debugger;
+    let {league, players, stats} = this.props;
     return (
       <div>
         <TeamStatList stats={stats} league={league} players={players}></TeamStatList>

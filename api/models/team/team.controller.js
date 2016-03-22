@@ -23,11 +23,13 @@ exports.index = function(req, res) {
 
 // Get a single team
 exports.show = function(req, res) {
-  Team.findById(req.params.id, function (err, team) {
-    if(err) { return handleError(res, err); }
-    if(!team) { return res.send(404); }
-    res.status(200).send(team);
-  });
+  Team.findById(req.params.id)
+    .populate('division')
+    .exec(function (err, team) {
+      if (err) { return handleError(res, err); }
+      if (!team) { return res.send(404); }
+      res.status(200).send(team);
+    });
 };
 
 // Creates a new team in the DB.

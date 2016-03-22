@@ -7,11 +7,17 @@ function _createPlayerUrl (league, player) {
 
 function _createTeamLink (league, team) {
   let {division} = team;
-  let divisionId = (typeof division === 'object' && division._id) ? division._id: division;
-  return (team) ? `/${league.name}/division/${divisionId}/team/${team._id}`: '#';
+  let divisionId = (typeof division === 'object' && division._id) ? division._id : division;
+  return (team) ? `/${league.name}/division/${divisionId}/team/${team._id}` : '#';
+}
+
+function _createDivisionLink (league, division) {
+  let divisionId = (typeof division === 'object' && division._id) ? division._id : division;
+  return `/${league.name}/division/${divisionId}`;
 }
 
 export default {
   createPlayerUrl: _createPlayerUrl,
-  createTeamLink: _createTeamLink
+  createTeamLink: _createTeamLink,
+  createDivisionLink: _createDivisionLink
 };
