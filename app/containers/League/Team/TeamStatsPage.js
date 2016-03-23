@@ -25,7 +25,7 @@ import { getStatsByTeamId } from '../../../actions/statActions';
   getStatsByTeamId
 })
 class TeamStatsPage extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
   }
   static propTypes = {
@@ -43,7 +43,7 @@ class TeamStatsPage extends React.Component {
     let {league, players, stats} = this.props;
     return (
       <div>
-        <TeamStatList stats={stats} league={league} players={players}></TeamStatList>
+        <TeamStatList stats={stats} league={league} players={players} />
       </div>
     );
   }

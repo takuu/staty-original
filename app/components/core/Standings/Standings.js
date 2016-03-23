@@ -1,5 +1,3 @@
-//import styles from './styles.styl';
-
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 //import CSSModules from 'react-css-modules';
@@ -37,7 +35,7 @@ const Standings = ({games, league, team}) => {
                 </span>
                 </Link>
               </li>
-            )
+            );
           })
         }
       </ul>
@@ -69,7 +67,7 @@ const Standings = ({games, league, team}) => {
     let divisionId = (typeof division === 'object' && division._id) ? division._id: division;
     return (team) ? `/${league.name}/division/${divisionId}/team/${team._id}`: '#';
   }*/
-}
+};
 
 Standings.propTypes = {
   games: PropTypes.array,
