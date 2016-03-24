@@ -67,10 +67,7 @@ function playerListCummulativeStats (stats = [], players = []) {
 
     return result;
   });
-  playerListSummary = _.orderBy(playerListSummary, (player) => {
-    return (player.points) ? player.points / player.gameCount : 0;
-
-  }, ['desc']);
+  playerListSummary = _.orderBy(playerListSummary, ['avgPoints', 'gameCount'], ['desc', 'desc']);
 
   return playerListSummary;
 

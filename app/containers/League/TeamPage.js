@@ -7,31 +7,10 @@ import classNames from 'classnames';
 import { Link } from 'react-router';
 import createLinks from '../../utils/createLinks';
 
-import { getGamesByTeamId } from '../../actions/gameActions';
-import { getTeamById } from '../../actions/teamActions';
-import { getPlayersWithFilters } from '../../actions/playerActions';
-
 @connect((state, router) => {
-  const teamId = router.params.teamId;
-
-  const gamesJS = state.games.toJS();
-  const games = _.map(gamesJS, (game) => { return game; });
-
-  const teamsJS = state.teams.toJS();
-  const team = _.find(teamsJS, {_id: teamId});
-
-  const playersJS = state.players.toJS();
-  const players = _.filter(playersJS, (player) => {
-    return player.team._id === teamId;
-  });
-
   const path = router.location && router.location.pathname;
 
-  return {games: games, team: team, players: players, path: path};
-}, {
-  getGamesByTeamId,
-  getTeamById,
-  getPlayersWithFilters
+  return {path: path};
 })
 class TeamPage extends React.Component {
   constructor (props) {
@@ -41,32 +20,21 @@ class TeamPage extends React.Component {
   static propTypes = {
     league: PropTypes.object,
     team: PropTypes.object,
-    games: PropTypes.array,
-    players: PropTypes.array,
     path: PropTypes.string
   };
 
   static defaultProps = {
     league: {},
     team: {},
-    games: [],
-    players: [],
     path: ''
   };
-
-  static fillStore (redux, route) {
-    redux.dispatch(getGamesByTeamId(route.params.teamId));
-    redux.dispatch(getTeamById(route.params.teamId));
-    return redux.dispatch(getPlayersWithFilters({team: route.params.teamId}));
-  }
-
   render () {
-    let {league, players, games, team, path} = this.props;
+    let {league, team, path} = this.props;
 
     let {division} = team;
 
-    let rosterUrl = createLinks.createTeamLink(league, team) + '/roster';
     let gameUrl = createLinks.createTeamLink(league, team);
+    let rosterUrl = createLinks.createTeamLink(league, team) + '/roster';
     let standingUrl = createLinks.createTeamLink(league, team) + '/team-stats';
 
     let urlParts = path.split('/');
@@ -82,7 +50,7 @@ class TeamPage extends React.Component {
     });
 
     var childrenWithProps = React.Children.map(this.props.children, (child) => {
-      return React.cloneElement(child, {league: league, players: players});
+      return React.cloneElement(child, {league: league});
     });
 
     return (
@@ -119,35 +87,6 @@ class TeamPage extends React.Component {
               <div style={{padding: '10px'}}>
                 {childrenWithProps}
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    );
-
-    let foo = (
-      <div>
-        <div className="portlet-title">
-          <div className="page-title">{team && team.name}</div>
-        </div>
-        <div className="row" style={{backgroundColor: '#eff3f8'}}>
-
-          <div className="col-md-5 col-xs-5" style={{margin: '20px 0px'}}>
-            <div className="sub-container">
-              <div className="sub-title-container">
-                <div className="sub-title">Roster</div>
-              </div>
-              <PlayerList players={players} team={team} league={league} />
-            </div>
-          </div>
-
-          <div className='col-md-7 col-xs-7' style={{margin: '20px 0px'}}>
-            <div className="sub-container">
-              <div className="sub-title-container">
-                <div className="sub-title">Schedule</div>
-              </div>
-              <TeamSchedule league={league} games={games} />
             </div>
           </div>
         </div>

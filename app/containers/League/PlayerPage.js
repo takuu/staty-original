@@ -1,82 +1,133 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import GameLog from '../../components/core/GameLog/GameLog'
-import SplitStats from '../../components/core/SplitStats/SplitStats'
+import GameLog from '../../components/core/GameLog/GameLog';
+import SplitStats from '../../components/core/SplitStats/SplitStats';
 import PlayerDetails from '../../components/core/PlayerDetails/PlayerDetails';
 import _ from 'lodash';
+import createLinks from '../../utils/createLinks';
+import classNames from 'classnames';
+import { Link } from 'react-router';
 
 import { getLeagueByName } from '../../actions/leagues';
 import { getGamesByTeamId } from '../../actions/gameActions';
 import { getStatsByPlayerId } from '../../actions/statActions';
-import { getPlayerById } from '../../actions/playerActions';
 
-
-@connect((state,router) => {
+@connect((state, router) => {
   const leagueName = router.params.leagueName;
   const playerId = router.params.playerId;
+  const path = router.location && router.location.pathname;
 
-  const leagues = state.leagues.toJS();
-  const league = _.find(leagues, {name: leagueName});
-
-  const gamesJS = state.games.toJS();
-  const games = _.map(gamesJS, (game)=>{return game});
 
   const statsJS = state.stats.toJS();
   const stats = _.filter(statsJS,(stat)=>{
     return stat.player === playerId;
   });
-
-  const playersJS = state.players.toJS();
-  const player = _.find(playersJS, {_id: playerId});
-
-  return {league: league, games: games, stats: stats, player: player}
+  return {stats: stats, path: path}
 }, {
-  getLeagueByName,
-  getGamesByTeamId,
-  getStatsByPlayerId,
-  getPlayerById
+  getStatsByPlayerId
 })
 class PlayerPage extends React.Component {
   constructor(props) {
     super(props)
   }
   static propTypes = {
-    league: PropTypes.object,
     stats: PropTypes.array,
-    games: PropTypes.array,
-    player: PropTypes.object
+    player: PropTypes.object,
+    path: PropTypes.string
+  };
+
+  static defaultProps = {
+    stats: [],
+    player: {},
+    path: ''
   };
 
   static fillStore(redux, route) {
 
     let leagueName = route.params.leagueName;
-    redux.dispatch(getGamesByTeamId(route.params.teamId));
     redux.dispatch(getStatsByPlayerId(route.params.playerId));
-    redux.dispatch(getPlayerById(route.params.playerId));
-    return redux.dispatch(getLeagueByName(leagueName));
   }
 
-  render() {
-    const {league, player, games, stats} = this.props;
+  render () {
+    const {league, player, games, team, stats, path} = this.props;
     const homeGames = _.filter(stats, (game) => {
-      return game.team == game.game.homeTeam;
+      return game.team === game.game.homeTeam;
     });
     const awayGames = _.filter(stats, (game) => {
-      return game.team == game.game.awayTeam;
+      return game.team === game.game.awayTeam;
+    });
+
+
+    let urlParts = path.split('/');
+    let routeName = urlParts[urlParts.length - 1];
+
+    let profileUrl = createLinks.createPlayerUrl(league, player);
+    let playerGamesUrl = createLinks.createPlayerUrl(league, player) + '/game-log';
+    let playerSplitsUrl = createLinks.createPlayerUrl(league, player) + '/split-stats';
+
+    let profileClass = classNames({
+      'active': routeName === player._id || routeName === ''
+    });
+    let gameLogClass = classNames({
+      'active': routeName === 'game-log'
+    });
+    let splitStatsClass = classNames({
+      'active': routeName === 'split-stats'
+    });
+    var childrenWithProps = React.Children.map(this.props.children, (child) => {
+      return React.cloneElement(child, {league: league});
     });
 
     const gameTimes = _.groupBy(stats, 'game.time');
-
     return (
       <div>
-        <div className="portlet-title">
-          <div className="page-title">{player && player.name}</div>
+        <div className='portlet-title'>
+          <div className='page-title'>
+            <span>{player && player.name}</span>
+            <Link to={createLinks.createTeamLink(league, team)}>
+              <span style={{'marginLeft': '40px', 'fontSize': '.9em'}}>{team && team.name}</span>
+            </Link>
+          </div>
         </div>
-        <div className="row" style={{backgroundColor: '#eff3f8'}}>
-          <div className="col-md-4 col-xs-4" style={{margin: '20px 0px'}}>
-            <div className="sub-container">
-              <div className="sub-title-container">
-                <div className="sub-title">Player Info</div>
+        <div className='row' style={{backgroundColor: '#eff3f8'}}>
+          <div className='col-md-12 col-xs-12' style={{margin: '20px 0px'}}>
+            <div className='sub-container'>
+              <div className='sub-title-container'>
+                <div className='container'>
+                  <div className='col-md-6 col-xs-12'>
+                    <ul className='nav nav-tabs nav-justified'>
+                      <li role='presentation' className={profileClass}>
+                        <Link to={profileUrl}><div className='sub-title'>Profile</div></Link>
+                      </li>
+                      <li role='presentation' className={gameLogClass}>
+                        <Link to={playerGamesUrl}><div className='sub-title'>Game Log</div></Link>
+                      </li>
+                      <li role='presentation' className={splitStatsClass}>
+                        <Link to={playerSplitsUrl}><div className='sub-title'>Split Stats</div></Link>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div style={{padding: '10px'}}>
+                {childrenWithProps}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+
+    var foo =  (
+      <div>
+        <div className='portlet-title'>
+          <div className='page-title'>{player && player.name}</div>
+        </div>
+        <div className='row' style={{backgroundColor: '#eff3f8'}}>
+          <div className='col-md-4 col-xs-4' style={{margin: '20px 0px'}}>
+            <div className='sub-container'>
+              <div className='sub-title-container'>
+                <div className='sub-title'>Player Info</div>
                 <PlayerDetails player={player} league={league} stats={stats} />
               </div>
             </div>

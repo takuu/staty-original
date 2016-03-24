@@ -3,14 +3,25 @@ import React, { PropTypes } from 'react';
 import './styles.css';
 import _ from 'lodash';
 import { getGamesByDivisionId } from '../../../actions/gameActions';
+import { getPlayerById } from '../../../actions/playerActions';
 import { getTeamById } from '../../../actions/teamActions';
 import Standings from '../../../components/core/Standings/Standings.js';
+import PlayerList from '../../../components/core/PlayerList/PlayerList';
+import { getPlayersWithFilters } from '../../../actions/playerActions';
 import { connect } from 'react-redux';
 
 //":leagueName/division/:divisionId/game/:gameId"
 
 @connect((state,router) => {
-  const {teamId} = router.params;
+  const {playerId, teamId} = router.params;
+
+  const playersJS = state.players.toJS();
+  const players = _.filter(playersJS, (player) => {
+    return player.team._id === teamId;
+  });
+
+  const playerJS = state.players.toJS();
+  const player = _.find(playerJS, {_id: playerId});
 
   const teamsJS = state.teams.toJS();
   const team = _.find(teamsJS, {_id: teamId});
@@ -20,38 +31,42 @@ import { connect } from 'react-redux';
     return game;
   });
 
-  return {games: games, params: router.params, team: team};
+  return {games: games, params: router.params, player: player, team: team, players: players}
 }, {
-  getGamesByDivisionId,
+  getPlayersWithFilters,
+  getPlayerById,
   getTeamById
 })
-export default class TeamLayout extends React.Component {
+export default class PlayerLayout extends React.Component {
   static propTypes = {
     children: PropTypes.element,
     league: PropTypes.object,
     games: PropTypes.array,
-    team: PropTypes.object
+    player: PropTypes.object,
+    team: PropTypes.object,
+    players: PropTypes.array
   };
   static fillStore (redux, router) {
-    const {divisionId, teamId} = router.params;
+    const {playerId, teamId} = router.params;
+    redux.dispatch(getPlayerById(playerId));
     redux.dispatch(getTeamById(teamId));
-    redux.dispatch(getGamesByDivisionId(divisionId));
+    return redux.dispatch(getPlayersWithFilters({team: teamId}));
   }
 
   render () {
-    const {league, games, team, params} = this.props;
+    const {league, games, player, team, params, players} = this.props;
     var childrenWithProps = React.Children.map(this.props.children, (child) => {
-      return React.cloneElement(child, {league: league, games: games, team: team});
+      return React.cloneElement(child, {league: league, games: games, player: player, team: team});
     });
     return (
       <div>
         <div className='col-md-4 col-xs-4' style={{margin: '20px 0px'}}>
           <div className='sub-container'>
             <div className='sub-title-container'>
-              <div className='sub-title'>Standings</div>
+              <div className='sub-title'>{team && team.name }</div>
             </div>
             <div>
-              <Standings league={league} games={games} team={team} />
+              <PlayerList league={league} players={players} />
             </div>
           </div>
         </div>

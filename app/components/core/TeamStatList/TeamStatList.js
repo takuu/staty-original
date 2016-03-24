@@ -36,6 +36,7 @@ const TeamStatList = ({stats, league, players}) =>  {
       <tbody>
       {
         _.map(playerSummaryList, (player) => {
+
           return (
             <tr key={player._id}>
 
@@ -44,15 +45,13 @@ const TeamStatList = ({stats, league, players}) =>  {
               <td>{player.gameCount}</td>
               <td>{player.avgFieldGoalsMade}</td>
               <td>{player.avgFieldGoalsAttempted}</td>
-
-              <td>{player.fieldGoalPercentage || '-'}</td>
-
+              <td>{(player.fieldGoalPercentage >= 0) ? player.fieldGoalPercentage : '-'}</td>
               <td>{player.avgThreePointsMade}</td>
               <td>{player.avgThreePointsAttempted}</td>
-              <td>{player.threePointPercentage|| '-'}</td>
+              <td>{(player.threePointPercentage >= 0) ? player.threePointPercentage : '-'}</td>
               <td>{player.avgFreeThrowsMade}</td>
               <td>{player.avgFreeThrowsAttempted}</td>
-              <td>{player.freeThrowsPercentage|| '-'}</td>
+              <td>{(player.freeThrowsPercentage >= 0) ? player.freeThrowsPercentage : '-'}</td>
               <td>{player.avgRebounds}</td>
               <td>{player.avgAssists}</td>
               <td>{player.avgSteals}</td>
@@ -63,16 +62,14 @@ const TeamStatList = ({stats, league, players}) =>  {
           );
         })
       }
-
       </tbody>
     </table>
 
-  )
-  function _createPlayerUrl(league = {}, player = {}) {
+  );
+  function _createPlayerUrl (league = {}, player = {}) {
     let teamId = player.team && player.team._id;
     return (player) ? `/${league.name}/team/${teamId}/player/${player._id}` : '#';
   }
-
 };
 
 TeamStatList.propTypes = {

@@ -21,6 +21,9 @@ import PlayerPage from '../containers/League/PlayerPage';
 import TeamGamesPage from '../containers/League/Team/TeamGamesPage';
 import RosterPage from '../containers/League/Team/RosterPage';
 import TeamStatsPage from '../containers/League/Team/TeamStatsPage';
+import PlayerGamesPage from '../containers/League/Player/PlayerGamesPage';
+import PlayerProfilePage from '../containers/League/Player/PlayerProfilePage';
+import PlayerStatsPage from '../containers/League/Player/PlayerStatsPage';
 import GamePage from '../containers/League/GamePage';
 import SearchResultPage from '../containers/League/SearchResultPage';
 import LeagueAboutPage from '../containers/LeagueAboutPage';
@@ -29,6 +32,7 @@ import * as Posts from './../containers/Posts';
 import SiteLayout from '../containers/Layout/SiteLayout/SiteLayout';
 import GameLayout from '../containers/Layout/GameLayout/GameLayout';
 import TeamLayout from '../containers/Layout/TeamLayout/TeamLayout';
+import PlayerLayout from '../containers/Layout/PlayerLayout/PlayerLayout';
 import DivisionLayout from '../containers/Layout/DivisionLayout/DivisionLayout';
 import AdminLayout from '../containers/Layout/AdminLayout/AdminLayout';
 import LeagueAdmin from '../containers/LeagueAdmin/LeagueAdmin';
@@ -65,7 +69,6 @@ const routes = (
           <Route path='standing' component={StandingPage} />
           <Route path='teams' component={TeamsPage} />
         </Route>
-        <Route path="team/:teamId/player/:playerId" component={PlayerPage} />
       </Route>
 
       <Route component={GameLayout}>
@@ -77,6 +80,14 @@ const routes = (
           <IndexRoute component={TeamGamesPage} />
           <Route path='roster' component={RosterPage} />
           <Route path='team-stats' component={TeamStatsPage} />
+        </Route>
+      </Route>
+
+      <Route component={PlayerLayout}>
+        <Route path='team/:teamId/player/:playerId' component={PlayerPage} >
+          <IndexRoute component={PlayerProfilePage} />
+          <Route path='game-log' component={PlayerGamesPage} />
+          <Route path='split-stats' component={PlayerStatsPage} />
         </Route>
       </Route>
 
@@ -99,9 +110,6 @@ const routes = (
       <Route path="about" component={LeagueAboutPage} />
 
       <Route path="results/:searchName" component={SearchResultPage}></Route>
-
-
-
 
     </Route>
 
