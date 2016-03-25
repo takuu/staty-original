@@ -74,5 +74,8 @@ export default {
       result = value;
     }
     return result;
+  },
+  getObjId (item) {
+    return (typeof item === 'object') ? item._id : item;
   }
 };

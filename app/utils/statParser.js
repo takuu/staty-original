@@ -64,12 +64,62 @@ function playerListCummulativeStats (stats = [], players = []) {
       ...combined
     }
 
-
     return result;
   });
   playerListSummary = _.orderBy(playerListSummary, ['avgPoints', 'gameCount'], ['desc', 'desc']);
 
   return playerListSummary;
+}
+
+function getMaxStats (stats = []) {
+  return _.reduce(stats, (result, stat, key) => {
+    let max = max || {};
+    max.points = (stat.points > result.points) ? stat.points : result.points;
+    max.assists = (stat.assists > result.assists) ? stat.assists : result.assists;
+    max.steals = (stat.steals > result.steals) ? stat.steals : result.steals;
+    max.blocks = (stat.blocks > result.blocks) ? stat.blocks : result.blocks;
+    max.totalRebounds = (stat.totalRebounds > result.totalRebounds) ? stat.totalRebounds : result.totalRebounds;
+    return max;
+  });
+}
+
+function getWinningStats (stats = []) {
+  return _.filter(stats, (stat) => {
+    let {team, game: {homeTeam, awayTeam, homeScore, awayScore}} = stat;
+    let myScore = 0, theirScore = 0;
+
+    if (helpers.getObjId(team) === helpers.getObjId(homeTeam)) {
+      myScore = homeScore;
+      theirScore = awayScore;
+    } else if (helpers.getObjId(team) === helpers.getObjId(awayTeam)){
+      myScore = awayScore;
+      theirScore = homeScore;
+    }
+
+    return myScore > theirScore;
+  });
+}
+
+function getLosingStats (stats = []) {
+  return _.filter(stats, (stat) => {
+    let {team, game: {homeTeam, awayTeam, homeScore, awayScore}} = stat;
+    let myScore = 0, theirScore = 0;
+
+    if (helpers.getObjId(team) === helpers.getObjId(homeTeam)) {
+      myScore = homeScore;
+      theirScore = awayScore;
+    } else if (helpers.getObjId(team) === helpers.getObjId(awayTeam)){
+      myScore = awayScore;
+      theirScore = homeScore;
+    }
+
+    return myScore < theirScore;
+  });
+}
+
+function getLatestStats (stats, count = 0) {
+  const ordered = _.orderBy(stats, ['game.date'], ['desc']);
+  return ordered.splice(0,count);
 
 }
 
@@ -129,6 +179,10 @@ export default {
   combineStats: combineStats,
   combineListofStats: combineList,
   pluckThenCombineStats: _.flowRight(combineList, _.map),
+  getMaxStats: getMaxStats,
+  getLatestStats: getLatestStats,
+  getWinningStats: getWinningStats,
+  getLosingStats: getLosingStats,
   shootingPercentage: shootingPercentage,
   createStandings: createStandings,
   createSchedule: createSchedule,

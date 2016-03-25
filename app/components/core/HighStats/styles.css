@@ -1,0 +1,19 @@
+.high-container {
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-around;
+    align-items:center;
+}
+
+.high-block {
+    height: 50px;
+}
+.high-title {
+    font-size:1.1em;
+    font-weight:bold;
+    text-align:center;
+}
+.high-stat {
+    font-size:1.1em;
+    text-align:center;
+}

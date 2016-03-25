@@ -18,7 +18,6 @@ import SplitStats from '../../../components/core/SplitStats/SplitStats';
     return stat.player === playerId;
   });
 
-
   return {players: players, stats: stats};
 }, {
   getStatsByPlayerId
@@ -51,14 +50,12 @@ class PlayerStatsPage extends React.Component {
     return (
       <div>
         <div className='sub-title-container'>
-          <div className='sub-title'>Split Stats</div>
 
-          <p>Home Away</p>
           <SplitStats stats={homeGames} title='Home' />
           <SplitStats stats={awayGames} title='Away' />
-          <p>Game Times</p>
+          <div className='sub-title'>Game Times</div>
           {
-            _.map(gameTimes,(time, key) => {
+            _.map(gameTimes, (time, key) => {
               return (
                 <SplitStats key={key} stats={time} title={key} />
               );

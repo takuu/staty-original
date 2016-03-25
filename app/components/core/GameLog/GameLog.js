@@ -10,25 +10,25 @@ const GameLog = ({stats, title}) => {
       <table className='table' style={{fontSize: '.7em'}}>
         <thead>
         <tr>
-          <td>Date</td>
-          <td>Time</td>
-          <td>Opp</td>
-          <td>Score</td>
-          <td>FGM</td>
-          <td>FGA</td>
-          <td>FG%</td>
-          <td>3PM</td>
-          <td>3PA</td>
-          <td>3PT%</td>
-          <td>FTM</td>
-          <td>FTA</td>
-          <td>FT%</td>
-          <td>REB</td>
-          <td>AST</td>
-          <td>ST</td>
-          <td>BS</td>
-          <td>PF</td>
-          <td>PTS</td>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Opp</th>
+          <th>Score</th>
+          <th>FGM</th>
+          <th>FGA</th>
+          <th>FG%</th>
+          <th>3PM</th>
+          <th>3PA</th>
+          <th>3PT%</th>
+          <th>FTM</th>
+          <th>FTA</th>
+          <th>FT%</th>
+          <th>REB</th>
+          <th>AST</th>
+          <th>ST</th>
+          <th>BS</th>
+          <th>PF</th>
+          <th>PTS</th>
         </tr>
         </thead>
         <tbody>
