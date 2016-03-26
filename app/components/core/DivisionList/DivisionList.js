@@ -38,7 +38,7 @@ const DivisionList = ({divisions, league, currentDivision}) => {
   );
 
   function _createScheduleLink (league, division) {
-    return (division) ? `/${league.name}/division/${division._id}/schedule` : '#';
+    return (division) ? `/${league.name}/division/${division._id}` : '#';
   }
 }
 

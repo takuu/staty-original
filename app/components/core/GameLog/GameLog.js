@@ -5,7 +5,9 @@ import statParser from '../../../utils/statParser';
 
 const GameLog = ({stats, title}) => {
 
-  const combined = statParser.combineStats(stats) || [];
+  // const combined = statParser.combineStats(stats) || [];
+
+  let combined = statParser.playerCummulativeStats(stats);
   return (
       <table className='table' style={{fontSize: '.7em'}}>
         <thead>
@@ -80,23 +82,25 @@ const GameLog = ({stats, title}) => {
             <td></td>
             <td></td>
             <td></td>
-            <td>{(combined.fieldGoalsMade/stats.length).toFixed(1) || '-'}</td>
-            <td>{(combined.fieldGoalsAttempted/stats.length).toFixed(1)}</td>
-            <td>{((combined.fieldGoalsMade/stats.length)/(combined.fieldGoalsAttempted/stats.length)*100).toFixed(1)}</td>
+            <td>{combined.avgFieldGoalsMade}</td>
+            <td>{combined.avgFieldGoalsAttempted}</td>
+            <td>{(combined.fieldGoalPercentage >= 0) ? combined.fieldGoalPercentage : '-'}</td>
 
-            <td>{(combined.threePointsMade/stats.length).toFixed(1)}</td>
-            <td>{(combined.threePointsAttempted/stats.length).toFixed(1)}</td>
-            <td>{((combined.threePointsMade/stats.length)/(combined.threePointsAttempted/stats.length)*100).toFixed(1)}</td>
 
-            <td>{(combined.freeThrowsMade/stats.length).toFixed(1)}</td>
-            <td>{(combined.freeThrowsAttempted/stats.length).toFixed(1)}</td>
-            <td>{((combined.freeThrowsMade/stats.length)/(combined.freeThrowsAttempted/stats.length)*100).toFixed(1)}</td>
-            <td>{(combined.totalRebounds/stats.length).toFixed(1)}</td>
-            <td>{(combined.assists/stats.length).toFixed(1)}</td>
-            <td>{(combined.steals/stats.length).toFixed(1)}</td>
-            <td>{(combined.blocks/stats.length).toFixed(1)}</td>
-            <td>{(combined.fouls/stats.length).toFixed(1)}</td>
-            <td>{(combined.points/stats.length).toFixed(1)}</td>
+            <td>{combined.avgThreePointsMade}</td>
+            <td>{combined.avgThreePointsAttempted}</td>
+            <td>{(combined.threePointPercentage >= 0) ? combined.threePointPercentage : '-'}</td>
+
+            <td>{combined.avgFreeThrowsMade}</td>
+            <td>{combined.avgFreeThrowsAttempted}</td>
+            <td>{(combined.freeThrowsPercentage >= 0) ? combined.freeThrowsPercentage : '-'}</td>
+
+            <td>{combined.avgRebounds}</td>
+            <td>{combined.avgAssists}</td>
+            <td>{combined.avgSteals}</td>
+            <td>{combined.avgBlocks}</td>
+            <td>{combined.avgFouls}</td>
+            <td>{combined.avgPoints}</td>
           </tr>
 
         }

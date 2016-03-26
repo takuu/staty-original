@@ -11,7 +11,7 @@ import { getGamesByDivisionId } from '../../actions/gameActions';
 import { getTeamsByDivisionId } from '../../actions/teamActions';
 import { getDivisionById } from '../../actions/divisionActions';
 
-@connect((state,router) => {
+@connect((state, router) => {
   const divisionId = router.params.divisionId;
   const leagueName = router.params.leagueName;
 
@@ -19,12 +19,12 @@ import { getDivisionById } from '../../actions/divisionActions';
   const league = _.find(leagues, {name: leagueName});
 
   const gamesJS = state.games.toJS();
-  const games = _.filter(gamesJS, (game)=> {
+  const games = _.filter(gamesJS, (game) => {
     return game.division === divisionId;
   });
 
   const teamsJS = state.teams.toJS();
-  const teams = _.filter(teamsJS, (team)=>{
+  const teams = _.filter(teamsJS, (team) => {
     return team.division._id === divisionId;
   });
 
@@ -61,26 +61,25 @@ class DivisionPage extends React.Component {
   };
 
   static fillStore(redux, route) {
-    //let leagueName = route.params.leagueName;
-    redux.dispatch(getDivisionById(route.params.divisionId));
-    redux.dispatch(getGamesByDivisionId(route.params.divisionId));
-    return redux.dispatch(getTeamsByDivisionId(route.params.divisionId));
-    //return redux.dispatch(getLeagueByName(leagueName));
-  }
+    let {divisionId, leagueName} = route.params;
+    redux.dispatch(getDivisionById(divisionId));
+    redux.dispatch(getGamesByDivisionId(divisionId));
+    return redux.dispatch(getTeamsByDivisionId(divisionId));
 
+  }
   render() {
     let {league, division, games, teams, path} = this.props;
-    let scheduleUrl = "/" + league.name + "/division/" + division._id + "/schedule";
-    let standingUrl = "/" + league.name + "/division/" + division._id + "/standing";
-    let teamsUrl = "/" + league.name + "/division/" + division._id + "/teams";
+    let scheduleUrl = `/${league.name}/division/${division._id}`;
+    let standingUrl = `/${league.name}/division/${division._id}/standing`;
+    let teamsUrl = `/${league.name}/division/${division._id}/teams`;
 
     let urlParts = path.split('/');
     let routeName = urlParts[urlParts.length-1];
     let standingClass = classNames({
-      'active': routeName == 'standing'
+      'active': routeName === 'standing'
     });
     let scheduleClass = classNames({
-      'active': routeName == 'schedule'
+      'active': routeName === '' || routeName === division._id
     });
 
     var childrenWithProps = React.Children.map(this.props.children, (child) => {

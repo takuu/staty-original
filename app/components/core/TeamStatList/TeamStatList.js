@@ -3,7 +3,7 @@ import './styles.css';
 import _ from 'lodash';
 import { Link } from 'react-router';
 import statParser from '../../../utils/statParser';
-import { createPlayerUrl } from '../../../utils/createLinks';
+import createLinks from '../../../utils/createLinks';
 import Loader from '../../Loader/Loader';
 
 const TeamStatList = ({stats, league, players}) =>  {
@@ -35,41 +35,38 @@ const TeamStatList = ({stats, league, players}) =>  {
 
       <tbody>
       {
-        _.map(playerSummaryList, (player) => {
+        _.map(playerSummaryList, (stat) => {
+          let {player} = stat;
 
           return (
-            <tr key={player._id}>
+            <tr key={stat._id}>
 
-              <th className='name' style={{'borderBottom': '1px solid #ddd'}}><Link to={_createPlayerUrl(league, player)}>{player.player && player.player.name}</Link></th>
+              <th className='name' style={{'borderBottom': '1px solid #ddd'}}><Link to={createLinks.createPlayerUrl(league, player)}>{player && player.name}</Link></th>
 
-              <td>{player.gameCount}</td>
-              <td>{player.avgFieldGoalsMade}</td>
-              <td>{player.avgFieldGoalsAttempted}</td>
-              <td>{(player.fieldGoalPercentage >= 0) ? player.fieldGoalPercentage : '-'}</td>
-              <td>{player.avgThreePointsMade}</td>
-              <td>{player.avgThreePointsAttempted}</td>
-              <td>{(player.threePointPercentage >= 0) ? player.threePointPercentage : '-'}</td>
-              <td>{player.avgFreeThrowsMade}</td>
-              <td>{player.avgFreeThrowsAttempted}</td>
-              <td>{(player.freeThrowsPercentage >= 0) ? player.freeThrowsPercentage : '-'}</td>
-              <td>{player.avgRebounds}</td>
-              <td>{player.avgAssists}</td>
-              <td>{player.avgSteals}</td>
-              <td>{player.avgBlocks}</td>
-              <td>{player.avgFouls}</td>
-              <td>{player.avgPoints}</td>
+              <td>{stat.gameCount}</td>
+              <td>{stat.avgFieldGoalsMade}</td>
+              <td>{stat.avgFieldGoalsAttempted}</td>
+              <td>{(stat.fieldGoalPercentage >= 0) ? stat.fieldGoalPercentage : '-'}</td>
+              <td>{stat.avgThreePointsMade}</td>
+              <td>{stat.avgThreePointsAttempted}</td>
+              <td>{(stat.threePointPercentage >= 0) ? stat.threePointPercentage : '-'}</td>
+              <td>{stat.avgFreeThrowsMade}</td>
+              <td>{stat.avgFreeThrowsAttempted}</td>
+              <td>{(stat.freeThrowsPercentage >= 0) ? stat.freeThrowsPercentage : '-'}</td>
+              <td>{stat.avgRebounds}</td>
+              <td>{stat.avgAssists}</td>
+              <td>{stat.avgSteals}</td>
+              <td>{stat.avgBlocks}</td>
+              <td>{stat.avgFouls}</td>
+              <td>{stat.avgPoints}</td>
             </tr>
           );
         })
       }
       </tbody>
     </table>
-
   );
-  function _createPlayerUrl (league = {}, player = {}) {
-    let teamId = player.team && player.team._id;
-    return (player) ? `/${league.name}/team/${teamId}/player/${player._id}` : '#';
-  }
+
 };
 
 TeamStatList.propTypes = {

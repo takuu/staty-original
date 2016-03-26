@@ -7,6 +7,7 @@ import { getLeagueByName } from '../../../actions/leagues';
 import { getGamesByDivisionId } from '../../../actions/gameActions';
 import Standings from '../../../components/core/Standings/Standings.js';
 import { connect } from 'react-redux';
+import helpers from '../../../utils/helpers';
 
 //":leagueName/division/:divisionId/game/:gameId"
 
@@ -17,7 +18,7 @@ import { connect } from 'react-redux';
 
   const gamesJS = state.games.toJS();
   const games = _.filter(gamesJS, (game) => {
-    return game.division === divisionId;
+    return helpers.getObjId(game.division) === divisionId;
   });
 
   return {league: league, games: games, params: router.params}

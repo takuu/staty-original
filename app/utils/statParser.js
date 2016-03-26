@@ -40,7 +40,8 @@ function playerListCummulativeStats (stats = [], players = []) {
     let playerStats = _.filter(statList, (stat) => {
       return stat.player._id === player._id;
     });
-    let combined = combineStats(playerStats) || {};
+
+    /*let combined = combineStats(playerStats) || {};
     let gameCount = playerStats.length;
 
     let result = {
@@ -64,11 +65,41 @@ function playerListCummulativeStats (stats = [], players = []) {
       ...combined
     }
 
-    return result;
+    return result;*/
+
+    return playerCummulativeStats(playerStats, player);
   });
   playerListSummary = _.orderBy(playerListSummary, ['avgPoints', 'gameCount'], ['desc', 'desc']);
 
   return playerListSummary;
+}
+
+function playerCummulativeStats(stats = [], player = {}) {
+  let combined = combineStats(stats) || {};
+  let gameCount = stats.length;
+
+  let result = {
+    gameCount: gameCount,
+    player: player,
+    avgFieldGoalsMade: helpers.roundDecimal(combined.fieldGoalsMade / gameCount, -1) || 0,
+    avgFieldGoalsAttempted: helpers.roundDecimal(combined.fieldGoalsAttempted / gameCount, -1) || 0,
+    fieldGoalPercentage: shootingPercentage(combined.fieldGoalsMade, combined.fieldGoalsAttempted),
+    avgThreePointsMade: helpers.roundDecimal(combined.threePointsMade / gameCount, -1) || 0,
+    avgThreePointsAttempted: helpers.roundDecimal(combined.threePointsAttempted / gameCount, -1) || 0,
+    threePointPercentage: shootingPercentage(combined.threePointsMade, combined.threePointsAttempted),
+    avgFreeThrowsMade: helpers.roundDecimal(combined.freeThrowsMade / gameCount, -1) || 0,
+    avgFreeThrowsAttempted: helpers.roundDecimal(combined.freeThrowsAttempted / gameCount, -1) || 0,
+    freeThrowsPercentage: shootingPercentage(combined.freeThrowsMade, combined.freeThrowsAttempted),
+    avgRebounds: helpers.roundDecimal(combined.totalRebounds / gameCount, -1) || 0,
+    avgAssists: helpers.roundDecimal(combined.assists / gameCount, -1) || 0,
+    avgSteals: helpers.roundDecimal(combined.steals / gameCount, -1) || 0,
+    avgBlocks: helpers.roundDecimal(combined.blocks / gameCount, -1) || 0,
+    avgFouls: helpers.roundDecimal(combined.fouls / gameCount, -1) || 0,
+    avgPoints: helpers.roundDecimal(combined.points / gameCount, -1) || 0,
+    ...combined
+  };
+
+  return result;
 }
 
 function getMaxStats (stats = []) {
@@ -186,5 +217,6 @@ export default {
   shootingPercentage: shootingPercentage,
   createStandings: createStandings,
   createSchedule: createSchedule,
+  playerCummulativeStats: playerCummulativeStats,
   playerListCummulativeStats: playerListCummulativeStats
 };

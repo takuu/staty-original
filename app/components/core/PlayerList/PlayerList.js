@@ -1,22 +1,32 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import statParser from '../../../utils/statParser';
-import helper from '../../../utils/helpers';
+import classNames from 'classnames';
+import helpers from '../../../utils/helpers';
 import './styles.css';
 
-const PlayerList = ({players, league}) => {
-  let hasNumber = helper.doesKeyExistInList(players, 'number');
-  let hasName = helper.doesKeyExistInList(players, 'name');
-  let hasPos = helper.doesKeyExistInList(players, 'position');
-  let hasHeight = helper.doesKeyExistInList(players, 'height');
+const PlayerList = ({players, league, player}) => {
+  let hasNumber = helpers.doesKeyExistInList(players, 'number');
+  let hasName = helpers.doesKeyExistInList(players, 'name');
+  let hasPos = helpers.doesKeyExistInList(players, 'position');
+  let hasHeight = helpers.doesKeyExistInList(players, 'height');
+  
+  let activePlayerId = helpers.getObjId(player);
 
   return (
     <ul className='list-group'>
       {
         _.map(players, (player) => {
+          let playerClass = classNames({
+            'active': player._id === activePlayerId,
+            'list-group-item': true,
+            'noborder': true
+          });
+
+
           return (
             <li className='list-group-item nopadding' key={player._id}>
-              <Link to={_createPlayerUrl(league, player)} className='list-group-item'>
+              <Link to={_createPlayerUrl(league, player)} className={playerClass}>
                 <span className='inline-list-item number-item'>
                   {(hasNumber) ? (player.number || '-') : ''}
                 </span>
@@ -44,12 +54,14 @@ const PlayerList = ({players, league}) => {
 
 PlayerList.propTypes = {
   players: PropTypes.array,
-  league: PropTypes.object
+  league: PropTypes.object,
+  player: PropTypes.object
 };
 
 PlayerList.defaultProps = {
   players: [],
-  league: {}
+  league: {},
+  player: {}
 };
 
 export default PlayerList;

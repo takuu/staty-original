@@ -65,7 +65,7 @@ const routes = (
         <IndexRoute component={LeaguePage} />
 
         <Route path="division/:divisionId" component={DivisionPage} >
-          <Route path='schedule' component={SchedulePage} />
+          <IndexRoute component={SchedulePage} />
           <Route path='standing' component={StandingPage} />
           <Route path='teams' component={TeamsPage} />
         </Route>

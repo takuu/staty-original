@@ -66,7 +66,7 @@ export default class PlayerLayout extends React.Component {
               <div className='sub-title'>{team && team.name }</div>
             </div>
             <div>
-              <PlayerList league={league} players={players} />
+              <PlayerList league={league} players={players} player={player}/>
             </div>
           </div>
         </div>

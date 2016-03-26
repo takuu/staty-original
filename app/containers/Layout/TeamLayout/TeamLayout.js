@@ -7,18 +7,20 @@ import { getTeamById } from '../../../actions/teamActions';
 import Standings from '../../../components/core/Standings/Standings.js';
 import { connect } from 'react-redux';
 
+import helpers from '../../../utils/helpers';
+
 //":leagueName/division/:divisionId/game/:gameId"
 
 @connect((state,router) => {
-  const {teamId} = router.params;
+  const {teamId, divisionId} = router.params;
   const path = router.location && router.location.pathname;
 
   const teamsJS = state.teams.toJS();
   const team = _.find(teamsJS, {_id: teamId});
 
   const gamesJS = state.games.toJS();
-  const games = _.map(gamesJS, (game) => {
-    return game;
+  const games = _.filter(gamesJS, (game) => {
+    return divisionId === helpers.getObjId(game.division);
   });
 
   return {games: games, params: router.params, team: team, path: path};
