@@ -75,8 +75,8 @@ const routes = (
         <Route path='division/:divisionId/game/:gameId' component={GamePage} />
       </Route>
 
-      <Route component={TeamLayout}>
-        <Route path='division/:divisionId/team/:teamId' component={TeamPage} >
+      <Route path='division/:divisionId/team/:teamId' component={TeamLayout}>
+        <Route component={TeamPage} >
           <IndexRoute component={TeamGamesPage} />
           <Route path='roster' component={RosterPage} />
           <Route path='team-stats' component={TeamStatsPage} />

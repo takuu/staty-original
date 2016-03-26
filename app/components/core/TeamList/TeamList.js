@@ -3,7 +3,6 @@ import { Link } from 'react-router';
 import './styles.css';
 
 const TeamList = ({teams, league}) => {
-  debugger;
   return (
     <ul className='list-group'>
       <li className='list-group-item nopadding'></li>

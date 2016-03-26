@@ -2,7 +2,8 @@ import _ from 'lodash';
 
 function _createPlayerUrl (league = {}, player = {}) {
   let teamId = (typeof player.team === 'object') ? player.team._id : player.team;
-  return (player) ? `/${league.name}/team/${teamId}/player/${player._id}` : '#';
+  let playerId = (typeof player === 'object') ? player._id : player;
+  return `/${league.name}/team/${teamId}/player/${playerId}`;
 }
 
 function _createTeamLink (league = {}, team = {}) {

@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 
 @connect((state,router) => {
   const {teamId} = router.params;
+  const path = router.location && router.location.pathname;
 
   const teamsJS = state.teams.toJS();
   const team = _.find(teamsJS, {_id: teamId});
@@ -20,7 +21,7 @@ import { connect } from 'react-redux';
     return game;
   });
 
-  return {games: games, params: router.params, team: team};
+  return {games: games, params: router.params, team: team, path: path};
 }, {
   getGamesByDivisionId,
   getTeamById
@@ -30,18 +31,25 @@ export default class TeamLayout extends React.Component {
     children: PropTypes.element,
     league: PropTypes.object,
     games: PropTypes.array,
-    team: PropTypes.object
+    team: PropTypes.object,
+    path: PropTypes.string
+  };
+  static defaultProps = {
+    league: {},
+    team: {},
+    games: [],
+    path: ''
   };
   static fillStore (redux, router) {
     const {divisionId, teamId} = router.params;
-    redux.dispatch(getTeamById(teamId));
     redux.dispatch(getGamesByDivisionId(divisionId));
+    return redux.dispatch(getTeamById(teamId));
   }
 
   render () {
-    const {league, games, team, params} = this.props;
+    const {league, games, team, params, path} = this.props;
     var childrenWithProps = React.Children.map(this.props.children, (child) => {
-      return React.cloneElement(child, {league: league, games: games, team: team});
+      return React.cloneElement(child, {league: league, games: games, team: team, path: path});
     });
     return (
       <div>

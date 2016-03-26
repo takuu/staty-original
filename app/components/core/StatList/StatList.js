@@ -3,7 +3,7 @@ import styles from './styles.css';
 import _ from 'lodash';
 import { Link } from 'react-router';
 import statParser from '../../../utils/statParser';
-import { createPlayerUrl } from '../../../utils/createLinks';
+import createLinks from '../../../utils/createLinks';
 import Loader from '../../Loader/Loader';
 
 
@@ -98,30 +98,30 @@ const StatList = ({stats, league}) =>  {
 
       <tbody>
       {
-        _.map(stats, (player) => {
+        _.map(stats, (stat) => {
 
           return (
-            <tr key={player._id}>
+            <tr key={stat._id}>
 
-              <th className='name'><Link to={_createPlayerUrl(league, player)}>{player.player.name}</Link></th>
+              <th className='name'><Link to={createLinks.createPlayerUrl(league, stat.player)}>{stat.player.name}</Link></th>
 
-              <td>{player.fieldGoalsMade}</td>
-              <td>{player.fieldGoalsAttempted}</td>
+              <td>{stat.fieldGoalsMade}</td>
+              <td>{stat.fieldGoalsAttempted}</td>
 
-              <td>{statParser.shootingPercentage(player.fieldGoalsMade, player.fieldGoalsAttempted)}</td>
+              <td>{statParser.shootingPercentage(stat.fieldGoalsMade, stat.fieldGoalsAttempted)}</td>
 
-              <td>{player.threePointsMade}</td>
-              <td>{player.threePointsAttempted}</td>
-              <td>{statParser.shootingPercentage(player.threePointsMade, player.threePointsAttempted)}</td>
-              <td>{player.freeThrowsMade}</td>
-              <td>{player.freeThrowsAttempted}</td>
-              <td>{statParser.shootingPercentage(player.freeThrowsMade, player.freeThrowsAttempted)}</td>
-              <td>{player.totalRebounds}</td>
-              <td>{player.assists}</td>
-              <td>{player.steals}</td>
-              <td>{player.blocks}</td>
-              <td>{player.fouls}</td>
-              <td>{player.points}</td>
+              <td>{stat.threePointsMade}</td>
+              <td>{stat.threePointsAttempted}</td>
+              <td>{statParser.shootingPercentage(stat.threePointsMade, stat.threePointsAttempted)}</td>
+              <td>{stat.freeThrowsMade}</td>
+              <td>{stat.freeThrowsAttempted}</td>
+              <td>{statParser.shootingPercentage(stat.freeThrowsMade, stat.freeThrowsAttempted)}</td>
+              <td>{stat.totalRebounds}</td>
+              <td>{stat.assists}</td>
+              <td>{stat.steals}</td>
+              <td>{stat.blocks}</td>
+              <td>{stat.fouls}</td>
+              <td>{stat.points}</td>
 
             </tr>
           )
@@ -154,12 +154,8 @@ const StatList = ({stats, league}) =>  {
       </tbody>
     </table>
 
-    )
-  function _createPlayerUrl(league, player) {
-    return (player) ? `/${league.name}/team/${player.team._id}/player/${player._id}` : '#';
-  }
-
-}
+    );
+};
 
 StatList.propTypes = {
   stats: PropTypes.array,

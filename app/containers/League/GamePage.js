@@ -18,7 +18,9 @@ import './styles.css';
   const game = _.find(gamesJS, {_id: gameId});
 
   const statsJS = state.stats.toJS();
-  const stats = _.map(statsJS,(stat)=>{return stat});
+  const stats = _.filter(statsJS, (stat) => {
+    return stat.game._id === gameId;
+  });
 
   return {league: league, game: game, stats: stats}
 }, {

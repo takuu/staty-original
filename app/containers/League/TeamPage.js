@@ -7,11 +7,6 @@ import classNames from 'classnames';
 import { Link } from 'react-router';
 import createLinks from '../../utils/createLinks';
 
-@connect((state, router) => {
-  const path = router.location && router.location.pathname;
-
-  return {path: path};
-})
 class TeamPage extends React.Component {
   constructor (props) {
     super(props);
@@ -31,7 +26,7 @@ class TeamPage extends React.Component {
   render () {
     let {league, team, path} = this.props;
 
-    let {division} = team;
+    let {division} = team || {};
 
     let gameUrl = createLinks.createTeamLink(league, team);
     let rosterUrl = createLinks.createTeamLink(league, team) + '/roster';

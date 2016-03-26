@@ -54,6 +54,7 @@ class SchedulePage extends React.Component {
     let scheduleUrl = "/" + league.name + "/division/" + division._id + "/schedule";
     let standingUrl = "/" + league.name + "/division/" + division._id + "/standing";
     let teamsUrl = "/" + league.name + "/division/" + division._id + "/teams";
+    // debugger;
     return (
 
         <div style={{padding: "10px"}}>
