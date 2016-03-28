@@ -11,7 +11,7 @@ import _ from 'lodash';
 import mongoose from 'mongoose';
 
 
-mongoose.connect('mongodb://localhost:27017/mofufus-dev', {db: {safe:true}});
+mongoose.connect('mongodb://localhost:27017/staty', {db: {safe:true}});
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
