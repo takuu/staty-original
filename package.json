@@ -21,7 +21,8 @@
     "start": "NODE_ENV=production babel-node ./api & node . & wait",
     "pretest": "make lint",
     "test": "make test",
-    "eslint-fix": "eslint app/**/*.js --fix"
+    "eslint-fix": "eslint app/**/*.js --fix",
+    "dev": "nodemon -x babel-node -w ./api ./api & babel-node ./dev-server & wait"
   },
   "dependencies": {
     "axios": "^0.5.4",
