@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import Standings from '../../../components/core/Standings/Standings'
-import Schedule from '../../../components/core/LeagueSchedule/LeagueSchedule';
+import Standings from '../../components/core/Standings/Standings'
+import Schedule from '../../components/core/LeagueSchedule/LeagueSchedule';
 import _ from 'lodash';
 import {Link} from 'react-router';
 
-import { getLeagueByName } from '../../../actions/leagues';
-import { getGamesByDivisionId } from '../../../actions/gameActions';
-import { getTeamsByDivisionId } from '../../../actions/teamActions';
+import { getLeagueByName } from '../../actions/leagues';
+import { getGamesByDivisionId } from '../../actions/gameActions';
+import { getTeamsByDivisionId } from '../../actions/teamActions';
 
 @connect((state,router) => {
   const divisionId = router.params.divisionId;

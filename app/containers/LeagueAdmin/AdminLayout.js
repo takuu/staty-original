@@ -1,9 +1,8 @@
 import React, { PropTypes } from 'react';
 
-import './styles.css';
 import _ from 'lodash';
-import { getLeagueByName } from '../../../actions/leagues';
-import SideNav from '../../../components/LeagueAdmin/SideNav/SideNav';
+import { getLeagueByName } from '../../actions/leagues';
+import SideNav from '../../components/LeagueAdmin/SideNav/SideNav';
 import { connect } from 'react-redux';
 
 @connect((state,router) => {

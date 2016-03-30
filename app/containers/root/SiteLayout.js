@@ -2,9 +2,9 @@ import React, { PropTypes } from 'react';
 
 import './styles.css';
 import _ from 'lodash';
-import SubHeader from '../../../components/SubHeader/SubHeader.js';
+import SubHeader from '../../components/SubHeader/SubHeader.js';
 //import DivisionList from '../../../components/core/DivisionList/DivisionList';
-import { getLeagueByName } from '../../../actions/leagues';
+import { getLeagueByName } from '../../actions/leagues';
 import { connect } from 'react-redux';
 
 @connect((state, router) => {

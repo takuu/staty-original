@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import classNames from 'classnames';
-import { getStatsByPlayerId } from '../../../actions/statActions';
-import SplitStats from '../../../components/core/SplitStats/SplitStats';
+import { getStatsByPlayerId } from '../../actions/statActions';
+import SplitStats from '../../components/core/SplitStats/SplitStats';
 
 @connect((state, router) => {
   const {teamId, playerId} = router.params;

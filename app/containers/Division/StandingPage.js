@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-
-import TeamList from '../../../components/core/TeamList/TeamList';
+import Standings from '../../components/core/Standings/Standings'
+import Schedule from '../../components/core/LeagueSchedule/LeagueSchedule';
 import _ from 'lodash';
 import {Link} from 'react-router';
 
-import { getLeagueByName } from '../../../actions/leagues';
-import { getGamesByDivisionId } from '../../../actions/gameActions';
-import { getTeamsByDivisionId } from '../../../actions/teamActions';
-import { getDivisionById } from '../../../actions/divisionActions';
+import { getLeagueByName } from '../../actions/leagues';
+import { getGamesByDivisionId } from '../../actions/gameActions';
+import { getTeamsByDivisionId } from '../../actions/teamActions';
+import { getDivisionById } from '../../actions/divisionActions';
 
 @connect((state,router) => {
   const divisionId = router.params.divisionId;
@@ -37,7 +37,7 @@ import { getDivisionById } from '../../../actions/divisionActions';
   getTeamsByDivisionId,
   getDivisionById
 })
-class TeamsPage extends React.Component {
+class StandingPage extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -67,11 +67,11 @@ class TeamsPage extends React.Component {
     let {league, division, games, teams} = this.props;
     return (
       <div>
-        <TeamList league={league} teams={teams} />
-      </div>
+          <Standings league={league} games={games} />
+        </div>
 
     );
   }
 }
 
-export default TeamsPage;
+export default StandingPage;

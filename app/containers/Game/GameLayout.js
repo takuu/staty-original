@@ -2,12 +2,12 @@ import React, { PropTypes } from 'react';
 
 import './styles.css';
 import _ from 'lodash';
-import SubHeader from '../../../components/SubHeader/SubHeader.js';
-import { getLeagueByName } from '../../../actions/leagues';
-import { getGamesByDivisionId } from '../../../actions/gameActions';
-import Standings from '../../../components/core/Standings/Standings.js';
+import SubHeader from '../../components/SubHeader/SubHeader.js';
+import { getLeagueByName } from '../../actions/leagues';
+import { getGamesByDivisionId } from '../../actions/gameActions';
+import Standings from '../../components/core/Standings/Standings.js';
 import { connect } from 'react-redux';
-import helpers from '../../../utils/helpers';
+import helpers from '../../utils/helpers';
 
 //":leagueName/division/:divisionId/game/:gameId"
 

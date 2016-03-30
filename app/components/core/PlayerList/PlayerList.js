@@ -10,7 +10,7 @@ const PlayerList = ({players, league, player}) => {
   let hasName = helpers.doesKeyExistInList(players, 'name');
   let hasPos = helpers.doesKeyExistInList(players, 'position');
   let hasHeight = helpers.doesKeyExistInList(players, 'height');
-  
+
   let activePlayerId = helpers.getObjId(player);
 
   return (

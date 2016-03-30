@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import classNames from 'classnames';
-import { getGamesByTeamId } from '../../../actions/gameActions';
-import LeagueSchedule from '../../../components/core/LeagueSchedule/LeagueSchedule.js';
+import { getGamesByTeamId } from '../../actions/gameActions';
+import LeagueSchedule from '../../components/core/LeagueSchedule/LeagueSchedule.js';
 
 @connect((state, router) => {
   const {leagueName, teamId} = router.params;

@@ -2,9 +2,9 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import classNames from 'classnames';
-import TeamStatList from '../../../components/core/TeamStatList/TeamStatList';
-import { getPlayersWithFilters } from '../../../actions/playerActions';
-import { getStatsByTeamId } from '../../../actions/statActions';
+import TeamStatList from '../../components/core/TeamStatList/TeamStatList';
+import { getPlayersWithFilters } from '../../actions/playerActions';
+import { getStatsByTeamId } from '../../actions/statActions';
 
 @connect((state, router) => {
   const teamId = router.params.teamId;
