@@ -57,12 +57,15 @@ const routes = (
     <Route path="/about" component={AboutPage} />
 
     <Route path="/contact" component={ContactPage} />
+    {/* */}<Route path="/search" component={SearchResultPage} />
     <Route path="/leagues" component={LeagueListPage} />
 
     <Route path="/:leagueName" component={SiteLayout}>
       /*League Home*/
       <Route component={DivisionLayout}>
         <IndexRoute component={LeaguePage} />
+
+        <Route path='search/:searchName' component={SearchResultPage} />
 
         <Route path="division/:divisionId" component={DivisionPage} >
           <IndexRoute component={SchedulePage} />

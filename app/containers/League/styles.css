@@ -6,3 +6,11 @@
     color:#fff;
     padding:5px;
 }
+
+#custom-search-input {
+    padding: 3px;
+    border: solid 1px #E4E4E4;
+    border-radius: 6px;
+    background-color: #fff;
+}
+

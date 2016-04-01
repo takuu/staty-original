@@ -9,6 +9,7 @@ import ActionTypes from '../constants/actions';
 import axios from 'axios';
 import getHeaders from '../utils/getHeaders';
 import helpers from '../utils/helpers';
+import _ from 'lodash';
 
 const baseUrl = 'http://localhost:1337/api';
 

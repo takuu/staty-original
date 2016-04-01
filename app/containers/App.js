@@ -32,6 +32,9 @@ export default class App extends React.Component {
       dispatch,
       params
     } = this.props;
+    var childrenWithProps = React.Children.map(this.props.children, (child) => {
+      return React.cloneElement(child, { dispatch: dispatch });
+    });
 
     return (
       <div>
@@ -42,7 +45,7 @@ export default class App extends React.Component {
           {...bindActionCreators({ logout }, dispatch)}
         />
         <div style={{minHeight: '800px'}}>
-          {this.props.children}
+          {childrenWithProps}
         </div>
 
         <Footer {...this.props.children} />

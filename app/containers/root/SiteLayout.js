@@ -19,7 +19,8 @@ import { connect } from 'react-redux';
 export default class SiteLayout extends React.Component {
   static propTypes = {
     children: PropTypes.element,
-    league: PropTypes.object
+    league: PropTypes.object,
+    dispatch: PropTypes.func
   };
   static fillStore(redux, route) {
     let leagueName = route.params.leagueName;
@@ -27,9 +28,9 @@ export default class SiteLayout extends React.Component {
   }
 
   render() {
-    const {league} = this.props;
+    const {league, dispatch} = this.props;
     var childrenWithProps = React.Children.map(this.props.children, (child) => {
-      return React.cloneElement(child, { league: league });
+      return React.cloneElement(child, { league: league, dispatch: dispatch });
     });
 
     return (
