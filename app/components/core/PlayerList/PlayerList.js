@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import statParser from '../../../utils/statParser';
 import classNames from 'classnames';
 import helpers from '../../../utils/helpers';
+import PlayerAddButton from '../../../components/core/PlayerAddButton/PlayerAddButton'
 import './styles.css';
 
 const PlayerList = ({players, league, player}) => {
@@ -20,26 +21,31 @@ const PlayerList = ({players, league, player}) => {
           let playerClass = classNames({
             'active': player._id === activePlayerId,
             'list-group-item': true,
-            'noborder': true
+            'nopadding': true
           });
 
-
           return (
-            <li className='list-group-item nopadding' key={player._id}>
-              <Link to={_createPlayerUrl(league, player)} className={playerClass}>
+            <li key={player._id} className={playerClass}>
+
                 <span className='inline-list-item number-item'>
                   {(hasNumber) ? (player.number || '-') : ''}
                 </span>
+
                 <span className='inline-list-item name-item'>
+                  <Link to={_createPlayerUrl(league, player)} >
                   {(hasName) ? (player.name || '-') : ''}
+                  </Link>
                 </span>
+
                 <span className='inline-list-item position-item'>
                   {(hasPos) ? (player.position || '-') : ''}
                 </span>
                 <span className='inline-list-item height-item'>
                   {(hasHeight) ? (player.height || '-') : ''}
                 </span>
-              </Link>
+                <span className='inline-list-item add-item'>
+                  <PlayerAddButton league={league} player={player} />
+                </span>
             </li>
           );
         })
@@ -48,7 +54,7 @@ const PlayerList = ({players, league, player}) => {
   );
 
   function _createPlayerUrl(league, player) {
-    return (player) ? `/${league.name}/team/${player.team._id}/player/${player._id}`: '#';
+    return (player) ? `/${league.name}/team/${player.team._id}/player/${player._id}` : '#';
   }
 };
 

@@ -1,6 +1,10 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-module.exports = mongoose.model('User',{
+/**
+ * User Schema
+ */
+var UserSchema = new Schema({
   fb: {
     id: String,
     access_token: String,
@@ -15,6 +19,10 @@ module.exports = mongoose.model('User',{
     username: String,
     displayName: String,
     lastStatus: String
-  }
+  },
+  created: { type: Date, default: Date.now },
+  updated: { type: Date, default: Date.now }
 
 });
+
+module.exports = mongoose.model('User', UserSchema);

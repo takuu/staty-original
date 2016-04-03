@@ -8,6 +8,8 @@ import jwtToken from 'jsonwebtoken';
 import path from 'path';
 import fs from 'fs';
 import _ from 'lodash';
+import passport from 'passport';
+import expressSession from 'express-session';
 import mongoose from 'mongoose';
 
 
@@ -33,18 +35,39 @@ app.use(jwt({
   const postsRE = /^\/posts(\/.*)?$/;
   const leaguesRE = /^\/leagues(\/.*)?$/;
   const apiRE = /^\/api(\/.*)?$/;
+  const loginRE = /^\/login(\/.*)?$/;
 
   return (
       url === '/signup' ||
       url === '/login' ||
       (postsRE).test(url) && req.method === 'GET' ||
       (leaguesRE).test(url) && req.method === 'GET' ||
+      (loginRE).test(url) && req.method === 'GET' ||
       (apiRE).test(url) && (req.method === 'GET' || req.method === 'POST')
   );
 }));
 
+app.use(function (err, req, res, next) {
+
+
+  if (err.name === 'UnauthorizedError') {
+    console.log('UnauthorizedError path', req.originalUrl);
+    res.send(401, 'invalid token...', req.originalUrl);
+  }
+});
+
+// Configuring passport
+app.use(expressSession({secret: 'mySecretKey'}));
+app.use(passport.initialize());
+app.use(passport.session());
+let initPassport = require('./passport/init');
+initPassport(passport);
+
+
 import api from './api';
 app.use('/api', api);
+import passportRoutes from './passport/routes';
+app.use('/', passportRoutes(passport));
 
 function generateToken(email, password) {
   const payload = { email, password };
@@ -79,6 +102,7 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/profile', (req, res) => {
+  console.log("ZOMG WHY?=========================================");
   try {
     const token = extractToken(req.headers.authorization);
     const decode = jwtToken.decode(token);
@@ -97,6 +121,7 @@ app.get('/profile', (req, res) => {
 
 
 app.put('/profile', (req, res) => {
+  console.log("ZOMG WHY?========================================");
   try {
     const token = extractToken(req.headers.authorization);
     const decode = jwtToken.decode(token);

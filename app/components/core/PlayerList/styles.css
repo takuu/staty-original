@@ -1,9 +1,10 @@
 .inline-list-item.number-item {
-    margin:10px 0px;
+    display:inline-block;
+    height:40px;
     width:10%;
 }
 .inline-list-item.name-item {
-    width:70%;
+    width:60%;
 }
 .inline-list-item.position-item {
     width:10%;
@@ -12,4 +13,8 @@
 .inline-list-item.height-item {
     width:10%;
     color:#aaa;
+}
+.inline-list-item.add-item {
+    width:10%;
+    height:28px;
 }
