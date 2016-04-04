@@ -30,12 +30,6 @@ module.exports = {
     __dirname: true
   },
   plugins: process.env.NODE_ENV === 'production' ? [
-    new ExtractTextPlugin('app.css', {
-      allChunks: true
-    }),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         BROWSER: JSON.stringify(false)

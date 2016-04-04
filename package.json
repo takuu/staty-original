@@ -65,8 +65,7 @@
     "react-router": "2.0.1",
     "redux": "^3.3.1",
     "redux-logger": "^2.6.1",
-    "redux-thunk": "^2.0.1",
-    "webpack-isomorphic-tools": "^2.2.44"
+    "redux-thunk": "^2.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.6.4",

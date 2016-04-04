@@ -4,15 +4,18 @@
 import 'babel-core/register';
 import 'babel-polyfill';
 import React from 'react';
+import cookieParser from 'cookie-parser';
+import express from 'express';
+import path from 'path';
 // we'll use this to render our app to an html string
 import { renderToString } from 'react-dom/server';
 // and these to match the url to routes and then render
 import { match, RouterContext } from 'react-router';
-import compression from 'compression';
+// import compression from 'compression';
 import routes from './routes/index';
 
 import app from '../api/index.js';
-app.use(compression());
+// app.use(compression());
 app.use(cookieParser());
 // app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')))
@@ -25,18 +28,18 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.get('*', (req, res) => {
   match({ routes, location: req.url }, (err, redirect, props) => {
     if (err) {
-      res.status(500).send(err.message)
+      res.status(500).send(err.message);
     } else if (redirect) {
       res.redirect(redirect.pathname + redirect.search)
     } else if (props) {
       // hey we made it!
       console.log('YAY!');
-      const appHtml = renderToString(<RouterContext {...props}/>)
-      res.send(renderPage(appHtml))
+      const appHtml = renderToString(<RouterContext {...props}/>);
+      res.send(renderPage(appHtml));
     } else {
-      res.status(404).send('Not Found')
+      res.status(404).send('Not Found');
     }
-  })
+  });
 })
 
 function renderPage(appHtml) {
@@ -53,5 +56,5 @@ function renderPage(appHtml) {
 
 var PORT = process.env.PORT || 3000;
 app.listen(PORT, function() {
-  console.log('Production Express server running at localhost:' + PORT)
+  console.log('Production Express server running at localhost:' + PORT);
 })
