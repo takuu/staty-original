@@ -27,11 +27,10 @@ browserSync({
       webpackHotMiddleware(bundler),
 
       (req, res, next) => {
-
-        console.log('foo?: ', req.originalUrl);
+        
         if(req.url == '/') {
 
-          fs.readFile(path.join(__dirname, 'app/landing', 'index.html'), {
+          fs.readFile(path.join(__dirname, 'landing', 'index.html'), {
             encoding: 'utf-8'
           }, (err, source) => {
             if (err) return next(err);

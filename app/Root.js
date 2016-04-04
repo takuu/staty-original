@@ -15,7 +15,8 @@ import { createRedux } from './utils/redux';
 //const newHistory = new BrowserHistory();
 
 const store = createRedux((process.env.NODE_ENV === 'production')
-  ? window.__INITIAL_STATE__
+  // ? window.__INITIAL_STATE__
+  ? {}
   : { auth: { token: cookie.get('token') || '' } });
 
 export default class Root extends React.Component {

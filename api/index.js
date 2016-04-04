@@ -9,7 +9,7 @@ import path from 'path';
 import fs from 'fs';
 import _ from 'lodash';
 import passport from 'passport';
-import expressSession from 'express-session';
+// import expressSession from 'express-session';
 import mongoose from 'mongoose';
 
 
@@ -57,9 +57,9 @@ app.use(function (err, req, res, next) {
 });
 
 // Configuring passport
-app.use(expressSession({secret: 'mySecretKey'}));
+// app.use(expressSession({secret: 'mySecretKey'}));
 app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.session());
 let initPassport = require('./passport/init');
 initPassport(passport);
 
@@ -102,7 +102,6 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/profile', (req, res) => {
-  console.log("ZOMG WHY?=========================================");
   try {
     const token = extractToken(req.headers.authorization);
     const decode = jwtToken.decode(token);
@@ -121,7 +120,6 @@ app.get('/profile', (req, res) => {
 
 
 app.put('/profile', (req, res) => {
-  console.log("ZOMG WHY?========================================");
   try {
     const token = extractToken(req.headers.authorization);
     const decode = jwtToken.decode(token);
@@ -158,5 +156,5 @@ app.put('/profile', (req, res) => {
 });
 
 app.use(jsonServer.router(jsonPath));
-
+// export default app;
 app.listen(1337);

@@ -1,5 +1,8 @@
 /* eslint-env node */
-import 'babel/polyfill';
+
+
+// import 'babel-core/register';
+// import 'babel-polyfill';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import _ from 'lodash';
@@ -15,7 +18,9 @@ import fillStore from './utils/fillStore';
 import stringifyLocation from './utils/stringifyLocation';
 
 const env = process.env.NODE_ENV || 'development';
-const app = express();
+
+import app from '../api/index.js';
+// const app = express();
 
 app.use(cookieParser());
 app.use(express.static('public'));

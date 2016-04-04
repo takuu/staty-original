@@ -21,19 +21,18 @@ module.exports = function(passport) {
       process.nextTick(function() {
 
         // find the user in the database based on their facebook id
-        User.findOne({ 'id' : profile.id }, function(err, user) {
+        User.findOne({ 'fb.id' : profile.id }, function(err, user) {
 
           console.log('err', err);
-          console.log('user', user);
-          // if there is an error, stop everything and return that
-          // ie an error connecting to the database
-          if (err)
-            return done(err);
+
+          if (err) return done(err);
 
           // if the user is found, then log them in
           if (user) {
+            console.log('FOUND USER', user);
             return done(null, user); // user found, return that user
           } else {
+            console.log('CREATE NEW USER');
             // if there is no user found with that facebook id, create them
             var newUser = new User();
 
