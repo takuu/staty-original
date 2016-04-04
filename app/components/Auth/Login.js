@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { browserHistory } from 'react-router';
-import './styles.css';
+// import './styles.css';
+if (process.env.BROWSER) require('./styles.css');
 
 export default class Login extends React.Component {
   static propTypes = {

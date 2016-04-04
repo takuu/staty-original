@@ -7,7 +7,8 @@ import ReactDOM from 'react-dom';
 //import BrowserHistory from 'react-router/lib/BrowserHistory';
 //import HashHistory from 'react-router/lib/HashHistory';
 import Root from './Root';
-import './styles/global.css';
+// import './styles/global.css';
+// import withStyles from './decorators/withStyles';
 
 /*
 const history = (process.env.NODE_ENV === 'production')

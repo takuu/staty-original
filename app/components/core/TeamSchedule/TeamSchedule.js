@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import statParser from '../../../utils/statParser';
-import './styles.css';
+// import './styles.css';
+if (process.env.BROWSER) require('./styles.css');
 
 const TeamSchedule = ({games, league}) => {
   return (

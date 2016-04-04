@@ -1,4 +1,5 @@
-import '../styles/global.css';
+
+if (process.env.BROWSER) require('../styles/global.css');
 
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
@@ -6,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import { fetchProfile, logout } from '../actions/auth';
+
 @connect(state => ({
   auth: state.auth,
   router: state.router

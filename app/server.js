@@ -9,7 +9,7 @@ import { renderToString } from 'react-dom/server';
 // and these to match the url to routes and then render
 import { match, RouterContext } from 'react-router';
 import compression from 'compression';
-import routes from './client';
+import routes from './routes/index';
 
 import app from '../api/index.js';
 app.use(compression());

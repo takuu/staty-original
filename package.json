@@ -41,6 +41,7 @@
     "express": "^4.12.4",
     "express-jwt": "^3.0.1",
     "express-session": "^1.13.0",
+    "fbjs": "^0.7.2",
     "if-env": "^1.0.0",
     "immutable": "^3.7.6",
     "json-server": "^0.7.25",
@@ -64,7 +65,8 @@
     "react-router": "2.0.1",
     "redux": "^3.3.1",
     "redux-logger": "^2.6.1",
-    "redux-thunk": "^2.0.1"
+    "redux-thunk": "^2.0.1",
+    "webpack-isomorphic-tools": "^2.2.44"
   },
   "devDependencies": {
     "babel-core": "^6.6.4",

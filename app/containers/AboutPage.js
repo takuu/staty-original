@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import './styles.css';
+// import './styles.css';
+if (process.env.BROWSER) require('./styles.css');
+
 
 @connect(state => ({
 }), {})

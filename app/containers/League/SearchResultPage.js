@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import './styles.css';
+// import './styles.css';
+if (process.env.BROWSER) require('./styles.css');
 import { searchPlayer } from '../../actions/playerActions';
 import { getLeagueByName } from '../../actions/leagues'
 import PlayerList from '../../components/core/PlayerList/PlayerList';

@@ -6,7 +6,8 @@ import _ from 'lodash';
 import { getLeagueByName } from '../../actions/leagues';
 import { getGameById } from '../../actions/gameActions';
 import { getStatsByGameId } from '../../actions/statActions';
-import './../League/styles.css';
+// import './../League/styles.css';
+if (process.env.BROWSER) require('./../League/styles.css');
 
 @connect((state,router) => {
   const leagueName = router.params.leagueName;

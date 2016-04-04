@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import './styles.css';
+// import './styles.css';
+if (process.env.BROWSER) require('./styles.css');
 
 var Modal = React.createClass({
   render: function () {

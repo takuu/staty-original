@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import './styles.css';
+// import './styles.css';
+if (process.env.BROWSER) require('./styles.css');
 
 const TeamList = ({teams, league}) => {
   return (

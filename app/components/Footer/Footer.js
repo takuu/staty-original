@@ -1,6 +1,7 @@
 
 import React from 'react';
-import './styles.css';
+// import './styles.css';
+if (process.env.BROWSER) require('./styles.css');
 
 import { Link } from 'react-router';
 

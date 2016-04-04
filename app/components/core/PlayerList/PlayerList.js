@@ -4,7 +4,8 @@ import statParser from '../../../utils/statParser';
 import classNames from 'classnames';
 import helpers from '../../../utils/helpers';
 import PlayerAddButton from '../../../components/core/PlayerAddButton/PlayerAddButton'
-import './styles.css';
+// import './styles.css';
+if (process.env.BROWSER) require('./styles.css');
 
 const PlayerList = ({players, league, player}) => {
   let hasNumber = helpers.doesKeyExistInList(players, 'number');

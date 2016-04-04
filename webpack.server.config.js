@@ -11,7 +11,8 @@ module.exports = {
 
   output: {
     filename: 'server.bundle.js',
-    publicPath: '/'
+    publicPath: '/',
+    path: 'public'
   },
 
   target: 'node',
@@ -34,7 +35,12 @@ module.exports = {
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin()
+    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        BROWSER: JSON.stringify(false)
+      }
+    })
   ] : [],
 
   module: {
@@ -49,13 +55,13 @@ module.exports = {
         exclude: /node_modules/,
         loaders: ['babel']
       },
-      {
-        test: /\.css$/,
-        loader: 'style!css'
-      },
+      // {
+      //   test: /\.css$/,
+      //   loader: 'style!css'
+      // },
       {
         test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
-        loader: 'url-loader?limit=10000',
+        loader: 'url-loader?limit=10000'
       },
       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
         loader: "file"

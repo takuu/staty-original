@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import Modal from '../../../components/core/Modal/Modal';
-import './styles.css';
+// import './styles.css';
+if (process.env.BROWSER) require('./styles.css');
 
 export default class PlayerAddButton extends React.Component {
   constructor(props) {
