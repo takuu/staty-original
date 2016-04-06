@@ -9,15 +9,34 @@ import cookie from './utils/cookie';
 import routes from './routes';
 import { routerStateChange } from './actions/router';
 import { createRedux } from './utils/redux';
+import { canUseDOM } from 'exenv';
 
 //import BrowserHistory from 'react-router/lib/BrowserHistory';
 
 //const newHistory = new BrowserHistory();
 
+/*
 const store = createRedux((process.env.NODE_ENV === 'production')
-  // ? window.__INITIAL_STATE__
-  ? {}
+  ? window.__INITIAL_STATE__
   : { auth: { token: cookie.get('token') || '' } });
+*/
+
+
+const store = createRedux((canUseDOM) ? { auth: { token: cookie.get('token') || '' } } : {});
+
+if(!canUseDOM) {
+  console.log('THIS?');
+  module.exports = (
+      <Router
+        history={browserHistory}
+        routes={routes(store, true)}
+
+        onUpdate={function() {
+            store.dispatch(routerStateChange(this.state));
+          }}
+      />
+  )
+}
 
 export default class Root extends React.Component {
   static propTypes = {

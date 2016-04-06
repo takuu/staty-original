@@ -8,7 +8,7 @@ import ActionTypes from '../constants/actions';
 import axios from 'axios';
 import getHeaders from '../utils/getHeaders';
 
-const baseUrl = 'http://localhost:1337/api';
+const baseUrl = 'http://localhost:3000/api';
 
 export function getSeasonById (id = '') {
   return async (dispatch) => {

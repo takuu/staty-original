@@ -21,7 +21,7 @@ import redirectBackAfter from '../utils/redirectBackAfter';
 import axios from 'axios';
 import getHeaders from '../utils/getHeaders.js';
 
-const baseUrl = 'http://localhost:1337';
+const baseUrl = 'http://localhost:3000';
 
 function saveAuthToken (token) {
   const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);

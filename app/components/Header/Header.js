@@ -1,7 +1,11 @@
 //import styles from './styles.styl';
 
 // import './styles.css';
-if (process.env.BROWSER) require('./styles.css');
+let logoFull;
+if (process.env.BROWSER) {
+  logoFull = require('./logo-full.png');
+  require('./styles.css');
+}
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import NavItem from './NavItem';
@@ -53,7 +57,7 @@ export default class Header extends React.Component {
         <div className="Header">
           <div className="container">
             <a className="Header-brand" href="/" title='Staty'>
-              <img className="Header-brandImg" src={require('./logo-full.png')} width="110" height="32" alt="React" />
+              <img className="Header-brandImg" src={logoFull} width="110" height="32" alt="React" />
 
             </a>
             {this.renderNavBar()}

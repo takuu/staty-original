@@ -1,4 +1,6 @@
-var webpack = require('webpack')
+var webpack = require('webpack');
+var cssnext = require('cssnext');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: './app/client.js',
@@ -10,6 +12,9 @@ module.exports = {
   },
 
   plugins: process.env.NODE_ENV === 'production' ? [
+    new ExtractTextPlugin('app.css', {
+      allChunks: true
+    }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin(),
@@ -38,14 +43,17 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
-        loader: 'url-loader?limit=10000',
+        loader: 'url-loader?limit=10000'
       },
       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "file"
+        loader: 'file'
       },
       { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "url?limit=10000&mimetype=application/octet-stream"
+        loader: 'url?limit=10000&mimetype=application/octet-stream'
       }
     ]
+  },
+  postcss: () => {
+    return [cssnext];
   }
 }

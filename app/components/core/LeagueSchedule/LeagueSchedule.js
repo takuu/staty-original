@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import statParser from '../../../utils/statParser';
 import GameDayList from '../../core/GameDayList/GameDayList';
+import _ from 'lodash';
 
 const Schedule = ({league, games}) => {
 

@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import classNames from 'classnames';
+import _ from 'lodash';
 // import './styles.css';
 if (process.env.BROWSER) require('./styles.css');
 const DivisionList = ({divisions, league, currentDivision}) => {
