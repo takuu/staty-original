@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import statParser from '../../../utils/statParser';
 import classNames from 'classnames';
 import helpers from '../../../utils/helpers';
+import _ from 'lodash';
 import PlayerAddButton from '../../../components/core/PlayerAddButton/PlayerAddButton'
 // import './styles.css';
 if (process.env.BROWSER) require('./styles.css');

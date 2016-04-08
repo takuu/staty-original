@@ -14,6 +14,7 @@ import { renderToString } from 'react-dom/server';
 // and these to match the url to routes and then render
 import { match, RouterContext } from 'react-router';
 import { Provider } from 'react-redux';
+import { createMemoryHistory, useQueries } from 'history';
 import { createRedux } from './utils/redux';
 // import compression from 'compression';
 import routes from './routes/index';
@@ -49,32 +50,43 @@ app.use('/', passportRoutes(passport));
 import api from '../api/api';
 app.use('/api', api);
 
+function getReduxPromise (renderProps) {
+  let { query, params } = renderProps;
+  const store = createRedux({});
+  let comp = renderProps.components[renderProps.components.length - 1].WrappedComponent;
+  let promise = comp.fillStore ?
+    comp.fillStore() : Promise.resolve();
 
-
+  return promise;
+}
 // send all requests to index.html so browserHistory works
 
 app.get('*', (req, res) => {
-  const store = createRedux({});
+  let history = useQueries(createMemoryHistory)();
+  const emptyStore = createRedux({});
+  let location = history.createLocation(req.url);
+
   console.log('this is getting triggered', req.url);
-  match({ routes: routes(store, false), location: req.url }, (err, redirect, props) => {
+  match({ routes: routes(emptyStore, true), location: req.url }, (err, redirect, props) => {
     console.log('err: ', err);
     // console.log('props: ', props);
     if (err) {
       res.status(500).send(err.message);
     } else if (redirect) {
-      res.redirect(redirect.pathname + redirect.search)
+      res.redirect(redirect.pathname + redirect.search);
     } else if (props) {
       // hey we made it!
-      console.log('YAY!');
+      console.log('YAY PROPS!', props);
+
+      // let reduxState = escape(JSON.stringify(emptyStore.getState()));
+      // console.log('reduxState: ', reduxState);
       // const appHtml = renderToString(<RouterContext {...props}/>);
-      const store = createRedux({});
-      const appHtml = renderToString(<Provider store={store}>
-        { <RouterContext {...props}/> }
-      </Provider>);
-
-
-
-      res.send(renderPage(appHtml));
+      // getReduxPromise(props).then(() => {
+        const appHtml = renderToString(<Provider store={emptyStore}>
+          { <RouterContext {...props}/> }
+        </Provider>);
+        res.send(renderPage(appHtml));
+      // });
     } else {
       res.status(404).send('Not Found');
     }
@@ -87,7 +99,7 @@ function renderPage(appHtml) {
     <html>
     <meta charset=utf-8/>
     <title>My First React Router App</title>
-    <link rel=stylesheet href=/index.css>
+   
     <div id=app>${appHtml}</div>
     <script src="/bundle.js"></script>
    `

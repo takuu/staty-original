@@ -11,7 +11,7 @@ import helpers from '../utils/helpers';
 import axios from 'axios';
 import getHeaders from '../utils/getHeaders';
 
-const baseUrl = 'http://localhost:3000/api';
+const baseUrl = 'http://localhost:1337/api';
 
 export function getGameById (id = '') {
   return async (dispatch) => {
