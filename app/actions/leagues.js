@@ -3,7 +3,8 @@ import ActionTypes from '../constants/actions';
 import axios from 'axios';
 import getHeaders from '../utils/getHeaders';
 
-const baseUrl = 'http://localhost:1337/api';
+import config from '../../api/config.json';
+const baseUrl = `http://localhost:${config.port}/api`;
 
 export function getAllLeagues () {
   return async (dispatch) => {

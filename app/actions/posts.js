@@ -13,7 +13,8 @@ import ActionTypes from '../constants/actions';
 import axios from 'axios';
 import getHeaders from '../utils/getHeaders';
 
-const baseUrl = 'http://localhost:1337';
+import config from '../../api/config.json';
+const baseUrl = `http://localhost:${config.port}`;
 
 export function fetchPosts () {
   return async (dispatch) => {

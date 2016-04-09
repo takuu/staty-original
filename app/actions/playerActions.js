@@ -11,7 +11,8 @@ import getHeaders from '../utils/getHeaders';
 import helpers from '../utils/helpers';
 import _ from 'lodash';
 
-const baseUrl = 'http://localhost:1337/api';
+import config from '../../api/config.json';
+const baseUrl = `http://localhost:${config.port}/api`;
 
 export function getPlayerById (id = '') {
   return async (dispatch) => {
