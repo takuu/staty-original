@@ -6,7 +6,7 @@ import _ from 'lodash';
 import SubHeader from '../../components/SubHeader/SubHeader.js';
 import DivisionList from '../../components/core/DivisionList/DivisionList';
 import { getLeagueByName } from '../../actions/leagues';
-import { getActiveDivisionByLeagueId } from '../../actions/divisionActions';
+import { getActiveDivisionByLeagueId, getDivisionsByLeagueName } from '../../actions/divisionActions';
 import { connect } from 'react-redux';
 
 @connect((state,router) => {
@@ -29,20 +29,8 @@ export default class LeagueLayout extends React.Component {
     divisions: PropTypes.array
   };
   static fillStore (redux, route) {
-  }
-  componentWillReceiveProps(nextProps) {
-    const { league, getActiveDivisionByLeagueId } = nextProps;
-
-    // Fetch if the _id don't match and if length == 0
-    const shouldFetch =
-      !_.isEqualWith(nextProps.divisions, this.props.divisions, (a, b) => {
-        return a._id == b._id;
-      }) || nextProps.divisions.length==0;
-
-    // TODO: currently called twice, fix so it's only called once
-    if(league && shouldFetch) {
-      getActiveDivisionByLeagueId(league._id);
-    }
+    let { leagueName } = route.params;
+    redux.dispatch(getDivisionsByLeagueName(leagueName));
   }
 
   render() {

@@ -9,6 +9,7 @@ router.get('/active/:id', controller.getActiveDivisionsByLeagueId);
 router.get('/season/:id', controller.findBySeasonId);
 router.get('/league/:id', controller.findByLeagueId);
 router.get('/leagueName/:name', controller.findByLeagueName);
+// router.get('/leagueName2/:name', controller.findByLeagueName2);
 router.get('/', controller.index);
 
 router.get('/:id', controller.show);

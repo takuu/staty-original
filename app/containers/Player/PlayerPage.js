@@ -45,7 +45,7 @@ class PlayerPage extends React.Component {
   static fillStore(redux, route) {
 
     let leagueName = route.params.leagueName;
-    redux.dispatch(getStatsByPlayerId(route.params.playerId));
+    return redux.dispatch(getStatsByPlayerId(route.params.playerId));
   }
 
   render () {

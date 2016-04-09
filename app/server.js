@@ -20,6 +20,7 @@ import { createRedux } from './utils/redux';
 import routes from './routes/routes';
 // import root from './Root';
 import mongoose from 'mongoose';
+import _ from 'lodash';
 import { routerStateChange } from './actions/router';
 
 mongoose.connect('mongodb://localhost:27017/staty', {db: {safe:true}});
@@ -53,10 +54,16 @@ app.use('/api', api);
 
 function getReduxPromise (renderProps, store, history) {
   let { query, params } = renderProps;
-  let comp = renderProps.components[renderProps.components.length - 1].WrappedComponent;
-  let promise = comp && comp.fillStore && comp.fillStore(store, renderProps);
+  let promiseList = [];
 
-  return promise || Promise.resolve();
+  _.map(Object.keys(renderProps.components), (index) => {
+    let component = renderProps.components[index];
+    let comp = component && component.WrappedComponent;
+    let promise = comp && comp.fillStore && comp.fillStore(store, renderProps);
+    if (promise) promiseList.push(promise);
+  });
+
+  return (promiseList.length) ? Promise.all(promiseList) : Promise.resolve();
 }
 
 
@@ -85,18 +92,8 @@ app.get('*', (req, res) => {
     } else if (redirect) {
       res.redirect(redirect.pathname + redirect.search);
     } else if (props) {
-      // hey we made it!
-      console.log('Promise: ', Promise.resolve());
-      console.log('YAY PROPS!', props);
-
-      // let reduxState = escape(JSON.stringify(emptyStore.getState()));
-      // console.log('reduxState: ', reduxState);
-      // const appHtml = renderToString(<RouterContext {...props}/>);
       const emptyStore = createRedux({});
-      console.log('YAY STORES: ', emptyStore);
-      console.log('YAY history: ', memHistory);
       getReduxPromise(props, emptyStore, memHistory).then(() => {
-
         const appHtml = renderToString(<Provider store={emptyStore}>
           { <RouterContext {...props}/> }
         </Provider>);
@@ -113,7 +110,7 @@ function renderPage(appHtml) {
     <!doctype html public="storage">
     <html>
     <meta charset=utf-8/>
-    <title>My First React Router App</title>
+    <title>Staty</title>
    
     <div id=app>${appHtml}</div>
     <script src="/bundle.js"></script>

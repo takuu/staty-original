@@ -25,7 +25,6 @@ export default (store, client) => {
       if (route.requireAuth && !loggedIn) {
         transition.to(...redirectBackAfter('/login', nextState));
       } else if (client) {
-        debugger;
         fillStore(store, nextState, [route.component]);
       }
     };

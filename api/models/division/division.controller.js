@@ -11,6 +11,7 @@
 
 var _ = require('lodash');
 var Division = require('./division.model.js');
+var League = require('../../models/league/league.model.js');
 var ObjectId = require('mongoose').Types.ObjectId;
 
 // Get list of divisions
@@ -89,7 +90,26 @@ exports.findByLeagueId = function(req, res) {
       res.status(200).send(divisions);
     });
 };
+exports.findByLeagueName = function(req, res) {
+  League.findOne({name: req.params.name})
+    .exec(function (err, league) {
+      // console.log('found league: ', league);
+      if (err) { return handleError(res, err); }
+      if (league) {
+        // console.log('found league: ', league);
+        Division.find({league:league._id})
+          .populate('season')
+          .exec(function (err, divisions) {
+            if (err) { return handleError(res, err); }
+            // console.log('Division.findByLeagueId', divisions);
+            res.status(200).send(divisions);
+          });
+      }
+    });
 
+};
+
+/*
 exports.findByLeagueName = function(req, res) {
   console.log(req.params.name);
   Division.find({})
@@ -100,10 +120,10 @@ exports.findByLeagueName = function(req, res) {
       divisions = divisions.filter(function(division) {
         return division.league != null;
       });
-      console.log('Division.findByLeagueName', divisions);
       res.status(200).send(divisions);
     });
 };
+*/
 
 exports.getActiveDivisionsByLeagueId = function(req, res) {
   Division.find({league: new ObjectId(req.params.id)})

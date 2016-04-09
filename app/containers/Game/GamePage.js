@@ -48,9 +48,14 @@ class GamePage extends React.Component {
   static fillStore(redux, route) {
     let leagueName = route.params.leagueName;
     let gameId = route.params.gameId;
-    redux.dispatch(getGameById(gameId));
-    redux.dispatch(getStatsByGameId(gameId));
-    return redux.dispatch(getLeagueByName(leagueName));
+    // redux.dispatch(getGameById(gameId));
+    // redux.dispatch(getStatsByGameId(gameId));
+    // return redux.dispatch(getLeagueByName(leagueName));
+    return Promise.all([redux.dispatch(getGameById(gameId)),
+      redux.dispatch(getStatsByGameId(gameId)),
+      redux.dispatch(getStatsByGameId(gameId)),
+      redux.dispatch(getLeagueByName(leagueName))
+    ]);
   }
 
   render() {
