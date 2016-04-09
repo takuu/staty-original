@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import classNames from 'classnames';
 import statParser from '../../../utils/statParser';
 import createLinks from '../../../utils/createLinks';
+import _ from 'lodash';
 
 
 const Standings = ({games, league, team}) => {

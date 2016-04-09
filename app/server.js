@@ -17,9 +17,10 @@ import { Provider } from 'react-redux';
 import { createMemoryHistory, useQueries } from 'history';
 import { createRedux } from './utils/redux';
 // import compression from 'compression';
-import routes from './routes/index';
+import routes from './routes/routes';
 // import root from './Root';
 import mongoose from 'mongoose';
+import { routerStateChange } from './actions/router';
 
 mongoose.connect('mongodb://localhost:27017/staty', {db: {safe:true}});
 
@@ -50,25 +51,34 @@ app.use('/', passportRoutes(passport));
 import api from '../api/api';
 app.use('/api', api);
 
-function getReduxPromise (renderProps) {
+function getReduxPromise (renderProps, store, history) {
   let { query, params } = renderProps;
-  const store = createRedux({});
   let comp = renderProps.components[renderProps.components.length - 1].WrappedComponent;
-  let promise = comp.fillStore ?
-    comp.fillStore() : Promise.resolve();
+  let promise = comp && comp.fillStore && comp.fillStore(store, renderProps);
 
-  return promise;
+  return promise || Promise.resolve();
+}
+
+
+import { Router } from 'react-router';
+function createRoute (history, store) {
+  return (
+    <Router history={history}>
+      {routes}
+      </Router>
+  );
 }
 // send all requests to index.html so browserHistory works
 
 app.get('*', (req, res) => {
-  let history = useQueries(createMemoryHistory)();
-  const emptyStore = createRedux({});
-  let location = history.createLocation(req.url);
+  let memHistory = useQueries(createMemoryHistory)();
 
+
+  let location = memHistory.createLocation(req.url);
   console.log('this is getting triggered', req.url);
-  match({ routes: routes(emptyStore, true), location: req.url }, (err, redirect, props) => {
+  match({ routes: createRoute(memHistory), location: req.url }, (err, redirect, props) => {
     console.log('err: ', err);
+    console.log('redirect: ', redirect);
     // console.log('props: ', props);
     if (err) {
       res.status(500).send(err.message);
@@ -76,17 +86,22 @@ app.get('*', (req, res) => {
       res.redirect(redirect.pathname + redirect.search);
     } else if (props) {
       // hey we made it!
+      console.log('Promise: ', Promise.resolve());
       console.log('YAY PROPS!', props);
 
       // let reduxState = escape(JSON.stringify(emptyStore.getState()));
       // console.log('reduxState: ', reduxState);
       // const appHtml = renderToString(<RouterContext {...props}/>);
-      // getReduxPromise(props).then(() => {
+      const emptyStore = createRedux({});
+      console.log('YAY STORES: ', emptyStore);
+      console.log('YAY history: ', memHistory);
+      getReduxPromise(props, emptyStore, memHistory).then(() => {
+
         const appHtml = renderToString(<Provider store={emptyStore}>
           { <RouterContext {...props}/> }
         </Provider>);
         res.send(renderPage(appHtml));
-      // });
+      });
     } else {
       res.status(404).send('Not Found');
     }

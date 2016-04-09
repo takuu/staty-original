@@ -3,5 +3,5 @@
     "expires": 10080,
     "secret": "eyJ0aXRsZSI6ImZ1Y2sgeW91IHBheSBtZSIsImxlYWQiOiJ0"
   },
-  "port": 1337
+  "port": 3000
 }
