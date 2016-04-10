@@ -27,7 +27,10 @@
     "pretest": "make lint",
     "test": "make test",
     "eslint-fix": "eslint app/**/*.js --fix",
-    "dev": "nodemon -x babel-node -w ./api ./api & babel-node ./dev-server & wait"
+
+
+    "dev": "nodemon -x babel-node -w ./api ./api & babel-node ./dev-server & wait",
+    "prod": "nodemon -x babel-node -w ./api ./api & NODE_ENV=production node app/run-server.js & wait"
   },
   "dependencies": {
     "axios": "^0.5.4",
@@ -43,6 +46,7 @@
     "express-session": "^1.13.0",
     "fbjs": "^0.7.2",
     "history": "^2.0.1",
+    "http-proxy": "^1.13.2",
     "if-env": "^1.0.0",
     "immutable": "^3.7.6",
     "json-server": "^0.7.25",

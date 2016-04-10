@@ -15,14 +15,13 @@ import { canUseDOM } from 'exenv';
 
 //const newHistory = new BrowserHistory();
 
-/*
+
 const store = createRedux((process.env.NODE_ENV === 'production')
-  ? window.__INITIAL_STATE__
-  : { auth: { token: cookie.get('token') || '' } });
-*/
+  ? JSON.parse(decodeURIComponent(window.__INITIAL_STATE__))
+  : (canUseDOM) ? { auth: { token: cookie.get('token') || '' } } : {});
 
 
-const store = createRedux((canUseDOM) ? { auth: { token: cookie.get('token') || '' } } : {});
+// const store = createRedux((canUseDOM) ? { auth: { token: cookie.get('token') || '' } } : {});
 
 if(!canUseDOM) {
   console.log('THIS?');
@@ -44,6 +43,7 @@ export default class Root extends React.Component {
   }
 
   render() {
+    console.log('STORE: ', store.getState());
     return (
       <Provider store={store}>
         <Router

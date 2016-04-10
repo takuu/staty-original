@@ -1,6 +1,3 @@
-// ...
-// import some new stuff
-
 import 'babel-core/register';
 import 'babel-polyfill';
 import React from 'react';
@@ -18,39 +15,24 @@ import { createMemoryHistory, useQueries } from 'history';
 import { createRedux } from './utils/redux';
 // import compression from 'compression';
 import routes from './routes/routes';
-// import root from './Root';
 import mongoose from 'mongoose';
 import _ from 'lodash';
 import { routerStateChange } from './actions/router';
 
-mongoose.connect('mongodb://localhost:27017/staty', {db: {safe:true}});
+import httpProxy from 'http-proxy';
 
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function (callback) {
-  console.log('DB CONNECTED!');
-  // yay!
-});
 
 var app = express();
 // app.use(compression());
 app.use(cookieParser());
 app.use(express.static('public'));
-// import './styles/global.css';
-
-// Configuring passport
-// app.use(expressSession({secret: 'mySecretKey'}));
 
 
+var apiProxy = new httpProxy.createProxyServer();
+app.get('/api*', function (req, res, next) {
+  apiProxy.web(req, res, { target: 'http://localhost:1337' });
+});
 
-app.use(passport.initialize());
-let initPassport = require('../api/passport/init');
-initPassport(passport);
-import passportRoutes from '../api/passport/routes';
-app.use('/', passportRoutes(passport));
-
-import api from '../api/api';
-app.use('/api', api);
 
 function getReduxPromise (renderProps, store, history) {
   let { query, params } = renderProps;
@@ -131,7 +113,11 @@ function renderPage(appHtml, initialState) {
   return `
     <!doctype html public="storage">
     <html>
-    <meta charset=utf-8/>
+      <head>
+      <meta charset=utf-8/>
+    <title>Staty.io</title>
+    <link rel="stylesheet" href="/app.css" type="text/css" media="screen" charset="utf-8">
+  </head>
     <title>Staty</title>
    
     <div id="app">${appHtml}</div>

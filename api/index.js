@@ -156,5 +156,5 @@ app.put('/profile', (req, res) => {
 });
 
 app.use(jsonServer.router(jsonPath));
-export default app;
-// app.listen(1337);
+// export default app;
+app.listen(1337);
