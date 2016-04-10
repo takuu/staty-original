@@ -1,5 +1,5 @@
-import 'babel-core/register';
-import 'babel-polyfill';
+// import 'babel-core/register';
+// import 'babel-polyfill';
 import React from 'react';
 import cookieParser from 'cookie-parser';
 import express from 'express';
@@ -10,14 +10,15 @@ import path from 'path';
 import { renderToString } from 'react-dom/server';
 // and these to match the url to routes and then render
 import { match, RouterContext } from 'react-router';
+import fs from 'fs';
 import { Provider } from 'react-redux';
 import { createMemoryHistory, useQueries } from 'history';
-import { createRedux } from './utils/redux';
+import { createRedux } from './app/utils/redux';
 import compression from 'compression';
-import routes from './routes/routes';
+import routes from './app/routes/routes';
 import mongoose from 'mongoose';
 import _ from 'lodash';
-import { routerStateChange } from './actions/router';
+import { routerStateChange } from './app/actions/router';
 
 import httpProxy from 'http-proxy';
 
@@ -25,6 +26,7 @@ var app = express();
 app.use(compression());
 app.use(cookieParser());
 app.use(express.static('public'));
+app.use('/landing', express.static(path.join(__dirname, 'landing')));
 
 var apiProxy = new httpProxy.createProxyServer();
 app.get('/api*', function (req, res, next) {
@@ -52,10 +54,24 @@ function createRoute (history, store) {
   return (
     <Router history={history}>
       {routes}
-      </Router>
+    </Router>
   );
 }
 // send all requests to index.html so browserHistory works
+
+app.get('/', (req, res, next) => {
+  fs.readFile(path.join(__dirname, 'landing', 'index.html'), {
+    encoding: 'utf-8'
+  }, (err, source) => {
+    console.log('landing page err', err);
+    if (err) return next(err);
+
+    const template = _.template(source);
+
+    res.write(template({ html: '', initialState: 'undefined' }));
+    res.end();
+  });
+});
 
 app.get('*', (req, res) => {
   let memHistory = useQueries(createMemoryHistory)();
@@ -70,7 +86,8 @@ app.get('*', (req, res) => {
     } else if (props) {
       let [ getCurrentUrl, unsubscribe ] = subscribeUrl();
       let reqUrl = location.pathname + location.search;
-      let store = createRedux({});
+      const token = req.cookies.token;
+      let store = createRedux({ auth: { token } });
       getReduxPromise(props, store, memHistory).then(() => {
         const html = renderToString(<Provider store={store}>
           { <RouterContext {...props}/> }
