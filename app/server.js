@@ -80,42 +80,67 @@ function createRoute (history, store) {
 app.get('*', (req, res) => {
   let memHistory = useQueries(createMemoryHistory)();
 
-
   let location = memHistory.createLocation(req.url);
   console.log('this is getting triggered', req.url);
-  match({ routes: createRoute(memHistory), location: req.url }, (err, redirect, props) => {
-    console.log('err: ', err);
-    console.log('redirect: ', redirect);
-    // console.log('props: ', props);
+  match({ routes: createRoute(memHistory), location: location }, (err, redirect, props) => {
     if (err) {
       res.status(500).send(err.message);
     } else if (redirect) {
       res.redirect(redirect.pathname + redirect.search);
     } else if (props) {
-      const emptyStore = createRedux({});
-      getReduxPromise(props, emptyStore, memHistory).then(() => {
-        const appHtml = renderToString(<Provider store={emptyStore}>
+      let [ getCurrentUrl, unsubscribe ] = subscribeUrl();
+      let reqUrl = location.pathname + location.search;
+      let store = createRedux({});
+      getReduxPromise(props, store, memHistory).then(() => {
+        const html = renderToString(<Provider store={store}>
           { <RouterContext {...props}/> }
         </Provider>);
-        res.send(renderPage(appHtml));
+
+        let initialState = escape(JSON.stringify(store.getState()));
+
+        if (getCurrentUrl() === reqUrl) {
+          res.send(renderPage(html, initialState));
+        } else {
+          res.redirect(302, getCurrentUrl());
+        }
+        unsubscribe();
+
+        res.send(renderPage(html, initialState));
+
       });
     } else {
       res.status(404).send('Not Found');
     }
   });
-})
 
-function renderPage(appHtml) {
+  function subscribeUrl () {
+    let currentUrl = location.pathname + location.search;
+    let unsubscribe = memHistory.listen((newLoc)=> {
+      if (newLoc.action === 'PUSH') {
+        currentUrl = newLoc.pathname + newLoc.search;
+      }
+    });
+    return [
+      ()=> currentUrl,
+      unsubscribe
+    ];
+  }
+});
+
+function renderPage(appHtml, initialState) {
   return `
     <!doctype html public="storage">
     <html>
     <meta charset=utf-8/>
     <title>Staty</title>
    
-    <div id=app>${appHtml}</div>
+    <div id="app">${appHtml}</div>
+    <script>var __INITIAL_STATE__ =  "${initialState}";</script>
     <script src="/bundle.js"></script>
    `
 }
+
+
 
 var PORT = process.env.PORT || 3000;
 app.listen(PORT, function() {
