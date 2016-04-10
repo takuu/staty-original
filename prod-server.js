@@ -1,9 +1,6 @@
-// import 'babel-core/register';
-// import 'babel-polyfill';
 import React from 'react';
 import cookieParser from 'cookie-parser';
 import express from 'express';
-import passport from 'passport';
 var router = express.Router();
 import path from 'path';
 // we'll use this to render our app to an html string
@@ -13,14 +10,12 @@ import { match, RouterContext } from 'react-router';
 import fs from 'fs';
 import { Provider } from 'react-redux';
 import { createMemoryHistory, useQueries } from 'history';
-import { createRedux } from './app/utils/redux';
 import compression from 'compression';
-import routes from './app/routes/routes';
-import mongoose from 'mongoose';
 import _ from 'lodash';
-import { routerStateChange } from './app/actions/router';
-
 import httpProxy from 'http-proxy';
+import { Router } from 'react-router';
+import { createRedux } from './app/utils/redux';
+import routes from './app/routes/routes';
 
 var app = express();
 app.use(compression());
@@ -30,6 +25,9 @@ app.use('/landing', express.static(path.join(__dirname, 'landing')));
 
 var apiProxy = new httpProxy.createProxyServer();
 app.get('/api*', function (req, res, next) {
+  apiProxy.web(req, res, { target: 'http://localhost:1337' });
+});
+app.get('/login*', function (req, res, next) {
   apiProxy.web(req, res, { target: 'http://localhost:1337' });
 });
 
@@ -48,8 +46,6 @@ function getReduxPromise (renderProps, store, history) {
   return (promiseList.length) ? Promise.all(promiseList) : Promise.resolve();
 }
 
-
-import { Router } from 'react-router';
 function createRoute (history, store) {
   return (
     <Router history={history}>

@@ -20,7 +20,7 @@
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:dev": "webpack-dev-server --inline --content-base public/ --history-api-fallback",
-    "start:prod": "npm run build && node server.bundle.js",
+    "start:prod": "npm run build && npm run prod",
     "build:client": "webpack",
     "build:server": "webpack --config webpack.server.config.js",
     "build": "npm run build:client && npm run build:server",
@@ -28,7 +28,7 @@
     "test": "make test",
     "eslint-fix": "eslint app/**/*.js --fix",
     "dev": "nodemon -x babel-node -w ./api ./api & babel-node ./dev-server & wait",
-    "prod": "nodemon -x babel-node -w ./api ./api & NODE_ENV=production babel-node prod-server.js & wait"
+    "prod": "nodemon -x babel-node -w ./api ./api & babel-node prod-server.js & wait"
   },
   "dependencies": {
     "axios": "^0.5.4",

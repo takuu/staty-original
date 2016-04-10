@@ -36,6 +36,7 @@ app.use(jwt({
   const leaguesRE = /^\/leagues(\/.*)?$/;
   const apiRE = /^\/api(\/.*)?$/;
   const loginRE = /^\/login(\/.*)?$/;
+  const callbackloginRE = /^\/callbacklogin(\/.*)?$/;
 
   return (
       url === '/signup' ||
@@ -43,6 +44,7 @@ app.use(jwt({
       (postsRE).test(url) && req.method === 'GET' ||
       (leaguesRE).test(url) && req.method === 'GET' ||
       (loginRE).test(url) && req.method === 'GET' ||
+      (callbackloginRE).test(url) && req.method === 'GET' ||
       (apiRE).test(url) && (req.method === 'GET' || req.method === 'POST')
   );
 }));

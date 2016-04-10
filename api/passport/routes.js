@@ -58,7 +58,7 @@ module.exports = function(passport){
     ));
 
   // handle the callback after facebook has authenticated the user
-  router.get('/login/facebook/callback',
+  router.get('/callbacklogin/facebook',
     passport.authenticate('facebook', { session: false, failureRedirect: "/contact" }),
     function(req, res) {
       console.log('route: req.user: ', req.user);

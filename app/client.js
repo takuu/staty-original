@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom';
 //import HashHistory from 'react-router/lib/HashHistory';
 import Root from './Root';
 // import './styles/global.css';
+if (process.env.BROWSER) require('./styles/global.css');
 // import withStyles from './decorators/withStyles';
 
 /*
