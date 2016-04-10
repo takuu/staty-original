@@ -5,6 +5,7 @@ import prodConfig from './webpack/prod.config.babel';
 import browserSync from 'browser-sync';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+import proxyMiddleware from 'http-proxy-middleware';
 import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
@@ -12,6 +13,11 @@ import _ from 'lodash';
 const env = process.env.NODE_ENV || 'development';
 const config = env === 'development' ? devConfig : prodConfig;
 const bundler = webpack(config);
+
+var proxy = proxyMiddleware('/api', {
+  target: 'http://localhost:1337',
+  changeOrigin: false   // for vhosted sites, changes host header to match to target's host
+});
 
 browserSync({
   server: {
@@ -23,6 +29,7 @@ browserSync({
         stats: { colors: true }
 
       }),
+      proxy,
 
       webpackHotMiddleware(bundler),
 

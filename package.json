@@ -27,8 +27,6 @@
     "pretest": "make lint",
     "test": "make test",
     "eslint-fix": "eslint app/**/*.js --fix",
-
-
     "dev": "nodemon -x babel-node -w ./api ./api & babel-node ./dev-server & wait",
     "prod": "nodemon -x babel-node -w ./api ./api & NODE_ENV=production node app/run-server.js & wait"
   },
@@ -47,6 +45,7 @@
     "fbjs": "^0.7.2",
     "history": "^2.0.1",
     "http-proxy": "^1.13.2",
+    "http-proxy-middleware": "^0.13.0",
     "if-env": "^1.0.0",
     "immutable": "^3.7.6",
     "json-server": "^0.7.25",

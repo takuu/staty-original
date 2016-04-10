@@ -13,7 +13,7 @@ import { match, RouterContext } from 'react-router';
 import { Provider } from 'react-redux';
 import { createMemoryHistory, useQueries } from 'history';
 import { createRedux } from './utils/redux';
-// import compression from 'compression';
+import compression from 'compression';
 import routes from './routes/routes';
 import mongoose from 'mongoose';
 import _ from 'lodash';
@@ -21,12 +21,10 @@ import { routerStateChange } from './actions/router';
 
 import httpProxy from 'http-proxy';
 
-
 var app = express();
-// app.use(compression());
+app.use(compression());
 app.use(cookieParser());
 app.use(express.static('public'));
-
 
 var apiProxy = new httpProxy.createProxyServer();
 app.get('/api*', function (req, res, next) {
