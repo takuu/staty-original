@@ -55,7 +55,9 @@ browserSync({
             res.end();
           });
         } else if (req.url.indexOf('/callbacklogin/facebook') >=0) {
-          var string = req.url.split('?')[1];
+
+          console.log('THIS SHOULD NOT BE CALLED');
+          /*var string = req.url.split('?')[1];
           var query = querystring.parse(string);
           console.log('FACEBOOK CALLBACK!', query);
           var options = {
@@ -76,7 +78,7 @@ browserSync({
               );
               res.end();
             }
-          })
+          })*/
 
         } else {
           console.log('req.url :', req.url);

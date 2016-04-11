@@ -63,13 +63,13 @@ module.exports = function(passport){
   router.get('/callbacklogin/facebook',
     passport.authenticate('facebook', { session: false, failureRedirect: "/contact" }),
     function(req, res) {
-      console.log('route: req.user: ', req.user);
-      var token = req.user.access_token;
+      console.log('route: req.user: ', typeof req.user, req.user);
+      var {fb: {access_token}} = req.user;
       // var token = req.user.displayName;
-      console.log('token: ', token);
-      apiProxy.web(req, res, { target: 'http://localhost:3000' });
+      console.log('token: ', access_token);
+      // apiProxy.web(req, res, { target: 'http://localhost:3000' });
       // res.json({ user: req.user});
-      // res.redirect("/profile?access_token=" + req.user.access_token);
+      res.redirect('http://localhost:3000/profile2?access_token=' + access_token);
     }
   );
 
