@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+import httpProxy from 'http-proxy';
+var apiProxy = new httpProxy.createProxyServer();
 
 var isAuthenticated = function (req, res, next) {
   // if user is authenticated in the session, call the next() to call the next request handler
@@ -63,14 +65,13 @@ module.exports = function(passport){
     function(req, res) {
       console.log('route: req.user: ', req.user);
       var token = req.user.access_token;
-      var token = req.user.displayName;
-      console.log('token: ', token)
-      res.json({ user: req.user});
+      // var token = req.user.displayName;
+      console.log('token: ', token);
+      apiProxy.web(req, res, { target: 'http://localhost:3000' });
+      // res.json({ user: req.user});
       // res.redirect("/profile?access_token=" + req.user.access_token);
     }
   );
-
-
 
   return router;
 };
