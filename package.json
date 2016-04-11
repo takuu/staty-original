@@ -2,20 +2,12 @@
   "main": "app/server-bundle",
   "license": "MIT",
   "author": {
-    "name": "Oleg Akbarov",
-    "email": "olegakbarov@gmail.com",
-    "url": "https://twitter.com/olegakbarov"
+    "name": "Taku Uechi",
+    "email": "taku30@gmail.com"
   },
-  "contributors": [
-    {
-      "name": "Sergey Slipchenko",
-      "email": "faergeek@gmail.com",
-      "url": "https://twitter.com/faergeek"
-    }
-  ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:GetExpert/redux-blog-example.git"
+    "url": "git@github.com:takuu/staty.git"
   },
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -70,7 +62,6 @@
     "redux": "^3.3.1",
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.0.1",
-    "request": "^2.70.0",
     "winston": "^2.2.0"
   },
   "devDependencies": {

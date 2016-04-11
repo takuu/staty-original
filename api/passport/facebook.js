@@ -21,7 +21,7 @@ module.exports = function(passport) {
       process.nextTick(function() {
 
         // find the user in the database based on their facebook id
-        User.findOne({ 'fb.id' : profile.id }, function(err, user) {
+        User.findOne({'fb.id' : profile.id}, function(err, user) {
 
           console.log('err', err);
 
