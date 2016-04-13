@@ -54,7 +54,7 @@ module.exports = function(passport){
   // route for facebook authentication and login
   // different scopes while logging in
   router.get('/login/facebook',
-    passport.authenticate('facebook', { session: false, scope : 'email' }
+    passport.authenticate('facebook', { session: false, scope: ['email', 'public_profile'] }
     ));
 
   // handle the callback after facebook has authenticated the user

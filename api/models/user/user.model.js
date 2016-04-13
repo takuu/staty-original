@@ -11,7 +11,8 @@ var UserSchema = new Schema({
     firstName: String,
     lastName: String,
     displayName: String,
-    email: String
+    email: String,
+    profile_image: String
   },
   twitter: {
     id: String,

@@ -18,6 +18,7 @@ export default class ProfileRoute extends React.Component {
 
   render () {
     const { auth: { profile } } = this.props;
+    debugger;
 
     if (!profile) return null;
 
