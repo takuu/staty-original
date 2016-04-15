@@ -55,7 +55,7 @@ const routes = (
       <Route path="/dashboard/add" component={Posts.Edit} />
       <Route path="/dashboard/edit/:id" component={Posts.Edit} />
     </Route>
-    <Route path="/profile" component={ProfilePage} />
+    <Route path="/profile/:userId" component={ProfilePage} />
     <Route path="/about" component={AboutPage} />
 
     <Route path="/contact" component={ContactPage} />

@@ -21,6 +21,7 @@ var UserSchema = new Schema({
     displayName: String,
     lastStatus: String
   },
+  players: [{type: Schema.ObjectId, ref: 'Player'}],
   created: { type: Date, default: Date.now },
   updated: { type: Date, default: Date.now }
 

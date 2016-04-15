@@ -66,5 +66,7 @@ export default keyMirror({
   SET_STATS_OF_PLAYER: null,
   SET_STATS_OF_TEAM: null,
   SET_STATS_OF_GAME: null,
-  UPDATE_STAT: null
+  UPDATE_STAT: null,
+
+  SET_USER: null
 });
