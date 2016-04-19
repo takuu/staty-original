@@ -3,16 +3,20 @@ import React, { PropTypes } from 'react';
 // import './styles.css';
 if (process.env.BROWSER) require('./styles.css');
 import _ from 'lodash';
-import { getPlayerById, getPlayersWithFilters } from '../../actions/playerActions';
+import { getPlayersWithFilters } from '../../actions/playerActions';
 import PlayerList from '../../components/core/PlayerList/PlayerList';
 import { connect } from 'react-redux';
 
-
 @connect((state,router) => {
-  return {games: games, params: router.params, player: player, team: team, players: players}
+
+  const playersJS = state.players.toJS();
+  const players = _.filter(playersJS, (player) => {
+    return player.team._id === teamId;
+  });
+
+  return { players: players };
 }, {
-  getPlayersWithFilters,
-  getPlayerById
+  getPlayersWithFilters
 })
 export default class PlayerLayout extends React.Component {
   static propTypes = {
@@ -27,19 +31,20 @@ export default class PlayerLayout extends React.Component {
   }
 
   render () {
-    const {league, games, player, team, params, players} = this.props;
+    const {players} = this.props;
+    debugger;
     var childrenWithProps = React.Children.map(this.props.children, (child) => {
-      return React.cloneElement(child, {league: league, games: games, player: player, team: team});
+      return React.cloneElement(child, { players: players });
     });
     return (
       <div>
         <div className='col-md-4 col-xs-4' style={{margin: '20px 0px'}}>
           <div className='sub-container'>
             <div className='sub-title-container'>
-              <div className='sub-title'>{team && team.name }</div>
+              <div className='sub-title'>WatchList</div>
             </div>
             <div>
-              <PlayerList players={players} player={player}/>
+              <PlayerList players={players}/>
             </div>
           </div>
         </div>
