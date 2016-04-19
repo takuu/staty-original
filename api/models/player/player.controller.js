@@ -17,6 +17,7 @@ var ObjectId = require('mongoose').Types.ObjectId;
 exports.index = function(req, res) {
   Player.find(req.query)
     .populate('team')
+    .populate('league')
     .exec(function (err, players) {
     if(err) { return handleError(res, err); }
     res.status(200).send(players);
@@ -73,6 +74,7 @@ exports.search = function(req, res) {
   var sort = {'score': {'$meta':'textScore'} };
   Player.find(find, findScore).sort(sort)
     .populate('team')
+    .populate('league')
     .exec(function(err, players) {
     // do something with returned docs
 
