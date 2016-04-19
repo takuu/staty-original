@@ -98,7 +98,7 @@ class SearchResultPage extends React.Component {
             <div className="sub-title-container">
               <div className="sub-title">Search results for "{searchName}"</div>
             </div>
-            <PlayerList players={players} league={league} />
+            <PlayerList players={players} />
           </div>
 
 

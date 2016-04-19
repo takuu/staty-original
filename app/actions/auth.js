@@ -67,8 +67,6 @@ export function login (email, password, router) {
         email,
         password
       });
-
-
       saveAuthToken(token);
 
       dispatch({ type: ActionTypes.LOGIN_SUCCESS, token });

@@ -5,6 +5,7 @@ import Auth from '../containers/Auth';
 import SignupPage from './../containers/SignupPage';
 import LoginPage from './../containers/LoginPage';
 import ProfilePage from './../containers/ProfilePage';
+import WatchPage from '../containers/Watch/WatchPage';
 import NotFound from '../components/NotFound';
 import redirectBackAfter from '../utils/redirectBackAfter';
 import fillStore from '../utils/fillStore';
@@ -55,7 +56,10 @@ const routes = (
       <Route path="/dashboard/add" component={Posts.Edit} />
       <Route path="/dashboard/edit/:id" component={Posts.Edit} />
     </Route>
+
     <Route path="/profile/:userId" component={ProfilePage} />
+    <Route path="/watchlist/:userId" component={WatchPage} />
+
     <Route path="/about" component={AboutPage} />
 
     <Route path="/contact" component={ContactPage} />

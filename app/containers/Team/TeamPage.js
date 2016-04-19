@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import PlayerList from '../../components/core/PlayerList/PlayerList';
+// import PlayerList from '../../components/core/PlayerList/PlayerList';
 import TeamSchedule from '../../components/core/TeamSchedule/TeamSchedule';
 import _ from 'lodash';
 import classNames from 'classnames';

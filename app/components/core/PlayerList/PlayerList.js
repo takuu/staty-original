@@ -20,6 +20,7 @@ const PlayerList = ({players, league, player}) => {
     <ul className='list-group'>
       {
         _.map(players, (player) => {
+          const { league } = player;
           let playerClass = classNames({
             'active': player._id === activePlayerId,
             'list-group-item': true,
@@ -62,13 +63,11 @@ const PlayerList = ({players, league, player}) => {
 
 PlayerList.propTypes = {
   players: PropTypes.array,
-  league: PropTypes.object,
   player: PropTypes.object
 };
 
 PlayerList.defaultProps = {
   players: [],
-  league: {},
   player: {}
 };
 
