@@ -1,7 +1,10 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import Modal from '../../../components/core/Modal/Modal';
+import { addPlayerToWatchList, removePlayerFromWatchList } from '../../../actions/guestActions';
+import _ from 'lodash';
 // import './styles.css';
+
 if (process.env.BROWSER) require('./styles.css');
 
 export default class PlayerAddButton extends React.Component {
@@ -12,32 +15,49 @@ export default class PlayerAddButton extends React.Component {
 
   static propTypes = {
     league: PropTypes.object,
-    player: PropTypes.object
+    player: PropTypes.object,
+    dispatch: PropTypes.func,
+    watchList: PropTypes.array
   };
 
-
-  close () {
+  remove () {
+    const { player, dispatch, watchList } = this.props;
+    dispatch(removePlayerFromWatchList(player));
     debugger;
-    this.setState({ showModal: false });
+    // this.setState({ showModal: false });
   }
 
   open () {
-    console.log('open', this.setState);
+    const { player, dispatch, watchList } = this.props;
+    dispatch(addPlayerToWatchList(player));
     debugger;
-    this.setState({ showModal: true });
+    // this.setState({ showModal: true });
   }
   render() {
+    const {player, watchList} = this.props;
+    debugger;
+
+    let which = _.find(watchList, {_id: player && player._id})
+      ? (
+        <button onClick={this.remove.bind(this)} className='btn btn-info'
+                style={{fontSize: '.8em', width: '28px', padding: '5px', backgroundColor: '#ffffff', color: '#5bc0de', border: '1px solid'}}>
+          <span className='glyphicon glyphicon-minus' style={{left: '1px'}}></span>
+        </button>
+      )
+      : (
+        <button onClick={this.open.bind(this)} className='btn btn-info' style={{fontSize: '.8em', width: '28px', padding: '5px', backgroundColor: '#ffffff', color: '#5bc0de', border: '1px solid'}}>
+          <span className='glyphicon glyphicon-plus' style={{left: '1px'}}></span>
+        </button>
+      );
 
     return (
       <div>
-      <button onClick={this.open.bind(this)} className='btn btn-info' style={{fontSize: '.8em', width: '28px', padding: '5px', backgroundColor: '#ffffff', color: '#5bc0de', border: '1px solid'}}>
-        <span className='glyphicon glyphicon-plus' style={{left: '1px'}}></span>
-      </button>
+        {which}
         <Modal isOpen={this.state.showModal}
                transitionName="modal-anim">
           <div>
             <h1>HELLO WORLD {this.props.player.name}</h1>
-            <button onClick={this.close.bind(this)}>Close</button>
+            <button onClick={this.remove.bind(this)}>Remove</button>
           </div>
         </Modal>
       </div>

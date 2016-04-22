@@ -44,7 +44,7 @@ export default class PlayerLayout extends React.Component {
               <div className='sub-title'>WatchList</div>
             </div>
             <div>
-              <PlayerList players={players}/>
+              <PlayerList players={players} />
             </div>
           </div>
         </div>

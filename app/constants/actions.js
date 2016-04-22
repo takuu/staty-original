@@ -68,5 +68,8 @@ export default keyMirror({
   SET_STATS_OF_GAME: null,
   UPDATE_STAT: null,
 
+  SET_PLAYER_TO_WATCH_LIST: null,
+  REMOVE_PLAYER_FROM_WATCH_LIST: null,
+
   SET_USER: null
 });

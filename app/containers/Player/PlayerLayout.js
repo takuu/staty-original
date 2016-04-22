@@ -9,6 +9,7 @@ import { getTeamById } from '../../actions/teamActions';
 import Standings from '../../components/core/Standings/Standings.js';
 import PlayerList from '../../components/core/PlayerList/PlayerList';
 import { getPlayersWithFilters } from '../../actions/playerActions';
+import { fetchWatchList } from '../../actions/guestActions'
 import { connect } from 'react-redux';
 
 //":leagueName/division/:divisionId/game/:gameId"
@@ -32,11 +33,16 @@ import { connect } from 'react-redux';
     return game;
   });
 
-  return {games: games, params: router.params, player: player, team: team, players: players}
+  const watchListJS = state.guests.toJS();
+  const watchList = _.map(watchListJS, (watch) => {
+    return watch;
+  });
+  return {games: games, params: router.params, player: player, team: team, players: players, watchList: watchList};
 }, {
   getPlayersWithFilters,
   getPlayerById,
-  getTeamById
+  getTeamById,
+  fetchWatchList
 })
 export default class PlayerLayout extends React.Component {
   static propTypes = {
@@ -45,17 +51,21 @@ export default class PlayerLayout extends React.Component {
     games: PropTypes.array,
     player: PropTypes.object,
     team: PropTypes.object,
-    players: PropTypes.array
+    players: PropTypes.array,
+    watchList: PropTypes.array
   };
   static fillStore (redux, router) {
     const {playerId, teamId} = router.params;
-    redux.dispatch(getPlayerById(playerId));
-    redux.dispatch(getTeamById(teamId));
-    return redux.dispatch(getPlayersWithFilters({team: teamId}));
+    return Promise.all([redux.dispatch(getPlayersWithFilters({team: teamId})),
+      redux.dispatch(getPlayerById(playerId)),
+      redux.dispatch(getTeamById(teamId)),
+      redux.dispatch(fetchWatchList())
+    ]);
+
   }
 
   render () {
-    const {league, games, player, team, params, players} = this.props;
+    const {league, games, player, team, params, players, dispatch, watchList} = this.props;
     var childrenWithProps = React.Children.map(this.props.children, (child) => {
       return React.cloneElement(child, {league: league, games: games, player: player, team: team});
     });
@@ -67,7 +77,7 @@ export default class PlayerLayout extends React.Component {
               <div className='sub-title'>{team && team.name }</div>
             </div>
             <div>
-              <PlayerList players={players} player={player}/>
+              <PlayerList players={players} player={player} dispatch={dispatch} watchList={watchList} />
             </div>
           </div>
         </div>

@@ -10,6 +10,8 @@ import players from './playerReducers';
 import stats from './statReducers';
 import seasons from './seasonReducers';
 import users from './userReducers';
+import guests from './guestReducers';
+
 export default combineReducers({
   auth,
   router,
@@ -21,5 +23,6 @@ export default combineReducers({
   players,
   stats,
   seasons,
-  users
+  users,
+  guests
 });

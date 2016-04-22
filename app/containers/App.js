@@ -18,15 +18,15 @@ export default class App extends React.Component {
     children: PropTypes.element.isRequired,
     dispatch: PropTypes.func.isRequired,
     error: PropTypes.string
-  }
+  };
 
   static contextTypes = {
     router: PropTypes.object
-  }
+  };
 
   static fillStore (redux) {
     return redux.dispatch(fetchProfile());
-  }
+  };
 
   render () {
     const {

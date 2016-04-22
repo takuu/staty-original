@@ -4,11 +4,11 @@ import statParser from '../../../utils/statParser';
 import classNames from 'classnames';
 import helpers from '../../../utils/helpers';
 import _ from 'lodash';
-import PlayerAddButton from '../../../components/core/PlayerAddButton/PlayerAddButton'
+import PlayerAddButton from '../../../components/core/PlayerAddButton/PlayerAddButton';
 // import './styles.css';
 if (process.env.BROWSER) require('./styles.css');
 
-const PlayerList = ({players, league, player}) => {
+const PlayerList = ({players, league, player, dispatch, watchList}) => {
   let hasNumber = helpers.doesKeyExistInList(players, 'number');
   let hasName = helpers.doesKeyExistInList(players, 'name');
   let hasPos = helpers.doesKeyExistInList(players, 'position');
@@ -47,7 +47,7 @@ const PlayerList = ({players, league, player}) => {
                   {(hasHeight) ? (player.height || '-') : ''}
                 </span>
                 <span className='inline-list-item add-item'>
-                  <PlayerAddButton league={league} player={player} />
+                  <PlayerAddButton league={league} player={player} dispatch={dispatch} watchList={watchList} />
                 </span>
             </li>
           );
@@ -56,7 +56,7 @@ const PlayerList = ({players, league, player}) => {
     </ul>
   );
 
-  function _createPlayerUrl(league, player) {
+  function _createPlayerUrl (league, player) {
     return (player) ? `/${league.name}/team/${player.team._id}/player/${player._id}` : '#';
   }
 };
