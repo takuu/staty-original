@@ -12,12 +12,12 @@ export default (state = defaultState, action) => {
       });
       return state;
       break;
-
     case ActionTypes.REMOVE_PLAYER_FROM_WATCH_LIST:
-      state = state.delete(action.guest._id);
+      _.map(action.guests, (guest, index) => {
+        state = state.delete(guest._id);
+      });
       return state;
       break;
-
     default:
       return state;
   }

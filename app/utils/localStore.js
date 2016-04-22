@@ -27,7 +27,7 @@ let storage = {
     console.log('localStore: removed: ', removed);
 
     localStorage.setItem(name, JSON.stringify(list));
-    if (removed.length) return removed.shift();
+    return removed;
   },
 
   get (name) {
