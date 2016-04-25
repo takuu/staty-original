@@ -1,6 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
+
+var jwtToken = require('jsonwebtoken');
+import config from '../config';
+function generateToken(id, access_token) {
+  const payload = {id, access_token};
+  return jwtToken.sign(payload, config.token.secret, {
+    expiresInMinutes: config.token.expires
+  });
+}
+
 var isAuthenticated = function (req, res, next) {
   // if user is authenticated in the session, call the next() to call the next request handler
   // Passport adds this method to request object. A middleware is allowed to add properties to
@@ -64,8 +74,10 @@ module.exports = function(passport){
       console.log('route: req.user: ', typeof req.user, req.user);
       var {_id, fb: {access_token}} = req.user;
       console.log('token: ', access_token);
+      var token = generateToken(_id, access_token);
 
-      res.cookie('access_token', access_token, { maxAge: 900000, httpOnly: true });
+      // res.cookie('token', access_token, { maxAge: 900000, httpOnly: false });
+      res.cookie('token', token, { maxAge: 900000, httpOnly: false });
       res.redirect('http://localhost:3000/profile/' + _id);
     }
   );

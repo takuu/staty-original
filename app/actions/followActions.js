@@ -11,11 +11,11 @@ export function addPlayerToWatchList (player) {
   return async (dispatch, getState) => {
     try {
       // TODO: Add check to see if user is already logged in
-      const guests = storage.add('watchList', player);
+      const followList = storage.add('watchList', player);
 
-      dispatch({ type: ActionTypes.SET_PLAYER_TO_WATCH_LIST, guests });
+      dispatch({ type: ActionTypes.SET_PLAYER_TO_WATCH_LIST, followList });
     } catch (error) {
-      console.error('guestActions error: ', error);
+      console.error('followActions error: ', error);
     }
   };
 }
@@ -23,10 +23,10 @@ export function fetchWatchList () {
   //TODO: fetch the full watchList
   return async (dispatch, getState) => {
     try {
-      const guests = storage.get('watchList');
-      dispatch({ type: ActionTypes.SET_PLAYER_TO_WATCH_LIST, guests });
+      const followList = storage.get('watchList');
+      dispatch({ type: ActionTypes.SET_PLAYER_TO_WATCH_LIST, followList });
     } catch (error) {
-      console.error('guestActions error: ', error);
+      console.error('followActions error: ', error);
     }
   };
 }
@@ -35,10 +35,10 @@ export function fetchWatchList () {
 export function removePlayerFromWatchList (player) {
   return async (dispatch, getState) => {
     try {
-      const guests = storage.remove('watchList', player && player._id);
-      dispatch({ type: ActionTypes.REMOVE_PLAYER_FROM_WATCH_LIST, guests });
+      const followList = storage.remove('watchList', player && player._id);
+      dispatch({ type: ActionTypes.REMOVE_PLAYER_FROM_WATCH_LIST, followList });
     } catch (error) {
-      console.error('guestActions error: ', error);
+      console.error('followActions error: ', error);
     }
   };
 }

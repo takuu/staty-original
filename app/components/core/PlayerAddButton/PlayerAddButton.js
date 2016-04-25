@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import Modal from '../../../components/core/Modal/Modal';
-import { addPlayerToWatchList, removePlayerFromWatchList } from '../../../actions/guestActions';
+import { addPlayerToWatchList, removePlayerFromWatchList } from '../../../actions/followActions';
 import _ from 'lodash';
 // import './styles.css';
 
@@ -35,8 +35,6 @@ export default class PlayerAddButton extends React.Component {
   }
   render() {
     const {player, watchList} = this.props;
-    debugger;
-
     let which = _.find(watchList, {_id: player && player._id})
       ? (
         <button onClick={this.remove.bind(this)} className='btn btn-info'

@@ -20,7 +20,6 @@ const store = createRedux((process.env.NODE_ENV === 'production')
   ? JSON.parse(decodeURIComponent(window.__INITIAL_STATE__))
   : (canUseDOM) ? { auth: { token: cookie.get('token') || '' } } : {});
 
-
 // const store = createRedux((canUseDOM) ? { auth: { token: cookie.get('token') || '' } } : {});
 
 if(!canUseDOM) {

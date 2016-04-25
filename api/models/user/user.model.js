@@ -14,14 +14,15 @@ var UserSchema = new Schema({
     email: String,
     profile_image: String
   },
-  twitter: {
+  /*twitter: {
     id: String,
     token: String,
     username: String,
     displayName: String,
     lastStatus: String
-  },
+  },*/
   players: [{type: Schema.ObjectId, ref: 'Player'}],
+  // players: [{name: String, players: [{type: Schema.ObjectId, ref: 'Player'}]}],
   created: { type: Date, default: Date.now },
   updated: { type: Date, default: Date.now }
 

@@ -2,6 +2,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import jwt from 'express-jwt';
+import cookieParser from 'cookie-parser';
 import jsonServer from 'json-server';
 import config from './config';
 import jwtToken from 'jsonwebtoken';
@@ -12,8 +13,7 @@ import passport from 'passport';
 // import expressSession from 'express-session';
 import mongoose from 'mongoose';
 
-
-mongoose.connect('mongodb://localhost:27017/staty', {db: {safe:true}});
+mongoose.connect('mongodb://localhost:27017/staty', {db: {safe: true}});
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -28,6 +28,8 @@ const app = express();
 
 app.use(jsonServer.defaults);
 app.use(bodyParser.json());
+app.use(cookieParser());
+
 app.use(jwt({
   secret: config.token.secret
 }).unless(req => {

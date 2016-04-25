@@ -9,7 +9,7 @@ import { getTeamById } from '../../actions/teamActions';
 import Standings from '../../components/core/Standings/Standings.js';
 import PlayerList from '../../components/core/PlayerList/PlayerList';
 import { getPlayersWithFilters } from '../../actions/playerActions';
-import { fetchWatchList } from '../../actions/guestActions'
+import { fetchWatchList } from '../../actions/followActions';
 import { connect } from 'react-redux';
 
 //":leagueName/division/:divisionId/game/:gameId"
@@ -33,7 +33,7 @@ import { connect } from 'react-redux';
     return game;
   });
 
-  const watchListJS = state.guests.toJS();
+  const watchListJS = state.followList.toJS();
   const watchList = _.map(watchListJS, (watch) => {
     return watch;
   });

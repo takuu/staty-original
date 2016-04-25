@@ -101,10 +101,12 @@ export function fetchProfile () {
     try {
       const { auth: { token } } = getState();
 
+      debugger;
       if (!token) { return; }
 
       const headers = getHeaders(token);
       const user = (await axios.get(`${baseUrl}/profile`, { headers })).data;
+      debugger;
       dispatch({ type: ActionTypes.FETCH_PROFILE_SUCCESS, user });
     } catch (error) {
       dispatch({ type: ActionTypes.FETCH_PROFILE_FAILURE, error });
