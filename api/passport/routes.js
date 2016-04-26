@@ -77,7 +77,7 @@ module.exports = function(passport){
       var token = generateToken(_id, access_token);
 
       // res.cookie('token', access_token, { maxAge: 900000, httpOnly: false });
-      res.cookie('token', token, { maxAge: 900000, httpOnly: false });
+      res.cookie('token', token, { expires: new Date(Date.now() + 900000), httpOnly: false });
       res.redirect('http://localhost:3000/profile/' + _id);
     }
   );

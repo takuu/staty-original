@@ -28,23 +28,31 @@ exports.show = function (req, res) {
 exports.getWatchList = function (req, res) {
   const { userId, access_token } = req;
   console.log('I HOPE!!', userId, access_token);
-  if (!userId) res.status(200).send([]);
-  User.findById(userId)
-    .populate('players')
-    .exec(function (err, user) {
-      if (err) { return handleError(res, err); }
-      if (!user) { return res.send(404); }
-      res.status(200).send(user);
-    });
+  if (!userId){
+    res.status(200).send([]);
+  } else {
+    User.findById(userId)
+      .populate('players')
+      .exec(function (err, user) {
+        if (err) { return handleError(res, err); }
+        if (!user) { return res.send(404); }
+        res.status(200).send(user);
+      });
+  }
+
 };
 
 exports.addWatch = function (req, res) {
-  const { playerId } = req.body;
-  const { id } = req.params;
+  const { userId } = req;
+  const { players } = req.body;
+
+  const playerList = _.map(players, (player) => {
+    return ObjectId(player);
+  })
 
   User.findOneAndUpdate(
-    {_id: ObjectId(id)},
-    {$push: {players: ObjectId(playerId)}},
+    {_id: ObjectId(userId)},
+    {$addToSet: { players: {$each: playerList} }},
     {safe: true, upsert: true, new: true},
     function (err, user) {
       if (err) { return handleError(res, err); }
@@ -54,11 +62,11 @@ exports.addWatch = function (req, res) {
 };
 
 exports.removeWatch = function (req, res) {
-  const { id } = req.params;
+  const { userId } = req;
   const { playerId } = req.body;
 
   User.findOneAndUpdate(
-    {_id: ObjectId(id)},
+    {_id: ObjectId(userId)},
     {$pullAll: {players: [ObjectId(playerId)]}},
     {safe: true, upsert: true, new: true},
     function (err, user) {

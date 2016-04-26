@@ -7,23 +7,24 @@ let storage = {
     localStorage.setItem(name, JSON.stringify(value));
   },*/
 
-  add (name, value = []) {
+  add (name, id = '') {
     if (!canUseDOM) { return; }
     let str = localStorage.getItem(name) || '[]';
 
     let list = [].concat(JSON.parse(str));
-    let found = _.find(list, {_id: value && value._id});
+    let found = (list.indexOf(id) >= 0);
 
-    let newList = list.concat(value);
-    if(!found) localStorage.setItem(name, JSON.stringify(newList));
-    return newList;
+    if (id) list.push(id);
+    if (!found) localStorage.setItem(name, JSON.stringify(list));
+    return list;
   },
 
-  remove(name, id = '') {
+  remove (name, id = '') {
     if (!canUseDOM) { return; }
     let str = localStorage.getItem(name) || '[]';
     let list = [].concat(JSON.parse(str));
-    let removed = _.remove(list, {_id: id});
+    let removed = _.remove(list, (item) => { return item == id; });
+    // let removed = _.remove(list, {_id: id});
     console.log('localStore: removed: ', removed);
 
     localStorage.setItem(name, JSON.stringify(list));

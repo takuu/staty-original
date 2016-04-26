@@ -21,21 +21,21 @@ export default class PlayerAddButton extends React.Component {
   };
 
   remove () {
-    const { player, dispatch, watchList } = this.props;
-    dispatch(removePlayerFromWatchList(player));
+    const { player: {_id}, dispatch, watchList } = this.props;
+    dispatch(removePlayerFromWatchList(_id));
     debugger;
     // this.setState({ showModal: false });
   }
 
   open () {
-    const { player, dispatch, watchList } = this.props;
-    dispatch(addPlayerToWatchList(player));
+    const { player: {_id}, dispatch, watchList } = this.props;
+    dispatch(addPlayerToWatchList(_id));
     debugger;
     // this.setState({ showModal: true });
   }
   render() {
     const {player, watchList} = this.props;
-    let which = _.find(watchList, {_id: player && player._id})
+    let which = (_.indexOf(watchList, player._id) >= 0)
       ? (
         <button onClick={this.remove.bind(this)} className='btn btn-info'
                 style={{fontSize: '.8em', width: '28px', padding: '5px', backgroundColor: '#ffffff', color: '#5bc0de', border: '1px solid'}}>

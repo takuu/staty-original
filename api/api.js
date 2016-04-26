@@ -15,7 +15,6 @@ router.use('/teams', require('./models/team/index.js'));
 router.use('/stats', require('./models/stat/index.js'));
 router.use('/users', require('./models/user/index.js'));
 
-
 router.get('/userStatus', async (req, res, next) => {
   try {
     let user = req.user;
