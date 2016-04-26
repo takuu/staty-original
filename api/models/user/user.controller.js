@@ -39,12 +39,12 @@ exports.getWatchList = function (req, res) {
 };
 
 exports.addWatch = function (req, res) {
-  const { player } = req.body;
+  const { playerId } = req.body;
   const { id } = req.params;
 
   User.findOneAndUpdate(
     {_id: ObjectId(id)},
-    {$push: {players: player}},
+    {$push: {players: ObjectId(playerId)}},
     {safe: true, upsert: true, new: true},
     function (err, user) {
       if (err) { return handleError(res, err); }
@@ -55,9 +55,11 @@ exports.addWatch = function (req, res) {
 
 exports.removeWatch = function (req, res) {
   const { id } = req.params;
+  const { playerId } = req.body;
 
-  User.findOneAndRemove(
+  User.findOneAndUpdate(
     {_id: ObjectId(id)},
+    {$pullAll: {players: [ObjectId(playerId)]}},
     {safe: true, upsert: true, new: true},
     function (err, user) {
       if (err) { return handleError(res, err); }

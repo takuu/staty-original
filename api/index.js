@@ -47,7 +47,7 @@ app.use(jwt({
       (leaguesRE).test(url) && req.method === 'GET' ||
       (loginRE).test(url) && req.method === 'GET' ||
       (callbackloginRE).test(url) && req.method === 'GET' ||
-      (apiRE).test(url) && (req.method === 'GET' || req.method === 'POST')
+      (apiRE).test(url) && (req.method === 'GET' || req.method === 'POST' || req.method === 'PUT')
   );
 }));
 
