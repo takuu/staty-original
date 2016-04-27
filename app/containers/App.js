@@ -8,10 +8,12 @@ import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import { fetchProfile, logout } from '../actions/auth';
 
-@connect(state => ({
-  auth: state.auth,
-  router: state.router
-}))
+@connect(state => {
+  const {auth, router, user} = state;
+
+  return {auth, router, user};
+
+})
 export default class App extends React.Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
@@ -32,7 +34,8 @@ export default class App extends React.Component {
     const {
       auth,
       dispatch,
-      params
+      params,
+      user
     } = this.props;
     var childrenWithProps = React.Children.map(this.props.children, (child) => {
       return React.cloneElement(child, { dispatch: dispatch });
@@ -45,6 +48,7 @@ export default class App extends React.Component {
           router={this.context.router}
           params={params}
           dispatch={dispatch}
+          user={user}
           {...bindActionCreators({ logout }, dispatch)}
         />
         <div style={{minHeight: '800px'}}>

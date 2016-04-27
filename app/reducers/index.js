@@ -9,7 +9,7 @@ import games from './gameReducers';
 import players from './playerReducers';
 import stats from './statReducers';
 import seasons from './seasonReducers';
-import users from './userReducers';
+import user from './userReducers';
 import followList from './followReducers';
 
 export default combineReducers({
@@ -23,6 +23,6 @@ export default combineReducers({
   players,
   stats,
   seasons,
-  users,
+  user,
   followList
 });

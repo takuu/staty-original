@@ -35,8 +35,20 @@ export default class Header extends React.Component {
   }
 
   renderNavBar () {
-    const { loggedIn, params } = this.props;
-    if (loggedIn) {
+    const { loggedIn, params, user } = this.props;
+
+
+    if (user && user.fb) {
+      debugger;
+      return (
+        <div className='Header-nav Navigation'>
+          <Link className='Navigation-link' to='/leagues'>Leagues</Link>
+          <Link className='Navigation-link' to='/about'>About</Link>
+          <Link className='Navigation-link' to='/profile'>{user.fb.name}</Link>
+
+        </div>
+        )
+    } else if (loggedIn) {
       let adminLink = `/${params.leagueName}/admin`;
       return (
           <div className='Header-nav Navigation' role='navigation'>
