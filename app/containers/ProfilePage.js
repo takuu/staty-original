@@ -12,8 +12,6 @@ import _ from 'lodash';
   const usersJS = state.users.toJS();
   const user = _.find(usersJS, {_id: userId});
 
-  debugger;
-
   return {auth, user};
 }, {
   saveProfile,
@@ -34,7 +32,6 @@ export default class ProfileRoute extends React.Component {
 
   render () {
     const { auth: { profile }, user } = this.props;
-    debugger;
 
     if (!user) return null;
 

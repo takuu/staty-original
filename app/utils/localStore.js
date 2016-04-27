@@ -35,6 +35,10 @@ let storage = {
     if (!canUseDOM) { return; }
     let str = localStorage.getItem(name) || '';
     return JSON.parse(str);
+  },
+  set(name, list) {
+    if (!canUseDOM) { return; }
+    localStorage.setItem(name, JSON.stringify(list));
   }
 };
 

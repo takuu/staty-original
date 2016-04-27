@@ -32,6 +32,7 @@ export function addPlayerToWatchList (playerId) {
       if (token) {
         const headers = getHeaders(token);
         const user = (await axios.put(`${baseUrl}/users/addwatch`, { players: followList }, { headers })).data;
+        storage.set('watchList', user.players);
       }
 
       // TODO: Add check to see if user is already logged in
@@ -52,6 +53,7 @@ export function removePlayerFromWatchList (playerId) {
       if (token) {
         const headers = getHeaders(token);
         const user = (await axios.put(`${baseUrl}/users/removewatch`, { playerId }, { headers })).data;
+        storage.set('watchList', user.players);
       }
 
       dispatch({ type: ActionTypes.REMOVE_PLAYER_FROM_WATCH_LIST, followList });

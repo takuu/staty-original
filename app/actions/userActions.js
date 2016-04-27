@@ -32,7 +32,6 @@ export function getProfile(id = '') {
   return async (dispatch) => {
     try {
       const user = (await axios.get(baseUrl + '/users/' + id)).data;
-      debugger;
       dispatch({ type: ActionTypes.SET_USER, user });
     } catch (error) {
       console.log('userActions error: ', error);

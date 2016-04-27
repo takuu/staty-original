@@ -9,7 +9,11 @@ if (process.env.BROWSER) {
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import NavItem from './NavItem';
+import FacebookLogin from 'react-facebook-login';
 
+const responseFacebook = (response) => {
+  console.log('facebook response', response);
+}
 export default class Header extends React.Component {
   static propTypes = {
     loggedIn: PropTypes.bool,
@@ -45,6 +49,10 @@ export default class Header extends React.Component {
         <div className='Header-nav Navigation'>
           <Link className='Navigation-link' to='/leagues'>Leagues</Link>
           <Link className='Navigation-link' to='/about'>About</Link>
+          <FacebookLogin
+            appId="1017967544938771"
+            autoLoad={true}
+            callback={responseFacebook} scope='public_profile, email' />
         </div>
       );
     }

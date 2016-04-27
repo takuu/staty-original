@@ -49,6 +49,7 @@ exports.addWatch = function (req, res) {
   const playerList = _.map(players, (player) => {
     return ObjectId(player);
   })
+  console.log('addWatch');
 
   User.findOneAndUpdate(
     {_id: ObjectId(userId)},

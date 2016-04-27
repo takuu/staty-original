@@ -101,7 +101,6 @@ export function fetchProfile () {
     try {
       const { auth: { token } } = getState();
 
-      debugger;
       if (!token) { return; }
 
       const headers = getHeaders(token);
