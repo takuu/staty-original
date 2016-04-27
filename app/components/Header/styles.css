@@ -19,6 +19,13 @@
     z-index:100;
 
 }
+.my-facebook-button-class {
+    width: 100px;
+    height: 50px;
+    font-size: 12px;
+    line-height: 1em;
+    padding: 0px;
+}
 
 /*.Header-container {*/
 /*margin: 0 auto;*/

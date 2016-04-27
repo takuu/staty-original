@@ -21,14 +21,26 @@ export function getUserByToken (token = '') {
   return async (dispatch) => {
     try {
       const season = (await axios.get(baseUrl + '/users/token/' + token)).data;
-      dispatch({ type: ActionTypes.SET_FACEBOOK_, season });
+      dispatch({ type: ActionTypes.SET_FACEBOOK, season });
     } catch (error) {
-      console.log('seasonActions error: ', error);
+      console.log('userActions error: ', error);
     }
   };
 }
 
-export function getProfile(id = '') {
+export function addFacebookUser (user = {}) {
+  return async (dispatch) => {
+    try {
+      console.log('adding... ', user);
+      const newUser = (await axios.put(baseUrl + '/users/addFacebookUser/', { user: user })).data;
+      dispatch({ type: ActionTypes.SET_USER, user: newUser });
+    } catch (error) {
+      console.log('userActions error: ', error);
+    }
+  };
+}
+
+export function getProfile (id = '') {
   return async (dispatch) => {
     try {
       const user = (await axios.get(baseUrl + '/users/' + id)).data;
@@ -39,6 +51,7 @@ export function getProfile(id = '') {
   };
 }
 
+/*
 export function addPlayerToWatchList (player) {
   return async (dispatch, getState) => {
     try {
@@ -85,4 +98,4 @@ export function removePlayerFromWatchList (player) {
       console.log('userActions error: ', error);
     }
   };
-}
+}*/

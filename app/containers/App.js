@@ -44,6 +44,7 @@ export default class App extends React.Component {
           loggedIn={!!auth.token}
           router={this.context.router}
           params={params}
+          dispatch={dispatch}
           {...bindActionCreators({ logout }, dispatch)}
         />
         <div style={{minHeight: '800px'}}>

@@ -7,12 +7,12 @@ var Schema = mongoose.Schema;
 var UserSchema = new Schema({
   fb: {
     id: String,
-    access_token: String,
+    accessToken: String,
     firstName: String,
     lastName: String,
     displayName: String,
     email: String,
-    profile_image: String
+    profileImage: String
   },
   /*twitter: {
     id: String,

@@ -1,6 +1,6 @@
-import {
+/*import {
   SET_USER
-} from '../constants/actions';
+} from '../constants/actions';*/
 import ActionTypes from '../constants/actions';
 import Immutable from 'immutable';
 import _ from 'lodash';

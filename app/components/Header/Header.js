@@ -9,11 +9,10 @@ if (process.env.BROWSER) {
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import NavItem from './NavItem';
+import { addFacebookUser } from '../../actions/userActions';
 import FacebookLogin from 'react-facebook-login';
 
-const responseFacebook = (response) => {
-  console.log('facebook response', response);
-}
+
 export default class Header extends React.Component {
   static propTypes = {
     loggedIn: PropTypes.bool,
@@ -28,6 +27,12 @@ export default class Header extends React.Component {
 
     logout(router);
   };
+
+  responseFacebook(user) {
+    const { logout, router, dispatch } = this.props;
+    console.log('facebook response', user);
+    dispatch(addFacebookUser(user));
+  }
 
   renderNavBar () {
     const { loggedIn, params } = this.props;
@@ -52,7 +57,8 @@ export default class Header extends React.Component {
           <FacebookLogin
             appId="1017967544938771"
             autoLoad={true}
-            callback={responseFacebook} scope='public_profile, email' />
+            callback={this.responseFacebook.bind(this)} scope='public_profile, email' cssClass="my-facebook-button-class"
+            icon="fa-facebook" />
         </div>
       );
     }

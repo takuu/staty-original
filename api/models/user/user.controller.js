@@ -8,7 +8,6 @@
  */
 
 'use strict';
-
 var _ = require('lodash');
 var User = require('./user.model.js');
 var ObjectId = require('mongoose').Types.ObjectId;
@@ -39,7 +38,6 @@ exports.getWatchList = function (req, res) {
         res.status(200).send(user);
       });
   }
-
 };
 
 exports.addWatch = function (req, res) {
@@ -48,7 +46,7 @@ exports.addWatch = function (req, res) {
 
   const playerList = _.map(players, (player) => {
     return ObjectId(player);
-  })
+  });
   console.log('addWatch');
 
   User.findOneAndUpdate(
@@ -58,6 +56,24 @@ exports.addWatch = function (req, res) {
     function (err, user) {
       if (err) { return handleError(res, err); }
       res.status(200).send(user);
+    }
+  );
+};
+
+exports.addFacebookUser = function (req, res) {
+  const { user } = req.body;
+  if (!user.id) invalidParams(res, 'addFaceBookUser');
+
+  console.log('addFacebookUser', user);
+  let newUser = new User({fb: user, player: []});
+  User.findOneAndUpdate(
+    {'fb.id': user.id},
+    {$setOnInsert: newUser},
+    {safe: true, upsert: true, new: true},
+    function (err, raw) {
+      if (err) { return handleError(res, err); }
+      console.log('addFacebookUser update', raw);
+      res.status(200).send(raw);
     }
   );
 };
@@ -76,6 +92,12 @@ exports.removeWatch = function (req, res) {
     }
   );
 };
+
+function invalidParams(res, name) {
+  const msg = 'invalid params in ' + name;
+  console.log(msg);
+  return res.send(500, msg);
+}
 
 function handleError (res, err) {
   console.log('handleError');
