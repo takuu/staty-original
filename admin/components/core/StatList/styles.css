@@ -1,0 +1,11 @@
+.table tbody tr td {
+    text-align:center;
+    border-bottom:1px solid #ddd !important;
+}
+.table thead tr th {
+    text-align:center;
+}
+
+.table tbody tr td.name {
+    text-align:left !important;
+}

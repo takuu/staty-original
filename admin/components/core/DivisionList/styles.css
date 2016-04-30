@@ -1,0 +1,35 @@
+.noborder {
+    border: none !important;
+}
+
+.list-group-item {
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-around;
+    align-items:center;
+}
+
+.list-group-item-md {
+    height:50px;
+}
+
+.inline-list-item.date-item {
+    display: -webkit-flex;
+    display:flex;
+    align-items:center;
+    width:25%;
+}
+.inline-list-item.division-item {
+    display: -webkit-flex;
+    display:flex;
+    align-items:center;
+    width:50%;
+}
+.inline-list-item.status-item {
+    display: -webkit-flex;
+    display:flex;
+    align-items:center;
+    width:25%;
+    color:#aaa;
+    font-size:.8em;
+}

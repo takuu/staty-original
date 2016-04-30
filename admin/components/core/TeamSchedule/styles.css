@@ -1,0 +1,41 @@
+.list-group-item {
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-around;
+    align-items:center;
+}
+
+.list-group-item-md {
+    height:50px;
+}
+
+.inline-list-item.date-item {
+    display: -webkit-flex;
+    display:flex;
+    align-items:center;
+    width:30%;
+}
+.inline-list-item.time-item {
+    display: -webkit-flex;
+    display:flex;
+    align-items:center;
+    width:15%;
+}
+.inline-list-item.home-item {
+    display: -webkit-flex;
+    display:flex;
+    align-items:center;
+    width:20%;
+}
+.inline-list-item.score-item {
+    display: -webkit-flex;
+    display:flex;
+    align-items:center;
+    width:10%;
+}
+.inline-list-item.away-item {
+    display: -webkit-flex;
+    display:flex;
+    align-items:center;
+    width:20%;
+}
