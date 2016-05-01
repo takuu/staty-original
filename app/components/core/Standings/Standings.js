@@ -7,7 +7,7 @@ import createLinks from '../../../utils/createLinks';
 import _ from 'lodash';
 
 
-export default Standing = ({games, league, team}) => {
+const Standings = ({games, league, team}) => {
   const standings = statParser.createStandings(games);
   let activeTeamId = (typeof team === 'object') ? team._id : team;
 

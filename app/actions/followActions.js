@@ -3,6 +3,7 @@ import ActionTypes from '../constants/actions';
 import axios from 'axios';
 import getHeaders from '../utils/getHeaders';
 import storage from '../utils/localStore';
+import authActions from '../actions/auth';
 import config from '../../api/config.json';
 const baseUrl = `http://localhost:${config.port}/api`;
 
@@ -31,8 +32,9 @@ export function addPlayerToWatchList (playerId) {
       let followList = storage.add('watchList', playerId);
       if (token) {
         const headers = getHeaders(token);
+        debugger;
         const user = (await axios.put(`${baseUrl}/users/addwatch`, { players: followList }, { headers })).data;
-        storage.set('watchList', user.players);
+        if (user && user.players) storage.set('watchList', user.players);
       }
 
       // TODO: Add check to see if user is already logged in
@@ -52,6 +54,7 @@ export function removePlayerFromWatchList (playerId) {
       let followList = storage.remove('watchList', playerId);
       if (token) {
         const headers = getHeaders(token);
+        debugger;
         const user = (await axios.put(`${baseUrl}/users/removewatch`, { playerId }, { headers })).data;
         storage.set('watchList', user.players);
       }

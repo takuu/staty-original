@@ -22,7 +22,6 @@ db.once('open', function (callback) {
   // yay!
 });
 
-
 const jsonPath = path.join(__dirname, 'data.json');
 const app = express();
 
@@ -52,8 +51,7 @@ app.use(jwt({
 }));
 
 app.use(function (err, req, res, next) {
-
-
+  
   if (err.name === 'UnauthorizedError') {
     console.log('UnauthorizedError path', req.originalUrl);
     res.send(401, 'invalid token...', req.originalUrl);

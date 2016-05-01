@@ -12,7 +12,6 @@ import { fetchProfile, logout } from '../actions/auth';
   const {auth, router, user} = state;
 
   return {auth, router, user};
-
 })
 export default class App extends React.Component {
   static propTypes = {

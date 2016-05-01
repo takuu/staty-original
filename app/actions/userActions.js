@@ -3,9 +3,20 @@ import ActionTypes from '../constants/actions';
 import axios from 'axios';
 import getHeaders from '../utils/getHeaders';
 import storage from '../utils/localStore';
+import cookie from '../utils/cookie';
 import config from '../../api/config.json';
 const baseUrl = `http://localhost:${config.port}/api`;
 
+
+function saveAuthToken (token) {
+  const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+
+  cookie.set({
+    name: 'token',
+    value: token,
+    expires
+  });
+}
 export function addPlayerToUser (id = '') {
   return async (dispatch) => {
     try {
@@ -28,11 +39,18 @@ export function getUserByToken (token = '') {
   };
 }
 
-export function addFacebookUser (user = {}) {
+export function addFacebookUser (fbUser = {}) {
   return async (dispatch) => {
     try {
-      console.log('adding... ', user);
-      const newUser = (await axios.put(baseUrl + '/users/addFacebookUser/', { user: user })).data;
+      // const {accessToken} = fbUser;
+      console.log('adding... ', fbUser);
+      debugger;
+      const newUser = (await axios.put(baseUrl + '/users/addFacebookUser/', { user: fbUser })).data;
+      const {token, user} = newUser;
+      saveAuthToken(token);
+      debugger;
+      dispatch({ type: ActionTypes.LOGIN_SUCCESS, token });
+      // dispatch({ type: ActionTypes.FETCH_PROFILE_SUCCESS, user });
       dispatch({ type: ActionTypes.SET_USER, user: newUser });
     } catch (error) {
       console.log('userActions error: ', error);
@@ -51,51 +69,3 @@ export function getProfile (id = '') {
   };
 }
 
-/*
-export function addPlayerToWatchList (player) {
-  return async (dispatch, getState) => {
-    try {
-      const { auth: { token } } = getState();
-      debugger;
-
-      if (!token) {
-        storage.set('watchList', player);
-      } else {
-        const headers = getHeaders(token);
-
-        let user = (await axios.put(
-            `${baseUrl}/users/addPlayer`,
-            player,
-            { headers })
-        ).data;
-      }
-      dispatch({ type: ActionTypes.SET_PLAYER_TO_WATCH_LIST, player });
-    } catch (error) {
-      console.log('userActions error: ', error);
-    }
-  };
-}
-
-export function removePlayerFromWatchList (player) {
-  return async (dispatch, getState) => {
-    try {
-      const { auth: { token } } = getState();
-      debugger;
-
-      if (!token) {
-        storage.remove('watchList', player);
-      } else {
-        const headers = getHeaders(token);
-
-        user = (await axios.put(
-            `${baseUrl}/users/removePlayer`,
-            player,
-            { headers })
-        ).data;
-      }
-      dispatch({ type: ActionTypes.REMOVE_PLAYER_FROM_WATCH_LIST, player });
-    } catch (error) {
-      console.log('userActions error: ', error);
-    }
-  };
-}*/

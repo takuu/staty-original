@@ -10,6 +10,7 @@
 'use strict';
 var _ = require('lodash');
 var User = require('./user.model.js');
+var auth = require('../../auth/index');
 var ObjectId = require('mongoose').Types.ObjectId;
 
 // Get a single team
@@ -44,10 +45,12 @@ exports.addWatch = function (req, res) {
   const { userId } = req;
   const { players } = req.body;
 
+
+
   const playerList = _.map(players, (player) => {
     return ObjectId(player);
   });
-  console.log('addWatch');
+  console.log('addWatch', userId, players);
 
   User.findOneAndUpdate(
     {_id: ObjectId(userId)},
@@ -73,7 +76,8 @@ exports.addFacebookUser = function (req, res) {
     function (err, raw) {
       if (err) { return handleError(res, err); }
       console.log('addFacebookUser update', raw);
-      res.status(200).send(raw);
+      req.access_token = auth.generateToken(raw._id, req.long_token);
+      res.status(200).send({token: req.access_token, user: raw});
     }
   );
 };

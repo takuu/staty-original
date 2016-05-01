@@ -7,7 +7,7 @@ var router = express.Router();
 router.get('/watchlist', auth.isAuthenticated, controller.getWatchList);
 router.put('/addwatch', auth.isAuthenticated, controller.addWatch);
 router.put('/removewatch', auth.isAuthenticated, controller.removeWatch);
-router.put('/addFacebookUser', controller.addFacebookUser);
+router.put('/addFacebookUser', auth.fetchFacebookAccessToken, controller.addFacebookUser);
 
 router.get('/:id', controller.show);
 

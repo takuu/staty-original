@@ -35,7 +35,7 @@ export default class PlayerAddButton extends React.Component {
   }
   render() {
     const {player, watchList, user} = this.props;
-    debugger;
+    // debugger;
     let which = (_.indexOf(watchList, player._id) >= 0)
       ? (
         <button onClick={this.remove.bind(this)} className='btn btn-info'
