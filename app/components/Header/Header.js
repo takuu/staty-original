@@ -12,7 +12,6 @@ import NavItem from './NavItem';
 import { addFacebookUser } from '../../actions/userActions';
 import FacebookLogin from 'react-facebook-login';
 
-
 export default class Header extends React.Component {
   static propTypes = {
     loggedIn: PropTypes.bool,
@@ -48,19 +47,6 @@ export default class Header extends React.Component {
 
         </div>
         )
-    } else if (loggedIn) {
-      let adminLink = `/${params.leagueName}/admin`;
-      return (
-          <div className='Header-nav Navigation' role='navigation'>
-            <Link className='Navigation-link' to='/leagues' >Leagues</Link>
-            <Link className='Navigation-link' to='/about'>About</Link>
-            <Link className='Navigation-link' to='/dashboard'>Dashboard</Link>
-            <Link className='Navigation-link' to={adminLink}>Admin</Link>
-            <Link className='Navigation-link' to='/profile'>Profile</Link>
-            <span className='Navigation-spacer'> | </span>
-            <Link className='Navigation-link' to='/logout' onClick={this.handleLogout}>Logout</Link>
-          </div>
-      );
     } else {
       return (
         <div className='Header-nav Navigation'>
@@ -76,7 +62,7 @@ export default class Header extends React.Component {
     }
   }
 
-  render() {
+  render () {
     return (
 
       <div>
@@ -90,8 +76,6 @@ export default class Header extends React.Component {
           </div>
         </div>
       </div>
-
-
     );
   }
 }

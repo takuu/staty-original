@@ -96,7 +96,7 @@ export function logout (router) {
   };
 }
 
-export function fetchProfile () {
+/*export function fetchProfile () {
   return async (dispatch, getState) => {
     try {
       const { auth: { token } } = getState();
@@ -111,7 +111,25 @@ export function fetchProfile () {
       dispatch({ type: ActionTypes.FETCH_PROFILE_FAILURE, error });
     }
   };
+}*/
+export function fetchUserProfile () {
+  return async (dispatch, getState) => {
+    try {
+      const { auth: { token } } = getState();
+
+      if (!token) { return; }
+
+      const headers = getHeaders(token);
+      const user = (await axios.get(`${baseUrl}/api/users/profile`, { headers })).data;
+      debugger;
+      // dispatch({ type: ActionTypes.FETCH_PROFILE_SUCCESS, user });
+      dispatch({ type: ActionTypes.SET_USER, user: user });
+    } catch (error) {
+      dispatch({ type: ActionTypes.FETCH_PROFILE_FAILURE, error });
+    }
+  };
 }
+
 
 export function saveProfile (user) {
   return async (dispatch, getState) => {

@@ -42,7 +42,6 @@ export function getUserByToken (token = '') {
 export function addFacebookUser (fbUser = {}) {
   return async (dispatch) => {
     try {
-      // const {accessToken} = fbUser;
       console.log('adding... ', fbUser);
       debugger;
       const newUser = (await axios.put(baseUrl + '/users/addFacebookUser/', { user: fbUser })).data;

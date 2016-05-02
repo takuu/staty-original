@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
-import { fetchProfile, logout } from '../actions/auth';
+import { fetchUserProfile, logout } from '../actions/auth';
 
 @connect(state => {
   const {auth, router, user} = state;
@@ -28,7 +28,7 @@ export default class App extends React.Component {
   };
 
   static fillStore (redux) {
-    return redux.dispatch(fetchProfile());
+    return redux.dispatch(fetchUserProfile());
   };
 
   render () {

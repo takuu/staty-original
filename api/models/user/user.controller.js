@@ -25,10 +25,21 @@ exports.show = function (req, res) {
     });
 };
 
+exports.getProfile = function (req, res) {
+  const { userId } = req;
+  console.log('getProfile');
+  User.findById(userId)
+    // .populate('division')
+    .exec(function (err, user) {
+      if (err) { return handleError(res, err); }
+      if (!user) { return res.send(404); }
+      res.status(200).send(user);
+    });
+};
+
 exports.getWatchList = function (req, res) {
   const { userId, access_token } = req;
-  console.log('I HOPE!!', userId, access_token);
-  if (!userId){
+  if (!userId) {
     res.status(200).send([]);
   } else {
     User.findById(userId)
@@ -69,7 +80,8 @@ exports.addFacebookUser = function (req, res) {
 
   console.log('addFacebookUser', user);
   let newUser = new User({fb: user, player: []});
-  User.findOneAndUpdate(
+  // TODO: This needs to update the long-token when it's renewed
+  /*User.findOneAndUpdate(
     {'fb.id': user.id},
     {$setOnInsert: newUser},
     {safe: true, upsert: true, new: true},
@@ -79,7 +91,36 @@ exports.addFacebookUser = function (req, res) {
       req.access_token = auth.generateToken(raw._id, req.long_token);
       res.status(200).send({token: req.access_token, user: raw});
     }
-  );
+  );*/
+
+  User.findOne({'fb.id': user.id}, function(err, raw) {
+    if (err) { return handleError(res, err); }
+    if (raw) {
+      // Found User
+      req.access_token = auth.generateToken(raw._id, req.long_token);
+      const {fb: {accessToken}} = raw;
+      if (accessToken != req.long_token) {
+        // Update Token
+        console.log('Updating ', accessToken, req.long_token);
+        raw.fb.accessToken = req.long_token;
+        raw.save(function(err, obj) {
+          console.log('updated User: ', obj);
+          res.status(200).send({token: req.access_token, user: obj});
+        });
+      } else {
+        // Same User, Same Token
+        res.status(200).send({token: req.access_token, user: raw});
+      }
+    } else {
+      // New User
+      newUser.save(function (err, obj) {
+        if (err) { return handleError(res, err); }
+        console.log('new User: ', obj);
+        req.access_token = auth.generateToken(obj._id, req.long_token);
+        res.status(200).send({token: req.access_token, user: obj});
+      });
+    }
+  });
 };
 
 exports.removeWatch = function (req, res) {

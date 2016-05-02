@@ -7,7 +7,6 @@ import config from '../config';
 var request = require('request');
 
 function isAuthenticated (req, res, next) {
-  console.log('req.cookies: ', req.cookies);
   const { token } = req.cookies;
   if (!token) {
     res.status(200).send({not_logged_in: true});
