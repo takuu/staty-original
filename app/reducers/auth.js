@@ -28,14 +28,12 @@ export default (state = initialState, action) => {
         ...state,
         error: null
       };
-
     case ActionTypes.LOGIN_SUCCESS:
       return {
         ...state,
         error: null,
         token: action.token
       };
-
     case ActionTypes.SIGNUP_FAILURE:
     case ActionTypes.LOGIN_FAILURE:
       return {
@@ -54,7 +52,6 @@ export default (state = initialState, action) => {
         profile: { ...state.profile, ...action.user },
         error: null
       };
-
     default:
       return state;
   }

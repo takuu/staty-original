@@ -17,6 +17,49 @@ function saveAuthToken (token) {
     expires
   });
 }
+export function addPlayerToWatchList (playerId) {
+  return async (dispatch, getState) => {
+    try {
+      const { auth: { token } } = getState();
+
+      let followList = storage.add('watchList', playerId);
+      if (token) {
+        const headers = getHeaders(token);
+        debugger;
+        const user = (await axios.put(`${baseUrl}/users/addwatch`, { players: followList }, { headers })).data;
+        if (user && user.players) storage.set('watchList', user.players);
+      }
+
+      // TODO: Add check to see if user is already logged in
+
+      dispatch({ type: ActionTypes.SET_PLAYER_TO_WATCH_LIST, followList });
+    } catch (error) {
+      console.error('followActions error: ', error);
+    }
+  };
+}
+
+export function removePlayerFromWatchList (playerId) {
+  return async (dispatch, getState) => {
+    try {
+      const { auth: { token } } = getState();
+
+      let followList = storage.remove('watchList', playerId);
+      if (token) {
+        const headers = getHeaders(token);
+        debugger;
+        const user = (await axios.put(`${baseUrl}/users/removewatch`, { playerId }, { headers })).data;
+        storage.set('watchList', user.players);
+      }
+
+      dispatch({ type: ActionTypes.REMOVE_PLAYER_FROM_WATCH_LIST, followList });
+    } catch (error) {
+      console.error('followActions error: ', error);
+    }
+  };
+}
+
+
 export function addPlayerToUser (id = '') {
   return async (dispatch) => {
     try {
@@ -35,6 +78,23 @@ export function getUserByToken (token = '') {
       dispatch({ type: ActionTypes.SET_FACEBOOK, season });
     } catch (error) {
       console.log('userActions error: ', error);
+    }
+  };
+}
+
+export function fetchWatchList () {
+  //TODO: fetch the full watchList
+  return async (dispatch, getState) => {
+    try {
+      const { auth: { token } } = getState();
+
+      const headers = getHeaders(token);
+      const user = (await axios.get(`${baseUrl}/users/watchlist`, { headers })).data;
+
+      const followList = storage.get('watchList');
+      dispatch({ type: ActionTypes.SET_PLAYER_TO_WATCH_LIST, followList });
+    } catch (error) {
+      console.error('followActions error: ', error);
     }
   };
 }
