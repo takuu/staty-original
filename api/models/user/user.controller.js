@@ -55,9 +55,7 @@ exports.getWatchList = function (req, res) {
 exports.addWatch = function (req, res) {
   const { userId } = req;
   const { players } = req.body;
-
-
-
+  
   const playerList = _.map(players, (player) => {
     return ObjectId(player);
   });

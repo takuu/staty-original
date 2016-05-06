@@ -146,7 +146,7 @@ adminBrowserSync.init({
           if(isAllowedAsset) return next();
 
 
-          fs.readFile(path.join(__dirname, 'app', 'template.html'), {
+          fs.readFile(path.join(__dirname, 'admin', 'template.html'), {
             encoding: 'utf-8'
           }, (err, source) => {
             if (err) return next(err);

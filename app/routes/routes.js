@@ -4,7 +4,8 @@ import App from './../containers/App';
 import Auth from '../containers/Auth';
 import SignupPage from './../containers/SignupPage';
 import LoginPage from './../containers/LoginPage';
-import ProfilePage from './../containers/ProfilePage';
+import ProfilePage from './../containers/Profile/ProfilePage';
+import ProfileLayout from './../containers/Profile/ProfileLayout';
 import WatchPage from '../containers/Watch/WatchPage';
 import NotFound from '../components/NotFound';
 import redirectBackAfter from '../utils/redirectBackAfter';
@@ -57,7 +58,10 @@ const routes = (
       <Route path="/dashboard/edit/:id" component={Posts.Edit} />
     </Route>
 
-    <Route path="/profile/:userId" component={ProfilePage} />
+    <Route component={ProfileLayout}>
+      <Route path="/profile" component={ProfilePage} />
+    </Route>
+
     <Route path="/watchlist/:userId" component={WatchPage} />
 
     <Route path="/about" component={AboutPage} />
