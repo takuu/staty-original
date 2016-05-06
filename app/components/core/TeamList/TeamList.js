@@ -4,9 +4,14 @@ import './styles.css';
 
 const TeamList = ({teams, league}) => {
   debugger;
+  var myTeam;
+
+  if(teams.length) {
+    myTeam = teams[7].name;
+  }
   return (
     <ul className='list-group'>
-      <li className='list-group-item nopadding'></li>
+      <li className='list-group-item nopadding'>{myTeam}</li>
     </ul>
   );
 
