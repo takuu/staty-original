@@ -2,16 +2,18 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import jwt from 'express-jwt';
+import cookieParser from 'cookie-parser';
 import jsonServer from 'json-server';
 import config from './config';
 import jwtToken from 'jsonwebtoken';
 import path from 'path';
 import fs from 'fs';
 import _ from 'lodash';
+import passport from 'passport';
+// import expressSession from 'express-session';
 import mongoose from 'mongoose';
 
-
-mongoose.connect('mongodb://localhost:27017/mofufus-dev', {db: {safe:true}});
+mongoose.connect('mongodb://localhost:27017/staty', {db: {safe: true}});
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -20,12 +22,13 @@ db.once('open', function (callback) {
   // yay!
 });
 
-
 const jsonPath = path.join(__dirname, 'data.json');
 const app = express();
 
 app.use(jsonServer.defaults);
 app.use(bodyParser.json());
+app.use(cookieParser());
+
 app.use(jwt({
   secret: config.token.secret
 }).unless(req => {
@@ -33,16 +36,40 @@ app.use(jwt({
   const postsRE = /^\/posts(\/.*)?$/;
   const leaguesRE = /^\/leagues(\/.*)?$/;
   const apiRE = /^\/api(\/.*)?$/;
+  const loginRE = /^\/login(\/.*)?$/;
+  const callbackloginRE = /^\/callbacklogin(\/.*)?$/;
 
   return (
       url === '/signup' ||
       url === '/login' ||
       (postsRE).test(url) && req.method === 'GET' ||
       (leaguesRE).test(url) && req.method === 'GET' ||
-      (apiRE).test(url) && (req.method === 'GET' || req.method === 'POST')
+      (loginRE).test(url) && req.method === 'GET' ||
+      (callbackloginRE).test(url) && req.method === 'GET' ||
+      (apiRE).test(url) && (req.method === 'GET' || req.method === 'POST' || req.method === 'PUT')
   );
 }));
-app.use('/api', require('./api.js'));
+
+app.use(function (err, req, res, next) {
+  
+  if (err.name === 'UnauthorizedError') {
+    console.log('UnauthorizedError path', req.originalUrl);
+    res.send(401, 'invalid token...', req.originalUrl);
+  }
+});
+
+// Configuring passport
+// app.use(expressSession({secret: 'mySecretKey'}));
+app.use(passport.initialize());
+// app.use(passport.session());
+let initPassport = require('./passport/init');
+initPassport(passport);
+
+
+import api from './api';
+app.use('/api', api);
+import passportRoutes from './passport/routes';
+app.use('/', passportRoutes(passport));
 
 function generateToken(email, password) {
   const payload = { email, password };
@@ -131,5 +158,5 @@ app.put('/profile', (req, res) => {
 });
 
 app.use(jsonServer.router(jsonPath));
-
+// export default app;
 app.listen(1337);

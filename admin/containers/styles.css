@@ -1,0 +1,239 @@
+.eric {
+    color: #ff0000;
+}
+
+h3 {
+    color:#ff0000;
+}
+
+h4 {
+    display: block;
+    -webkit-margin-before: 1.33em;
+    -webkit-margin-after: 1.33em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+}
+
+.center{
+    text-align: center;
+}
+
+.centerpicture{
+    margin-left: 55px;
+}
+
+.k-header--medium {
+    font-family: "Apercu", Arial, sans-serif;
+    font-size: 34px;
+    font-weight: 400;
+    line-height: 1.2;
+    word-wrap: break-word;
+    margin-bottom: 18px;
+}
+.k-color--marine {
+    color: #0e2f3c !important;
+}
+
+.k-spacing-bottom--x-large {
+    margin-bottom: 30px !important;
+}
+
+.k-paragraph {
+    font-family: "Apercu", Arial, sans-serif;
+    font-size: 19px;
+    font-weight: normal;
+    line-height: 1.5em;
+    margin-bottom: 20px;
+}
+
+.row.w-employees.k-spacing-bottom--base {
+    margin-bottom: 15px !important;
+}
+.k-align--center {
+    text-align: center !important;
+}
+
+.w-employee {
+    -moz-transition: opacity 0.2s;
+    -o-transition: opacity 0.2s;
+    -webkit-transition: opacity 0.2s;
+    transition: opacity 0.2s;
+    display: block;
+    position: relative;
+    border-radius: 64px;
+    width: 128px;
+    height: 128px;
+    Margin-Bottom: 50px
+}
+
+
+.w-employee-title {
+    -moz-transition: opacity 0.2s;
+    -o-transition: opacity 0.2s;
+    -webkit-transition: opacity 0.2s;
+    transition: opacity 0.2s;
+    opacity: 0.0;
+    visibility: hidden;
+    bottom: 138px;
+    box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1);
+}
+
+.k-balloon {
+    position: absolute;
+    text-align: center;
+    color: #4c5058;
+    z-index: 2;
+    width: 250px;
+    left: 50%;
+    margin-left: -125px;
+    border: 1px solid #caccd1;
+    padding: 15px;
+    border-radius: 6px;
+    background: #ffffff;
+}
+
+.k-balloon:after {
+    border-color: rgba(202,204,209,0);
+    border-top-color: #ffffff;
+    border-width: 10px;
+    margin-left: -10px;
+}
+
+.k-balloon:after, .k-balloon:before {
+    top: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+}
+
+.k-spacing-bottom--none {
+    margin-bottom: 0 !important;
+}
+
+.k-header--x-small {
+    font-family: "Apercu", Arial, sans-serif;
+    font-size: 19px;
+    font-weight: 500;
+    font-size: 15px;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.w-employee-title {
+    -moz-transition: opacity 0.2s;
+    -o-transition: opacity 0.2s;
+    -webkit-transition: opacity 0.2s;
+    transition: opacity 0.2s;
+    opacity: 0.0;
+    visibility: hidden;
+    bottom: 138px;
+    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.w-employee-link {
+    position: relative;
+    display: inline-block;
+    width: 128px;
+    height: 128px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+.w-employees:hover .w-employee-title
+{
+    visibility:visible;
+    opacity:1.0;
+}
+.col-md-3 {
+    width: 25%;
+}
+
+.k-section--large{
+    padding: 30px 0;
+}
+
+.k-color--night {
+    color: #1d1e21 !important;
+}
+
+.k-header {
+    font-family: "Apercu", Arial, sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.2;
+    word-wrap: break-word;
+    margin-bottom: 18px;
+}
+
+.k-link, .k-footer-nav-item-link {
+    -webkit-transition: color 0.1s;
+    -o-transition: color 0.1s;
+    transition: color 0.1s;
+    color: #f9461c;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.row {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.k-header--small {
+    font-family: "Apercu", Arial, sans-serif;
+    font-size: 19px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.w-media-logo {
+    background-size: contain;
+}
+
+.w-media {
+    height: 180px;
+}
+
+.k-spacing-bottom--small {
+    margin-bottom: 11px !important;
+}
+
+.k-badge--clickable {
+    cursor: pointer;
+}
+
+.k-badge {
+    border-radius: 14px;
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.k-badge-link {
+    -webkit-transition: opacity ease-in-out 200ms;
+    -o-transition: opacity ease-in-out 200ms;
+    transition: opacity ease-in-out 200ms;
+    content: " ";
+    opacity: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    position: absolute;
+    background-color: rgba(0,0,0,0.75);
+    border-radius: 4px;
+}
+.k-paragraph--small {
+    font-family: "Apercu", Arial, sans-serif;
+    font-size: 19px;
+    font-weight: normal;
+    line-height: 1.5em;
+    font-size: 15px;
+    margin-bottom: 20px;
+    line-height: 1.5em;
+}

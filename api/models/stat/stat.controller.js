@@ -11,6 +11,7 @@
 
 var _ = require('lodash');
 var Stat = require('./stat.model.js');
+var ObjectId = require('mongoose').Types.ObjectId;
 
 // Get list of stats
 exports.index = function(req, res) {
@@ -31,10 +32,17 @@ exports.show = function(req, res) {
 
 // Creates a new stat in the DB.
 exports.create = function(req, res) {
-  Stat.create(req.body, function(err, stat) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, stat);
+  let {player, game} = req.body;
+  Stat.count({player: ObjectId(player), game: ObjectId(game)}, function (err, count) {
+    if (err) { return handleError(res, err); }
+    if (!count) {
+      Stat.create(req.body, function(err, stat) {
+        if(err) { return handleError(res, err); }
+        return res.json(201, stat);
+      });
+    }
   });
+
 };
 
 // Updates an existing stat in the DB.
@@ -57,8 +65,18 @@ exports.getPlayerStats = function(req, res) {
     .populate('vsTeam game')
     .exec(function(err, stats) {
     res.status(200).send(stats);
-  })
+  });
 };
+
+exports.getTeamStats = function(req, res) {
+  var id = req.params.id;
+  Stat.find({team: id})
+    .populate('team vsTeam game player')
+    .exec(function(err, stats) {
+      res.status(200).send(stats);
+    });
+};
+
 
 exports.getGameStats = function(req, res) {
   var id = req.params.id;

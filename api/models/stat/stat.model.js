@@ -1,11 +1,14 @@
 'use strict';
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+import stat from '../../../shared/models/stat';
+import utils from '../../utils';
 
 /**
  * Stat Schema
  */
-var StatSchema = new Schema({
+var StatSchema = new Schema(utils.mongooseify(stat));
+/*var StatSchema = new Schema({
   player: { type: Schema.ObjectId, ref: 'Player' },
   league: { type: Schema.ObjectId, ref: 'League' },
   season: {type: Schema.ObjectId, ref: 'Season'},
@@ -30,6 +33,6 @@ var StatSchema = new Schema({
   turnovers: {type: Number, default: -1},
   created: { type: Date, default: Date.now },
   updated: { type: Date, default: Date.now }
-});
+});*/
 
 module.exports = mongoose.model('Stat', StatSchema);

@@ -17,6 +17,7 @@ var ObjectId = require('mongoose').Types.ObjectId;
 exports.index = function(req, res) {
   Player.find(req.query)
     .populate('team')
+    .populate('league')
     .exec(function (err, players) {
     if(err) { return handleError(res, err); }
     res.status(200).send(players);
@@ -34,10 +35,17 @@ exports.show = function(req, res) {
 
 // Creates a new player in the DB.
 exports.create = function(req, res) {
-  Player.create(req.body, function(err, player) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, player);
+  let {team, name} = req.body;
+  Player.count({team: ObjectId(team), name: name}, function (err, count) {
+    if (err) { return handleError(res, err); }
+    if (!count) {
+      Player.create(req.body, function(err, player) {
+        if(err) { return handleError(res, err); }
+        return res.json(201, player);
+      });
+    }
   });
+
 };
 
 // Updates an existing player in the DB.
@@ -66,6 +74,7 @@ exports.search = function(req, res) {
   var sort = {'score': {'$meta':'textScore'} };
   Player.find(find, findScore).sort(sort)
     .populate('team')
+    .populate('league')
     .exec(function(err, players) {
     // do something with returned docs
 

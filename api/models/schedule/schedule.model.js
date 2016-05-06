@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 /**
- * Player Schema
+ * Schedule Schema
  */
 var ScheduleSchema = new Schema({
   name: {

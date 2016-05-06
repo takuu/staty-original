@@ -13,6 +13,9 @@ var PlayerSchema = new Schema({
     trim: true
   },
   team: { type: Schema.ObjectId, ref: 'Team' },
+  league: { type: Schema.ObjectId, ref: 'League' },
+  season: { type: Schema.ObjectId, ref: 'Season'},
+  division: { type: Schema.ObjectId, ref: 'Division'},
   created: { type: Date, default: Date.now },
   updated: { type: Date, default: Date.now }
 

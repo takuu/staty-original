@@ -1,0 +1,53 @@
+.noborder {
+    border: none !important;
+}
+
+.list-group-item {
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-around;
+    align-items:center;
+}
+
+.list-group-item-md {
+    height:50px;
+}
+
+.list-group-item-lg {
+    height:70px;
+    font-size:1.1em;
+}
+
+.inline-list-item.teams-item {
+    display: -webkit-flex;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    width:45%;
+    height:initial;
+    line-height:1.4em;
+}
+
+.inline-list-item.scores-item {
+    display: -webkit-flex;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:15%;
+    height:initial;
+    line-height:1.4em;
+}
+.inline-list-item.status-item {
+    display: -webkit-flex;
+    display:flex;
+    align-items:center;
+    width:15%;
+}
+.inline-list-item.location-item {
+    display: -webkit-flex;
+    display:flex;
+    align-items:center;
+    width:25%;
+    color:#aaa;
+    font-size:.8em;
+}

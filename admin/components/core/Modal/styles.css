@@ -1,0 +1,9 @@
+.modal {
+    top: 25%;
+    display:block;
+    left: 35%;
+    background-color: #fff;
+    width:350px;
+    height:350px;
+
+}

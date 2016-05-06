@@ -11,6 +11,7 @@
 
 var _ = require('lodash');
 var Division = require('./division.model.js');
+var League = require('../../models/league/league.model.js');
 var ObjectId = require('mongoose').Types.ObjectId;
 
 // Get list of divisions
@@ -32,10 +33,18 @@ exports.show = function(req, res) {
 
 // Creates a new division in the DB.
 exports.create = function(req, res) {
-  Division.create(req.body, function(err, division) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, division);
+  let {league, season, name} = req.body;
+  Division.count({league: ObjectId(league), season: ObjectId(season), name: name}, function (err, count) {
+    if (err) { return handleError(res, err); }
+    if (!count) {
+      Division.create(req.body, function(err, division) {
+        if(err) { return handleError(res, err); }
+        return res.json(201, division);
+      });
+    }
+
   });
+
 };
 
 // Updates an existing division in the DB.
@@ -81,6 +90,40 @@ exports.findByLeagueId = function(req, res) {
       res.status(200).send(divisions);
     });
 };
+exports.findByLeagueName = function(req, res) {
+  League.findOne({name: req.params.name})
+    .exec(function (err, league) {
+      // console.log('found league: ', league);
+      if (err) { return handleError(res, err); }
+      if (league) {
+        // console.log('found league: ', league);
+        Division.find({league:league._id})
+          .populate('season')
+          .exec(function (err, divisions) {
+            if (err) { return handleError(res, err); }
+            // console.log('Division.findByLeagueId', divisions);
+            res.status(200).send(divisions);
+          });
+      }
+    });
+
+};
+
+/*
+exports.findByLeagueName = function(req, res) {
+  console.log(req.params.name);
+  Division.find({})
+    .populate('league', null, {name: {$in: [req.params.name]}})
+    .populate('season')
+    .exec(function(err, divisions) {
+      if (err) { return handleError(res, err); }
+      divisions = divisions.filter(function(division) {
+        return division.league != null;
+      });
+      res.status(200).send(divisions);
+    });
+};
+*/
 
 exports.getActiveDivisionsByLeagueId = function(req, res) {
   Division.find({league: new ObjectId(req.params.id)})
