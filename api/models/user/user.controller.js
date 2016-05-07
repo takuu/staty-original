@@ -55,7 +55,7 @@ exports.getWatchList = function (req, res) {
 exports.addWatch = function (req, res) {
   const { userId } = req;
   const { players } = req.body;
-  
+
   const playerList = _.map(players, (player) => {
     return ObjectId(player);
   });
@@ -64,12 +64,13 @@ exports.addWatch = function (req, res) {
   User.findOneAndUpdate(
     {_id: ObjectId(userId)},
     {$addToSet: { players: {$each: playerList} }},
-    {safe: true, upsert: true, new: true},
-    function (err, user) {
+    {safe: true, upsert: true, new: true})
+    .populate('players')
+    .exec(function (err, user) {
       if (err) { return handleError(res, err); }
       res.status(200).send(user);
-    }
-  );
+    });
+
 };
 
 exports.addFacebookUser = function (req, res) {
@@ -128,12 +129,12 @@ exports.removeWatch = function (req, res) {
   User.findOneAndUpdate(
     {_id: ObjectId(userId)},
     {$pullAll: {players: [ObjectId(playerId)]}},
-    {safe: true, upsert: true, new: true},
-    function (err, user) {
+    {safe: true, upsert: true, new: true})
+    .populate('players')
+    .exec(function (err, user) {
       if (err) { return handleError(res, err); }
       res.status(200).send(user);
-    }
-  );
+    });
 };
 
 function invalidParams(res, name) {

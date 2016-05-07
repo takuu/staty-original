@@ -9,7 +9,7 @@ import { getTeamById } from '../../actions/teamActions';
 import Standings from '../../components/core/Standings/Standings.js';
 import PlayerList from '../../components/core/PlayerList/PlayerList';
 import { getPlayersWithFilters } from '../../actions/playerActions';
-import { fetchWatchList } from '../../actions/userActions';
+import { getUserProfile } from '../../actions/userActions';
 import { connect } from 'react-redux';
 
 //":leagueName/division/:divisionId/game/:gameId"
@@ -39,7 +39,7 @@ import { connect } from 'react-redux';
   getPlayersWithFilters,
   getPlayerById,
   getTeamById,
-  fetchWatchList
+  getUserProfile
 })
 export default class PlayerLayout extends React.Component {
   static propTypes = {
@@ -57,9 +57,8 @@ export default class PlayerLayout extends React.Component {
     return Promise.all([redux.dispatch(getPlayersWithFilters({team: teamId})),
       redux.dispatch(getPlayerById(playerId)),
       redux.dispatch(getTeamById(teamId)),
-      redux.dispatch(fetchWatchList())
+      redux.dispatch(getUserProfile())
     ]);
-
   }
 
   render () {

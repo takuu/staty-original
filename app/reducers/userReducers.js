@@ -2,10 +2,8 @@
   SET_USER
 } from '../constants/actions';*/
 import ActionTypes from '../constants/actions';
-import Immutable from 'immutable';
 import _ from 'lodash';
 
-// const defaultState = new Immutable.Map({});
 const defaultState = {
   players: []
 };
@@ -19,12 +17,12 @@ export default (state = defaultState, action) => {
     case ActionTypes.SET_PLAYER_TO_WATCH_LIST:
       return {
         ...state,
-        players: _.union(action.followList, state.players)
+        players: _.cloneDeep(action.user.players)
       };
     case ActionTypes.REMOVE_PLAYER_FROM_WATCH_LIST:
       return {
         ...state,
-        players: _.without(state.players, action.followList[0])
+        players: _.cloneDeep(action.user.players)
       };
     default:
       return state;

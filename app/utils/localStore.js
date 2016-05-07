@@ -2,33 +2,29 @@ import { canUseDOM } from 'exenv';
 import _ from 'lodash';
 
 let storage = {
-  /*set (name, value = []) {
-    if (!canUseDOM) { return; }
-    localStorage.setItem(name, JSON.stringify(value));
-  },*/
-
-  add (name, id = '') {
+  add (name, item = {}) {
     if (!canUseDOM) { return; }
     let str = localStorage.getItem(name) || '[]';
 
     let list = [].concat(JSON.parse(str));
-    let found = (list.indexOf(id) >= 0);
+    let ids = _.map(list, '_id');
+    let found = (ids.indexOf(item._id) >= 0);
 
-    if (id) list.push(id);
+    if (item) list.push(item);
     if (!found) localStorage.setItem(name, JSON.stringify(list));
+    console.log('localStore: ', list);
     return list;
   },
 
-  remove (name, id = '') {
+  remove (name, item = {}) {
     if (!canUseDOM) { return; }
     let str = localStorage.getItem(name) || '[]';
     let list = [].concat(JSON.parse(str));
-    let removed = _.remove(list, (item) => { return item == id; });
-    // let removed = _.remove(list, {_id: id});
-    console.log('localStore: removed: ', removed);
+    _.remove(list, (data) => { return data._id == item._id; });
+    console.log('localStore: ', list);
 
     localStorage.setItem(name, JSON.stringify(list));
-    return removed;
+    return list;
   },
 
   get (name) {
@@ -36,9 +32,11 @@ let storage = {
     let str = localStorage.getItem(name) || '';
     return JSON.parse(str);
   },
-  set(name, list) {
+
+  set (name, list) {
     if (!canUseDOM) { return; }
     localStorage.setItem(name, JSON.stringify(list));
+    debugger;
   }
 };
 

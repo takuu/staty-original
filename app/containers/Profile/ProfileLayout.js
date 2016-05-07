@@ -4,7 +4,7 @@ import React, { PropTypes } from 'react';
 if (process.env.BROWSER) require('./styles.css');
 import _ from 'lodash';
 import PlayerList from '../../components/core/PlayerList/PlayerList';
-import { fetchWatchList } from '../../actions/userActions';
+import { getUserProfile } from '../../actions/userActions';
 import { connect } from 'react-redux';
 
 //"/profile"
@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
   const watchList = _.cloneDeep(state.user.players);
   return {watchList: watchList};
 }, {
-  fetchWatchList
+  getUserProfile
 })
 export default class PlayerLayout extends React.Component {
   static propTypes = {
@@ -25,7 +25,7 @@ export default class PlayerLayout extends React.Component {
   static fillStore (redux, router) {
     // const {playerId, teamId} = router.params;
     return Promise.all([
-      redux.dispatch(fetchWatchList())
+      redux.dispatch(getUserProfile())
     ]);
   }
   componentWillReceiveProps(a, b) {

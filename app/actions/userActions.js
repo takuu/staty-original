@@ -5,84 +5,63 @@ import getHeaders from '../utils/getHeaders';
 import storage from '../utils/localStore';
 import cookie from '../utils/cookie';
 import config from '../../api/config.json';
+import _ from 'lodash';
 const baseUrl = `http://localhost:${config.port}/api`;
-
 
 function saveAuthToken (token) {
   const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-
   cookie.set({
     name: 'token',
     value: token,
     expires
   });
 }
-export function addPlayerToWatchList (playerId) {
+export function addPlayerToWatchList (player = {}) {
   return async (dispatch, getState) => {
     try {
       const { auth: { token } } = getState();
 
-      let followList = storage.add('watchList', playerId);
+      let followList = storage.add('watchList', player);
+      let user = { players: followList };
       if (token) {
         const headers = getHeaders(token);
         debugger;
-        const user = (await axios.put(`${baseUrl}/users/addwatch`, { players: followList }, { headers })).data;
+        const ids = _.map(followList, '_id');
+        user = (await axios.put(`${baseUrl}/users/addwatch`, { players: ids }, { headers })).data;
         if (user && user.players) storage.set('watchList', user.players);
       }
 
       // TODO: Add check to see if user is already logged in
 
-      dispatch({ type: ActionTypes.SET_PLAYER_TO_WATCH_LIST, followList });
+      dispatch({ type: ActionTypes.SET_PLAYER_TO_WATCH_LIST, user });
     } catch (error) {
       console.error('followActions error: ', error);
     }
   };
 }
 
-export function removePlayerFromWatchList (playerId) {
+export function removePlayerFromWatchList (player = {}) {
   return async (dispatch, getState) => {
     try {
       const { auth: { token } } = getState();
 
-      let followList = storage.remove('watchList', playerId);
+      let followList = storage.remove('watchList', player);
+      let user = { players: followList };
       if (token) {
         const headers = getHeaders(token);
         debugger;
-        const user = (await axios.put(`${baseUrl}/users/removewatch`, { playerId }, { headers })).data;
+        user = (await axios.put(`${baseUrl}/users/removewatch`, { playerId: player._id }, { headers })).data;
         storage.set('watchList', user.players);
       }
 
-      dispatch({ type: ActionTypes.REMOVE_PLAYER_FROM_WATCH_LIST, followList });
+      dispatch({ type: ActionTypes.REMOVE_PLAYER_FROM_WATCH_LIST, user });
     } catch (error) {
       console.error('followActions error: ', error);
     }
   };
 }
 
-
-export function addPlayerToUser (id = '') {
-  return async (dispatch) => {
-    try {
-      // const season = (await axios.get(baseUrl + '/seasons/' + id)).data;
-      // dispatch({ type: ActionTypes.SET_SEASON, season });
-    } catch (error) {
-      console.log('seasonActions error: ', error);
-    }
-  };
-}
-
-export function getUserByToken (token = '') {
-  return async (dispatch) => {
-    try {
-      const season = (await axios.get(baseUrl + '/users/token/' + token)).data;
-      dispatch({ type: ActionTypes.SET_FACEBOOK, season });
-    } catch (error) {
-      console.log('userActions error: ', error);
-    }
-  };
-}
-
-export function fetchWatchList () {
+export function getUserProfile () {
   //TODO: fetch the full watchList
   return async (dispatch, getState) => {
     try {
@@ -90,11 +69,13 @@ export function fetchWatchList () {
 
       const headers = getHeaders(token);
       const user = (await axios.get(`${baseUrl}/users/watchlist`, { headers })).data;
+      const { players } = user;
 
-      const followList = storage.get('watchList');
-      dispatch({ type: ActionTypes.SET_PLAYER_TO_WATCH_LIST, followList });
+      storage.set('watchList', players);
+      debugger;
+      dispatch({ type: ActionTypes.SET_USER, user });
     } catch (error) {
-      console.error('followActions error: ', error);
+      console.error('userActions error: ', error);
     }
   };
 }
