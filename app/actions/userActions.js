@@ -25,7 +25,6 @@ export function addPlayerToWatchList (player = {}) {
       let user = { players: followList };
       if (token) {
         const headers = getHeaders(token);
-        debugger;
         const ids = _.map(followList, '_id');
         user = (await axios.put(`${baseUrl}/users/addwatch`, { players: ids }, { headers })).data;
         if (user && user.players) storage.set('watchList', user.players);
@@ -49,7 +48,6 @@ export function removePlayerFromWatchList (player = {}) {
       let user = { players: followList };
       if (token) {
         const headers = getHeaders(token);
-        debugger;
         user = (await axios.put(`${baseUrl}/users/removewatch`, { playerId: player._id }, { headers })).data;
         storage.set('watchList', user.players);
       }
@@ -72,7 +70,6 @@ export function getUserProfile () {
       const { players } = user;
 
       storage.set('watchList', players);
-      debugger;
       dispatch({ type: ActionTypes.SET_USER, user });
     } catch (error) {
       console.error('userActions error: ', error);
@@ -91,7 +88,7 @@ export function addFacebookUser (fbUser = {}) {
       debugger;
       dispatch({ type: ActionTypes.LOGIN_SUCCESS, token });
       // dispatch({ type: ActionTypes.FETCH_PROFILE_SUCCESS, user });
-      dispatch({ type: ActionTypes.SET_USER, user: newUser });
+      dispatch({ type: ActionTypes.SET_USER, user: user });
     } catch (error) {
       console.log('userActions error: ', error);
     }

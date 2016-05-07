@@ -36,7 +36,6 @@ let storage = {
   set (name, list) {
     if (!canUseDOM) { return; }
     localStorage.setItem(name, JSON.stringify(list));
-    debugger;
   }
 };
 

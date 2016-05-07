@@ -27,41 +27,33 @@ export default class Header extends React.Component {
     logout(router);
   };
 
-  responseFacebook(user) {
-    const { logout, router, dispatch } = this.props;
-    console.log('facebook response', user);
-    dispatch(addFacebookUser(user));
+  responseFacebook(fbUser) {
+    const { logout, router, dispatch, user } = this.props;
+    console.log('facebook response', fbUser);
+    // Call this if there isn't a facebook user
+    if(!(user && user.fb)){
+      dispatch(addFacebookUser(fbUser));
+    }
   }
 
   renderNavBar () {
     const { loggedIn, params, user } = this.props;
 
+    debugger;
 
     if (user && user.fb) {
+      let named = user.fb.name;
       debugger;
       return (
         <div className='Header-nav Navigation'>
           <Link className='Navigation-link' to='/leagues'>Leagues</Link>
           <Link className='Navigation-link' to='/about'>About</Link>
-          <Link className='Navigation-link' to='/profile'>{user.fb.name}</Link>
+          <Link className='Navigation-link' to='/profile'>{named}</Link>
 
         </div>
-        )
-    } else if (loggedIn) {
-     /* let adminLink = `/${params.leagueName}/admin`;
-      debugger;
-      return (
-          <div className='Header-nav Navigation' role='navigation'>
-            <Link className='Navigation-link' to='/leagues' >Leagues</Link>
-            <Link className='Navigation-link' to='/about'>About</Link>
-            <Link className='Navigation-link' to='/dashboard'>Dashboard</Link>
-            <Link className='Navigation-link' to={adminLink}>Admin</Link>
-            <Link className='Navigation-link' to='/profile'>Profile</Link>
-            <span className='Navigation-spacer'> | </span>
-            <Link className='Navigation-link' to='/logout' onClick={this.handleLogout}>Logout</Link>
-          </div>
-      );*/
+        );
     } else {
+      debugger;
       return (
         <div className='Header-nav Navigation'>
           <Link className='Navigation-link' to='/leagues'>Leagues</Link>
