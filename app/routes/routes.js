@@ -6,7 +6,6 @@ import SignupPage from './../containers/SignupPage';
 import LoginPage from './../containers/LoginPage';
 import ProfilePage from './../containers/Profile/ProfilePage';
 import ProfileLayout from './../containers/Profile/ProfileLayout';
-import WatchPage from '../containers/Watch/WatchPage';
 import NotFound from '../components/NotFound';
 import redirectBackAfter from '../utils/redirectBackAfter';
 import fillStore from '../utils/fillStore';
@@ -61,8 +60,6 @@ const routes = (
     <Route component={ProfileLayout}>
       <Route path="/profile" component={ProfilePage} />
     </Route>
-
-    <Route path="/watchlist/:userId" component={WatchPage} />
 
     <Route path="/about" component={AboutPage} />
 

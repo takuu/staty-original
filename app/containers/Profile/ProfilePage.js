@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Link } from 'react-router';
+import { getStatsByPlayerId } from '../../actions/statActions';
 
 
 export default class ProfilePage extends React.Component {

@@ -39,11 +39,8 @@ export default class Header extends React.Component {
   renderNavBar () {
     const { loggedIn, params, user } = this.props;
 
-    debugger;
-
     if (user && user.fb) {
       let named = user.fb.name;
-      debugger;
       return (
         <div className='Header-nav Navigation'>
           <Link className='Navigation-link' to='/leagues'>Leagues</Link>
@@ -53,16 +50,23 @@ export default class Header extends React.Component {
         </div>
         );
     } else {
-      debugger;
       return (
         <div className='Header-nav Navigation'>
-          <Link className='Navigation-link' to='/leagues'>Leagues</Link>
-          <Link className='Navigation-link' to='/about'>About</Link>
-          <FacebookLogin
-            appId="1017967544938771"
-            autoLoad={true}
-            callback={this.responseFacebook.bind(this)} scope='public_profile, email' cssClass="my-facebook-button-class"
-            icon="fa-facebook" />
+          <div style={{'float': 'left'}}>
+            <Link className='Navigation-link' to='/leagues'>Leagues</Link>
+          </div>
+          <div style={{'float': 'left'}}>
+            <Link className='Navigation-link' to='/about'>About</Link>
+          </div>
+          <div style={{'float': 'left'}}>
+            <FacebookLogin
+              appId="1017967544938771"
+              autoLoad={true}
+              callback={this.responseFacebook.bind(this)} scope='public_profile, email' cssClass="my-facebook-button-class"
+              textButton='Login'
+              icon="fa-facebook" />
+          </div>
+
         </div>
       );
     }
@@ -76,7 +80,6 @@ export default class Header extends React.Component {
           <div className="container">
             <a className="Header-brand" href="/" title='Staty'>
               <img className="Header-brandImg" src={logoFull} width="110" height="32" alt="React" />
-
             </a>
             {this.renderNavBar()}
           </div>

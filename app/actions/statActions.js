@@ -17,6 +17,17 @@ export function getStatsByPlayerId (id = '') {
   };
 }
 
+export function getStatsByPlayerListId (id = '') {
+  return async (dispatch) => {
+    try {
+      const stats = (await axios.get(baseUrl + '/stats/playerList/' + id)).data;
+      dispatch({ type: ActionTypes.SET_STATS_OF_PLAYER_LIST, stats });
+    } catch (error) {
+      console.log('statActions error: ', error);
+    }
+  };
+}
+
 export function getStatsByTeamId (id = '') {
   return async (dispatch) => {
     try {

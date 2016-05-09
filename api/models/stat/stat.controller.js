@@ -68,6 +68,25 @@ exports.getPlayerStats = function(req, res) {
   });
 };
 
+exports.getPlayerListStats = function(req, res) {
+  var {id} = req.query;
+  var list = id.split(',');
+  console.log('test: ', list);
+  if (list && list.length) {
+    Stat.find({'player': { $in: [list] }})
+      .populate('division', 'name _id')
+      .populate('league', 'name _id')
+      .populate('season', 'name _id active')
+      .populate('team vsTeam game player')
+      .exec(function(err, stats) {
+        if (err) return handleError(res, err);
+        res.status(200).send(stats);
+      });
+  } else {
+    res.status(200).send({});
+  }
+};
+
 exports.getTeamStats = function(req, res) {
   var id = req.params.id;
   Stat.find({team: id})
@@ -84,9 +103,8 @@ exports.getGameStats = function(req, res) {
     .populate('player game')
     .exec(function(err, stats) {
     res.status(200).send(stats);
-  })
+  });
 };
-
 
 function handleError(res, err) {
   console.log('handleError');
