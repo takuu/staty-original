@@ -46,7 +46,6 @@ export default class Header extends React.Component {
           <Link className='Navigation-link' to='/leagues'>Leagues</Link>
           <Link className='Navigation-link' to='/about'>About</Link>
           <Link className='Navigation-link' to='/profile'>{named}</Link>
-
         </div>
         );
     } else {

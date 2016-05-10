@@ -70,10 +70,12 @@ exports.getPlayerStats = function(req, res) {
 
 exports.getPlayerListStats = function(req, res) {
   var {id} = req.query;
-  var list = id.split(',');
-  console.log('test: ', list);
+  var list = _.map(id.split(','), (item) => {
+    return ObjectId(item);
+  });
+  console.log('test: ', list.length, list);
   if (list && list.length) {
-    Stat.find({'player': { $in: [list] }})
+    Stat.find({'player': { $in: list }})
       .populate('division', 'name _id')
       .populate('league', 'name _id')
       .populate('season', 'name _id active')
