@@ -1,19 +1,35 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
+import createLinks from '../../../utils/createLinks';
 // import './styles.css';
 if (process.env.BROWSER) require('./styles.css');
 
 const TeamList = ({teams, league}) => {
-  debugger;
+
   var myTeam;
 
   if(teams.length) {
-    myTeam = teams[7].name;
+    myTeam = teams[1].name;
   }
   return (
-    <ul className='list-group'>
-      <li className='list-group-item nopadding'>{myTeam}</li>
-    </ul>
+      <div>
+        <ul className='list-group'>
+            {
+                _.map(teams,(team)=> {
+                    let {name} = team;
+                    return(
+                        <li className='list-group-item nopadding list-group-item-md'>
+                            <Link to={createLinks.createTeamLink(league, team)}>
+                            <span>{name}</span>
+                            </Link>
+                        </li>
+                    )
+                })
+
+            }
+        </ul>
+      </div>
+
   );
 };
 
