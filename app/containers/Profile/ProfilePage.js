@@ -2,13 +2,20 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Link } from 'react-router';
-import { getStatsByPlayerId } from '../../actions/statActions';
+import { getStatsByPlayerListId } from '../../actions/statActions';
 
-
+@connect((state,router) => {
+  return {};
+}, {
+  getStatsByPlayerListId
+})
 export default class ProfilePage extends React.Component {
 
   static fillStore(redux, route) {
-    // redux.dispatch(getProfile(userId));
+    const { watchList } = this.props;
+    debugger;
+    const list = _.map(watchList, '_id');
+    redux.dispatch(getStatsByPlayerListId(list.toString()));
   }
   static propTypes = {
     // auth: PropTypes.object.isRequired,
@@ -18,9 +25,9 @@ export default class ProfilePage extends React.Component {
   // saveProfile = profile => this.props.saveProfile(profile);
 
   render () {
-    const { user } = this.props;
+    const { user, watchList } = this.props;
     var childrenWithProps = React.Children.map(this.props.children, (child) => {
-      return React.cloneElement(child, {user: user});
+      return React.cloneElement(child, {user: user, watchList: watchList});
     });
 
     if (!user) return null;

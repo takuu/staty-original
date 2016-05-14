@@ -33,7 +33,7 @@ let storage = {
     return JSON.parse(str);
   },
 
-  set (name, list) {
+  set (name, list = []) {
     if (!canUseDOM) { return; }
     localStorage.setItem(name, JSON.stringify(list));
   }

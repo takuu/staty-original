@@ -22,23 +22,26 @@ import SplitStats from '../../components/core/SplitStats/SplitStats';
 }, {
   getStatsByPlayerId
 })
-class ProfileStatsPage extends React.Component {
+class ProfileGamesPage extends React.Component {
   constructor(props) {
     super(props);
   }
   static propTypes = {
-    league: PropTypes.object,
-    players: PropTypes.array,
+    watchList: PropTypes.array,
     stats: PropTypes.array
+  };
+  static defaultProps = {
+    watchList: [],
+    stats: []
   };
 
   static fillStore (redux, route) {
-    return redux.dispatch(getStatsByPlayerId(route.params.playerId));
   }
 
   render () {
-    let {league, players, stats} = this.props;
+    let {watchList, stats} = this.props;
 
+    debugger;
     const homeGames = _.filter(stats, (game) => {
       return game.team === game.game.homeTeam;
     });
@@ -67,4 +70,4 @@ class ProfileStatsPage extends React.Component {
   }
 }
 
-export default ProfileStatsPage;
+export default ProfileGamesPage;

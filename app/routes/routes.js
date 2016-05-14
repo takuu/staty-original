@@ -5,6 +5,8 @@ import Auth from '../containers/Auth';
 import SignupPage from './../containers/SignupPage';
 import LoginPage from './../containers/LoginPage';
 import ProfilePage from './../containers/Profile/ProfilePage';
+import ProfileGamesPage from './../containers/Profile/ProfileGamesPage';
+import ProfileStatsPage from './../containers/Profile/ProfileStatsPage';
 import ProfileLayout from './../containers/Profile/ProfileLayout';
 import NotFound from '../components/NotFound';
 import redirectBackAfter from '../utils/redirectBackAfter';
@@ -58,7 +60,10 @@ const routes = (
     </Route>
 
     <Route component={ProfileLayout}>
-      <Route path="/profile" component={ProfilePage} />
+      <Route path="/profile" component={ProfilePage} >
+        <IndexRoute component={ProfileGamesPage} />
+        <Route path='stats' component={ProfileStatsPage} />
+      </Route>
     </Route>
 
     <Route path="/about" component={AboutPage} />

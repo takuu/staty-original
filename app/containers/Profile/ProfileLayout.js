@@ -24,6 +24,7 @@ export default class PlayerLayout extends React.Component {
   };
   static fillStore (redux, router) {
     // const {playerId, teamId} = router.params;
+    debugger;
     // return Promise.all([
     //   redux.dispatch(getUserProfile())
     // ]);
@@ -39,7 +40,7 @@ export default class PlayerLayout extends React.Component {
   render () {
     const {dispatch, watchList, user} = this.props;
     var childrenWithProps = React.Children.map(this.props.children, (child) => {
-      return React.cloneElement(child, {user: user});
+      return React.cloneElement(child, {user: user, watchList: watchList});
     });
     // debugger;
     return (

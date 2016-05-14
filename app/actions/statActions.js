@@ -17,10 +17,10 @@ export function getStatsByPlayerId (id = '') {
   };
 }
 
-export function getStatsByPlayerListId (id = '') {
+export function getStatsByPlayerListId (list = '') {
   return async (dispatch) => {
     try {
-      const stats = (await axios.get(baseUrl + '/stats/playerList/' + id)).data;
+      const stats = (await axios.get(baseUrl + '/stats/playerList/' + list)).data;
       dispatch({ type: ActionTypes.SET_STATS_OF_PLAYER_LIST, stats });
     } catch (error) {
       console.log('statActions error: ', error);

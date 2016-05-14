@@ -80,12 +80,12 @@ export function getUserProfile () {
 export function addFacebookUser (fbUser = {}) {
   return async (dispatch) => {
     try {
+      if (fbUser && !fbUser.id) return;
       console.log('adding... ', fbUser);
-      debugger;
-      const newUser = (await axios.put(baseUrl + '/users/addFacebookUser/', { user: fbUser })).data;
+      const followList = storage.get('watchList');
+      const newUser = (await axios.put(baseUrl + '/users/addFacebookUser/', { user: fbUser, players: followList })).data;
       const {token, user} = newUser;
       saveAuthToken(token);
-      debugger;
       dispatch({ type: ActionTypes.LOGIN_SUCCESS, token });
       // dispatch({ type: ActionTypes.FETCH_PROFILE_SUCCESS, user });
       dispatch({ type: ActionTypes.SET_USER, user: user });

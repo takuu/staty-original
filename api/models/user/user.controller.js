@@ -74,11 +74,11 @@ exports.addWatch = function (req, res) {
 };
 
 exports.addFacebookUser = function (req, res) {
-  const { user } = req.body;
+  const { user, players } = req.body;
   if (!user.id) invalidParams(res, 'addFaceBookUser');
 
   console.log('addFacebookUser', user);
-  let newUser = new User({fb: user, player: []});
+  let newUser = new User({fb: user, players: players});
   // TODO: This needs to update the long-token when it's renewed
   /*User.findOneAndUpdate(
     {'fb.id': user.id},
