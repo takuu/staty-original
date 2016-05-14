@@ -60,16 +60,20 @@ export function removePlayerFromWatchList (player = {}) {
 }
 
 export function getUserProfile () {
-  //TODO: fetch the full watchList
+  // TODO: fetch the full watchList
   return async (dispatch, getState) => {
     try {
       const { auth: { token } } = getState();
-
+      
       const headers = getHeaders(token);
-      const user = (await axios.get(`${baseUrl}/users/watchlist`, { headers })).data;
-      const { players } = user;
-
-      storage.set('watchList', players);
+      let user = (await axios.get(`${baseUrl}/users/watchlist`, { headers })).data;
+      let { players } = user;
+      if (players && players.length) {
+        storage.set('watchList', players);
+      } else {
+        players = storage.get('watchList');
+        user = { players: players };
+      }
       dispatch({ type: ActionTypes.SET_USER, user });
     } catch (error) {
       console.error('userActions error: ', error);

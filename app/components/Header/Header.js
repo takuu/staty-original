@@ -49,6 +49,14 @@ export default class Header extends React.Component {
         </div>
         );
     } else {
+      let profile = (user && user.players.length) ?
+        (
+          <div style={{'float': 'left'}}>
+            <Link className='Navigation-link' to='/profile'>List</Link>
+            <span className='badge'>{user.players.length}</span>
+          </div>
+        )
+        : null;
       return (
         <div className='Header-nav Navigation'>
           <div style={{'float': 'left'}}>
@@ -57,6 +65,7 @@ export default class Header extends React.Component {
           <div style={{'float': 'left'}}>
             <Link className='Navigation-link' to='/about'>About</Link>
           </div>
+          {profile}
           <div style={{'float': 'left'}}>
             <FacebookLogin
               appId="1017967544938771"
