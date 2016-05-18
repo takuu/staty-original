@@ -64,7 +64,7 @@ export function getUserProfile () {
   return async (dispatch, getState) => {
     try {
       const { auth: { token } } = getState();
-      
+
       const headers = getHeaders(token);
       let user = (await axios.get(`${baseUrl}/users/watchlist`, { headers })).data;
       let { players } = user;

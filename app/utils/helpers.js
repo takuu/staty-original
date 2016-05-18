@@ -27,8 +27,6 @@ function decimalAdjust(type, value, exp) {
   return +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
 }
 
-
-
 export default {
   jsonToQueryString (json = {}) {
     return Object.keys(json).map(function (key) {

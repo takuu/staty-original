@@ -28,20 +28,23 @@ class ProfileGamesPage extends React.Component {
   }
   static propTypes = {
     watchList: PropTypes.array,
-    stats: PropTypes.array
+    stats: PropTypes.array,
+    user: PropTypes.object
   };
   static defaultProps = {
     watchList: [],
-    stats: []
+    stats: [],
+    user: {}
   };
 
   static fillStore (redux, route) {
+    const { user } = this.props;
+    debugger;
   }
 
   render () {
     let {watchList, stats} = this.props;
-
-    debugger;
+    
     const homeGames = _.filter(stats, (game) => {
       return game.team === game.game.homeTeam;
     });

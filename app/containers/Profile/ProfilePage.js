@@ -13,8 +13,8 @@ export default class ProfilePage extends React.Component {
 
   static fillStore(redux, route) {
     const { watchList } = this.props;
-    debugger;
     const list = _.map(watchList, '_id');
+    debugger;
     redux.dispatch(getStatsByPlayerListId(list.toString()));
   }
   static propTypes = {

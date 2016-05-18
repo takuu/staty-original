@@ -5,14 +5,26 @@ if (process.env.BROWSER) require('./styles.css');
 import _ from 'lodash';
 import PlayerList from '../../components/core/PlayerList/PlayerList';
 import { getUserProfile } from '../../actions/userActions';
+import { getStatsByPlayerListId } from '../../actions/statActions';
+import helpers from '../../utils/helpers';
 import { connect } from 'react-redux';
 
 //"/profile"
 
 @connect((state,router) => {
+  const { user } = state;
 
-  const watchList = _.cloneDeep(state.user.players);
-  return {watchList: watchList};
+  const watchList = _.cloneDeep(user.players);
+
+  const list = _.map(watchList, '_id');
+  const statsJS = state.stats.toJS();
+  const stats = _.filter(statsJS, (stat) => {
+    // return !!_.find(list, helpers.getObjId(stat.player));
+    return list.indexOf(helpers.getObjId(stat.player)) >= 0;
+  });
+  debugger;
+
+  return {watchList, user, stats};
 }, {
   getUserProfile
 })
@@ -20,18 +32,27 @@ export default class PlayerLayout extends React.Component {
   static propTypes = {
     children: PropTypes.element,
     user: PropTypes.object,
-    watchList: PropTypes.array
+    watchList: PropTypes.array,
+    stats: PropTypes.array
+  };
+  static defaultProps = {
+    watchList: [],
+    user: {},
+    children: [],
+    stats: []
   };
   static fillStore (redux, router) {
-    // const {playerId, teamId} = router.params;
-    debugger;
+    const { user } = this.props;
     // return Promise.all([
     //   redux.dispatch(getUserProfile())
     // ]);
   }
-  // componentWillReceiveProps(a, b) {
-  //   const {dispatch, watchList, user} = this.props;
-  // }
+  componentWillReceiveProps(nextProps) {
+    const {dispatch, watchList, user, stats} = nextProps;
+
+    const list = _.map(watchList, '_id');
+    if (list.length && !stats.length) return dispatch(getStatsByPlayerListId(list));
+  }
 
   // shouldComponentUpdate(a, b) {
   //   const {dispatch, watchList, user} = this.props;
@@ -39,9 +60,10 @@ export default class PlayerLayout extends React.Component {
 
   render () {
     const {dispatch, watchList, user} = this.props;
-    var childrenWithProps = React.Children.map(this.props.children, (child) => {
+    debugger;
+    var childrenWithProps = (watchList.length) ? React.Children.map(this.props.children, (child) => {
       return React.cloneElement(child, {user: user, watchList: watchList});
-    });
+    }) : null;
     // debugger;
     return (
       <div>

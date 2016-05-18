@@ -12,6 +12,12 @@ export default (state = defaultState, action) => {
       });
       return state;
       break;
+    case ActionTypes.SET_STATS_OF_PLAYER_LIST:
+      _.map(action.stats, (stat) => {
+        state = state.set(stat._id, stat);
+      });
+      return state;
+      break;
     case ActionTypes.SET_STATS_OF_GAME:
       _.map(action.stats, (stat) => {
         state = state.set(stat._id, stat);
