@@ -9,6 +9,7 @@ if (process.env.BROWSER) {
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import NavItem from './NavItem';
+import createLinks from '../../utils/createLinks';
 import { addFacebookUser } from '../../actions/userActions';
 import FacebookLogin from 'react-facebook-login';
 
@@ -21,9 +22,7 @@ export default class Header extends React.Component {
 
   handleLogout = e => {
     const { logout, router } = this.props;
-
     e.preventDefault();
-
     logout(router);
   };
 
@@ -45,14 +44,14 @@ export default class Header extends React.Component {
         <div className='Header-nav Navigation'>
           <Link className='Navigation-link' to='/leagues'>Leagues</Link>
           <Link className='Navigation-link' to='/about'>About</Link>
-          <Link className='Navigation-link' to='/profile'>{named}</Link>
+          <Link className='Navigation-link' to={createLinks.createProfileLink(user)}>{named}</Link>
         </div>
         );
     } else {
       let profile = (user && user.players.length) ?
         (
           <div style={{'float': 'left'}}>
-            <Link className='Navigation-link' to='/profile'>List</Link>
+            <Link className='Navigation-link' to={createLinks.createProfileLink(user)}>List</Link>
             <span className='badge'>{user.players.length}</span>
           </div>
         )
@@ -82,7 +81,6 @@ export default class Header extends React.Component {
 
   render () {
     return (
-
       <div>
         <div className="Header">
           <div className="container">

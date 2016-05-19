@@ -13,20 +13,20 @@ import { connect } from 'react-redux';
 
 @connect((state,router) => {
   const { user } = state;
+  const { id } = router.location.query;
+  const list = id.split(',');
 
   const watchList = _.cloneDeep(user.players);
 
-  const list = _.map(watchList, '_id');
+  // const list = _.map(watchList, '_id');
   const statsJS = state.stats.toJS();
   const stats = _.filter(statsJS, (stat) => {
-    // return !!_.find(list, helpers.getObjId(stat.player));
     return list.indexOf(helpers.getObjId(stat.player)) >= 0;
   });
-  debugger;
 
   return {watchList, user, stats};
 }, {
-  getUserProfile
+  getStatsByPlayerListId
 })
 export default class PlayerLayout extends React.Component {
   static propTypes = {
@@ -42,28 +42,17 @@ export default class PlayerLayout extends React.Component {
     stats: []
   };
   static fillStore (redux, router) {
-    const { user } = this.props;
-    // return Promise.all([
-    //   redux.dispatch(getUserProfile())
-    // ]);
+    const { id } = router.location.query;
+    const playerList = id.split(',');
+    return redux.dispatch(getStatsByPlayerListId(playerList));
   }
-  componentWillReceiveProps(nextProps) {
-    const {dispatch, watchList, user, stats} = nextProps;
-
-    const list = _.map(watchList, '_id');
-    if (list.length && !stats.length) return dispatch(getStatsByPlayerListId(list));
-  }
-
-  // shouldComponentUpdate(a, b) {
-  //   const {dispatch, watchList, user} = this.props;
-  // }
 
   render () {
-    const {dispatch, watchList, user} = this.props;
+    const {dispatch, watchList, user, stats} = this.props;
     debugger;
-    var childrenWithProps = (watchList.length) ? React.Children.map(this.props.children, (child) => {
-      return React.cloneElement(child, {user: user, watchList: watchList});
-    }) : null;
+    var childrenWithProps = React.Children.map(this.props.children, (child) => {
+      return React.cloneElement(child, {user: user, watchList: watchList, stats: stats});
+    });
     // debugger;
     return (
       <div>
