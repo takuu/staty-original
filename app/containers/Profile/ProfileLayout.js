@@ -49,11 +49,9 @@ export default class PlayerLayout extends React.Component {
 
   render () {
     const {dispatch, watchList, user, stats} = this.props;
-    debugger;
     var childrenWithProps = React.Children.map(this.props.children, (child) => {
       return React.cloneElement(child, {user: user, watchList: watchList, stats: stats});
     });
-    // debugger;
     return (
       <div>
         <div className='page-content'>

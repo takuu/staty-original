@@ -61,8 +61,8 @@ const routes = (
 
     <Route component={ProfileLayout}>
       <Route path="/profile" component={ProfilePage} >
-        <IndexRoute component={ProfileGamesPage} />
-        <Route path='stats' component={ProfileStatsPage} />
+        <IndexRoute component={ProfileStatsPage} />
+        <Route path='stats' component={ProfileGamesPage} />
       </Route>
     </Route>
 

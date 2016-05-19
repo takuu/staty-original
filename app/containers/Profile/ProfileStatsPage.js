@@ -2,48 +2,32 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import classNames from 'classnames';
-import { getStatsByPlayerId } from '../../actions/statActions';
 import SplitStats from '../../components/core/SplitStats/SplitStats';
+import helpers from '../../utils/helpers';
 
-@connect((state, router) => {
-  const {teamId, playerId} = router.params;
-
-  const playersJS = state.players.toJS();
-  const players = _.filter(playersJS, (player) => {
-    return player.team._id === teamId;
-  });
-
-  const statsJS = state.stats.toJS();
-  const stats = _.filter(statsJS, (stat) => {
-    return stat.player === playerId;
-  });
-
-  return {players: players, stats: stats};
-}, {
-  getStatsByPlayerId
-})
 class ProfileStatsPage extends React.Component {
   constructor(props) {
     super(props);
   }
   static propTypes = {
-    league: PropTypes.object,
-    players: PropTypes.array,
-    stats: PropTypes.array
+    watchList: PropTypes.array,
+    stats: PropTypes.array,
+    user: PropTypes.object
+  };
+  static defaultProps = {
+    watchList: [],
+    stats: [],
+    user: {}
   };
 
-  static fillStore (redux, route) {
-    return redux.dispatch(getStatsByPlayerId(route.params.playerId));
-  }
-
   render () {
-    let {league, players, stats} = this.props;
+    let {watchList, stats} = this.props;
 
-    const homeGames = _.filter(stats, (game) => {
-      return game.team === game.game.homeTeam;
+    const homeGames = _.filter(stats, (stat) => {
+      return helpers.getObjId(stat.team) === stat.game.homeTeam;
     });
-    const awayGames = _.filter(stats, (game) => {
-      return game.team === game.game.awayTeam;
+    const awayGames = _.filter(stats, (stat) => {
+      return helpers.getObjId(stat.team) === stat.game.awayTeam;
     });
 
     const gameTimes = _.groupBy(stats, 'game.time');

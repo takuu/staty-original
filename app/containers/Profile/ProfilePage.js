@@ -2,21 +2,9 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Link } from 'react-router';
-import { getStatsByPlayerListId } from '../../actions/statActions';
 
-@connect((state,router) => {
-  return {};
-}, {
-  getStatsByPlayerListId
-})
 export default class ProfilePage extends React.Component {
 
-  static fillStore(redux, route) {
-    const { watchList } = this.props;
-    const list = _.map(watchList, '_id');
-    debugger;
-    redux.dispatch(getStatsByPlayerListId(list.toString()));
-  }
   static propTypes = {
     // auth: PropTypes.object.isRequired,
     // saveProfile: PropTypes.func.isRequired
@@ -25,21 +13,18 @@ export default class ProfilePage extends React.Component {
   // saveProfile = profile => this.props.saveProfile(profile);
 
   render () {
-    const { user, watchList } = this.props;
+    const { user, watchList, stats } = this.props;
     var childrenWithProps = React.Children.map(this.props.children, (child) => {
-      return React.cloneElement(child, {user: user, watchList: watchList});
+      return React.cloneElement(child, {user: user, watchList: watchList, stats: stats});
     });
-
+    debugger;
     if (!user) return null;
 
     return (
       <div>
         <div className='portlet-title'>
           <div className='page-title'>
-            <span>Stuff</span>
-            <Link to={'#'}>
-              <span style={{'marginLeft': '40px', 'fontSize': '.9em'}}>USER NAME</span>
-            </Link>
+            <span>{user.fb && user.fb.name}</span>
           </div>
         </div>
         <div className='row' style={{backgroundColor: '#eff3f8'}}>
