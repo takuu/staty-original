@@ -81,6 +81,33 @@ export function getUserProfile () {
   };
 }
 
+export function getUserStats () {
+  return async (dispatch, getState) => {
+    try {
+      const { auth: { token } } = getState();
+
+      const headers = getHeaders(token);
+      let user = (await axios.get(`${baseUrl}/users/watchlist`, { headers })).data;
+      let { players } = user;
+      if (players && players.length) {
+        storage.set('watchList', players);
+        const list = _.map(players, '_id');
+        const statBaseUrl = `http://localhost:${config.port}/api`;
+        const stats = (await axios.get(statBaseUrl + '/stats/players/?id=' + list.toString())).data;
+        debugger;
+        dispatch({ type: ActionTypes.SET_STATS_OF_PLAYER_LIST, stats });
+
+      } else {
+        players = storage.get('watchList');
+        user = { players: players };
+      }
+      dispatch({ type: ActionTypes.SET_USER, user });
+    } catch (error) {
+      console.error('userActions error: ', error);
+    }
+  };
+}
+
 export function addFacebookUser (fbUser = {}) {
   return async (dispatch) => {
     try {

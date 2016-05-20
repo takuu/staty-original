@@ -4,7 +4,7 @@ import React, { PropTypes } from 'react';
 if (process.env.BROWSER) require('./styles.css');
 import _ from 'lodash';
 import PlayerList from '../../components/core/PlayerList/PlayerList';
-import { getUserProfile } from '../../actions/userActions';
+import { getUserProfile, getUserStats } from '../../actions/userActions';
 import { getStatsByPlayerListId } from '../../actions/statActions';
 import helpers from '../../utils/helpers';
 import { connect } from 'react-redux';
@@ -14,11 +14,11 @@ import { connect } from 'react-redux';
 @connect((state,router) => {
   const { user } = state;
   const { id } = router.location.query;
-  const list = id.split(',');
+  // const list = id.split(',');
 
   const watchList = _.cloneDeep(user.players);
 
-  // const list = _.map(watchList, '_id');
+  const list = _.map(watchList, '_id');
   const statsJS = state.stats.toJS();
   const stats = _.filter(statsJS, (stat) => {
     return list.indexOf(helpers.getObjId(stat.player)) >= 0;
@@ -26,7 +26,8 @@ import { connect } from 'react-redux';
 
   return {watchList, user, stats};
 }, {
-  getStatsByPlayerListId
+  getStatsByPlayerListId,
+  getUserStats
 })
 export default class PlayerLayout extends React.Component {
   static propTypes = {
@@ -43,8 +44,9 @@ export default class PlayerLayout extends React.Component {
   };
   static fillStore (redux, router) {
     const { id } = router.location.query;
-    const playerList = id.split(',');
-    return redux.dispatch(getStatsByPlayerListId(playerList));
+    // const playerList = id.split(',');
+    return redux.dispatch(getUserStats());
+    // return redux.dispatch(getStatsByPlayerListId(playerList));
   }
 
   render () {
