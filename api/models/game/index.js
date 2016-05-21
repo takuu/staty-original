@@ -6,6 +6,7 @@ var controller = require('./game.controller');
 var router = express.Router();
 
 router.get('/team/:id', controller.findByTeamId);
+router.get('/teams/?', controller.findByTeamList);
 router.get('/division/:id', controller.findByDivisionId);
 router.get('/', controller.index);
 router.get('/:id', controller.show);

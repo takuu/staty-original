@@ -70,13 +70,29 @@ exports.update = function(req, res) {
 };
 
 // This query can be optimized...
-exports.findByTeamId = function(req, res) {
+exports.findByTeamId = function (req, res) {
   Game.find({$or: [{homeTeam:new ObjectId(req.params.id)},{awayTeam:new ObjectId(req.params.id)}]})
     .populate('homeTeam awayTeam league')
     .exec(function(err, games) {
       if (err) { return handleError(res, err); }
       res.status(200).send(games);
     });
+};
+
+exports.findByTeamList = function (req, res) {
+  var {id} = req.query;
+  var list = _.map(id.split(','), (item) => {
+    return ObjectId(item);
+  });
+  if (list && list.length) {
+    Game.find({ $or: [{'awayTeam': { $in: list }}, {'homeTeam': { $in: list }}] })
+      .exec(function (err, games) {
+        if (err) return handleError(res, err);
+        res.status(200).send(games);
+      });
+  } else {
+    res.status(200).send({});
+  }
 };
 
 exports.findByDivisionId = function(req, res) {

@@ -17,7 +17,6 @@ export default class ProfilePage extends React.Component {
     var childrenWithProps = React.Children.map(this.props.children, (child) => {
       return React.cloneElement(child, {user: user, watchList: watchList, stats: stats});
     });
-    debugger;
     if (!user) return null;
 
     return (

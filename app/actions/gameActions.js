@@ -35,6 +35,17 @@ export function getGamesByTeamId (id = '') {
   };
 }
 
+export function getGamesByTeamList (list = []) {
+  return async (dispatch) => {
+    try {
+      const games = (await axios.get(`${baseUrl}/games/teams/?id=` + list.toString())).data;
+      dispatch({ type: ActionTypes.SET_GAMES_BY_TEAM, games });
+    } catch (error) {
+      console.log('gameActions error: ', error);
+    }
+  };
+}
+
 export function getGamesByDivisionId (id = '') {
   return async (dispatch) => {
     try {

@@ -41,6 +41,8 @@ class ProfileStatsPage extends React.Component {
 
 
     const gameTimes = _.groupBy(stats, 'game.time');
+    const divisionSplits = _.groupBy(stats, 'division._id')
+    debugger;
     return (
       <div>
         <div className='sub-title-container'>
@@ -61,6 +63,16 @@ class ProfileStatsPage extends React.Component {
           <div className='sub-title'>Game Splits</div>
           <SplitStats stats={winnings} title='In Wins' />
           <SplitStats stats={losings} title='In Losses' />
+          <div className='sub-title'>Season Splits</div>
+          {
+            _.map(divisionSplits, (stats, key) => {
+              const divisionName = stats[0].division.name;
+              const seasonName = stats[0].season.name;
+              return (
+                <SplitStats key={key} stats={stats} title={`${divisionName} ${seasonName}`} />
+              );
+            })
+          }
         </div>
       </div>
     );
