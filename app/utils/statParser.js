@@ -160,6 +160,15 @@ function shootingPercentage (made, attempted) {
   return helpers.roundDecimal(percentage, -1);
 }
 
+function getWinLoss (stats = []) {
+  const winningStats = getWinningStats(stats);
+  const losingStats = getLosingStats(stats);
+  debugger;
+
+  // return {win: 0, loss: 0} format
+  return {win: winningStats.length, loss: losingStats.length};
+}
+
 function createStandings (games = []) {
   let cloned = _.cloneDeep(games);
   let finishedGames = _.filter(cloned, {isUpdated: true});
@@ -213,6 +222,7 @@ export default {
   getMaxStats: getMaxStats,
   getLatestStats: getLatestStats,
   getWinningStats: getWinningStats,
+  getWinLoss: getWinLoss,
   getLosingStats: getLosingStats,
   shootingPercentage: shootingPercentage,
   createStandings: createStandings,
