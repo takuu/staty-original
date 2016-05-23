@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 @connect((state,router) => {
   const { user } = state;
   const { id } = router.location.query;
+  const path = router.location && router.location.pathname;
   // const list = id.split(',');
 
   const watchList = _.cloneDeep(user.players);
@@ -24,7 +25,7 @@ import { connect } from 'react-redux';
     return list.indexOf(helpers.getObjId(stat.player)) >= 0;
   });
 
-  return {watchList, user, stats};
+  return {watchList, user, stats, path};
 }, {
   getStatsByPlayerListId,
   getUserStats
@@ -50,9 +51,9 @@ export default class PlayerLayout extends React.Component {
   }
 
   render () {
-    const {dispatch, watchList, user, stats} = this.props;
+    const {dispatch, watchList, user, stats, path} = this.props;
     var childrenWithProps = React.Children.map(this.props.children, (child) => {
-      return React.cloneElement(child, {user: user, watchList: watchList, stats: stats});
+      return React.cloneElement(child, {user: user, watchList: watchList, stats: stats, path: path});
     });
     return (
       <div>

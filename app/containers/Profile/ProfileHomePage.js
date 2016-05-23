@@ -4,9 +4,8 @@ import _ from 'lodash';
 import classNames from 'classnames';
 import SplitStats from '../../components/core/SplitStats/SplitStats';
 import helpers from '../../utils/helpers';
-import statParser from '../../utils/statParser';
 
-class ProfileStatsPage extends React.Component {
+class ProfileGamesPage extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -23,7 +22,6 @@ class ProfileStatsPage extends React.Component {
 
   render () {
     let {watchList, stats} = this.props;
-    const LATEST = 3;
 
     const homeGames = _.filter(stats, (stat) => {
       return helpers.getObjId(stat.team) === stat.game.homeTeam;
@@ -32,14 +30,7 @@ class ProfileStatsPage extends React.Component {
       return helpers.getObjId(stat.team) === stat.game.awayTeam;
     });
 
-    const winnings = statParser.getWinningStats(stats) || [];
-    const losings = statParser.getLosingStats(stats) || [];
-    const latest = statParser.getLatestStats(stats, LATEST) || [];
-
-
     const gameTimes = _.groupBy(stats, 'game.time');
-    const divisionSplits = _.groupBy(stats, 'division._id');
-    debugger;
     return (
       <div>
         <div className='sub-title-container'>
@@ -54,26 +45,10 @@ class ProfileStatsPage extends React.Component {
               );
             })
           }
-          <div className='sub-title'>Last {LATEST} Games</div>
-          <SplitStats stats={latest} title={`Last ${LATEST} Games`} />
-
-          <div className='sub-title'>Game Splits</div>
-          <SplitStats stats={winnings} title='In Wins' />
-          <SplitStats stats={losings} title='In Losses' />
-          <div className='sub-title'>Season Splits</div>
-          {
-            _.map(divisionSplits, (stats, key) => {
-              const divisionName = stats[0].division.name;
-              const seasonName = stats[0].season.name;
-              return (
-                <SplitStats key={key} stats={stats} title={`${divisionName} ${seasonName}`} />
-              );
-            })
-          }
         </div>
       </div>
     );
   }
 }
 
-export default ProfileStatsPage;
+export default ProfileGamesPage;

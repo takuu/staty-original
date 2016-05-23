@@ -19,10 +19,11 @@ function _createDivisionLink (league, division) {
 
 function _createProfileLink (user = {}) {
   const { players } = user;
-  const playerList = _.map(players, (player) => {
-    return (typeof player === 'object' && player._id) ? player._id : player;
-  });
-  return `/profile?id=${playerList.toString()}`;
+  // const playerList = _.map(players, (player) => {
+  //   return (typeof player === 'object' && player._id) ? player._id : player;
+  // });
+  // return `/profile?id=${playerList.toString()}`;
+  return `/profile`;
 }
 
 export default {

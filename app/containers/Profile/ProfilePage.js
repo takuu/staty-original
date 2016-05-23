@@ -2,22 +2,46 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Link } from 'react-router';
+import classNames from 'classnames';
 
 export default class ProfilePage extends React.Component {
 
   static propTypes = {
-    // auth: PropTypes.object.isRequired,
-    // saveProfile: PropTypes.func.isRequired
+    path: PropTypes.string,
+    user: PropTypes.object,
+    watchList: PropTypes.array,
+    stats: PropTypes.array
+  };
+
+  static defaultProps = {
+    path: '',
+    user: {},
+    watchList: [],
+    stats: []
   };
 
   // saveProfile = profile => this.props.saveProfile(profile);
 
   render () {
-    const { user, watchList, stats } = this.props;
+    const { user, watchList, stats, path } = this.props;
     var childrenWithProps = React.Children.map(this.props.children, (child) => {
       return React.cloneElement(child, {user: user, watchList: watchList, stats: stats});
     });
     if (!user) return null;
+
+    let urlParts = path.split('/');
+    let routeName = urlParts[urlParts.length - 1];
+
+
+    let profileClass = classNames({
+      'active': routeName === 'profile'
+    });
+    let gameLogClass = classNames({
+      'active': routeName === 'games'
+    });
+    let splitStatsClass = classNames({
+      'active': routeName === 'stats'
+    });
 
     return (
       <div>
@@ -33,14 +57,14 @@ export default class ProfilePage extends React.Component {
                 <div className='container'>
                   <div className='col-md-6 col-xs-12'>
                     <ul className='nav nav-tabs nav-justified'>
-                      <li role='presentation' className={{'active': false}}>
-                        <Link to={'#'}><div className='sub-title'>Profile</div></Link>
+                      <li role='presentation' className={profileClass}>
+                        <Link to={'/profile'}><div className='sub-title'>General</div></Link>
                       </li>
-                      <li role='presentation' className={{'active': false}}>
-                        <Link to={'#'}><div className='sub-title'>Game Log</div></Link>
+                      <li role='presentation' className={gameLogClass}>
+                        <Link to={'/profile/game-log'}><div className='sub-title'>Game Log</div></Link>
                       </li>
-                      <li role='presentation' className={{'active': false}}>
-                        <Link to={'#'}><div className='sub-title'>Split Stats</div></Link>
+                      <li role='presentation' className={splitStatsClass}>
+                        <Link to={'/profile/stats'}><div className='sub-title'>Split Stats</div></Link>
                       </li>
                     </ul>
                   </div>
