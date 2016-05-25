@@ -32,7 +32,6 @@ export default class ProfilePage extends React.Component {
     let urlParts = path.split('/');
     let routeName = urlParts[urlParts.length - 1];
 
-
     let profileClass = classNames({
       'active': routeName === 'profile'
     });
@@ -61,7 +60,7 @@ export default class ProfilePage extends React.Component {
                         <Link to={'/profile'}><div className='sub-title'>General</div></Link>
                       </li>
                       <li role='presentation' className={gameLogClass}>
-                        <Link to={'/profile/game-log'}><div className='sub-title'>Game Log</div></Link>
+                        <Link to={'/profile/games'}><div className='sub-title'>Game Log</div></Link>
                       </li>
                       <li role='presentation' className={splitStatsClass}>
                         <Link to={'/profile/stats'}><div className='sub-title'>Split Stats</div></Link>

@@ -39,7 +39,6 @@ class ProfileStatsPage extends React.Component {
 
     const gameTimes = _.groupBy(stats, 'game.time');
     const divisionSplits = _.groupBy(stats, 'division._id');
-    debugger;
     return (
       <div>
         <div className='sub-title-container'>

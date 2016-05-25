@@ -163,7 +163,6 @@ function shootingPercentage (made, attempted) {
 function getWinLoss (stats = []) {
   const winningStats = getWinningStats(stats);
   const losingStats = getLosingStats(stats);
-  debugger;
 
   // return {win: 0, loss: 0} format
   return {win: winningStats.length, loss: losingStats.length};

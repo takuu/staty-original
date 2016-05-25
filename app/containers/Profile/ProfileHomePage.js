@@ -4,6 +4,7 @@ import _ from 'lodash';
 import classNames from 'classnames';
 import SplitStats from '../../components/core/SplitStats/SplitStats';
 import helpers from '../../utils/helpers';
+import statParser from '../../utils/statParser';
 
 class ProfileGamesPage extends React.Component {
   constructor(props) {
@@ -30,7 +31,15 @@ class ProfileGamesPage extends React.Component {
       return helpers.getObjId(stat.team) === stat.game.awayTeam;
     });
 
+
     const gameTimes = _.groupBy(stats, 'game.time');
+    const gamesGroup = _.groupBy(stats, 'game._id');
+    const uniqueGames = _.map(gamesGroup, (list) => {
+      return list[0];
+    });
+    const record = statParser.getWinLoss(uniqueGames);
+    const gamesCount = (Object.keys(gamesGroup)).length;
+    debugger;
     return (
       <div>
         <div className='sub-title-container'>
