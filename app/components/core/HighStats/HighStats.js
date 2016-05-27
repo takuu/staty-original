@@ -5,13 +5,12 @@ import _ from 'lodash';
 import statParser from '../../../utils/statParser';
 import helpers from '../../../utils/helpers';
 
-
-const HighStats = ({highs}) => {
+const HighStats = ({highs, title}) => {
   const {assists, points, blocks, rebounds, steals} = highs;
 
   return (
     <div>
-      <div className='title'>Season Highs</div>
+      <div className='title'>{title || 'Season Highs'}</div>
       <div className='high-container'>
       {
         _.map(highs, (item, key) => {

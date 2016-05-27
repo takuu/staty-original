@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import classNames from 'classnames';
 import SplitStats from '../../components/core/SplitStats/SplitStats';
+import HighStats from '../../components/core/HighStats/HighStats';
 import helpers from '../../utils/helpers';
 import statParser from '../../utils/statParser';
 
@@ -38,12 +39,14 @@ class ProfileGamesPage extends React.Component {
       return list[0];
     });
     const record = statParser.getWinLoss(uniqueGames);
-    const gamesCount = (Object.keys(gamesGroup)).length;
+    const gamesPlayed = (Object.keys(gamesGroup)).length;
+    const cummulative = {record: `${record.win} - ${record.loss}`, gamesPlayed};
     debugger;
     return (
       <div>
         <div className='sub-title-container'>
 
+          <HighStats title='Cummulative Stats' highs={cummulative} />
           <SplitStats stats={homeGames} title='Home' />
           <SplitStats stats={awayGames} title='Away' />
           <div className='sub-title'>Game Times</div>
