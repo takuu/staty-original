@@ -28,7 +28,7 @@ import { getStatsByPlayerId } from '../../actions/statActions';
 })
 class PlayerPage extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
   static propTypes = {
     stats: PropTypes.array,

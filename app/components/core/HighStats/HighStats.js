@@ -3,36 +3,28 @@ import React, { PropTypes } from 'react';
 if (process.env.BROWSER) require('./styles.css');
 import _ from 'lodash';
 import statParser from '../../../utils/statParser';
+import helpers from '../../../utils/helpers';
+
 
 const HighStats = ({highs}) => {
-  const {assists, points, blocks, totalRebounds, steals} = highs;
+  const {assists, points, blocks, rebounds, steals} = highs;
 
   return (
     <div>
       <div className='title'>Season Highs</div>
       <div className='high-container'>
-        <div className='high-block'>
-          <div className='high-title'>Assists</div>
-          <div className='high-stat'>{assists}</div>
+      {
+        _.map(highs, (item, key) => {
+          const title = helpers.camelCaseToTitle(key);
+          return (
+            <div className='high-block'>
+              <div className='high-title'>{title}</div>
+              <div className='high-stat'>{item}</div>
+            </div>
+          );
+        })
+      }
         </div>
-        <div className='high-block'>
-          <div className='high-title'>Points</div>
-          <div className='high-stat'>{points}</div>
-        </div>
-        <div className='high-block'>
-          <div className='high-title'>Rebounds</div>
-          <div className='high-stat'>{totalRebounds}</div>
-        </div>
-        <div className='high-block'>
-          <div className='high-title'>Steals</div>
-          <div className='high-stat'>{steals}</div>
-        </div>
-        <div className='high-block'>
-          <div className='high-title'>Blocks</div>
-          <div className='high-stat'>{blocks}</div>
-        </div>
-      </div>
-
     </div>
   );
 

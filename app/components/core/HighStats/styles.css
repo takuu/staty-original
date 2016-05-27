@@ -12,6 +12,7 @@
     font-size:1.1em;
     font-weight:bold;
     text-align:center;
+    text-transform: capitalize;
 }
 .high-stat {
     font-size:1.1em;
