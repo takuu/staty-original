@@ -1,0 +1,8 @@
+.team-header {
+    font-size:1.1em;
+    border-top:1px solid #ddd;
+    border-bottom:1px solid #ddd;
+    background-color:#1a2c51;
+    color:#fff;
+    padding:5px;
+}
