@@ -17,7 +17,7 @@ import { connect } from 'react-redux';
 }, {
   getLeagueByName
 })
-export default class SiteLayout extends React.Component {
+export default class LeagueLayout extends React.Component {
   static propTypes = {
     children: PropTypes.element,
     league: PropTypes.object,

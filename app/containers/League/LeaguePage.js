@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 class LeagueRoute extends React.Component {
+  static propTypes = {
+    children: PropTypes.element,
+    league: PropTypes.object
+  };
   render () {
+    const {league} = this.props;
+
+    var childrenWithProps = React.Children.map(this.props.children, (child) => {
+      return React.cloneElement(child, {league: league});
+    });
     return (
       <div className='sub-container'>
         <div className='sub-title-container'>
@@ -17,6 +26,9 @@ class LeagueRoute extends React.Component {
               </ul>
             </div>
           </div>
+        </div>
+        <div style={{padding: '10px'}}>
+          {childrenWithProps}
         </div>
       </div>
     );

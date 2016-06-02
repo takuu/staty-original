@@ -33,7 +33,7 @@ import SearchResultPage from '../containers/League/SearchResultPage';
 import LeagueAboutPage from '../containers/LeagueAboutPage';
 import AboutPage from '../containers/AboutPage';
 import * as Posts from './../containers/Posts';
-import SiteLayout from '../containers/root/SiteLayout';
+import LeagueLayout from '../containers/League/LeagueLayout';
 import GameLayout from '../containers/Game/GameLayout';
 import TeamLayout from '../containers/Team/TeamLayout';
 import PlayerLayout from '../containers/Player/PlayerLayout';
@@ -74,7 +74,7 @@ const routes = (
     {/* */}<Route path="/search" component={SearchResultPage} />
     <Route path="/leagues" component={LeagueListPage} />
 
-    <Route path="/:leagueName" component={SiteLayout}>
+    <Route path="/:leagueName" component={LeagueLayout}>
       /*League Home*/
       <Route component={DivisionLayout}>
         <IndexRoute component={LeaguePage} />
