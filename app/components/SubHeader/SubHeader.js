@@ -43,9 +43,11 @@ class SubHeader extends React.Component {
                 <div className="sub-header-title pull-left">{title}</div>
 
                 <ul className="nav nav-pills pull-right" style={{lineHeight:'30px'}}>
-                  <li className="sub-header-link"><Link to={"/" + leagueName + "/contact"}>Information</Link></li>
+                  <li className="sub-header-link"><Link to={"/" + leagueName + "/register"}>Register</Link></li>
                   <li className="sub-header-link"><Link to={"/" + leagueName + "/search"}>Search</Link></li>
                   <li className="sub-header-link"><Link to={"/" + leagueName + "/rules"}>Rules</Link></li>
+                  <li className="sub-header-link"><Link to={"/" + leagueName + "/about"}>About Us</Link></li>
+                  <li className="sub-header-link"><Link to={"/" + leagueName + "/contact"}>Contact Us</Link></li>
                 </ul>
               </div>
 

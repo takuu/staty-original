@@ -209,7 +209,7 @@ Custom Bootstrap
     color: #333;
     background: 0 0 !important;
     margin:0;
-    padding:10px 15px;
+    padding:10px 10px;
 }
 .nav-tabs li.active a:hover {
     border:none !important;
@@ -226,14 +226,18 @@ Custom Bootstrap
     border:none !important;
     background: 0 0 !important;
     margin: 0;
-    padding-left:15px;
-    padding-right:15px;
+    padding-left:10px;
+    padding-right:10px;
     color: #737373;
 }
 
 .nav-tabs li a:active {
     border:none !important;
     background: 0 0 !important;
+}
+
+.nav-pills .sub-header-link a:hover {
+    background:none;
 }
 
 .list-group {
