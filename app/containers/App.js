@@ -32,12 +32,7 @@ export default class App extends React.Component {
   };
 
   render () {
-    const {
-      auth,
-      dispatch,
-      params,
-      user
-    } = this.props;
+    const { auth, dispatch, params, user } = this.props;
     var childrenWithProps = React.Children.map(this.props.children, (child) => {
       return React.cloneElement(child, { dispatch: dispatch, user: user });
     });

@@ -16,7 +16,7 @@ export default class PlayerAddButton extends React.Component {
   static propTypes = {
     league: PropTypes.object,
     player: PropTypes.object,
-    dispatch: PropTypes.func,
+    dispatch: PropTypes.func.isRequired,
     watchList: PropTypes.array
   };
 

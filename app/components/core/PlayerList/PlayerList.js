@@ -63,7 +63,8 @@ const PlayerList = ({players, league, player, dispatch, watchList, user}) => {
 
 PlayerList.propTypes = {
   players: PropTypes.array,
-  player: PropTypes.object
+  player: PropTypes.object,
+  dispatch: PropTypes.func.isRequired
 };
 
 PlayerList.defaultProps = {

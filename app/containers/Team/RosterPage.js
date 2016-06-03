@@ -31,10 +31,11 @@ class RosterPage extends React.Component {
   }
 
   render () {
-    let {players} = this.props;
+    let {players, dispatch} = this.props;
+    debugger;
     return (
       <div>
-        <PlayerList players={players} />
+        <PlayerList players={players} dispatch={dispatch} />
       </div>
     );
   }

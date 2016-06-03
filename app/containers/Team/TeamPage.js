@@ -24,7 +24,7 @@ class TeamPage extends React.Component {
     path: ''
   };
   render () {
-    let {league, team, path} = this.props;
+    let {league, team, path, dispatch} = this.props;
 
     let {division} = team || {};
 
@@ -45,7 +45,7 @@ class TeamPage extends React.Component {
     });
 
     var childrenWithProps = React.Children.map(this.props.children, (child) => {
-      return React.cloneElement(child, {league: league});
+      return React.cloneElement(child, {league: league, dispatch: dispatch});
     });
 
     return (
