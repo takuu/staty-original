@@ -1,47 +1,24 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import classNames from 'classnames';
+import DivisionGroup from './DivisionGroup';
 import _ from 'lodash';
-// import './styles.css';
 if (process.env.BROWSER) require('./styles.css');
 const DivisionList = ({divisions, league, currentDivision}) => {
-  let season = (divisions.length) ? divisions[0].season.name : '';
+  const divisionGroup = _.groupBy(_.orderBy(divisions, ['season.startDate'], ['desc']), 'season._id');
   return (
     <div>
-      <div className='page-title text-center'>{season}</div>
-      <ul className='list-group'>
-        {
-          _.map(divisions, (division) => {
-            let divisionClass = classNames({
-              'active': division._id === currentDivision._id,
-              'list-group-item': true,
-              'noborder': true,
-              'list-group-item-md': true
-            });
-            return (
-              <li key={division._id} className='list-group-item nopadding'>
-                <Link to={_createScheduleLink(league, division)} className={divisionClass}>
-                  <span className='inline-list-item date-item'>
-                    Dec 1
-                  </span>
-                  <span className='inline-list-item division-item'>
-                    {division.name}
-                  </span>
-                  <span className='inline-list-item status-item'>
-                    Completed
-                  </span>
-                </Link>
-              </li>
-            );
-          })
-        }
-      </ul>
+      {
+        _.map(Object.keys(divisionGroup), (key) => {
+          const divisionList = divisionGroup[key];
+          return (
+            <div>
+              <DivisionGroup divisions={divisionList} league={league} currentDivision={currentDivision} />
+            </div>
+          );
+        })
+      }
     </div>
   );
-
-  function _createScheduleLink (league, division) {
-    return (division) ? `/${league.name}/division/${division._id}` : '#';
-  }
 }
 
 DivisionList.propTypes = {
