@@ -72,7 +72,7 @@ const routes = (
     <Route path="/about" component={AboutPage} />
 
     <Route path="/contact" component={ContactPage} />
-    {/* */}<Route path="/search" component={SearchResultPage} />
+    {/* */}
     <Route path="/leagues" component={LeagueListPage} />
 
     <Route path="/:leagueName" component={LeagueLayout}>
@@ -81,6 +81,7 @@ const routes = (
         <IndexRoute component={LeaguePage} />
 
         <Route path='register' component={LeagueRegisterPage} />
+        <Route path="search" component={SearchResultPage} />
         <Route path='search/:searchName' component={SearchResultPage} />
 
         <Route path="division/:divisionId" component={DivisionPage} >
