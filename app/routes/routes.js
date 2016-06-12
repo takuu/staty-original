@@ -16,6 +16,7 @@ import DashboardPage from './../containers/DashboardPage';
 import ContactPage from './../containers/ContactPage';
 import LeagueListPage from './../containers/LeagueListPage';
 import LeaguePage from './../containers/League/LeaguePage';
+import LeagueRegisterPage from '../containers/League/LeagueRegisterPage';
 import DivisionPage from './../containers/Division/DivisionPage';
 import SchedulePage from '../containers/Division/SchedulePage';
 import StandingPage from '../containers/Division/StandingPage';
@@ -79,6 +80,7 @@ const routes = (
       <Route component={DivisionLayout}>
         <IndexRoute component={LeaguePage} />
 
+        <Route path='register' component={LeagueRegisterPage} />
         <Route path='search/:searchName' component={SearchResultPage} />
 
         <Route path="division/:divisionId" component={DivisionPage} >

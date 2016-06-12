@@ -17,6 +17,13 @@ function _createDivisionLink (league, division) {
   return `/${league.name}/division/${divisionId}`;
 }
 
+function _createLeagueRegisterLink (league = {}) {
+  return `/${league.name}/register`;
+}
+function _createLeagueLink (league = {}) {
+  return `/${league.name}`;
+}
+
 function _createProfileLink (user = {}) {
   const { players } = user;
   // const playerList = _.map(players, (player) => {
@@ -30,5 +37,7 @@ export default {
   createPlayerUrl: _createPlayerUrl,
   createTeamLink: _createTeamLink,
   createDivisionLink: _createDivisionLink,
-  createProfileLink: _createProfileLink
+  createProfileLink: _createProfileLink,
+  createLeagueRegisterLink: _createLeagueRegisterLink,
+  createLeagueLink: _createLeagueLink
 };
