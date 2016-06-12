@@ -31,7 +31,9 @@ import PlayerProfilePage from '../containers/Player/PlayerProfilePage';
 import PlayerStatsPage from '../containers/Player/PlayerStatsPage';
 import GamePage from '../containers/Game/GamePage';
 import SearchResultPage from '../containers/League/SearchResultPage';
-import LeagueAboutPage from '../containers/LeagueAboutPage';
+import LeagueRulesPage from '../containers/League/LeagueRulesPage';
+import LeagueAboutPage from '../containers/League/LeagueAboutPage';
+import LeagueContactPage from '../containers/League/LeagueContactPage';
 import AboutPage from '../containers/AboutPage';
 import * as Posts from './../containers/Posts';
 import LeagueLayout from '../containers/League/LeagueLayout';
@@ -81,6 +83,11 @@ const routes = (
         <IndexRoute component={LeaguePage} />
 
         <Route path='register' component={LeagueRegisterPage} />
+        <Route path='rules' component={LeagueRulesPage} />
+        <Route path='about' component={LeagueAboutPage} />
+
+        <Route path='contact' component={LeagueContactPage} />
+
         <Route path="search" component={SearchResultPage} />
         <Route path='search/:searchName' component={SearchResultPage} />
 
@@ -131,8 +138,6 @@ const routes = (
       <Route path="dashboard" component={Auth} >
         <Route path="about" component={LeagueAboutPage} />
       </Route>
-
-      <Route path="about" component={LeagueAboutPage} />
 
       <Route path="results/:searchName" component={SearchResultPage}></Route>
 

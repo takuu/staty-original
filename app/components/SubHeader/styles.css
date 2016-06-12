@@ -16,6 +16,7 @@
 .sub-header-link a {
     color:#fff;
     font-weight:bold;
+    background: none !important;
 }
 .sub-header-title {
     color:#fff;

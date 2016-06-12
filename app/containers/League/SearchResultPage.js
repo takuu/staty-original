@@ -74,7 +74,6 @@ class SearchResultPage extends React.Component {
           <div className="page-title">Search</div>
         </div>
 
-
         <div className="row" style={{backgroundColor: '#eff3f8'}}>
           <div className="col-md-12 col-xs-12" style={{margin: '20px 0px'}}>
 
