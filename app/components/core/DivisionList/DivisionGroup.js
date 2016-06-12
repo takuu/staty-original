@@ -6,13 +6,14 @@ import _ from 'lodash';
 if (process.env.BROWSER) require('./styles.css');
 const DivisionGroup = ({divisions, league, currentDivision}) => {
   let season = (divisions.length) ? divisions[0].season.name : '';
+  const sortedDivisions = _.orderBy(divisions, ['strengthLevel'], ['desc']);
 
   return (
     <div>
       <div className='page-title text-center'>{season}</div>
       <ul className='list-group'>
         {
-          _.map(divisions, (division) => {
+          _.map(sortedDivisions, (division) => {
             let divisionClass = classNames({
               'active': division._id === currentDivision._id,
               'list-group-item': true,
