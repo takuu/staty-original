@@ -46,6 +46,12 @@ class SearchResultPage extends React.Component {
     this.setState({ [field]: e.target.value, isTouched: true });
   };
 
+  handleKeyPress = e => {
+    if (e.charCode == 13) {
+      this.handleSearch(e);
+    }
+  };
+
   handleSearch = e => {
     e.preventDefault();
     const { name } = this.state;
@@ -79,7 +85,7 @@ class SearchResultPage extends React.Component {
 
               <div id="custom-search-input">
                 <div className="input-group col-md-12" style={{padding: '20px'}}>
-                  <input type="text" className="form-control input-lg" placeholder="Player" onChange={this.handleChange('name')} value={viewed} />
+                  <input type="text" className="form-control input-lg" placeholder="Player" onKeyPress={this.handleKeyPress} onChange={this.handleChange('name')} value={viewed} />
                   <span className="input-group-btn">
                     <button className="btn btn-info btn-lg" type="button" onClick={this.handleSearch} >
                       <i className="glyphicon glyphicon-search"></i>
