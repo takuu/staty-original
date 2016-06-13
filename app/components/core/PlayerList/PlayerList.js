@@ -8,19 +8,18 @@ import PlayerAddButton from '../../../components/core/PlayerAddButton/PlayerAddB
 // import './styles.css';
 if (process.env.BROWSER) require('./styles.css');
 
-const PlayerList = ({players, league, player, dispatch, watchList, user}) => {
+const PlayerList = ({players, league, player, dispatch, watchList, user, showTeam, showSeason}) => {
   let hasNumber = helpers.doesKeyExistInList(players, 'number');
   let hasName = helpers.doesKeyExistInList(players, 'name');
   let hasPos = helpers.doesKeyExistInList(players, 'position');
   let hasHeight = helpers.doesKeyExistInList(players, 'height');
-
   let activePlayerId = helpers.getObjId(player);
 
   return (
     <ul className='list-group'>
       {
         _.map(players, (player) => {
-          const { league } = player;
+          const { league, team, season } = player;
           let playerClass = classNames({
             'active': player._id === activePlayerId,
             'list-group-item': true,
@@ -38,6 +37,13 @@ const PlayerList = ({players, league, player, dispatch, watchList, user}) => {
                   <Link to={_createPlayerUrl(league, player)} >
                   {(hasName) ? (player.name || '-') : ''}
                   </Link>
+                </span>
+
+                <span className='inline-list-item team-item'>
+                  {(showTeam) ? (team && team.name) : ''}
+                </span>
+                <span className='inline-list-item season-item'>
+                  {(showSeason) ? (season && season.name) : ''}
                 </span>
 
                 <span className='inline-list-item position-item'>

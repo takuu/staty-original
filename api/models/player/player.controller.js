@@ -75,6 +75,7 @@ exports.search = function(req, res) {
   Player.find(find, findScore).sort(sort)
     .populate('team')
     .populate('league')
+    .populate('season')
     .exec(function(err, players) {
     // do something with returned docs
 
