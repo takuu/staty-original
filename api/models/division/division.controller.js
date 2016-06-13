@@ -24,7 +24,9 @@ exports.index = function(req, res) {
 
 // Get a single division
 exports.show = function(req, res) {
-  Division.findById(req.params.id, function (err, division) {
+  Division.findById(req.params.id)
+    .populate('season')
+    .exec(function (err, division) {
     if(err) { return handleError(res, err); }
     if(!division) { return res.send(404); }
     res.status(200).send(division);
