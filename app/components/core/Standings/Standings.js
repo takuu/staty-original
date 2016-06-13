@@ -20,7 +20,7 @@ const Standings = ({games, league, team}) => {
             let teamClass = classNames({
               'active': team._id === activeTeamId,
               'list-group-item': true,
-              'noborder': true,
+              'noborder': false,
               'list-group-item-md': true
             });
 

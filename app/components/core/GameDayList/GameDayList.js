@@ -19,7 +19,7 @@ const GameDayList = ({games, date, league}) => {
 
             return (
               <li key={game._id} className='list-group-item nopadding list-group-item-md'>
-                <Link to={_createGameLink(league, game)} className="list-group-item list-group-item-md noborder">
+                <Link to={_createGameLink(league, game)} className="list-group-item list-group-item-md">
                   <span className='inline-list-item teams-item'>
                     <span>{homeTeam.name}</span>
                     <span>{awayTeam.name}</span>
