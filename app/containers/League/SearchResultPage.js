@@ -9,17 +9,20 @@ import PlayerList from '../../components/core/PlayerList/PlayerList';
 
 
 @connect((state,router) => {
+  const { user } = state;
   const leagueName = router.params.leagueName;
   const searchName = router.params.searchName;
   const teamId = router.params.teamId;
 
   const leagues = state.leagues.toJS();
   const league = _.find(leagues, {name: leagueName});
+  const watchList = _.cloneDeep(user.players);
+  debugger;
 
   const playersJS = state.players.toJS();
   const players = _.filter(playersJS, {searchName: searchName});
 
-  return {league: league, players: players, router: router}
+  return {league: league, players: players, router: router, watchList: watchList}
 }, {
   getLeagueByName,
   searchPlayer
@@ -69,10 +72,9 @@ class SearchResultPage extends React.Component {
     return redux.dispatch(getLeagueByName(leagueName));
   }
   render () {
-    const {players, league, params: {searchName}, dispatch} = this.props;
+    const {players, league, params: {searchName}, dispatch, watchList} = this.props;
     const {name, isTouched} = this.state;
 
-    debugger;
     let viewed = (isTouched) ? name : searchName;
     return (
 
@@ -104,7 +106,7 @@ class SearchResultPage extends React.Component {
             <div className="sub-title-container">
               <div className="sub-title">Search results for "{searchName}"</div>
             </div>
-            <PlayerList players={players} showTeam={true} showSeason={true} dispatch={dispatch} />
+            <PlayerList players={players} showTeam={true} showSeason={true} dispatch={dispatch} watchList={watchList} />
           </div>
 
 

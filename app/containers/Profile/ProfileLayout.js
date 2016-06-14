@@ -18,6 +18,7 @@ import { connect } from 'react-redux';
   // const list = id.split(',');
 
   const watchList = _.cloneDeep(user.players);
+  debugger;
 
   const list = _.map(watchList, '_id');
   const statsJS = state.stats.toJS();
@@ -46,7 +47,7 @@ export default class PlayerLayout extends React.Component {
   static fillStore (redux, router) {
     const { id } = router.location.query;
     // const playerList = id.split(',');
-    return redux.dispatch(getUserStats());
+    // return redux.dispatch(getUserStats());
     // return redux.dispatch(getStatsByPlayerListId(playerList));
   }
 

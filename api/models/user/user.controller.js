@@ -52,6 +52,14 @@ exports.getWatchList = function (req, res) {
   } else {
     User.findById(userId)
       .populate('players')
+      .populate({
+        path: 'players',
+        populate: { path: 'team', model: 'Team' }
+      })
+      .populate({
+        path: 'players',
+        populate: { path: 'season', model: 'Season' }
+      })
       .exec(function (err, user) {
         if (err) { return handleError(res, err); }
         if (!user) { return res.send(404); }
@@ -74,6 +82,14 @@ exports.addWatch = function (req, res) {
     {$addToSet: { players: {$each: playerList} }},
     {safe: true, upsert: true, new: true})
     .populate('players')
+    .populate({
+      path: 'players',
+      populate: { path: 'team', model: 'Team' }
+    })
+    .populate({
+      path: 'players',
+      populate: { path: 'season', model: 'Season' }
+    })
     .exec(function (err, user) {
       if (err) { return handleError(res, err); }
       res.status(200).send(user);
@@ -146,6 +162,14 @@ exports.removeWatch = function (req, res) {
     {$pullAll: {players: [ObjectId(playerId)]}},
     {safe: true, upsert: true, new: true})
     .populate('players')
+    .populate({
+      path: 'players',
+      populate: { path: 'team', model: 'Team' }
+    })
+    .populate({
+      path: 'players',
+      populate: { path: 'season', model: 'Season' }
+    })
     .exec(function (err, user) {
       if (err) { return handleError(res, err); }
       res.status(200).send(user);
