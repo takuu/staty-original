@@ -44,7 +44,6 @@ class ProfileGamesPage extends React.Component {
     const maxStats = statParser.getMaxStats(stats);
 
     // TODO: Need stat average throughout all seasons
-    debugger;
     return (
       <div>
         <div className='sub-title-container'>

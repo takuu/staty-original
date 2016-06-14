@@ -61,7 +61,7 @@ class SearchResultPage extends React.Component {
     this.props.dispatch(searchPlayer(name));
   }
 
-  static fillStore(redux, route, foo) {
+  static fillStore(redux, route) {
     const leagueName = route.params.leagueName;
     const searchName = route.params.searchName;
     redux.dispatch(searchPlayer(searchName));
@@ -69,9 +69,10 @@ class SearchResultPage extends React.Component {
     return redux.dispatch(getLeagueByName(leagueName));
   }
   render () {
-    const {players, league, params: {searchName}} = this.props;
+    const {players, league, params: {searchName}, dispatch} = this.props;
     const {name, isTouched} = this.state;
 
+    debugger;
     let viewed = (isTouched) ? name : searchName;
     return (
 
@@ -103,7 +104,7 @@ class SearchResultPage extends React.Component {
             <div className="sub-title-container">
               <div className="sub-title">Search results for "{searchName}"</div>
             </div>
-            <PlayerList players={players} showTeam={true} showSeason={true} />
+            <PlayerList players={players} showTeam={true} showSeason={true} dispatch={dispatch} />
           </div>
 
 

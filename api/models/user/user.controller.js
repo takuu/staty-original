@@ -30,6 +30,14 @@ exports.getProfile = function (req, res) {
   console.log('getProfile');
   User.findById(userId)
     .populate('players')
+    .populate({
+      path: 'players',
+      populate: { path: 'season', model: 'Season' }
+    })
+    .populate({
+      path: 'players',
+      populate: { path: 'team', model: 'Team' }
+    })
     .exec(function (err, user) {
       if (err) { return handleError(res, err); }
       if (!user) { return res.send(404); }

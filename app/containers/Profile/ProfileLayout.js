@@ -68,7 +68,7 @@ export default class PlayerLayout extends React.Component {
                         <div className='sub-container'>
                           <div className='sub-title-container'>WATCH LIST</div>
                           <div>
-                            <PlayerList players={watchList} dispatch={dispatch} watchList={watchList} user={user} />
+                            <PlayerList players={watchList} dispatch={dispatch} watchList={watchList} user={user} showTeam={true} showSeason={true} />
                           </div>
                         </div>
                       </div>
