@@ -47,7 +47,7 @@ export default class PlayerLayout extends React.Component {
   static fillStore (redux, router) {
     const { id } = router.location.query;
     // const playerList = id.split(',');
-    // return redux.dispatch(getUserStats());
+    return redux.dispatch(getUserStats());
     // return redux.dispatch(getStatsByPlayerListId(playerList));
   }
 
