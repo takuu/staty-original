@@ -40,7 +40,6 @@ class ProfileGamesPage extends React.Component {
       return gameTime;
     });
     const gameTimes = _.groupBy(orderedStats, 'game.time');
-    debugger;
     const gamesGroup = _.groupBy(stats, 'game._id');
     const uniqueGames = _.map(gamesGroup, (list) => {
       return list[0];

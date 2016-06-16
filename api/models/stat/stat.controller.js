@@ -88,6 +88,10 @@ exports.getPlayerListStats = function(req, res) {
         path: 'player',
         populate: { path: 'season', model: 'Season' }
       })
+      .populate({
+        path: 'player',
+        populate: { path: 'league', model: 'League' }
+      })
       .exec(function(err, stats) {
         if (err) return handleError(res, err);
         res.status(200).send(stats);

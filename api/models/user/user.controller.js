@@ -38,6 +38,10 @@ exports.getProfile = function (req, res) {
       path: 'players',
       populate: { path: 'team', model: 'Team' }
     })
+    .populate({
+      path: 'players',
+      populate: { path: 'league', model: 'League' }
+    })
     .exec(function (err, user) {
       if (err) { return handleError(res, err); }
       if (!user) { return res.send(404); }
@@ -59,6 +63,10 @@ exports.getWatchList = function (req, res) {
       .populate({
         path: 'players',
         populate: { path: 'season', model: 'Season' }
+      })
+      .populate({
+        path: 'players',
+        populate: { path: 'league', model: 'League' }
       })
       .exec(function (err, user) {
         if (err) { return handleError(res, err); }
@@ -89,6 +97,10 @@ exports.addWatch = function (req, res) {
     .populate({
       path: 'players',
       populate: { path: 'season', model: 'Season' }
+    })
+    .populate({
+      path: 'players',
+      populate: { path: 'league', model: 'League' }
     })
     .exec(function (err, user) {
       if (err) { return handleError(res, err); }
@@ -169,6 +181,10 @@ exports.removeWatch = function (req, res) {
     .populate({
       path: 'players',
       populate: { path: 'season', model: 'Season' }
+    })
+    .populate({
+      path: 'players',
+      populate: { path: 'league', model: 'League' }
     })
     .exec(function (err, user) {
       if (err) { return handleError(res, err); }
