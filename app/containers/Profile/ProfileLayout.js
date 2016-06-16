@@ -18,7 +18,6 @@ import { connect } from 'react-redux';
   // const list = id.split(',');
 
   const watchList = _.cloneDeep(user.players);
-  debugger;
 
   const list = _.map(watchList, '_id');
   const statsJS = state.stats.toJS();

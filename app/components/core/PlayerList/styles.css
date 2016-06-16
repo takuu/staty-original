@@ -14,12 +14,16 @@
 .inline-list-item.team-item {
     display: flex;
     align-items:center;
+    justify-content:center;
+    text-align:center;
     width:20%;
     color:#aaa;
 }
 .inline-list-item.season-item {
     display: flex;
     align-items:center;
+    justify-content:center;
+    text-align:center;
     width:15%;
     color:#aaa;
 }

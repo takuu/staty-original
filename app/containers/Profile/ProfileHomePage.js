@@ -33,7 +33,14 @@ class ProfileGamesPage extends React.Component {
     });
 
 
-    const gameTimes = _.groupBy(stats, 'game.time');
+    const orderedStats = _.sortBy(stats, (stat) => {
+      const { game } = stat;
+      var d = new Date().toISOString().slice(0,10);
+      var gameTime = new Date(`${d} ${game.time}`);
+      return gameTime;
+    });
+    const gameTimes = _.groupBy(orderedStats, 'game.time');
+    debugger;
     const gamesGroup = _.groupBy(stats, 'game._id');
     const uniqueGames = _.map(gamesGroup, (list) => {
       return list[0];
