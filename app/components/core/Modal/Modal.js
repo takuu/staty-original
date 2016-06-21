@@ -8,7 +8,7 @@ var Modal = React.createClass({
     if (this.props.isOpen){
       return (
         <ReactCSSTransitionGroup transitionName={this.props.transitionName}>
-          <div className="modal">
+          <div className='modal'>
             {this.props.children}
           </div>
         </ReactCSSTransitionGroup>

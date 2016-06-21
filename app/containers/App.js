@@ -7,11 +7,12 @@ import { bindActionCreators } from 'redux';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import { fetchUserProfile, logout } from '../actions/auth';
+import Modal from '../components/core/Modal/Modal';
 
 @connect(state => {
-  const {auth, router, user} = state;
+  const {auth, router, user, ui} = state;
 
-  return {auth, router, user};
+  return {auth, router, user, ui};
 })
 export default class App extends React.Component {
   static propTypes = {
@@ -19,7 +20,8 @@ export default class App extends React.Component {
     children: PropTypes.element.isRequired,
     dispatch: PropTypes.func.isRequired,
     error: PropTypes.string,
-    user: PropTypes.object
+    user: PropTypes.object,
+    ui: PropTypes.object
   };
 
   static contextTypes = {
@@ -32,7 +34,8 @@ export default class App extends React.Component {
   };
 
   render () {
-    const { auth, dispatch, params, user } = this.props;
+    const { auth, dispatch, params, user, ui } = this.props;
+    debugger;
     var childrenWithProps = React.Children.map(this.props.children, (child) => {
       return React.cloneElement(child, { dispatch: dispatch, user: user });
     });
@@ -52,6 +55,12 @@ export default class App extends React.Component {
         </div>
 
         <Footer {...this.props.children} />
+        <Modal isOpen={ui.showLoginModal}
+               transitionName="modal-anim">
+          <div>
+            <h1>HELLO WORLD</h1>
+          </div>
+        </Modal>
       </div>
     );
   }

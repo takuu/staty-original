@@ -16,7 +16,7 @@
     color: #444;
     height:48px;
     width:100%;
-    z-index:100;
+    z-index:101;
 
 }
 .my-facebook-button-class {
@@ -75,7 +75,13 @@
     margin: 0;
 }
 
-
+.btn-Navigation-dropdown {
+    background:none !important;
+    color:#fff !important;
+}
+.btn-Navigation-dropdown:hover {
+    color:#eee !important;
+}
 
 .Navigation-link {
     display: inline-block;

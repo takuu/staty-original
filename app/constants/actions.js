@@ -72,5 +72,7 @@ export default keyMirror({
   SET_PLAYER_TO_WATCH_LIST: null,
   REMOVE_PLAYER_FROM_WATCH_LIST: null,
 
-  SET_USER: null
+  SET_USER: null,
+
+  SHOW_LOGIN_MODAL: null
 });

@@ -1,23 +1,30 @@
-//import styles from './styles.styl';
-
-// import './styles.css';
 let logoFull;
 if (process.env.BROWSER) {
   logoFull = require('./logo-full.png');
   require('./styles.css');
 }
+
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import NavItem from './NavItem';
 import createLinks from '../../utils/createLinks';
 import { addFacebookUser } from '../../actions/userActions';
+import { showLoginModal } from '../../actions/uiActions';
 import FacebookLogin from 'react-facebook-login';
+import {DropdownButton, MenuItem} from 'react-bootstrap';
 
 export default class Header extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {showModal: false};
+  }
+
   static propTypes = {
     loggedIn: PropTypes.bool,
     logout: PropTypes.func.isRequired,
-    router: PropTypes.object.isRequired
+    router: PropTypes.object.isRequired,
+    ui: PropTypes.object.isRequired
   };
 
   handleLogout = e => {
@@ -25,6 +32,13 @@ export default class Header extends React.Component {
     e.preventDefault();
     logout(router);
   };
+
+  login () {
+    const { player, dispatch, watchList } = this.props;
+    dispatch(showLoginModal());
+    debugger;
+
+  }
 
   responseFacebook(fbUser) {
     const { logout, router, dispatch, user } = this.props;
@@ -44,7 +58,15 @@ export default class Header extends React.Component {
         <div className='Header-nav Navigation'>
           <Link className='Navigation-link' to='/leagues'>Leagues</Link>
           <Link className='Navigation-link' to='/about'>About</Link>
-          <Link className='Navigation-link' to={createLinks.createProfileLink(user)}>{named}</Link>
+          <div style={{'float': 'right'}}>
+            <DropdownButton bsStyle='Navigation-dropdown' title={named}>
+              <MenuItem key='1'>
+                <Link to={createLinks.createProfileLink(user)}>Profile</Link>
+              </MenuItem>
+              <MenuItem key='2'>Settings</MenuItem>
+              <MenuItem key='2'>Logout</MenuItem>
+            </DropdownButton>
+          </div>
         </div>
         );
     } else {
@@ -73,6 +95,13 @@ export default class Header extends React.Component {
               textButton='Login'
               icon="fa-facebook" />
           </div>
+          <div style={{'float': 'left'}}>
+            <div onClick={this.login.bind(this)} style={{'color': '#fff'}}>Login</div>
+          </div>
+          <div style={{'float': 'left'}}>
+            Register
+          </div>
+
 
         </div>
       );
@@ -80,6 +109,7 @@ export default class Header extends React.Component {
   }
 
   render () {
+    const { ui } = this.props;
     return (
       <div>
         <div className="Header">
