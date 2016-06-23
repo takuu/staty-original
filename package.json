@@ -52,7 +52,6 @@
     "passport-facebook": "^2.1.0",
     "passport-http-bearer": "^1.0.1",
     "react": "^0.14.7",
-    "react-addons-css-transition-group": "0.14.7",
     "react-bootstrap": "^0.28.5",
     "react-data-grid": "^0.14.1",
     "react-dom": "^0.14.7",

@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import { fetchUserProfile, logout } from '../actions/auth';
-import Modal from '../components/core/Modal/Modal';
+import CustomModal from '../components/core/CustomModal/CustomModal';
 
 @connect(state => {
   const {auth, router, user, ui} = state;
@@ -55,12 +55,11 @@ export default class App extends React.Component {
         </div>
 
         <Footer {...this.props.children} />
-        <Modal isOpen={ui.showLoginModal}
-               transitionName="modal-anim">
+        <CustomModal isOpen={ui.showLoginModal} dispatch={dispatch}>
           <div>
             <h1>HELLO WORLD</h1>
           </div>
-        </Modal>
+        </CustomModal>
       </div>
     );
   }

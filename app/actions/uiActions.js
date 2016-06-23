@@ -9,3 +9,13 @@ export function showLoginModal () {
     }
   };
 }
+
+export function hideLoginModal () {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: ActionTypes.HIDE_LOGIN_MODAL, showLoginModal: false });
+    } catch (error) {
+      console.log('uiActions error: ', error);
+    }
+  };
+}

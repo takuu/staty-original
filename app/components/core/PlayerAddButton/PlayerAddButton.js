@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import Modal from '../../../components/core/Modal/Modal';
+import Modal from '../CustomModal/CustomModal';
 import { addPlayerToWatchList, removePlayerFromWatchList } from '../../../actions/userActions';
 import _ from 'lodash';
 // import './styles.css';

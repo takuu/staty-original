@@ -13,6 +13,11 @@ export default (state = defaultState, action) => {
       return {
         showLoginModal: action.showLoginModal
       };
+    case ActionTypes.HIDE_LOGIN_MODAL:
+      debugger;
+      return {
+        showLoginModal: action.showLoginModal
+      };
     default:
       return state;
   };

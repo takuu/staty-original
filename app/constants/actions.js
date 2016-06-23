@@ -74,5 +74,6 @@ export default keyMirror({
 
   SET_USER: null,
 
-  SHOW_LOGIN_MODAL: null
+  SHOW_LOGIN_MODAL: null,
+  HIDE_LOGIN_MODAL: null
 });
