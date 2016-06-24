@@ -17,8 +17,14 @@ export default class CustomModal extends React.Component {
   render () {
     const {isOpen} = this.props;
     return (
-          <Modal show={isOpen} onHide={this.close.bind(this)}>
-            {this.props.children}
+          <Modal show={isOpen} onHide={this.close.bind(this)} bsSize='large'>
+            <Modal.Header closeButton>
+              <Modal.Title>Modal heading</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {this.props.children}
+            </Modal.Body>
+
           </Modal>
       );
   }

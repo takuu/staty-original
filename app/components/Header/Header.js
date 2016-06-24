@@ -12,7 +12,8 @@ import createLinks from '../../utils/createLinks';
 import { addFacebookUser } from '../../actions/userActions';
 import { showLoginModal } from '../../actions/uiActions';
 import FacebookLogin from 'react-facebook-login';
-import {DropdownButton, MenuItem} from 'react-bootstrap';
+import {DropdownButton, MenuItem, Modal} from 'react-bootstrap';
+import { hideLoginModal } from '../../actions/uiActions';
 
 export default class Header extends React.Component {
   constructor(props) {
@@ -27,6 +28,11 @@ export default class Header extends React.Component {
     ui: PropTypes.object.isRequired
   };
 
+  close () {
+    const {dispatch} = this.props;
+    dispatch(hideLoginModal());
+  }
+
   handleLogout = e => {
     const { logout, router } = this.props;
     e.preventDefault();
@@ -34,14 +40,14 @@ export default class Header extends React.Component {
   };
 
   login () {
-    const { player, dispatch, watchList } = this.props;
+    const { player, dispatch, watchList, ui } = this.props;
     dispatch(showLoginModal());
-    debugger;
 
   }
 
   responseFacebook(fbUser) {
     const { logout, router, dispatch, user } = this.props;
+    this.close();
     console.log('facebook response', fbUser);
     // Call this if there isn't a facebook user
     if(!(user && user.fb)){
@@ -50,7 +56,7 @@ export default class Header extends React.Component {
   }
 
   renderNavBar () {
-    const { loggedIn, params, user } = this.props;
+    const { loggedIn, params, user, ui } = this.props;
 
     if (user && user.fb) {
       let named = user.fb.name;
@@ -88,18 +94,10 @@ export default class Header extends React.Component {
           </div>
           {profile}
           <div style={{'float': 'left'}}>
-            <FacebookLogin
-              appId="1017967544938771"
-              autoLoad={true}
-              callback={this.responseFacebook.bind(this)} scope='public_profile, email' cssClass="my-facebook-button-class"
-              textButton='Login'
-              icon="fa-facebook" />
+            <a href='#' className='Navigation-link' onClick={this.login.bind(this)}>Login</a>
           </div>
           <div style={{'float': 'left'}}>
-            <div onClick={this.login.bind(this)} style={{'color': '#fff'}}>Login</div>
-          </div>
-          <div style={{'float': 'left'}}>
-            Register
+            <a href='#' className='Navigation-link' onClick={this.login.bind(this)}>Register</a>
           </div>
 
 
@@ -120,6 +118,35 @@ export default class Header extends React.Component {
             {this.renderNavBar()}
           </div>
         </div>
+        <Modal show={ui.showLoginModal} onHide={this.close.bind(this)}>
+          <Modal.Header closeButton>
+            <h4 className='modal-title text-center'>LOGIN TO STATY</h4>
+          </Modal.Header>
+          <Modal.Body>
+            <div>
+              <div className='form-group'>
+                <label className='email-inline'>
+                  <input type='email' className='form-control' id='exampleInputEmail1' placeholder='Email' />
+                </label>
+              </div>
+              <div className='form-group'>
+                <input type='password' className='form-control' id='exampleInputPassword1' placeholder='Password' />
+              </div>
+              <button type='submit' className='btn btn-default'>Login</button>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <div className='centered'>
+              <FacebookLogin
+                appId='1017967544938771'
+                autoLoad={true}
+                callback={this.responseFacebook.bind(this)} scope='public_profile, email' cssClass='my-facebook-button-class'
+                textButton='Login'
+                icon='fa-facebook' />
+            </div>
+          </Modal.Footer>
+
+        </Modal>
       </div>
     );
   }

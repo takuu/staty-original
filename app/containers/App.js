@@ -7,7 +7,8 @@ import { bindActionCreators } from 'redux';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import { fetchUserProfile, logout } from '../actions/auth';
-import CustomModal from '../components/core/CustomModal/CustomModal';
+import { hideLoginModal } from '../actions/uiActions';
+// import CustomModal from '../components/core/CustomModal/CustomModal';
 
 @connect(state => {
   const {auth, router, user, ui} = state;
@@ -24,6 +25,10 @@ export default class App extends React.Component {
     ui: PropTypes.object
   };
 
+  close () {
+    const {dispatch} = this.props;
+    dispatch(hideLoginModal());
+  }
   static contextTypes = {
     router: PropTypes.object,
     user: PropTypes.object
@@ -35,7 +40,6 @@ export default class App extends React.Component {
 
   render () {
     const { auth, dispatch, params, user, ui } = this.props;
-    debugger;
     var childrenWithProps = React.Children.map(this.props.children, (child) => {
       return React.cloneElement(child, { dispatch: dispatch, user: user });
     });
@@ -48,6 +52,7 @@ export default class App extends React.Component {
           params={params}
           dispatch={dispatch}
           user={user}
+          ui={ui}
           {...bindActionCreators({ logout }, dispatch)}
         />
         <div style={{minHeight: '800px'}}>
@@ -55,11 +60,9 @@ export default class App extends React.Component {
         </div>
 
         <Footer {...this.props.children} />
-        <CustomModal isOpen={ui.showLoginModal} dispatch={dispatch}>
-          <div>
-            <h1>HELLO WORLD</h1>
-          </div>
-        </CustomModal>
+
+
+
       </div>
     );
   }
