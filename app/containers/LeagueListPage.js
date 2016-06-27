@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import LeagueList from '../components/LeagueList/LeagueList';
-import GoogleMap from 'google-map-react';
 import {
   getAllLeagues
 } from '../actions/leagues';
@@ -13,10 +12,7 @@ import {
 })
 export default class LeagueListRoute extends React.Component {
   static propTypes = {
-    leagues: PropTypes.array.isRequired,
-    center: {lat: 59.938043, lng: 30.337157},
-    zoom: 9,
-    greatPlaceCoords: {lat: 59.724465, lng: 30.080121}
+    leagues: PropTypes.array.isRequired
   };
 
   static fillStore (redux) {
@@ -30,12 +26,6 @@ export default class LeagueListRoute extends React.Component {
       <div>
         <LeagueList leagues={leagues} />
         <div style={{'backgroundColor': '#fff', 'width': '100%', 'height': '500px'}}></div>
-        <GoogleMap
-          apiKey={'Browser key 1'}
-          center={{lat: 59.938043, lng: 30.337157}}
-          zoom={9}>
-
-        </GoogleMap>
 
       </div>
 

@@ -1,5 +1,7 @@
 .league-img {
     background: url('/app/assets/league/logo/mofufus_logo.png') #ffffff no-repeat;
+    background-size:contain;
+    background-repeat:no-repeat;
     width: 64px;
     height: 64px;
     border-radius: 50%;
