@@ -420,3 +420,24 @@ END SPINNERS
 }
 
 /* END MODAL */
+
+
+/* Flex Stuff */
+.flex-container {
+    display: flex;
+    display: -webkit-flex
+}
+
+.flex-center {
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.flex-spacing {
+    justify-content: space-between;
+}
+
+
+/* End Flex Stuff */

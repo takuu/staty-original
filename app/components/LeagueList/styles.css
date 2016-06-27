@@ -6,4 +6,12 @@
     height: 64px;
     border-radius: 50%;
 }
+.basketball-icon {
+    background: url('/app/assets/icons/basketball.png') #ffffff no-repeat;
+    background-size:contain;
+    background-repeat:no-repeat;
+    width: 14px;
+    height: 14px;
+
+}
 

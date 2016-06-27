@@ -18,7 +18,13 @@ const League = ({ leagues }) => {
                       <div className='league-img'></div>
 
                     </div>
-                    <div className='col-md-6'>{league.displayName || league.name}</div>
+                    <div className='col-md-6'>
+                      <div className="flex-container flex-center flex-spacing">
+                        <div>{league.displayName || league.name}</div>
+                        <div className='basketball-icon'></div>
+                      </div>
+
+                    </div>
                     <div className='col-md-3'>
                       {league.location}
                     </div>
