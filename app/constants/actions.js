@@ -12,10 +12,13 @@ export default keyMirror({
   LOGIN_FAILURE: null,
 
   LOGOUT: null,
+  LOGOUT_PROFILE_SUCCESS: null,
 
   FETCH_PROFILE: null,
   FETCH_PROFILE_SUCCESS: null,
   FETCH_PROFILE_FAILURE: null,
+
+
 
   SAVE_PROFILE: null,
   SAVE_PROFILE_SUCCESS: null,
@@ -73,6 +76,7 @@ export default keyMirror({
   REMOVE_PLAYER_FROM_WATCH_LIST: null,
 
   SET_USER: null,
+  REMOVE_USER: null,
 
   SHOW_LOGIN_MODAL: null,
   HIDE_LOGIN_MODAL: null

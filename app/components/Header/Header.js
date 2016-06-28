@@ -10,10 +10,10 @@ import { Link } from 'react-router';
 import NavItem from './NavItem';
 import createLinks from '../../utils/createLinks';
 import { addFacebookUser } from '../../actions/userActions';
-import { showLoginModal } from '../../actions/uiActions';
+import { logout } from '../../actions/auth'
+import { showLoginModal, hideLoginModal } from '../../actions/uiActions';
 import FacebookLogin from 'react-facebook-login';
 import {DropdownButton, MenuItem, Modal} from 'react-bootstrap';
-import { hideLoginModal } from '../../actions/uiActions';
 
 export default class Header extends React.Component {
   constructor(props) {
@@ -39,10 +39,14 @@ export default class Header extends React.Component {
     logout(router);
   };
 
-  login () {
+  showLogin () {
     const { player, dispatch, watchList, ui } = this.props;
     dispatch(showLoginModal());
+  }
 
+  logout () {
+    const { dispatch } = this.props;
+    dispatch(logout());
   }
 
   responseFacebook(fbUser) {
@@ -56,10 +60,11 @@ export default class Header extends React.Component {
   }
 
   renderNavBar () {
-    const { loggedIn, params, user, ui } = this.props;
-
-    if (user && user.fb) {
-      let named = user.fb.name;
+    const { loggedIn, params, user, ui, auth } = this.props;
+    
+    // if (user && user.fb) {
+    if (auth && auth.token) {
+      let named = (user && user.fb) ? user.fb.name : '';
       return (
         <div className='Header-nav Navigation'>
           <Link className='Navigation-link' to='/leagues'>Leagues</Link>
@@ -70,7 +75,9 @@ export default class Header extends React.Component {
                 <Link to={createLinks.createProfileLink(user)}>Profile</Link>
               </MenuItem>
               <MenuItem key='2'>Settings</MenuItem>
-              <MenuItem key='2'>Logout</MenuItem>
+              <MenuItem key='3'>
+                <div onClick={this.logout.bind(this)}>Logout</div>
+              </MenuItem>
             </DropdownButton>
           </div>
         </div>
@@ -94,13 +101,11 @@ export default class Header extends React.Component {
           </div>
           {profile}
           <div style={{'float': 'left'}}>
-            <a href='#' className='Navigation-link' onClick={this.login.bind(this)}>Login</a>
+            <a href='#' className='Navigation-link' onClick={this.showLogin.bind(this)}>Login</a>
           </div>
           <div style={{'float': 'left'}}>
-            <a href='#' className='Navigation-link' onClick={this.login.bind(this)}>Register</a>
+            <a href='#' className='Navigation-link' onClick={this.showLogin.bind(this)}>Register</a>
           </div>
-
-
         </div>
       );
     }
@@ -145,7 +150,6 @@ export default class Header extends React.Component {
                 icon='fa-facebook' />
             </div>
           </Modal.Footer>
-
         </Modal>
       </div>
     );

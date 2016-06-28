@@ -52,6 +52,7 @@ export default class App extends React.Component {
           params={params}
           dispatch={dispatch}
           user={user}
+          auth={auth}
           ui={ui}
           {...bindActionCreators({ logout }, dispatch)}
         />

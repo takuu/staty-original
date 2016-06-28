@@ -10,6 +10,12 @@ const defaultState = {
 
 export default (state = defaultState, action) => {
   switch (action.type) {
+
+    case ActionTypes.REMOVE_USER:
+      return {
+        ...state,
+        fb: ''
+      };
     case ActionTypes.SET_USER:
       return {
         ...action.user

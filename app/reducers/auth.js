@@ -1,18 +1,3 @@
-/*import {
-  ROUTER_STATE_CHANGE,
-
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-
-  SIGNUP_FAILURE,
-
-  LOGOUT,
-
-  SAVE_PROFILE,
-  SAVE_PROFILE_SUCCESS,
-  FETCH_PROFILE_SUCCESS
-} from '../constants/actions';*/
-
 import ActionTypes from '../constants/actions';
 
 const initialState = {
@@ -42,6 +27,8 @@ export default (state = initialState, action) => {
       };
 
     case ActionTypes.LOGOUT:
+      return { ...initialState };
+    case ActionTypes.LOGOUT_PROFILE_SUCCESS:
       return { ...initialState };
 
     case ActionTypes.SAVE_PROFILE:

@@ -8,7 +8,7 @@ import config from '../../api/config.json';
 import _ from 'lodash';
 const baseUrl = `http://localhost:${config.port}/api`;
 
-function saveAuthToken (token) {
+function saveAuthToken(token) {
   const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
   cookie.set({
     name: 'token',
@@ -94,7 +94,6 @@ export function getUserStats () {
         const list = _.map(players, '_id');
         const statBaseUrl = `http://localhost:${config.port}/api`;
         const stats = (await axios.get(statBaseUrl + '/stats/players/?id=' + list.toString())).data;
-        debugger;
         dispatch({ type: ActionTypes.SET_STATS_OF_PLAYER_LIST, stats });
 
       } else {
@@ -115,7 +114,7 @@ export function addFacebookUser (fbUser = {}) {
       console.log('adding... ', fbUser);
       const followList = storage.get('watchList');
       const newUser = (await axios.put(baseUrl + '/users/addFacebookUser/', { user: fbUser, players: followList })).data;
-      const {token, user} = newUser;
+      const { token, user } = newUser;
       saveAuthToken(token);
       dispatch({ type: ActionTypes.LOGIN_SUCCESS, token });
       // dispatch({ type: ActionTypes.FETCH_PROFILE_SUCCESS, user });
@@ -130,6 +129,7 @@ export function getProfile (id = '') {
   return async (dispatch) => {
     try {
       const user = (await axios.get(baseUrl + '/users/' + id)).data;
+      debugger;
       dispatch({ type: ActionTypes.SET_USER, user });
     } catch (error) {
       console.log('userActions error: ', error);
