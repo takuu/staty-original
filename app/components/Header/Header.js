@@ -61,7 +61,7 @@ export default class Header extends React.Component {
 
   renderNavBar () {
     const { loggedIn, params, user, ui, auth } = this.props;
-    
+
     // if (user && user.fb) {
     if (auth && auth.token) {
       let named = (user && user.fb) ? user.fb.name : '';
@@ -144,7 +144,7 @@ export default class Header extends React.Component {
             <div className='centered'>
               <FacebookLogin
                 appId='1017967544938771'
-                autoLoad={true}
+                autoLoad={false}
                 callback={this.responseFacebook.bind(this)} scope='public_profile, email' cssClass='my-facebook-button-class'
                 textButton='Login'
                 icon='fa-facebook' />
