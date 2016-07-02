@@ -440,4 +440,49 @@ END SPINNERS
 }
 
 
+/* Flex Table */
+
+.table-row {
+    display: flex;           display: -webkit-flex;
+    flex-direction: row;     -webkit-flex-direction: row;
+    flex-grow: 0;            -webkit-flex-grow: 0;
+    flex-wrap: nowrap;         -webkit-flex-wrap: nowrap;
+    width: 100%;
+    padding:0px 15px;
+    font-weight:100;
+    font-size: 0.7em;
+    line-height:2.0em;
+    border-bottom: 1px solid #eee;
+
+}
+.table-header {
+    font-weight: bold;
+    border-bottom: 1px solid #444;
+}
+
+
+.text {
+    flex-grow: 1;            -webkit-flex-grow: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-right: 20px;
+    align-items:center;
+
+}
+
+
+.text {
+    width: 180px;
+}
+
+.num {
+    width: 80px;
+}
+
+
+
+/* End Flex Table */
+
+
 /* End Flex Stuff */

@@ -17,8 +17,6 @@ import PlayerList from '../../components/core/PlayerList/PlayerList';
   const leagues = state.leagues.toJS();
   const league = _.find(leagues, {name: leagueName});
   const watchList = _.cloneDeep(user.players);
-  debugger;
-
   const playersJS = state.players.toJS();
   const players = _.filter(playersJS, {searchName: searchName});
 
@@ -76,6 +74,7 @@ class SearchResultPage extends React.Component {
     const {name, isTouched} = this.state;
 
     let viewed = (isTouched) ? name : searchName;
+    const sortedPlayers = _.orderBy(players, ['score', 'season.startDate'], ['desc', 'desc']);
     return (
 
       <div>
@@ -106,7 +105,7 @@ class SearchResultPage extends React.Component {
             <div className="sub-title-container">
               <div className="sub-title">Search results for "{searchName}"</div>
             </div>
-            <PlayerList players={players} showTeam={true} showSeason={true} dispatch={dispatch} watchList={watchList} />
+            <PlayerList players={sortedPlayers} showTeam={true} showSeason={true} dispatch={dispatch} watchList={watchList} />
           </div>
 
 

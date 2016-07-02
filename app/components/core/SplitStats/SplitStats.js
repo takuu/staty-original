@@ -5,71 +5,90 @@ import _ from 'lodash';
 import statParser from '../../../utils/statParser';
 import helpers from '../../../utils/helpers';
 
-const SplitStats = ({stats, title}) => {
+const SplitStats = ({stats, title, showHeader}) => {
   let combined = statParser.playerCummulativeStats(stats);
+  const header = (showHeader) ? (
+    <div className='table-row table-header'>
+      <div className='text' style={{width: '100px'}}></div>
+      <div className='num'>G</div>
+      <div className='num'>FGM</div>
+      <div className='num'>FGA</div>
+      <div className='num'>FG%</div>
+      <div className='num'>3PM</div>
+      <div className='num'>3PA</div>
+      <div className='num'>3PT%</div>
+      <div className='num'>FTM</div>
+      <div className='num'>FTA</div>
+      <div className='num'>FT%</div>
+      <div className='num'>REB</div>
+      <div className='num'>AST</div>
+      <div className='num'>ST</div>
+      <div className='num'>BS</div>
+      <div className='num'>PF</div>
+      <div className='num'>PTS</div>
+    </div>
+    ) : (
+    <div className='table-row'>
+      <div className='text' style={{width: '100px'}}></div>
+      <div className='num'></div>
+      <div className='num'></div>
+      <div className='num'></div>
+      <div className='num'></div>
+      <div className='num'></div>
+      <div className='num'></div>
+      <div className='num'></div>
+      <div className='num'></div>
+      <div className='num'></div>
+      <div className='num'></div>
+      <div className='num'></div>
+      <div className='num'></div>
+      <div className='num'></div>
+      <div className='num'></div>
+      <div className='num'></div>
+      <div className='num'></div>
+    </div>
+  );
+  return (
+    <div className='container-fluid'>
+      {header}
+      <div className='table-row'>
+        <div className='text' style={{width: '100px'}}><b>{title}</b></div>
+        <div className='num'>{stats.length}</div>
+        <div className='num'>{combined.avgFieldGoalsMade}</div>
+        <div className='num'>{combined.avgFieldGoalsAttempted}</div>
+        <div className='num'>{(combined.fieldGoalPercentage >= 0) ? combined.fieldGoalPercentage : '-'}</div>
 
-    return (
-      <table className='table' style={{fontSize: '.7em'}}>
-        <thead>
-        <tr>
-          <th style={{width: '100px'}}></th>
-          <th>G</th>
-          <th>FGM</th>
-          <th>FGA</th>
-          <th>FG%</th>
-          <th>3PM</th>
-          <th>3PA</th>
-          <th>3PT%</th>
-          <th>FTM</th>
-          <th>FTA</th>
-          <th>FT%</th>
-          <th>REB</th>
-          <th>AST</th>
-          <th>ST</th>
-          <th>BS</th>
-          <th>PF</th>
-          <th>PTS</th>
-        </tr>
-        </thead>
-        <tbody>
+        <div className='num'>{combined.avgThreePointsMade}</div>
+        <div className='num'>{combined.avgThreePointsAttempted}</div>
+        <div className='num'>{(combined.threePointPercentage >= 0) ? combined.threePointPercentage : '-'}</div>
 
-          <tr>
-            <td style={{width: '100px'}}><b>{title}</b></td>
-            <td>{stats.length}</td>
-            <td>{combined.avgFieldGoalsMade}</td>
-            <td>{combined.avgFieldGoalsAttempted}</td>
-            <td>{(combined.fieldGoalPercentage >= 0) ? combined.fieldGoalPercentage : '-'}</td>
+        <div className='num'>{combined.avgFreeThrowsMade}</div>
+        <div className='num'>{combined.avgFreeThrowsAttempted}</div>
+        <div className='num'>{(combined.freeThrowsPercentage >= 0) ? combined.freeThrowsPercentage : '-'}</div>
 
+        <div className='num'>{combined.avgRebounds}</div>
+        <div className='num'>{combined.avgAssists}</div>
+        <div className='num'>{combined.avgSteals}</div>
+        <div className='num'>{combined.avgBlocks}</div>
+        <div className='num'>{combined.avgFouls}</div>
+        <div className='num'>{combined.avgPoints}</div>
+    </div>
 
-            <td>{combined.avgThreePointsMade}</td>
-            <td>{combined.avgThreePointsAttempted}</td>
-            <td>{(combined.threePointPercentage >= 0) ? combined.threePointPercentage : '-'}</td>
-
-            <td>{combined.avgFreeThrowsMade}</td>
-            <td>{combined.avgFreeThrowsAttempted}</td>
-            <td>{(combined.freeThrowsPercentage >= 0) ? combined.freeThrowsPercentage : '-'}</td>
-
-            <td>{combined.avgRebounds}</td>
-            <td>{combined.avgAssists}</td>
-            <td>{combined.avgSteals}</td>
-            <td>{combined.avgBlocks}</td>
-            <td>{combined.avgFouls}</td>
-            <td>{combined.avgPoints}</td>
-          </tr>
-
-        </tbody>
-      </table>
-
-    );
+    </div>
+  )
 
 };
 
 SplitStats.propTypes = {
-  stats: PropTypes.array.isRequired
+  stats: PropTypes.array.isRequired,
+  title: PropTypes.string,
+  showHeader: PropTypes.bool
 
 };
 SplitStats.defaultProps = {
-  stats: []
+  stats: [],
+  title: '',
+  showHeader: true
 };
 
 export default SplitStats;

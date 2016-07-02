@@ -57,12 +57,13 @@ class ProfileGamesPage extends React.Component {
           <HighStats title='Cummulative Stats' highs={cummulative} />
           <HighStats title='Cummulative High' highs={maxStats} />
           <SplitStats stats={homeGames} title='Home' />
-          <SplitStats stats={awayGames} title='Away' />
+          <SplitStats stats={awayGames} title='Away' showHeader={false} />
           <div className='sub-title'>Game Times</div>
           {
-            _.map(gameTimes, (time, key) => {
+            _.map(Object.keys(gameTimes), (key, index) => {
+              const time = gameTimes[key];
               return (
-                <SplitStats key={key} stats={time} title={key} />
+                <SplitStats key={key} stats={time} title={key} showHeader={!index} />
               );
             })
           }
