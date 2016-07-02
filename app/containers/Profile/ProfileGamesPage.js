@@ -35,13 +35,14 @@ class ProfileGamesPage extends React.Component {
       <div>
         <div className='sub-title-container'>
 
-          <SplitStats stats={homeGames} title='Home' />
-          <SplitStats stats={awayGames} title='Away' />
+          <SplitStats stats={homeGames} title='Home'  />
+          <SplitStats stats={awayGames} title='Away' showHeader={false} />
           <div className='sub-title'>Game Times</div>
           {
-            _.map(gameTimes, (time, key) => {
+            _.map(Object.keys(gameTimes), (key, index) => {
+              const time = gameTimes[key];
               return (
-                <SplitStats key={key} stats={time} title={key} />
+                <SplitStats key={key} stats={time} title={key} showHeader={!index} />
               );
             })
           }

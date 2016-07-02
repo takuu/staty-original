@@ -44,12 +44,13 @@ class ProfileStatsPage extends React.Component {
         <div className='sub-title-container'>
 
           <SplitStats stats={homeGames} title='Home' />
-          <SplitStats stats={awayGames} title='Away' />
+          <SplitStats stats={awayGames} title='Away' showHeader={false} />
           <div className='sub-title'>Game Times</div>
           {
-            _.map(gameTimes, (time, key) => {
+            _.map(Object.keys(gameTimes), (key, index) => {
+              const time = gameTimes[key];
               return (
-                <SplitStats key={key} stats={time} title={key} />
+                <SplitStats key={key} stats={time} title={key} showHeader={!index} />
               );
             })
           }
@@ -58,14 +59,15 @@ class ProfileStatsPage extends React.Component {
 
           <div className='sub-title'>Game Splits</div>
           <SplitStats stats={winnings} title='In Wins' />
-          <SplitStats stats={losings} title='In Losses' />
+          <SplitStats stats={losings} title='In Losses' showHeader={false} />
           <div className='sub-title'>Season Splits</div>
           {
-            _.map(divisionSplits, (stats, key) => {
+            _.map(Object.keys(divisionSplits), (key, index) => {
+              const stats = divisionSplits[key];
               const divisionName = stats[0].division.name;
               const seasonName = stats[0].season.name;
               return (
-                <SplitStats key={key} stats={stats} title={`${divisionName} ${seasonName}`} />
+                <SplitStats key={key} stats={stats} title={`${divisionName} ${seasonName}`} showHeader={!index} />
               );
             })
           }
