@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import classNames from 'classnames';
 import SplitStats from '../../components/core/SplitStats/SplitStats';
+import CombinedStats from '../../components/core/SplitStats/CombinedStats/CombinedStats';
 import HighStats from '../../components/core/HighStats/HighStats';
 import helpers from '../../utils/helpers';
 import statParser from '../../utils/statParser';
@@ -58,6 +59,7 @@ class ProfileGamesPage extends React.Component {
           <HighStats title='Cummulative High' highs={maxStats} />
           <SplitStats stats={homeGames} title='Home' />
           <SplitStats stats={awayGames} title='Away' showHeader={false} />
+          <CombinedStats stats={stats} title='Total' showHeader={false} />
           <div className='sub-title'>Game Times</div>
           {
             _.map(Object.keys(gameTimes), (key, index) => {
