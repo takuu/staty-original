@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import classNames from 'classnames';
 import SplitStats from '../../components/core/SplitStats/SplitStats';
-import CombinedStats from '../../components/core/SplitStats/CombinedStats/CombinedStats';
+import CombinedStats from '../../components/core/SplitStats/CombinedStats';
 import HighStats from '../../components/core/HighStats/HighStats';
 import helpers from '../../utils/helpers';
 import statParser from '../../utils/statParser';

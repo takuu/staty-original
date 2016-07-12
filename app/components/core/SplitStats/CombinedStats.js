@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
-if (process.env.BROWSER) require('../styles.css');
+if (process.env.BROWSER) require('styles.css');
 import _ from 'lodash';
-import statParser from '../../../../utils/statParser';
-import helpers from '../../../../utils/helpers';
+import statParser from '../../../utils/statParser';
+import helpers from '../../../utils/helpers';
 
 const CombinedStats = ({stats, title, showHeader}) => {
   let combined = statParser.playerCummulativeStats(stats);
