@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import classNames from 'classnames';
 import SplitStats from '../../components/core/SplitStats/SplitStats';
+import SplitStatsv2 from '../../components/core/SplitStats/SplitStatsv2';
 import CombinedStats from '../../components/core/SplitStats/CombinedStats';
 import HighStats from '../../components/core/HighStats/HighStats';
 import helpers from '../../utils/helpers';
 import statParser from '../../utils/statParser';
 
-class ProfileGamesPage extends React.Component {
+class ProfileHomePage extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -57,9 +58,10 @@ class ProfileGamesPage extends React.Component {
 
           <HighStats title='Cummulative Stats' highs={cummulative} />
           <HighStats title='Cummulative High' highs={maxStats} />
-          <SplitStats stats={homeGames} title='Home' />
+          {/*<SplitStats stats={homeGames} title='Home' />
           <SplitStats stats={awayGames} title='Away' showHeader={false} />
-          <CombinedStats stats={stats} title='Total' showHeader={false} />
+          <CombinedStats stats={stats} title='Total' showHeader={false} />*/}
+          <SplitStatsv2 statList={{'Home': homeGames, 'Away': awayGames}} />
           <div className='sub-title'>Game Times</div>
           {
             _.map(Object.keys(gameTimes), (key, index) => {
@@ -75,4 +77,4 @@ class ProfileGamesPage extends React.Component {
   }
 }
 
-export default ProfileGamesPage;
+export default ProfileHomePage;

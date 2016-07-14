@@ -1,5 +1,5 @@
 import React from 'react';
-if (process.env.BROWSER) require('styles.css');
+if (process.env.BROWSER) require('./styles.css');
 
 const StatsHeader = () => {
   return (

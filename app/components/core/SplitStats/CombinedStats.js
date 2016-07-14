@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-if (process.env.BROWSER) require('styles.css');
+if (process.env.BROWSER) require('./styles.css');
 import _ from 'lodash';
 import statParser from '../../../utils/statParser';
 import helpers from '../../../utils/helpers';
@@ -52,7 +52,7 @@ const CombinedStats = ({stats, title, showHeader}) => {
       {header}
       <div className='table-row'>
         <div className='text' style={{width: '100px'}}><b>{title}</b></div>
-        <div className='num'>{stats.length}</div>
+        <div className='num'>{combined.gameCount}</div>
         <div className='num'>{combined.avgFieldGoalsMade}</div>
         <div className='num'>{combined.avgFieldGoalsAttempted}</div>
         <div className='num'>{(combined.fieldGoalPercentage >= 0) ? combined.fieldGoalPercentage : '-'}</div>
@@ -72,7 +72,6 @@ const CombinedStats = ({stats, title, showHeader}) => {
         <div className='num'>{combined.avgFouls}</div>
         <div className='num'>{combined.avgPoints}</div>
       </div>
-
     </div>
   )
 
