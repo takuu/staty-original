@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import classNames from 'classnames';
-import SplitStatsv2 from '../../components/core/SplitStats/SplitStatsv2';
+import SplitStats from '../../components/core/SplitStats/SplitStats';
 import helpers from '../../utils/helpers';
 
 class ProfileGamesPage extends React.Component {
@@ -41,9 +41,9 @@ class ProfileGamesPage extends React.Component {
     return (
       <div>
         <div className='sub-title-container'>
-          <SplitStatsv2 statList={{'Home': homeGames, 'Away': awayGames}} />
+          <SplitStats statList={{'Home': homeGames, 'Away': awayGames}} />
           <div className='sub-title'>Game Times</div>
-          <SplitStatsv2 statList={gameTimes} />
+          <SplitStats statList={gameTimes} />
         </div>
       </div>
     );

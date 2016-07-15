@@ -4,7 +4,7 @@ import _ from 'lodash';
 import classNames from 'classnames';
 import { getStatsByPlayerId } from '../../actions/statActions';
 import statParser from '../../utils/statParser';
-import SplitStatsv2 from '../../components/core/SplitStats/SplitStatsv2';
+import SplitStats from '../../components/core/SplitStats/SplitStats';
 import HighStats from '../../components/core/HighStats/HighStats';
 
 @connect((state, router) => {
@@ -57,10 +57,10 @@ class PlayerProfilePage extends React.Component {
       <div>
         <HighStats highs={maxes} />
         <br/>
-        <SplitStatsv2 statList={{'Season Average': stats}} />
-        <SplitStatsv2 statList={{'Lasted 3 Games': latest}} />
-        <SplitStatsv2 statList={{'In Wins': winnings}} />
-        <SplitStatsv2 statList={{'In Losses': losings}} />
+        <SplitStats statList={{'Season Average': stats}} />
+        <SplitStats statList={{'Lasted 3 Games': latest}} />
+        <SplitStats statList={{'In Wins': winnings}} />
+        <SplitStats statList={{'In Losses': losings}} />
       </div>
     );
   }

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import classNames from 'classnames';
-import SplitStatsv2 from '../../components/core/SplitStats/SplitStatsv2';
+import SplitStats from '../../components/core/SplitStats/SplitStats';
 import CombinedStats from '../../components/core/SplitStats/CombinedStats';
 import HighStats from '../../components/core/HighStats/HighStats';
 import helpers from '../../utils/helpers';
@@ -53,10 +53,10 @@ class ProfileHomePage extends React.Component {
           <HighStats title='Cummulative Stats' highs={cummulative} />
           <HighStats title='Cummulative High' highs={maxStats} />
 
-          <SplitStatsv2 statList={{'Home': homeGames, 'Away': awayGames}} showTotal={true} />
+          <SplitStats statList={{'Home': homeGames, 'Away': awayGames}} showTotal={true} />
 
           <div className='sub-title'>Game Times</div>
-          <SplitStatsv2 statList={gameTimes} showTotal={true} />
+          <SplitStats statList={gameTimes} showTotal={true} />
         </div>
       </div>
     );

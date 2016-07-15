@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import classNames from 'classnames';
-import SplitStatsv2 from '../../components/core/SplitStats/SplitStatsv2';
+import SplitStats from '../../components/core/SplitStats/SplitStats';
 import helpers from '../../utils/helpers';
 import statParser from '../../utils/statParser';
 
@@ -58,19 +58,19 @@ class ProfileStatsPage extends React.Component {
       <div>
         <div className='sub-title-container'>
 
-          <SplitStatsv2 statList={{'Home': homeGames, 'Away': awayGames}} showTotal={true} />
+          <SplitStats statList={{'Home': homeGames, 'Away': awayGames}} showTotal={true} />
 
           <div className='sub-title'>Game Times</div>
-          <SplitStatsv2 statList={gameTimes} showTotal={true} />
+          <SplitStats statList={gameTimes} showTotal={true} />
 
           <div className='sub-title'>Last {LATEST} Games</div>
-          <SplitStatsv2 statList={{'Last 3 Games': latest}} showTotal={false} />
+          <SplitStats statList={{'Last 3 Games': latest}} showTotal={false} />
 
           <div className='sub-title'>Game Splits</div>
-          <SplitStatsv2 statList={{'In Wins': winnings, 'In Losses': losings}} showTotal={false} />
+          <SplitStats statList={{'In Wins': winnings, 'In Losses': losings}} showTotal={false} />
 
           <div className='sub-title'>Season Splits</div>
-          <SplitStatsv2 statList={divisionSplitsHash} showTotal={false} />
+          <SplitStats statList={divisionSplitsHash} showTotal={false} />
         </div>
       </div>
     );
