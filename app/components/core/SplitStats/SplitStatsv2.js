@@ -22,7 +22,9 @@ const SplitStatsv2 = ({statList, showTotal}) => {
           );
         })
       }
-      <StatsRow title={'Total'} combined={statParser.playerCummulativeStats(cummulativeStats)} />
+      {(showTotal) ? (
+        <StatsRow title={'Total'} combined={statParser.playerCummulativeStats(cummulativeStats)} />
+      ) : null}
     </div>
   )
 };

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import classNames from 'classnames';
-import SplitStats from '../../components/core/SplitStats/SplitStats';
+import SplitStatsv2 from '../../components/core/SplitStats/SplitStatsv2';
 import helpers from '../../utils/helpers';
 
 class ProfileGamesPage extends React.Component {
@@ -30,22 +30,20 @@ class ProfileGamesPage extends React.Component {
       return helpers.getObjId(stat.team) === stat.game.awayTeam;
     });
 
-    const gameTimes = _.groupBy(stats, 'game.time');
+    const orderedStats = _.sortBy(stats, (stat) => {
+      const { game } = stat;
+      let d = new Date().toISOString().slice(0, 10);
+      let gameTime = new Date(`${d} ${game.time}`);
+      return gameTime;
+    });
+
+    const gameTimes = _.groupBy(orderedStats, 'game.time');
     return (
       <div>
         <div className='sub-title-container'>
-
-          <SplitStats stats={homeGames} title='Home'  />
-          <SplitStats stats={awayGames} title='Away' showHeader={false} />
+          <SplitStatsv2 statList={{'Home': homeGames, 'Away': awayGames}} />
           <div className='sub-title'>Game Times</div>
-          {
-            _.map(Object.keys(gameTimes), (key, index) => {
-              const time = gameTimes[key];
-              return (
-                <SplitStats key={key} stats={time} title={key} showHeader={!index} />
-              );
-            })
-          }
+          <SplitStatsv2 statList={gameTimes} />
         </div>
       </div>
     );

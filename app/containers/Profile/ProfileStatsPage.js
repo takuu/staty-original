@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import classNames from 'classnames';
-import SplitStats from '../../components/core/SplitStats/SplitStats';
+import SplitStatsv2 from '../../components/core/SplitStats/SplitStatsv2';
 import helpers from '../../utils/helpers';
 import statParser from '../../utils/statParser';
 
@@ -36,41 +36,41 @@ class ProfileStatsPage extends React.Component {
     const losings = statParser.getLosingStats(stats) || [];
     const latest = statParser.getLatestStats(stats, LATEST) || [];
 
+    const orderedStats = _.sortBy(stats, (stat) => {
+      const { game } = stat;
+      var d = new Date().toISOString().slice(0,10);
+      var gameTime = new Date(`${d} ${game.time}`);
+      return gameTime;
+    });
+    const gameTimes = _.groupBy(orderedStats, 'game.time');
 
-    const gameTimes = _.groupBy(stats, 'game.time');
     const divisionSplits = _.groupBy(stats, 'division._id');
+    let divisionSplitsHash = {};
+    _.map(Object.keys(divisionSplits), (key, index) => {
+      const stats = divisionSplits[key];
+      const divisionName = stats[0].division.name;
+      const seasonName = stats[0].season.name;
+      const boo = `${divisionName} ${seasonName}`;
+      divisionSplitsHash[boo] = stats;
+    });
+
     return (
       <div>
         <div className='sub-title-container'>
 
-          <SplitStats stats={homeGames} title='Home' />
-          <SplitStats stats={awayGames} title='Away' showHeader={false} />
+          <SplitStatsv2 statList={{'Home': homeGames, 'Away': awayGames}} showTotal={true} />
+
           <div className='sub-title'>Game Times</div>
-          {
-            _.map(Object.keys(gameTimes), (key, index) => {
-              const time = gameTimes[key];
-              return (
-                <SplitStats key={key} stats={time} title={key} showHeader={!index} />
-              );
-            })
-          }
+          <SplitStatsv2 statList={gameTimes} showTotal={true} />
+
           <div className='sub-title'>Last {LATEST} Games</div>
-          <SplitStats stats={latest} title={`Last ${LATEST} Games`} />
+          <SplitStatsv2 statList={{'Last 3 Games': latest}} showTotal={false} />
 
           <div className='sub-title'>Game Splits</div>
-          <SplitStats stats={winnings} title='In Wins' />
-          <SplitStats stats={losings} title='In Losses' showHeader={false} />
+          <SplitStatsv2 statList={{'In Wins': winnings, 'In Losses': losings}} showTotal={false} />
+
           <div className='sub-title'>Season Splits</div>
-          {
-            _.map(Object.keys(divisionSplits), (key, index) => {
-              const stats = divisionSplits[key];
-              const divisionName = stats[0].division.name;
-              const seasonName = stats[0].season.name;
-              return (
-                <SplitStats key={key} stats={stats} title={`${divisionName} ${seasonName}`} showHeader={!index} />
-              );
-            })
-          }
+          <SplitStatsv2 statList={divisionSplitsHash} showTotal={false} />
         </div>
       </div>
     );
