@@ -25,25 +25,32 @@ class ProfileHomePage extends React.Component {
 
   render () {
     let {watchList, stats} = this.props;
+    const LATEST = 3;
 
-    const homeGames = _.filter(stats, (stat) => {
-      return helpers.getObjId(stat.team) === stat.game.homeTeam;
-    });
-    const awayGames = _.filter(stats, (stat) => {
-      return helpers.getObjId(stat.team) === stat.game.awayTeam;
-    });
-
-    const orderedStats = _.sortBy(stats, (stat) => {
+    /*const orderedStats = _.sortBy(stats, (stat) => {
       const { game } = stat;
       var d = new Date().toISOString().slice(0, 10);
       var gameTime = new Date(`${d} ${game.time}`);
       return gameTime;
-    });
-    const gameTimes = _.groupBy(orderedStats, 'game.time');
+    });*/
+    // const gameTimes = _.groupBy(orderedStats, 'game.time');
     const gamesGroup = _.groupBy(stats, 'game._id');
     const uniqueGames = _.map(gamesGroup, (list) => {
       return list[0];
     });
+
+    const latest = statParser.getLatestStats(stats, LATEST) || [];
+
+    const divisionSplits = _.groupBy(stats, 'division._id');
+    let divisionSplitsHash = {};
+    _.map(Object.keys(divisionSplits), (key, index) => {
+      const stats = divisionSplits[key];
+      const divisionName = stats[0].division.name;
+      const seasonName = stats[0].season.name;
+      const name = `${divisionName} ${seasonName}`;
+      divisionSplitsHash[name] = stats;
+    });
+
     const record = statParser.getWinLoss(uniqueGames);
     const gamesPlayed = (Object.keys(gamesGroup)).length;
     const cummulative = {record: `${record.win} - ${record.loss}`, gamesPlayed};
@@ -54,14 +61,14 @@ class ProfileHomePage extends React.Component {
           {/*<HighStats title='Cummulative Stats' highs={cummulative} />*/}
           <HighStats title='Cummulative High' highs={maxStats} />
 
-          <SplitStats statList={{'Home': homeGames, 'Away': awayGames}} showTotal={true} />
+          <div className='sub-title'>Last {LATEST} Games</div>
+          <SplitStats statList={{'Last 3 Games': latest}} showTotal={false} />
 
-          <div className='sub-title'>Game Times</div>
-          <SplitStats statList={gameTimes} showTotal={true} />
+          <div className='sub-title'>Season Splits</div>
+          <SplitStats statList={divisionSplitsHash} showTotal={true} />
         </div>
       </div>
     );
-
 
     // TODO: Need stat average throughout all seasons
   }

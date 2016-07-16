@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import classNames from 'classnames';
 import SplitStats from '../../components/core/SplitStats/SplitStats';
+import GameLog from '../../components/core/GameLog/GameLog';
 import helpers from '../../utils/helpers';
 
 class ProfileGamesPage extends React.Component {
@@ -30,20 +31,17 @@ class ProfileGamesPage extends React.Component {
       return helpers.getObjId(stat.team) === stat.game.awayTeam;
     });
 
-    const orderedStats = _.sortBy(stats, (stat) => {
+    /*const orderedStats = _.sortBy(stats, (stat) => {
       const { game } = stat;
-      let d = new Date().toISOString().slice(0, 10);
-      let gameTime = new Date(`${d} ${game.time}`);
-      return gameTime;
-    });
+      let gameDate = new Date(game.date);
+      return gameDate;
+    });*/
+    const orderedStats = _.sortBy(stats, ['game.date', 'game.time']);
 
-    const gameTimes = _.groupBy(orderedStats, 'game.time');
     return (
       <div>
         <div className='sub-title-container'>
-          <SplitStats statList={{'Home': homeGames, 'Away': awayGames}} />
-          <div className='sub-title'>Game Times</div>
-          <SplitStats statList={gameTimes} />
+          <GameLog stats={orderedStats} />
         </div>
       </div>
     );

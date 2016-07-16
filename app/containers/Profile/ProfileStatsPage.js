@@ -69,8 +69,6 @@ class ProfileStatsPage extends React.Component {
           <div className='sub-title'>Game Splits</div>
           <SplitStats statList={{'In Wins': winnings, 'In Losses': losings}} showTotal={false} />
 
-          <div className='sub-title'>Season Splits</div>
-          <SplitStats statList={divisionSplitsHash} showTotal={false} />
         </div>
       </div>
     );
