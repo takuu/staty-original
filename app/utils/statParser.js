@@ -103,32 +103,45 @@ function playerCummulativeStats(stats = [], player = {}) {
 }
 
 function getMaxStats (stats = []) {
+
+  return {
+    points: _.maxBy(stats, 'points'),
+    assists: _.maxBy(stats, 'assists'),
+    steals: _.maxBy(stats, 'steals'),
+    blocks: _.maxBy(stats, 'blocks'),
+    totalRebounds: _.maxBy(stats, 'totalRebounds')
+  };
+  /*debugger;
   return _.reduce(stats, (result, stat, key) => {
     let max = max || {};
-    max.points = (stat.points > result.points) ? stat.points : result.points;
-    max.assists = (stat.assists > result.assists) ? stat.assists : result.assists;
-    max.steals = (stat.steals > result.steals) ? stat.steals : result.steals;
-    max.blocks = (stat.blocks > result.blocks) ? stat.blocks : result.blocks;
-    max.totalRebounds = (stat.totalRebounds > result.totalRebounds) ? stat.totalRebounds : result.totalRebounds;
+    max.points = (stat.points > result.points) ? stat : result;
+    max.assists = (stat.assists > result.assists) ? stat : result;
+    max.steals = (stat.steals > result.steals) ? stat : result;
+    max.blocks = (stat.blocks > result.blocks) ? stat : result;
+    max.totalRebounds = (stat.totalRebounds > result.totalRebounds) ? stat : result;
     return max;
-  });
+  });*/
 }
 
 function getWinningStats (stats = []) {
   return _.filter(stats, (stat) => {
-    let {team, game: {homeTeam, awayTeam, homeScore, awayScore}} = stat;
-    let myScore = 0, theirScore = 0;
-
-    if (helpers.getObjId(team) === helpers.getObjId(homeTeam)) {
-      myScore = homeScore;
-      theirScore = awayScore;
-    } else if (helpers.getObjId(team) === helpers.getObjId(awayTeam)){
-      myScore = awayScore;
-      theirScore = homeScore;
-    }
-
-    return myScore > theirScore;
+    return didWeWin(stat);
   });
+}
+
+function didWeWin (stat = {}) {
+  let {team, game: {homeTeam, awayTeam, homeScore, awayScore}} = stat;
+  let myScore = 0, theirScore = 0;
+
+  if (helpers.getObjId(team) === helpers.getObjId(homeTeam)) {
+    myScore = homeScore;
+    theirScore = awayScore;
+  } else if (helpers.getObjId(team) === helpers.getObjId(awayTeam)){
+    myScore = awayScore;
+    theirScore = homeScore;
+  }
+
+  return myScore > theirScore;
 }
 
 function getLosingStats (stats = []) {
@@ -166,6 +179,14 @@ function getWinLoss (stats = []) {
 
   // return {win: 0, loss: 0} format
   return {win: winningStats.length, loss: losingStats.length};
+}
+
+function _getGameResult (stat = {}) {
+  let {game: {homeScore, awayScore}} = stat;
+  const winLoss = (didWeWin(stat)) ? 'W' : 'L';
+  debugger;
+  return `${winLoss} ${homeScore} - ${awayScore}`;
+
 }
 
 function createStandings (games = []) {
@@ -222,6 +243,7 @@ export default {
   getLatestStats: getLatestStats,
   getWinningStats: getWinningStats,
   getWinLoss: getWinLoss,
+  getGameResult: _getGameResult,
   getLosingStats: getLosingStats,
   shootingPercentage: shootingPercentage,
   createStandings: createStandings,

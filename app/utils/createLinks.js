@@ -24,6 +24,13 @@ function _createLeagueLink (league = {}) {
   return `/${league.name}`;
 }
 
+function _createGameLink (league = {}, game = {} ) {
+  const {division} = game;
+  let divisionId = (typeof division === 'object' && division._id) ? division._id : division;
+  let gameId = (typeof game === 'object' && game._id) ? game._id : game;
+  return `/${league.name}/division/${divisionId}/game/${gameId}`;
+}
+
 function _createProfileLink (user = {}) {
   const { players } = user;
   // const playerList = _.map(players, (player) => {
@@ -39,5 +46,6 @@ export default {
   createDivisionLink: _createDivisionLink,
   createProfileLink: _createProfileLink,
   createLeagueRegisterLink: _createLeagueRegisterLink,
-  createLeagueLink: _createLeagueLink
+  createLeagueLink: _createLeagueLink,
+  createGameLink: _createGameLink
 };

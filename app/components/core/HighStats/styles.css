@@ -6,15 +6,34 @@
 }
 
 .high-block {
-    height: 50px;
+    padding:8px;
+    min-width:10%;
+    background-color:#eee;
 }
 .high-title {
-    font-size:1.1em;
+    font-size:0.6em;
     font-weight:bold;
     text-align:center;
-    text-transform: capitalize;
+    text-transform: uppercase;
+    color:#444;
+}
+
+.high-date {
+    font-size:0.6em;
+    font-weight:normal;
+    text-align:center;
+    text-transform: uppercase;
+    color:#888;
+}
+
+.high-result {
+    font-size:0.75em;
+    font-weight:normal;
+    text-align:center;
+    text-transform: uppercase;
+    color:#888;
 }
 .high-stat {
-    font-size:1.1em;
+    font-size:1.25em;
     text-align:center;
 }

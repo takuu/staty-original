@@ -47,10 +47,11 @@ class ProfileHomePage extends React.Component {
     const record = statParser.getWinLoss(uniqueGames);
     const gamesPlayed = (Object.keys(gamesGroup)).length;
     const cummulative = {record: `${record.win} - ${record.loss}`, gamesPlayed};
+    const maxStats = statParser.getMaxStats(stats);
     return (
       <div>
         <div className='sub-title-container'>
-          <HighStats title='Cummulative Stats' highs={cummulative} />
+          {/*<HighStats title='Cummulative Stats' highs={cummulative} />*/}
           <HighStats title='Cummulative High' highs={maxStats} />
 
           <SplitStats statList={{'Home': homeGames, 'Away': awayGames}} showTotal={true} />
@@ -60,7 +61,7 @@ class ProfileHomePage extends React.Component {
         </div>
       </div>
     );
-    const maxStats = statParser.getMaxStats(stats);
+
 
     // TODO: Need stat average throughout all seasons
   }
