@@ -472,7 +472,7 @@ END SPINNERS
     font-size:9px;
     padding: 3px 12px 3px 0px;
     align-items:center;
-    justify-content:center;
+    /*justify-content:center;*/
 
 }
 

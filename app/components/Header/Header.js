@@ -14,7 +14,7 @@ import { logout } from '../../actions/auth'
 import { showLoginModal, hideLoginModal } from '../../actions/uiActions';
 import FacebookLogin from 'react-facebook-login';
 import {DropdownButton, MenuItem, Modal} from 'react-bootstrap';
-
+import {LinkContainer} from 'react-router-bootstrap';
 export default class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -70,10 +70,12 @@ export default class Header extends React.Component {
           <Link className='Navigation-link' to='/leagues'>Leagues</Link>
           <Link className='Navigation-link' to='/about'>About</Link>
           <div style={{'float': 'right'}}>
-            <DropdownButton bsStyle='Navigation-dropdown' title={named}>
-              <MenuItem key='1'>
-                <Link to={createLinks.createProfileLink(user)}>Profile</Link>
-              </MenuItem>
+            <DropdownButton id='dropDownProfile' className='btn-Navigation-dropdown' title={named}>
+              <LinkContainer active={false} to={createLinks.createProfileLink(user)}>
+                <MenuItem key='1'>
+                  Profile
+                </MenuItem>
+              </LinkContainer>
               <MenuItem key='2'>Settings</MenuItem>
               <MenuItem key='3'>
                 <div onClick={this.logout.bind(this)}>Logout</div>

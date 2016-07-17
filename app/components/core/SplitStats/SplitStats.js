@@ -16,7 +16,7 @@ const SplitStats = ({statList, showTotal}) => {
           cummulativeStats = cummulativeStats.concat(stat);
           let combined = statParser.playerCummulativeStats(stat);
           return (
-            <div>
+            <div key={key}>
               <StatsRow title={key} combined={combined} />
             </div>
           );

@@ -53,7 +53,6 @@ class PlayerStatsPage extends React.Component {
       return gameTime;
     });
     const gameTimes = _.groupBy(orderedStats, 'game.time');
-    debugger;
     return (
       <div>
         <div className='sub-title-container'>

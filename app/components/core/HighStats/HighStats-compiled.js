@@ -42,36 +42,6 @@ var HighStats = function HighStats(_ref) {
   var steals = highs.steals;
 
 
-  var foo = _react2.default.createElement(
-    'div',
-    { className: 'high-container' },
-    _react2.default.createElement(
-      'div',
-      { className: 'title' },
-      title || 'Season Highs'
-    ),
-    _react2.default.createElement(
-      'ul',
-      { className: 'list-group' },
-      _lodash2.default.map(highs, function (item, key) {
-        var title = _helpers2.default.camelCaseToTitle(key);
-        return _react2.default.createElement(
-          'li',
-          { className: 'list-group-item' },
-          _react2.default.createElement(
-            'div',
-            { className: 'high-title' },
-            title
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'high-stat' },
-            item
-          )
-        );
-      })
-    )
-  );
   return _react2.default.createElement(
     'div',
     null,
@@ -86,6 +56,7 @@ var HighStats = function HighStats(_ref) {
       _lodash2.default.map(highs, function () {
         var item = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
         var key = arguments[1];
+        var index = arguments[2];
 
         var title = _helpers2.default.camelCaseToTitle(key);
         var game = item.game;
@@ -96,7 +67,7 @@ var HighStats = function HighStats(_ref) {
 
         return _react2.default.createElement(
           'div',
-          { className: 'high-block' },
+          { key: key, className: 'high-block' },
           _react2.default.createElement(
             'div',
             { className: 'high-title' },
