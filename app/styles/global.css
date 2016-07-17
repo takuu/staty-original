@@ -311,6 +311,7 @@ End Custom Boostrap
     text-transform: uppercase;
     color: #2f353b!important;
     font-weight: bold;
+    padding: 10px 15px;
 }
 
 .sub-container {

@@ -184,7 +184,6 @@ function getWinLoss (stats = []) {
 function _getGameResult (stat = {}) {
   let {game: {homeScore, awayScore}} = stat;
   const winLoss = (didWeWin(stat)) ? 'W' : 'L';
-  debugger;
   return `${winLoss} ${homeScore} - ${awayScore}`;
 
 }

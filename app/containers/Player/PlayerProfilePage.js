@@ -47,20 +47,21 @@ class PlayerProfilePage extends React.Component {
 
   render () {
     let {league, players, stats} = this.props;
+    const {season} = stats[0] || {};
+    const seasonName = (season) ? season.name : '';
     const LATEST = 3;
 
     let maxes = statParser.getMaxStats(stats);
     const winnings = statParser.getWinningStats(stats) || [];
     const losings = statParser.getLosingStats(stats) || [];
-    const latest = statParser.getLatestStats(stats, LATEST) || [];
+    // const latest = statParser.getLatestStats(stats, LATEST) || [];
     return (
       <div>
-        <HighStats highs={maxes} />
+        <HighStats highs={maxes} title={`${seasonName} HIGHS`} />
         <br/>
-        <SplitStats statList={{'Season Average': stats}} />
-        <SplitStats statList={{'Lasted 3 Games': latest}} />
-        <SplitStats statList={{'In Wins': winnings}} />
-        <SplitStats statList={{'In Losses': losings}} />
+
+        {/*<SplitStats statList={{'Last 3 Games': latest}} />*/}
+        <SplitStats statList={{'In Losses': losings, 'In Wins': winnings}} showTotal={true} />
       </div>
     );
   }

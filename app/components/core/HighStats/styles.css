@@ -3,12 +3,13 @@
     display: flex;
     justify-content: space-around;
     align-items:center;
+    background-color:#f8f8f8;
 }
 
 .high-block {
     padding:8px;
     min-width:10%;
-    background-color:#eee;
+
 }
 .high-title {
     font-size:0.6em;

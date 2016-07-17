@@ -59,7 +59,7 @@ class ProfileHomePage extends React.Component {
       <div>
         <div className='sub-title-container'>
           {/*<HighStats title='Cummulative Stats' highs={cummulative} />*/}
-          <HighStats title='Cummulative High' highs={maxStats} />
+          <HighStats title='CUMMULATIVE HIGH' highs={maxStats} />
 
           <div className='sub-title'>Last {LATEST} Games</div>
           <SplitStats statList={{'Last 3 Games': latest}} showTotal={false} />
