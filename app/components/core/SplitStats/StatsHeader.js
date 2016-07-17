@@ -5,7 +5,7 @@ const StatsHeader = () => {
   return (
     <div>
       <div className='table-row table-header'>
-        <div className='text' style={{width: '100px'}}></div>
+        <div className='text' style={{width: '150px'}}></div>
         <div className='num'>G</div>
         <div className='num'>FGM</div>
         <div className='num'>FGA</div>

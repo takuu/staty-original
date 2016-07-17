@@ -15,7 +15,7 @@ const StatsRow = ({combined, title, highlight}) => {
   return (
     <div>
       <div className={rowClass}>
-        <div className='text' style={{width: '100px'}}><b>{title}</b></div>
+        <div className='text' style={{width: '150px', height: '25px'}}><b>{title}</b></div>
         <div className={statClass}>{combined.gameCount}</div>
         <div className={statClass}>{combined.avgFieldGoalsMade}</div>
         <div className={statClass}>{combined.avgFieldGoalsAttempted}</div>
@@ -42,7 +42,7 @@ const StatsRow = ({combined, title, highlight}) => {
 
 StatsRow.propTypes = {
   combined: PropTypes.object.isRequired,
-  title: PropTypes.string,
+  title: PropTypes.any,
   highlight: PropTypes.bool
 };
 
