@@ -57,7 +57,7 @@ export default class PlayerLayout extends React.Component {
     });
     return (
       <div>
-        <div className='page-content'>
+        <div className='page-content profile-content'>
           <div className='container-fluid'>
             <div className='row'>
               <div className='col-md-12 col-xs-12'>
