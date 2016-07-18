@@ -36,11 +36,11 @@ const TeamStatList = ({stats, league, players}) =>  {
 
       <tbody>
       {
-        _.map(playerSummaryList, (stat) => {
+        _.map(playerSummaryList, (stat, index) => {
           let {player} = stat;
 
           return (
-            <tr key={stat._id}>
+            <tr key={index}>
 
               <th className='name' style={{'borderBottom': '1px solid #ddd'}}><Link to={createLinks.createPlayerUrl(league, player)}>{player && player.name}</Link></th>
 

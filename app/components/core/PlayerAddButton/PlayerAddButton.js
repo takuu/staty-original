@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import Modal from '../CustomModal/CustomModal';
+// import Modal from '../CustomModal/CustomModal';
 import { addPlayerToWatchList, removePlayerFromWatchList } from '../../../actions/userActions';
 import _ from 'lodash';
 // import './styles.css';
@@ -23,7 +23,6 @@ export default class PlayerAddButton extends React.Component {
   remove () {
     const { player, dispatch, watchList } = this.props;
     dispatch(removePlayerFromWatchList(player));
-    debugger;
     // this.setState({ showModal: false });
   }
 
@@ -34,7 +33,6 @@ export default class PlayerAddButton extends React.Component {
   }
   render() {
     const {player, watchList, user} = this.props;
-    // debugger;
     const playerList = _.map(watchList, '_id');
     let which = (_.indexOf(playerList, player._id) >= 0)
       ? (
@@ -52,13 +50,6 @@ export default class PlayerAddButton extends React.Component {
     return (
       <div>
         {which}
-        <Modal isOpen={this.state.showModal}
-               transitionName="modal-anim">
-          <div>
-            <h1>HELLO WORLD {this.props.player.name}</h1>
-            <button onClick={this.remove.bind(this)}>Remove</button>
-          </div>
-        </Modal>
       </div>
     );
   }

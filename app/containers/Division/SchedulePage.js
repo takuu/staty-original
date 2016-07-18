@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Standings from '../../components/core/Standings/Standings'
-import Schedule from '../../components/core/LeagueSchedule/LeagueSchedule';
+import LeagueSchedule from '../../components/core/LeagueSchedule/LeagueSchedule';
 import _ from 'lodash';
 import {Link} from 'react-router';
 
@@ -58,7 +58,7 @@ class SchedulePage extends React.Component {
     return (
 
         <div style={{padding: "10px"}}>
-          <Schedule league={league} games={games} />
+          <LeagueSchedule league={league} games={games} />
         </div>
 
     );

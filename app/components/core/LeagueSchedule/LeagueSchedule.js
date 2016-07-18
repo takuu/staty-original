@@ -12,10 +12,10 @@ const Schedule = ({league, games}) => {
   return (
     <div>
       {
-        _.map(Object.keys(schedule), (date) => {
+        _.map(Object.keys(schedule), (date, index) => {
           let games = schedule[date];
           return (
-            <GameDayList games={games} date={date} league={league} />
+            <GameDayList key={index} games={games} date={date} league={league} />
           );
         })
       }

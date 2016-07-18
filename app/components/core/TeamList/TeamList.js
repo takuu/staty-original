@@ -15,10 +15,10 @@ const TeamList = ({teams, league}) => {
       <div>
         <ul className='list-group'>
             {
-                _.map(teams,(team)=> {
+                _.map(teams,(team, index) => {
                     let {name} = team;
                     return(
-                        <li className='list-group-item nopadding list-group-item-md'>
+                        <li key={index} className='list-group-item nopadding list-group-item-md'>
                             <Link to={createLinks.createTeamLink(league, team)}>
                             <span>{name}</span>
                             </Link>

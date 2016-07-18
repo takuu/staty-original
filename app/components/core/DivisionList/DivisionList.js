@@ -11,7 +11,7 @@ const DivisionList = ({divisions, league, currentDivision}) => {
         _.map(Object.keys(divisionGroup), (key) => {
           const divisionList = divisionGroup[key];
           return (
-            <div>
+            <div key={key}>
               <DivisionGroup divisions={divisionList} league={league} currentDivision={currentDivision} />
             </div>
           );
