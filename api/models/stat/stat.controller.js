@@ -103,6 +103,37 @@ exports.getPlayerListStats = function(req, res) {
   }
 };
 
+exports.getTeamAggregateStatsByDivision = function(req, res) {
+  let {id} = req.params;
+  console.log('This is getting called');
+  Stat.aggregate([
+    {
+      $match: {
+        division: new ObjectId(id)
+      }
+    },
+    {
+      $group: {
+        _id: '$team',
+        combinedPoints: {$sum: '$points'},
+        combinedTotalRebounds: {$sum: '$totalRebounds'},
+        combinedFreeThrowsMade: {$sum: '$freeThrowsMade'},
+        combinedFreeThrowsAttempted: {$sum: '$freeThrowsAttempted'},
+        combinedThreePointsMade: {$sum: '$threePointsMade'},
+        combinedThreePointsAttempted: {$sum: '$threePointsAttempted'},
+        combinedFieldGoalsMade: {$sum: '$fieldGoalsMade'},
+        combinedFieldGoalsAttempted: {$sum: '$fieldGoalsAttempted'},
+        combinedBlocks: {$sum: '$blocks'},
+        combinedSteals: {$sum: '$steals'},
+        combinedAssists: {$sum: '$assists'}
+      }
+    }
+  ], function (err, stats) {
+    if (err) return handleError(res, err);
+    res.status(200).send(stats);
+  });
+};
+
 exports.getTeamStats = function(req, res) {
   var id = req.params.id;
   Stat.find({team: id})
