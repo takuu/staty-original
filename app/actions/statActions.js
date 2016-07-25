@@ -51,6 +51,19 @@ export function getStatsByGameId (id = '') {
   };
 }
 
+export function getAggregateTeamStatsByDivisionId (id = '') {
+  debugger;
+  return async (dispatch) => {
+    try {
+      const stats = (await axios.get(`${baseUrl}/stats/getTeamAggregateStatsByDivision/` + id)).data;
+      debugger;
+      dispatch({ type: ActionTypes.SET_COMBINED_STATS_OF_TEAM_BY_DIVISION, stats });
+    } catch (error) {
+      console.log('statActions error: ', error);
+    }
+  };
+}
+
 export function updateStat (item) {
   return async (dispatch, getState) => {
     try {

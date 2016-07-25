@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import classNames from 'classnames';
 import { getGamesByTeamId } from '../../actions/gameActions';
+import { getAggregateTeamStatsByDivisionId } from '../../actions/statActions';
 import LeagueSchedule from '../../components/core/LeagueSchedule/LeagueSchedule.js';
 
 @connect((state, router) => {
@@ -15,21 +15,28 @@ import LeagueSchedule from '../../components/core/LeagueSchedule/LeagueSchedule.
     return (game.awayTeam._id === teamId || game.homeTeam._id === teamId);
   });
 
+  // const aggregateStats = state.aggregateStats;
   return {league: league, games: games};
 }, {
-  getGamesByTeamId
+  getGamesByTeamId,
+  getAggregateTeamStatsByDivisionId
 })
-class RosterPage extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+class TeamGamesPage extends React.Component {
   static propTypes = {
     league: PropTypes.object,
     games: PropTypes.array
   };
 
+  static defaultProps = {
+    league: {},
+    games: []
+  };
+
   static fillStore (redux, route) {
-    redux.dispatch(getGamesByTeamId(route.params.teamId));
+    return Promise.all([
+      redux.dispatch(getAggregateTeamStatsByDivisionId(route.params.divisionId)),
+      redux.dispatch(getGamesByTeamId(route.params.teamId))
+    ]);
   }
 
   render () {
@@ -42,4 +49,4 @@ class RosterPage extends React.Component {
   }
 }
 
-export default RosterPage;
+export default TeamGamesPage;

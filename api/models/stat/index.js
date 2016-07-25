@@ -11,7 +11,7 @@ router.get('/team/:id', controller.getTeamStats);
 router.get('/game/:id', controller.getGameStats);
 router.get('/', controller.index);
 router.get('/:id', controller.show);
-router.get('/aggregateByDivision/:id', controller.getTeamAggregateStatsByDivision)
+router.get('/getTeamAggregateStatsByDivision/:id', controller.getTeamAggregateStatsByDivision);
 router.post('/', controller.create);
 router.put('/:id', controller.update);
 

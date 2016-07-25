@@ -1,9 +1,3 @@
-import {
-  SET_TEAM,
-  SET_TEAMS_BY_LEAGUE,
-  SET_TEAMS_BY_DIVISION,
-  UPDATE_TEAM
-} from '../constants/actions';
 import ActionTypes from '../constants/actions';
 import Immutable from 'immutable';
 import _ from 'lodash';

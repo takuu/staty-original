@@ -11,6 +11,7 @@ import stats from './statReducers';
 import seasons from './seasonReducers';
 import user from './userReducers';
 import ui from './uiReducers';
+import aggregateStats from './aggregateStatsReducers';
 
 export default combineReducers({
   auth,
@@ -24,5 +25,6 @@ export default combineReducers({
   stats,
   seasons,
   user,
-  ui
+  ui,
+  aggregateStats
 });
