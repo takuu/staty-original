@@ -125,7 +125,8 @@ exports.getTeamAggregateStatsByDivision = function(req, res) {
         combinedFieldGoalsAttempted: {$sum: '$fieldGoalsAttempted'},
         combinedBlocks: {$sum: '$blocks'},
         combinedSteals: {$sum: '$steals'},
-        combinedAssists: {$sum: '$assists'}
+        combinedAssists: {$sum: '$assists'},
+        gamesPlayed: {$addToSet: '$game'}
       }
     }
   ], function (err, stats) {
