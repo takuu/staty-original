@@ -111,8 +111,7 @@ exports.getTeamAggregateStatsByDivision = function(req, res) {
       $match: {
         division: new ObjectId(id)
       }
-    },
-    {
+    }, {
       $group: {
         _id: '$team',
         combinedPoints: {$sum: '$points'},
@@ -127,6 +126,23 @@ exports.getTeamAggregateStatsByDivision = function(req, res) {
         combinedSteals: {$sum: '$steals'},
         combinedAssists: {$sum: '$assists'},
         gamesPlayed: {$addToSet: '$game'}
+      }
+    }, {
+      $project : {
+        _id: '$id',
+        combinedPoints: '$combinedPoints',
+
+        combinedTotalRebounds: '$combinedTotalRebounds',
+        combinedFreeThrowsMade: '$combinedFreeThrowsMade',
+        combinedFreeThrowsAttempted: '$combinedFreeThrowsAttempted',
+        combinedThreePointsMade: '$combinedThreePointsMade',
+        combinedThreePointsAttempted: '$combinedThreePointsAttempted',
+        combinedFieldGoalsMade: '$combinedFieldGoalsMade',
+        combinedFieldGoalsAttempted: '$combinedFieldGoalsAttempted',
+        combinedBlocks: '$combinedBlocks',
+        combinedSteals: '$combinedSteals',
+        combinedAssists: '$combinedAssists',
+        gameCount: { $size: '$gamesPlayed'}
       }
     }
   ], function (err, stats) {
