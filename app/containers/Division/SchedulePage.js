@@ -44,9 +44,11 @@ class SchedulePage extends React.Component {
     games: []
   };
 
-  static fillStore(redux, route) {
-    redux.dispatch(getGamesByDivisionId(route.params.divisionId));
-    return redux.dispatch(getTeamsByDivisionId(route.params.divisionId));
+  static fillStore (redux, route) {
+
+    debugger;
+    // redux.dispatch(getGamesByDivisionId(route.params.divisionId));
+    // return redux.dispatch(getTeamsByDivisionId(route.params.divisionId));
   }
 
   render() {

@@ -65,7 +65,7 @@ class PlayerPage extends React.Component {
     let playerSplitsUrl = createLinks.createPlayerUrl(league, player) + '/split-stats';
 
     let profileClass = classNames({
-      'active': routeName === player._id || routeName === ''
+      'active': routeName === player._id || routeName === 'home'
     });
     let gameLogClass = classNames({
       'active': routeName === 'game-log'

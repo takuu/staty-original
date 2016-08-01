@@ -69,7 +69,7 @@ class DivisionPage extends React.Component {
   }
   render() {
     let {league, division, games, teams, path} = this.props;
-    let scheduleUrl = `/${league.name}/division/${division._id}`;
+    let scheduleUrl = `/${league.name}/division/${division._id}/home`;
     let standingUrl = `/${league.name}/division/${division._id}/standing`;
     let teamsUrl = `/${league.name}/division/${division._id}/teams`;
 

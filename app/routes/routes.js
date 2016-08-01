@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import { Route, IndexRoute, IndexRedirect } from 'react-router';
 import App from './../containers/App';
 import Auth from '../containers/Auth';
 import SignupPage from './../containers/SignupPage';
@@ -92,7 +92,8 @@ const routes = (
         <Route path='search/:searchName' component={SearchResultPage} />
 
         <Route path="division/:divisionId" component={DivisionPage} >
-          <IndexRoute component={SchedulePage} />
+          <IndexRedirect to='home' />
+          <Route path='home' component={SchedulePage} />
           <Route path='standing' component={StandingPage} />
           <Route path='teams' component={TeamsPage} />
         </Route>
@@ -102,9 +103,10 @@ const routes = (
         <Route path='division/:divisionId/game/:gameId' component={GamePage} />
       </Route>
 
-      <Route path='division/:divisionId/team/:teamId' component={TeamLayout}>
-        <Route component={TeamPage} >
-          <IndexRoute component={TeamGamesPage} />
+      <Route component={TeamLayout}>
+        <Route path='division/:divisionId/team/:teamId' component={TeamPage} >
+          <IndexRedirect to='home' />
+          <Route path='home' component={TeamGamesPage} />
           <Route path='roster' component={RosterPage} />
           <Route path='team-stats' component={TeamStatsPage} />
         </Route>
@@ -112,7 +114,8 @@ const routes = (
 
       <Route component={PlayerLayout}>
         <Route path='team/:teamId/player/:playerId' component={PlayerPage} >
-          <IndexRoute component={PlayerProfilePage} />
+          <IndexRedirect to='home' />
+          <Route path='home' component={PlayerProfilePage} />
           <Route path='game-log' component={PlayerGamesPage} />
           <Route path='split-stats' component={PlayerStatsPage} />
         </Route>

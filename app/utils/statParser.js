@@ -234,6 +234,34 @@ function createSchedule (games = []) {
   return _.groupBy(gameList, 'prettyDate');
 }
 
+function getTeamRanking (combinedStats = [], teamId = '') {
+  combinedStats = [{"_id":"56f565c9a81b4e2d1c11500c","combinedPoints":372,"combinedTotalRebounds":300,"combinedFreeThrowsMade":49,"combinedFreeThrowsAttempted":99,"combinedThreePointsMade":9,"combinedThreePointsAttempted":62,"combinedFieldGoalsMade":157,"combinedFieldGoalsAttempted":454,"combinedBlocks":8,"combinedSteals":72,"combinedAssists":49},{"_id":"56f565c9a81b4e2d1c115006","combinedPoints":499,"combinedTotalRebounds":319,"combinedFreeThrowsMade":58,"combinedFreeThrowsAttempted":104,"combinedThreePointsMade":42,"combinedThreePointsAttempted":128,"combinedFieldGoalsMade":199,"combinedFieldGoalsAttempted":511,"combinedBlocks":18,"combinedSteals":75,"combinedAssists":97},{"_id":"56f565c9a81b4e2d1c11500b","combinedPoints":500,"combinedTotalRebounds":322,"combinedFreeThrowsMade":55,"combinedFreeThrowsAttempted":98,"combinedThreePointsMade":49,"combinedThreePointsAttempted":163,"combinedFieldGoalsMade":198,"combinedFieldGoalsAttempted":517,"combinedBlocks":10,"combinedSteals":54,"combinedAssists":62},{"_id":"56f565c9a81b4e2d1c11500a","combinedPoints":482,"combinedTotalRebounds":315,"combinedFreeThrowsMade":59,"combinedFreeThrowsAttempted":104,"combinedThreePointsMade":75,"combinedThreePointsAttempted":273,"combinedFieldGoalsMade":174,"combinedFieldGoalsAttempted":571,"combinedBlocks":9,"combinedSteals":71,"combinedAssists":86},{"_id":"56f565c9a81b4e2d1c115004","combinedPoints":526,"combinedTotalRebounds":302,"combinedFreeThrowsMade":83,"combinedFreeThrowsAttempted":139,"combinedThreePointsMade":32,"combinedThreePointsAttempted":134,"combinedFieldGoalsMade":205,"combinedFieldGoalsAttempted":503,"combinedBlocks":16,"combinedSteals":82,"combinedAssists":84},{"_id":"56f565c9a81b4e2d1c115007","combinedPoints":558,"combinedTotalRebounds":318,"combinedFreeThrowsMade":89,"combinedFreeThrowsAttempted":122,"combinedThreePointsMade":80,"combinedThreePointsAttempted":221,"combinedFieldGoalsMade":195,"combinedFieldGoalsAttempted":523,"combinedBlocks":26,"combinedSteals":63,"combinedAssists":48},{"_id":"56f565c9a81b4e2d1c11500d","combinedPoints":314,"combinedTotalRebounds":257,"combinedFreeThrowsMade":46,"combinedFreeThrowsAttempted":85,"combinedThreePointsMade":18,"combinedThreePointsAttempted":79,"combinedFieldGoalsMade":125,"combinedFieldGoalsAttempted":386,"combinedBlocks":11,"combinedSteals":46,"combinedAssists":34},{"_id":"56f565c9a81b4e2d1c115005","combinedPoints":608,"combinedTotalRebounds":308,"combinedFreeThrowsMade":87,"combinedFreeThrowsAttempted":142,"combinedThreePointsMade":57,"combinedThreePointsAttempted":132,"combinedFieldGoalsMade":232,"combinedFieldGoalsAttempted":515,"combinedBlocks":23,"combinedSteals":65,"combinedAssists":63},{"_id":"56f565c9a81b4e2d1c115009","combinedPoints":406,"combinedTotalRebounds":266,"combinedFreeThrowsMade":70,"combinedFreeThrowsAttempted":108,"combinedThreePointsMade":31,"combinedThreePointsAttempted":143,"combinedFieldGoalsMade":152,"combinedFieldGoalsAttempted":427,"combinedBlocks":19,"combinedSteals":54,"combinedAssists":55},{"_id":"56f565c9a81b4e2d1c115008","combinedPoints":469,"combinedTotalRebounds":332,"combinedFreeThrowsMade":78,"combinedFreeThrowsAttempted":132,"combinedThreePointsMade":58,"combinedThreePointsAttempted":238,"combinedFieldGoalsMade":167,"combinedFieldGoalsAttempted":530,"combinedBlocks":10,"combinedSteals":62,"combinedAssists":82}];
+  teamId = '56f565c9a81b4e2d1c11500c';
+
+  // const COMBINED_STATS_MAP = {
+  //   combinedPoints: {label: 'Field Goal %', weight: 1, suffix: 'FG%'},
+  // };
+
+  // TODO: We need Games Played Passed
+  const currentTeam = _.find(combinedStats, {_id: teamId});
+
+
+
+
+  /*
+    Returns:
+    {
+      fieldGoalPercentage: { rank: 1, data: '48.7 FG%', label: 'Field Goal %', weight: 1 },
+      PointsScored: { rank: 2, data: '45.5 PPG', label: 'Points Scored', weight: 1 },
+      threePointPercentage: { rank: 3, data: '38.7 FG%', label: '3-point %', weight: 1 },
+      totalRebounds: { rank: 4, data: '48.7 RPG', label: 'Total Rebounds', weight: 1 },
+      freeThrowPercentage: { rank: 5, data: '48.7 FG%', label: 'Free Throw %', weight: .5 },
+      totalBlocks: { rank: 6, data: '2.1 BPG', label: 'Total Blocks', weight: .5 },
+      totalSteals: { rank: 7, data: '48.7 FG%', label: 'Total Steals', weight: .5 },
+      totalAssists: { rank: 8, data: '12.5 APG', label: 'Total Assists', weight: .7 },
+   */
+}
+
 export default {
   combineStats: combineStats,
   combineListofStats: combineList,

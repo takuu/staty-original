@@ -27,6 +27,7 @@ class RosterPage extends React.Component {
   };
 
   static fillStore (redux, route) {
+    debugger;
     redux.dispatch(getPlayersWithFilters({team: route.params.teamId}));
   }
 

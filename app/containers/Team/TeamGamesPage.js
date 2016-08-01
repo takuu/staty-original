@@ -33,6 +33,7 @@ class TeamGamesPage extends React.Component {
   };
 
   static fillStore (redux, route) {
+    debugger;
     return Promise.all([
       redux.dispatch(getAggregateTeamStatsByDivisionId(route.params.divisionId)),
       redux.dispatch(getGamesByTeamId(route.params.teamId))

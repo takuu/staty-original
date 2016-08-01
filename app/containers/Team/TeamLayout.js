@@ -45,8 +45,14 @@ export default class TeamLayout extends React.Component {
   };
   static fillStore (redux, router) {
     const {divisionId, teamId} = router.params;
-    redux.dispatch(getGamesByDivisionId(divisionId));
-    return redux.dispatch(getTeamById(teamId));
+    debugger;
+    return Promise.all([
+      redux.dispatch(getGamesByDivisionId(divisionId)),
+      redux.dispatch(getTeamById(teamId))
+    ]);
+
+    // redux.dispatch(getGamesByDivisionId(divisionId));
+    // return redux.dispatch(getTeamById(teamId));
   }
 
   render () {

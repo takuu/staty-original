@@ -42,6 +42,7 @@ class PlayerProfilePage extends React.Component {
 
   static fillStore (redux, route) {
     let {playerId} = route.params;
+    debugger;
     redux.dispatch(getStatsByPlayerId(playerId));
   }
 

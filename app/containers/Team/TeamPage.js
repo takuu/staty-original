@@ -35,7 +35,7 @@ class TeamPage extends React.Component {
     let urlParts = path.split('/');
     let routeName = urlParts[urlParts.length - 1];
     let gamesClass = classNames({
-      'active': routeName === team._id || routeName === ''
+      'active': routeName === team._id || routeName === 'home'
     });
     let rosterClass = classNames({
       'active': routeName === 'roster'
