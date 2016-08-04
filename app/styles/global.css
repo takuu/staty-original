@@ -258,7 +258,11 @@ a.list-group-item {
     border-right-style:none;
     border-top: 1px solid #ddd !important;
     padding:0px 15px;
+
 }
+
+
+
 
 .list-group-item.active {
     background-color:#eee;
@@ -315,7 +319,7 @@ End Custom Boostrap
 }
 
 .sub-container {
-    padding: 10px 0px 0px 0px;
+    padding: 5px 0px 0px 0px;
     background-color:#fff;
     border: 1px solid #ebf0f5;
     min-height:200px;
