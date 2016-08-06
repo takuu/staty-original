@@ -24,7 +24,6 @@ const Standings = ({games, league, team}) => {
               'list-group-item-md': true
             });
 
-
             return (
               <li key={_id} className='list-group-item nopadding list-group-item-md'>
                 <Link to={createLinks.createTeamLink(league, team)} className={teamClass}>

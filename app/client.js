@@ -6,6 +6,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 //import BrowserHistory from 'react-router/lib/BrowserHistory';
 //import HashHistory from 'react-router/lib/HashHistory';
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Root from './Root';
 // import './styles/global.css';
 if (process.env.BROWSER) require('./styles/global.css');
@@ -18,8 +20,17 @@ const history = (process.env.NODE_ENV === 'production')
 */
 
 //const history = new BrowserHistory();
+
+const App = () => (
+  <MuiThemeProvider>
+    <Root {...{ history }} />
+  </MuiThemeProvider>
+);
+
+
+
 const history = {};
 ReactDOM.render(
-  <Root {...{ history }} />,
+  <App />,
   document.getElementById('app')
 );

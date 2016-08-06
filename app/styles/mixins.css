@@ -9,7 +9,7 @@ input {
   --gray: color(#000 33.33333333333333%);
   --gray-light: color(#000 46.666666666666664%);
   --gray-lighter: color(#000 46.666666666666664%);
-  --font-family-base: 'Segoe UI', 'HelveticaNeue-Light', sans-serif;
+  --font-family-base: 'Roboto', 'Segoe UI', 'HelveticaNeue-Light', sans-serif;
   --max-content-width: 1000px;
   --screen-xs-min: 480px;
   --screen-sm-min: 768px;

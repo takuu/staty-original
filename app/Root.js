@@ -30,8 +30,8 @@ if(!canUseDOM) {
         routes={routes(store, true)}
 
         onUpdate={function() {
-            store.dispatch(routerStateChange(this.state));
-          }}
+          store.dispatch(routerStateChange(this.state));
+        }}
       />
   )
 }
