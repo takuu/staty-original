@@ -23,6 +23,8 @@ import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
 import Dialog from 'material-ui/Dialog';
 
+import TextField from 'material-ui/TextField';
+
 import PersonIcon from 'material-ui/svg-icons/social/person';
 import ExitIcon from 'material-ui/svg-icons/action/exit-to-app';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
@@ -188,18 +190,22 @@ export default class Header extends React.Component {
           title="LOGIN TO STATY"
           modal={false}
           open={this.state.showModal}
+          contentStyle={{width: 300}}
           onRequestClose={this.handleClose}
         >
           <div>
             <div className='form-group'>
               <label className='email-inline'>
-                <input type='email' className='form-control' id='exampleInputEmail1' placeholder='Email' />
+                <TextField hintText="" floatingLabelText="Email"/>
               </label>
             </div>
             <div className='form-group'>
-              <input type='password' className='form-control' id='exampleInputPassword1' placeholder='Password' />
+              <TextField hintText="" type='password' floatingLabelText="Password" />
             </div>
-            <button type='submit' className='btn btn-default'>Login</button>
+            <div className='centered'>
+              <RaisedButton label="Login" primary />
+            </div>
+
           </div>
           <Divider />
 
