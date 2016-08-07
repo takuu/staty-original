@@ -22,6 +22,7 @@ import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
 import Dialog from 'material-ui/Dialog';
+import Checkbox from 'material-ui/Checkbox';
 
 import TextField from 'material-ui/TextField';
 
@@ -187,9 +188,10 @@ export default class Header extends React.Component {
           </div>
         </div>
         <Dialog
-          title="LOGIN TO STATY"
+          title="LOGIN"
           modal={false}
           open={this.state.showModal}
+          titleStyle={{color: '#1E88E5'}}
           contentStyle={{width: 300}}
           onRequestClose={this.handleClose}
         >
@@ -202,20 +204,30 @@ export default class Header extends React.Component {
             <div className='form-group'>
               <TextField hintText="" type='password' floatingLabelText="Password" />
             </div>
-            <div className='centered'>
-              <RaisedButton label="Login" primary />
+            <div className='col-md-12 col-xs-12 nopadding'>
+              <div className="col-md-6 col-xs-6 nopadding" >
+                <Checkbox
+                  label="Remember me"
+                  labelStyle={{fontSize: '.6em', color: '#aaa'}}
+                  defaultChecked={true}
+                />
+              </div>
+              <div className="col-md-6 col-xs-6" style={{'padding-left': '32px'}}>
+                <RaisedButton label='GO' primary />
+              </div>
+
+
             </div>
 
           </div>
-          <Divider />
 
           <div className='centered'>
             <FacebookLogin
               appId='1017967544938771'
               autoLoad={false}
               callback={this.responseFacebook.bind(this)} scope='public_profile, email' cssClass='my-facebook-button-class'
-              textButton='Login'
-              icon='fa-facebook' />
+              textButton='Login with Facebook'
+            />
           </div>
         </Dialog>
       </div>
