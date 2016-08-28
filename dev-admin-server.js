@@ -1,12 +1,11 @@
-/* eslint-env node */
 import webpack from 'webpack';
 import devConfig from './webpack/dev.app.config.babel.js';
 import prodConfig from './webpack/prod.app.config.babel.js';
 import browserSync from 'browser-sync';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import proxyMiddleware from 'http-proxy-middleware';
 import winston from 'winston';
+import proxyMiddleware from 'http-proxy-middleware';
 winston.add(winston.transports.File, { filename: 'somefile.log' });
 import fs from 'fs';
 import path from 'path';
@@ -14,31 +13,35 @@ import _ from 'lodash';
 
 const env = process.env.NODE_ENV || 'development';
 const config = env === 'development' ? devConfig : prodConfig;
-const bundler = webpack(config);
 
 var proxy = proxyMiddleware(['/api', '/login'], {
   target: 'http://localhost:1337',
   changeOrigin: false   // for vhosted sites, changes host header to match to target's host
 });
 
-// We want to create multiple browserSync instances
-var appBrowserSync = browserSync.create('app');
 
-appBrowserSync.init({
+import devAdminConfig from './webpack/dev.admin.config.babel.js';
+import prodAdminConfig from './webpack/prod.admin.config.babel.js';
+const configAdmin = env === 'development' ? devAdminConfig : prodAdminConfig;
+const bundlerAdmin = webpack(configAdmin);
+
+// We want to create multiple browserSync instances
+var adminBrowserSync = browserSync.create('admin');
+adminBrowserSync.init({
   server: {
     baseDir: '.',
 
     middleware: [
-      webpackDevMiddleware(bundler, {
+      webpackDevMiddleware(bundlerAdmin, {
         publicPath: config.output.publicPath,
         stats: { colors: true }
       }),
       proxy,
 
-      webpackHotMiddleware(bundler),
+      webpackHotMiddleware(bundlerAdmin),
 
       (req, res, next) => {
-        
+
         if(req.url == '/') {
 
           fs.readFile(path.join(__dirname, 'landing', 'index.html'), {
@@ -51,7 +54,7 @@ appBrowserSync.init({
             res.write(template({ html: '', initialState: 'undefined', env }));
             res.end();
           });
-        } else if (req.url.indexOf('/callbacklogin/facebook') >= 0) {
+        } else if (req.url.indexOf('/callbacklogin/facebook') >=0) {
 
           console.log('THIS SHOULD NOT BE CALLED');
 
@@ -65,7 +68,7 @@ appBrowserSync.init({
           if(isAllowedAsset) return next();
 
 
-          fs.readFile(path.join(__dirname, 'app', 'template.html'), {
+          fs.readFile(path.join(__dirname, 'admin', 'template.html'), {
             encoding: 'utf-8'
           }, (err, source) => {
             if (err) return next(err);
@@ -90,9 +93,11 @@ appBrowserSync.init({
 
     ]
   },
-
   files: [
-    'app/template.html'
-  ]
+    'admin/template.html'
+  ],
+  port: 3010,
+  ui: {
+    port: 3011
+  }
 });
-

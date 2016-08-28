@@ -19,7 +19,7 @@
     "pretest": "make lint",
     "test": "make test",
     "eslint-fix": "eslint app/**/*.js --fix",
-    "dev": "nodemon -x babel-node -w ./api ./api & babel-node ./dev-server --presets react es2015 stage-0 stage-1 stage-2 stage-3 & wait",
+    "dev": "nodemon -x babel-node -w ./api ./api & babel-node ./dev-server --presets react es2015 stage-0 stage-1 stage-2 stage-3 & wait & babel-node ./dev-admin-server --presets react es2015 stage-0 stage-1 stage-2 stage-3 & wait",
     "prod": "nodemon -x babel-node -w ./api ./api & babel-node prod-server.js  --presets react es2015 stage-0 stage-1 stage-2 stage-3 & wait"
   },
   "dependencies": {
