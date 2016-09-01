@@ -50,6 +50,6 @@ It will automatically open your default browser with project loaded.
 
 ## TODO
 
-- [ ] profile page
+- [X] profile page
 - [ ] google analytics
 - [ ] server logging
