@@ -41,7 +41,7 @@ import GameLayout from '../containers/Game/GameLayout';
 import TeamLayout from '../containers/Team/TeamLayout';
 import PlayerLayout from '../containers/Player/PlayerLayout';
 import DivisionLayout from '../containers/Division/DivisionLayout';
-/*
+
  import AdminLayout from '../containers/LeagueAdmin/AdminLayout';
  import LeagueAdmin from '../containers/LeagueAdmin/LeagueAdmin';
  import DivisionAdmin from '../containers/LeagueAdmin/DivisionAdmin';
@@ -49,7 +49,7 @@ import DivisionLayout from '../containers/Division/DivisionLayout';
  import PlayerAdmin from '../containers/LeagueAdmin/PlayerAdmin';
  import StatAdmin from '../containers/LeagueAdmin/StatAdmin';
  import SeasonAdmin from '../containers/LeagueAdmin/SeasonAdmin';
- */
+
 
 const routes = (
   <Route component={App}>
@@ -122,8 +122,7 @@ const routes = (
       </Route>
 
       /*League Admin*/
-      {
-        /*
+
          <Route path="admin" component={Auth}>
          <Route component={AdminLayout}>
          <IndexRoute component={LeagueAdmin} />
@@ -135,8 +134,6 @@ const routes = (
          </Route>
          </Route>
 
-         */
-      }
 
       <Route path="dashboard" component={Auth} >
         <Route path="about" component={LeagueAboutPage} />

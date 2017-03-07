@@ -27,9 +27,12 @@ export default class Auth extends React.Component {
     const { auth: {profile, token}, dispatch, params, league } = this.props;
     let body = (<div></div>);
 
+
     let childrenWithProps = React.Children.map(this.props.children, (child) => {
       return React.cloneElement(child, { league: league });
     });
+
+    debugger;
 
     if (profile) {
       if (token && profile.leagueName === params.leagueName && league) {

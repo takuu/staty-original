@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import {Link} from 'react-router';
 import { getLeagueByName } from '../../actions/leagues';
 import { connect } from 'react-redux';
-var ReactDataGrid = require('react-data-grid/addons');
+import ReactDataGrid from 'react-data-grid';
 import SideNav from '../../components/LeagueAdmin/SideNav/SideNav';
 
 @connect((state,router) => {

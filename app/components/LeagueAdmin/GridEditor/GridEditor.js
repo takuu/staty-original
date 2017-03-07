@@ -5,7 +5,7 @@ import helper from '../../../utils/helpers';
 import classNames from 'classnames';
 import _ from 'lodash';
 import './styles.css';
-var ReactDataGrid = require('react-data-grid/addons');
+import ReactDataGrid from 'react-data-grid';
 export default class GridEditor extends React.Component {
   static propTypes = {
     list: PropTypes.array,

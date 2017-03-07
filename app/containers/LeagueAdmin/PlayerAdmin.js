@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import GridEditor from '../../components/LeagueAdmin/GridEditor/GridEditor';
 import GridLink from '../../components/LeagueAdmin/GridLink/GridLink';
 import SideNav from '../../components/LeagueAdmin/SideNav/SideNav';
-var ReactDataGrid = require('react-data-grid/addons');
+import ReactDataGrid from 'react-data-grid';
 
 @connect((state,router) => {
   const leagueName = router.params.leagueName;

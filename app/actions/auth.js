@@ -99,7 +99,7 @@ export function logout(router) {
   };
 }
 
-/*export function fetchProfile () {
+export function fetchProfile () {
   return async (dispatch, getState) => {
     try {
       const { auth: { token } } = getState();
@@ -114,7 +114,7 @@ export function logout(router) {
       dispatch({ type: ActionTypes.FETCH_PROFILE_FAILURE, error });
     }
   };
-}*/
+}
 export function fetchUserProfile () {
   return async (dispatch, getState) => {
     try {
