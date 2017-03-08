@@ -16,7 +16,7 @@ const env = process.env.NODE_ENV || 'development';
 const config = env === 'development' ? devConfig : prodConfig;
 const bundler = webpack(config);
 
-var proxy = proxyMiddleware(['/api', '/login'], {
+var proxy = proxyMiddleware(['/api', '/logins'], {
   target: 'http://localhost:1337',
   changeOrigin: false   // for vhosted sites, changes host header to match to target's host
 });

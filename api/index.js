@@ -44,7 +44,7 @@ app.use(jwt({
       url === '/login' ||
       (postsRE).test(url) && req.method === 'GET' ||
       (leaguesRE).test(url) && req.method === 'GET' ||
-      (loginRE).test(url) && req.method === 'GET' ||
+      (loginRE).test(url) && (req.method === 'GET' ||  req.method === 'POST') ||
       (callbackloginRE).test(url) && req.method === 'GET' ||
       (apiRE).test(url) && (req.method === 'GET' || req.method === 'POST' || req.method === 'PUT')
   );
@@ -69,7 +69,7 @@ initPassport(passport);
 import api from './api';
 app.use('/api', api);
 import passportRoutes from './passport/routes';
-app.use('/', passportRoutes(passport));
+app.use('/api', passportRoutes(passport));
 
 function generateToken(email, password) {
   const payload = { email, password };
@@ -93,9 +93,14 @@ const HARDCODED_USER = {
 };
 
 app.post('/login', (req, res) => {
-  const { email, password } = req.body;
+  let { email, password } = req.body;
+  console.log('req.body: ', req.body);
+  console.log('email: ', email);
+  email = HARDCODED_EMAIL;
+  password = HARDCODED_PASSWORD;
   if (email === HARDCODED_EMAIL && password === HARDCODED_PASSWORD) {
     const token = generateToken(email, password);
+    console.log(token);
     const user = HARDCODED_USER;
     res.send({ token, user });
   } else {

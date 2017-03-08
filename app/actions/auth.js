@@ -63,10 +63,11 @@ export function signup (email, password, router) {
 export function login(email, password, router) {
   return async (dispatch) => {
     try {
-      const { data: { token, user } } = await axios.post(`${baseUrl}/login`, {
+      const { data: { token, user } } = await axios.post(`http://localhost:1337/login`, {
         email,
         password
       });
+      debugger;
       saveAuthToken(token);
 
       dispatch({ type: ActionTypes.LOGIN_SUCCESS, token });
@@ -104,10 +105,12 @@ export function fetchProfile () {
     try {
       const { auth: { token } } = getState();
 
+      debugger;
+
       if (!token) { return; }
 
       const headers = getHeaders(token);
-      const user = (await axios.get(`${baseUrl}/profile`, { headers })).data;
+      const user = (await axios.get(`http://localhost:1337/profile`, { headers })).data;
       debugger;
       dispatch({ type: ActionTypes.FETCH_PROFILE_SUCCESS, user });
     } catch (error) {
